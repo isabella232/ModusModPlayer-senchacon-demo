@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "394575665.414915"
+         timestampString = "394589857.699339"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "158"
-         endingLineNumber = "158"
+         startingLineNumber = "229"
+         endingLineNumber = "229"
          landmarkName = "-cordovaPlayMod:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,25 +21,51 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "394575665.414915"
+         timestampString = "394589857.699339"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "160"
-         endingLineNumber = "160"
+         startingLineNumber = "231"
+         endingLineNumber = "231"
          landmarkName = "-cordovaPlayMod:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "394575665.414915"
+         timestampString = "394580178.562017"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "169"
-         endingLineNumber = "169"
-         landmarkName = "-echo:"
+         startingLineNumber = "18"
+         endingLineNumber = "18"
+         landmarkName = "@implementation ModPlyr"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
+         timestampString = "394589857.699339"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "193"
+         endingLineNumber = "193"
+         landmarkName = "-cordovaGetModPaths:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
+         timestampString = "394589857.699339"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "205"
+         endingLineNumber = "205"
+         landmarkName = "-cordovaGetModFiles:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

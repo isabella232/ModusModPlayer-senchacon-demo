@@ -1,50 +1,83 @@
 Ext.define('MMP.view.Main', {
-    extend: 'Ext.tab.Panel',
+    extend: 'Ext.Container',
     xtype: 'main',
+
     requires: [
         'Ext.TitleBar',
-        'Ext.Video'
+        'Ext.dataview.List'
     ],
     config: {
-        tabBarPosition: 'bottom',
-
-        items: [
-            {
-                title: 'Welcome',
-                iconCls: 'home',
-
-                styleHtmlContent: true,
-                scrollable: true,
-
-                items: {
-                    docked: 'top',
-                    xtype: 'titlebar',
-                    title: 'Welcome to Sencha Touch 2'
-                },
-
-                html: [
-                    "You've just generated a new Sencha Touch 2 project. What you're looking at right now is the ",
-                    "contents of <a target='_blank' href=\"app/view/Main.js\">app/view/Main.js</a> - edit that file ",
-                    "and refresh to change what's rendered here."
-                ].join("")
-            },
-            {
-                title: 'Get Started',
-                iconCls: 'action',
-
-                items: [
-                    {
-                        docked: 'top',
-                        xtype: 'titlebar',
-                        title: 'Getting Started'
-                    },
-                    {
-                        xtype: 'video',
-                        url: 'http://av.vimeo.com/64284/137/87347327.mp4?token=1330978144_f9b698fea38cd408d52a2393240c896c',
-                        posterUrl: 'http://b.vimeocdn.com/ts/261/062/261062119_640.jpg'
-                    }
-                ]
+        layout : {
+            type : 'card'
+        },
+        items : {
+            xtype  : 'titlebar',
+            itemId : 'titlebar',
+            docked : 'top',
+            title  : ' ',
+            items : {
+                xtype  : 'button',
+                ui     : 'back',
+                itemId : 'backbutton',
+                text   : 'Back',
+                hidden : true
             }
-        ]
+        },
+        control : {
+            '#backbutton' :{
+                tap : 'onBackButton'
+            }
+        }
+    },
+
+    addAndAnimateItem : function(item) {
+        this.add(item);
+
+        this.animateActiveItem(item, { type : 'slide', direction : 'left' });
+        this.showBackButton();
+    },
+
+    showBackButton : function(title) {
+        title = title || 'Back';
+
+        var backButton = this.backButton || (this.backButton = this.down('#backbutton'));
+
+
+        backButton.setText(title);
+        backButton.setHidden(false);
+    },
+    onBackButton : function(btn) {
+        var innerItems = [].concat(this.getInnerItems());
+
+        if (innerItems.length > 1) {
+            var animateTo = innerItems[innerItems.length - 2];
+            var currentItem = innerItems.pop();
+
+            this.animateActiveItem(animateTo, {
+                type      : 'slide',
+                direction : 'right'
+            });
+
+            Ext.Function.defer(function() {
+                this.remove(currentItem);
+                if (this.getInnerItems().length == 1) {
+                    btn.hide();
+                }
+            }, 300, this)
+
+
+
+
+
+
+
+        }
+        else {
+            btn.hide();
+        }
+
+
+
     }
+
 });

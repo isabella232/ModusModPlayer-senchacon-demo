@@ -97,25 +97,78 @@
     NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
     
     NSArray *directories = [fileManager
-                 contentsOfDirectoryAtURL: directoryUrl
-                 includingPropertiesForKeys : keys
-                 options : 0
-                 error:nil];
+                             contentsOfDirectoryAtURL: directoryUrl
+                             includingPropertiesForKeys : keys
+                             options : 0
+                             error:nil
+                            ];
 
     NSMutableArray *pathDictionaries = [[NSMutableArray alloc] init];
     
     for (NSURL *url in directories) {
          NSDictionary *jsonObj = [[NSDictionary alloc]
-            initWithObjectsAndKeys:
-                [url lastPathComponent], @"dirName",
-                [url path], @"path",
-                nil
-            ];
-        
+                                    initWithObjectsAndKeys:
+                                        [url lastPathComponent], @"dirName",
+                                        [url path], @"path",
+                                        nil
+                                    ];
         
         
         [pathDictionaries addObject:jsonObj];
+    }
+    
+    NSError *jsonError;
+    NSData *jsonData = [NSJSONSerialization
+                        dataWithJSONObject:pathDictionaries
+                        options:NSJSONWritingPrettyPrinted
+                        error:&jsonError
+                       ];
+    
+    NSString *jsonDataString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 
+    return jsonDataString;
+}
+
+
+
+- (NSString *) getModFilesAsJson: (NSString*)path {
+   
+    
+    NSURL *directoryUrl = [[NSURL alloc] initFileURLWithPath:path];
+    
+    NSFileManager *fileManager = [[[NSFileManager alloc] init] autorelease];
+    
+    NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
+    
+    NSDirectoryEnumerator *enumerator = [fileManager
+                                         enumeratorAtURL : directoryUrl
+                                         includingPropertiesForKeys : keys
+                                         options : 0
+                                         errorHandler : ^(NSURL *url, NSError *error) {
+                                             //Handle the error.
+                                             // Return YES if the enumeration should continue after the error.
+                                             NSLog(@"Error :: %@", error);
+                                             return YES;
+                                         }];
+    
+    NSMutableArray *pathDictionaries = [[NSMutableArray alloc] init];
+
+    for (NSURL *url in enumerator) {
+        NSError *error;
+        NSNumber *isDirectory = nil;
+        if (! [url getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:&error]) {
+            //handle error
+        }
+        else if (! [isDirectory boolValue]) {
+            NSDictionary *jsonObj = [[NSDictionary alloc]
+                initWithObjectsAndKeys:
+                    [url lastPathComponent], @"fileName",
+                    [url path], @"path",
+                    nil
+                ];
+            [pathDictionaries addObject:jsonObj];
+
+        }
     }
     
     NSError *jsonError;
@@ -130,12 +183,28 @@
     return jsonDataString;
 }
 
+
+
 #pragma mark - CORDOVA
 
 
 - (void) cordovaGetModPaths:(CDVInvokedUrlCommand*)command {
     
     NSString* modPaths = [self getModDirectoriesAsJson];
+    
+    CDVPluginResult *pluginResult = [CDVPluginResult
+                                    resultWithStatus:CDVCommandStatus_OK
+                                    messageAsString:modPaths
+                                ];
+    
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];    
+}
+
+- (void) cordovaGetModFiles:(CDVInvokedUrlCommand*)command {
+    
+    NSString* path = [command.arguments objectAtIndex:0];
+
+    NSString* modPaths = [self getModFilesAsJson:path];
     
     CDVPluginResult *pluginResult = [CDVPluginResult
                                     resultWithStatus:CDVCommandStatus_OK

@@ -30,6 +30,11 @@ Ext.application({
         'Main'
     ],
 
+    stores : [
+        'ModFiles',
+        'Directories'
+    ],
+
     icon: {
         '57': 'resources/icons/Icon.png',
         '72': 'resources/icons/Icon~ipad.png',
@@ -53,8 +58,87 @@ Ext.application({
         Ext.fly('appLoadingIndicator').destroy();
 
         // Initialize the main view
-        Ext.Viewport.add(Ext.create('MMP.view.Main'));
+        this.main = Ext.Viewport.add(Ext.create('MMP.view.Main'));
+
+
+        cordova.exec(
+            Ext.Function.bind(this.onAfterGetDirectories, this),
+//            function callback(directories) {
+//                directories = Ext.decode(directories);
+//                alert(directories[0].path);
+//            },
+            function errorHandler(err) {
+                callback('Nothing to echo');
+            },
+            'ModPlyr',
+            'cordovaGetModPaths',
+            ['']
+        );
     },
+
+    onAfterGetDirectories : function(directories) {
+        directories = Ext.decode(directories);
+
+        var dirStore = Ext.create('MMP.store.Directories', {
+                data : directories
+            }),
+            dirList  = Ext.create('Ext.dataview.List', {
+                itemTpl   : '{dirName}',
+                store     : dirStore,
+                listeners : {
+                    scope   : this,
+                    itemtap : this.onDirListItemTap
+                }
+            });
+
+        this.main.add(dirList);
+
+    },
+
+    onDirListItemTap : function(list, index, listItem, record) {
+
+        cordova.exec(
+            Ext.Function.bind(this.onAfterGetModFiles, this),
+//            function callback(directories) {
+//                directories = Ext.decode(directories);
+//                alert(directories[0].path);
+//            },
+            function errorHandler(err) {
+                callback('Nothing to echo');
+            },
+            'ModPlyr',
+            'cordovaGetModFiles',
+            [record.data.path]
+        );
+    },
+
+    onAfterGetModFiles : function(files) {
+        files = Ext.decode(files);
+
+
+         var fileStore = Ext.create('MMP.store.ModFiles', {
+                data : files
+            }),
+            fileList  = Ext.create('Ext.dataview.List', {
+                itemTpl   : '{fileName}',
+                store     : fileStore,
+                listeners : {
+                    scope   : this,
+                    itemtap : this.onFileListItemTap
+                }
+            });
+
+
+        this.main.addAndAnimateItem(fileList);
+//        this.main.animateActiveItem(fileList, {type:'slide', direction:'right'});
+//        this.main.showBackButton();
+    },
+
+    onFileListItemTap : function(list, index, listItem, record) {
+        debugger;
+
+    },
+
 
     onUpdated: function() {
         Ext.Msg.confirm(
