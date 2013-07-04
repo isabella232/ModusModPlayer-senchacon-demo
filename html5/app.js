@@ -58,7 +58,25 @@ Ext.application({
         Ext.fly('appLoadingIndicator').destroy();
 
         // Initialize the main view
-        this.main = Ext.Viewport.add(Ext.create('MMP.view.Main'));
+        this.main = Ext.create('MMP.view.Main', {
+            listeners : {
+                stop : function() {
+                cordova.exec(
+//                    Ext.Function.bind(this.onAfterGetDirectories, this),
+                    function callback(directories) {
+                    },
+                    function errorHandler(err) {
+                        callback('Nothing to echo');
+                    },
+                    'ModPlyr',
+                    'cordovaStopMusic',
+                    ['']
+                );
+                }
+            }
+        });
+
+        Ext.Viewport.add(this.main);
 
 
         cordova.exec(
@@ -135,7 +153,20 @@ Ext.application({
     },
 
     onFileListItemTap : function(list, index, listItem, record) {
-        debugger;
+        var filePath = record.data.path;
+
+
+        cordova.exec(
+            function callback(directories) {
+                alert('file played')
+            },
+            function errorHandler(err) {
+                callback('Nothing to echo');
+            },
+            'ModPlyr',
+            'cordovaPlayMod',
+            [filePath]
+        );
 
     },
 

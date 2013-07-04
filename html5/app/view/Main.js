@@ -11,21 +11,35 @@ Ext.define('MMP.view.Main', {
             type : 'card'
         },
         items : {
-            xtype  : 'titlebar',
+            xtype  : 'toolbar',
             itemId : 'titlebar',
             docked : 'top',
-            title  : ' ',
-            items : {
-                xtype  : 'button',
-                ui     : 'back',
-                itemId : 'backbutton',
-                text   : 'Back',
-                hidden : true
-            }
+            title  : 'Prototype',
+            items : [
+                {
+                    xtype  : 'button',
+                    ui     : 'back',
+                    itemId : 'backbutton',
+                    text   : 'Back',
+                    hidden : true
+                },
+                {xtype:'spacer'},
+                {
+                    xtype  : 'button',
+                    ui     : 'decline',
+                    itemId : 'stopbutton',
+                    text   : 'STOP',
+                    hidden : false
+                }
+
+            ]
         },
         control : {
             '#backbutton' :{
                 tap : 'onBackButton'
+            },
+            '#stopbutton' :{
+                tap : 'onStopButton'
             }
         }
     },
@@ -45,6 +59,8 @@ Ext.define('MMP.view.Main', {
 
         backButton.setText(title);
         backButton.setHidden(false);
+        this.down('#stopbutton').show();
+
     },
     onBackButton : function(btn) {
         var innerItems = [].concat(this.getInnerItems());
@@ -62,6 +78,7 @@ Ext.define('MMP.view.Main', {
                 this.remove(currentItem);
                 if (this.getInnerItems().length == 1) {
                     btn.hide();
+                    this.down('#stopbutton').hide();
                 }
             }, 300, this)
 
@@ -78,6 +95,9 @@ Ext.define('MMP.view.Main', {
 
 
 
+    },
+    onStopButton : function() {
+        this.fireEvent('stop');
     }
 
 });

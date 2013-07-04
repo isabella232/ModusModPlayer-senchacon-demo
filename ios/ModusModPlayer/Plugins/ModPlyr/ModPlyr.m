@@ -215,7 +215,9 @@
 }
 
 
-- (void) cordovaPlayMod:(NSString*)file {
+- (void) cordovaPlayMod:(CDVInvokedUrlCommand*)command {
+    NSString *file = [command.arguments objectAtIndex:0];
+
      BASS_Free();
     
     if (!BASS_Init(-1,44100,0,NULL,NULL)) {
@@ -226,15 +228,78 @@
     
     modFile = BASS_MusicLoad(FALSE, [file UTF8String],0,0,BASS_MUSIC_RAMPS,1);
     
-    int errNo = BASS_ErrorGetCode();    
+//    int errNo = BASS_ErrorGetCode();    
     
     if (! modFile) {
         NSLog(@"Could not load file: %@", file);
+        
+        
+        NSDictionary *jsonObj = [[NSDictionary alloc]
+                initWithObjectsAndKeys:
+                    @"false", @"success",
+                    nil
+                ];
+        
+        
+        CDVPluginResult *pluginResult = [CDVPluginResult
+                                            resultWithStatus:CDVCommandStatus_OK
+                                            messageAsDictionary:jsonObj
+                                        ];
+    
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+    else {
+    
+        NSLog(@"PLAYING : %@", file);
+
+        BASS_ChannelPlay(modFile, FALSE); // play the stream
+    }
+
+}
+
+
+
+- (void) cordovaGetSongStatus:(CDVInvokedUrlCommand*)command {
+    NSString *file = [command.arguments objectAtIndex:0];
+
+     BASS_Free();
+    
+    if (!BASS_Init(-1,44100,0,NULL,NULL)) {
+		NSLog(@"Can't initialize device");
+    }
+    
+    HMUSIC modFile;
+    
+    modFile = BASS_MusicLoad(FALSE, [file UTF8String],0,0,BASS_MUSIC_RAMPS,1);
+    
+//    int errNo = BASS_ErrorGetCode();    
+    
+    if (! modFile) {
+        NSLog(@"Could not load file: %@", file);
+        
+        
+        NSDictionary *jsonObj = [[NSDictionary alloc]
+                initWithObjectsAndKeys:
+                    @"false", @"success",
+                    nil
+                ];
+        CDVPluginResult *pluginResult = [CDVPluginResult
+                                            resultWithStatus:CDVCommandStatus_OK
+                                            messageAsDictionary:jsonObj
+                                        ];
+    
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
     else {
         BASS_ChannelPlay(modFile, FALSE); // play the stream
     }
 
+}
+
+- (void) cordovaStopMusic:(CDVInvokedUrlCommand*)command {
+    BASS_Free();
+    NSLog(@"STOPPING MUSIC");
+    
 }
 
 - (void) echo:(CDVInvokedUrlCommand*)command {
@@ -254,6 +319,7 @@
     
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];    
 }
+
 
 
 

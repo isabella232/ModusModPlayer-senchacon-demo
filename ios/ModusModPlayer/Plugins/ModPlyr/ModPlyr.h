@@ -24,13 +24,13 @@
 #pragma mark - CORDOVA
 
 
-
-
 - (void) cordovaGetModPaths;
 
 - (void) cordovaGetFilesForPath;
 
 - (void) cordovaPlayMod;
+- (void) cordovaStopMusic;
+- (void) cordovaGetSongStatus;
 
 - (void) echo;
 
