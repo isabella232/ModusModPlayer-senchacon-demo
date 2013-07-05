@@ -8,19 +8,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "394592475.334043"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "233"
-         endingLineNumber = "233"
-         landmarkName = "-cordovaPlayMod:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
          timestampString = "394580178.562017"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
@@ -60,12 +47,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "394592475.334043"
+         timestampString = "394685187.64056"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "221"
-         endingLineNumber = "221"
-         landmarkName = "-cordovaPlayMod:"
+         startingLineNumber = "302"
+         endingLineNumber = "302"
+         landmarkName = "-cordovaGetSongStatus:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -73,12 +60,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "394592475.334043"
+         timestampString = "394685187.64056"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "222"
-         endingLineNumber = "222"
-         landmarkName = "-cordovaPlayMod:"
+         startingLineNumber = "303"
+         endingLineNumber = "303"
+         landmarkName = "-cordovaGetSongStatus:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
+         timestampString = "394685187.64056"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "319"
+         endingLineNumber = "319"
+         landmarkName = "-cordovaGetSongStatus:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
+         timestampString = "394685187.64056"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "313"
+         endingLineNumber = "313"
+         landmarkName = "-cordovaGetSongStatus:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

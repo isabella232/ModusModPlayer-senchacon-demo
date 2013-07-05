@@ -215,84 +215,138 @@
 }
 
 
-- (void) cordovaPlayMod:(CDVInvokedUrlCommand*)command {
-    NSString *file = [command.arguments objectAtIndex:0];
+- (void) cordovaLoadMod:(CDVInvokedUrlCommand*) command {
+    BASS_Free();
 
-     BASS_Free();
-    
     if (!BASS_Init(-1,44100,0,NULL,NULL)) {
 		NSLog(@"Can't initialize device");
     }
     
-    HMUSIC modFile;
+    NSString *file = [command.arguments objectAtIndex:0];
+    currentModFile = BASS_MusicLoad(FALSE, [file UTF8String],0,0,BASS_SAMPLE_LOOP|BASS_MUSIC_RAMPS|BASS_MUSIC_PRESCAN,1);
+
+//    int errNo = BASS_ErrorGetCode();
     
-    modFile = BASS_MusicLoad(FALSE, [file UTF8String],0,0,BASS_MUSIC_RAMPS,1);
-    
-//    int errNo = BASS_ErrorGetCode();    
-    
-    if (! modFile) {
+  
+    NSDictionary *jsonObj;
+        
+    if (! currentModFile) {
         NSLog(@"Could not load file: %@", file);
         
         
-        NSDictionary *jsonObj = [[NSDictionary alloc]
+        jsonObj = [[NSDictionary alloc]
                 initWithObjectsAndKeys:
                     @"false", @"success",
                     nil
                 ];
-        
-        
-        CDVPluginResult *pluginResult = [CDVPluginResult
-                                            resultWithStatus:CDVCommandStatus_OK
-                                            messageAsDictionary:jsonObj
-                                        ];
-    
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+          
     }
     else {
+        NSString *songName = [[NSString alloc] initWithCString: BASS_ChannelGetTags(currentModFile,BASS_TAG_MUSIC_NAME)];
     
-        NSLog(@"PLAYING : %@", file);
-
-        BASS_ChannelPlay(modFile, FALSE); // play the stream
+        NSLog(@"PLAYING : %s", BASS_ChannelGetTags(currentModFile,BASS_TAG_MUSIC_NAME));
+        
+        // This needs to be moved to a separate method;
+        jsonObj = [[NSDictionary alloc]
+                initWithObjectsAndKeys:
+                    @"true", @"success",
+                    songName, @"songName",
+                    nil
+                ];
     }
+
+
+     
+    CDVPluginResult *pluginResult = [CDVPluginResult
+                                        resultWithStatus:CDVCommandStatus_OK
+                                        messageAsDictionary:jsonObj
+                                    ];
+    
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+
+- (void) cordovaPlayMod:(CDVInvokedUrlCommand*)command {
+    
+    NSDictionary *jsonObj  = [[NSDictionary alloc]
+                initWithObjectsAndKeys:
+                    @"true", @"success",
+                    nil
+                ];
+
+    BASS_ChannelPlay(currentModFile, FALSE); // play the stream
+
+        
+    CDVPluginResult *pluginResult = [CDVPluginResult
+                                        resultWithStatus:CDVCommandStatus_OK
+                                        messageAsDictionary:jsonObj
+                                    ];
+    
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+
 
 }
 
 
 
 - (void) cordovaGetSongStatus:(CDVInvokedUrlCommand*)command {
-    NSString *file = [command.arguments objectAtIndex:0];
+    int level, pos, time, act;
+    float *buf;
+    float cpu;
+    
+    BASS_CHANNELINFO ci;
+    BASS_ChannelGetInfo(currentModFile, &ci); // get number of channels
 
-     BASS_Free();
     
-    if (!BASS_Init(-1,44100,0,NULL,NULL)) {
-		NSLog(@"Can't initialize device");
-    }
+    NSDictionary *jsonObj;
     
-    HMUSIC modFile;
+    if ((act = BASS_ChannelIsActive(currentModFile)) ) {
     
-    modFile = BASS_MusicLoad(FALSE, [file UTF8String],0,0,BASS_MUSIC_RAMPS,1);
-    
-//    int errNo = BASS_ErrorGetCode();    
-    
-    if (! modFile) {
-        NSLog(@"Could not load file: %@", file);
+        level = BASS_ChannelGetLevel(currentModFile);
+        pos   = BASS_ChannelGetPosition(currentModFile, BASS_POS_MUSIC_ORDER);
+        time  = BASS_ChannelBytes2Seconds(currentModFile, pos);
+        cpu   = BASS_GetCPU();
         
         
-        NSDictionary *jsonObj = [[NSDictionary alloc]
+        buf = alloca(ci.chans * 368 * sizeof(float)); // allocate buffer for data
+		
+        BASS_ChannelGetData(currentModFile, buf, (ci.chans * 368 * sizeof(float)) | BASS_DATA_FLOAT); // get the sample data (floating-point to avoid 8 & 16 bit processing)
+
+        NSNumber *nsPosition = [[NSNumber alloc] initWithInt:pos];
+        NSNumber *nsLevel    = [[NSNumber alloc] initWithInt:level];
+        NSNumber *nsTime     = [[NSNumber alloc] initWithInt:time];
+        NSNumber *nsCpu      = [[NSNumber alloc] initWithFloat: cpu];
+        NSNumber *nsBuf      = [[NSNumber alloc] initWithFloat: *buf];
+        
+        jsonObj = [[NSDictionary alloc]
                 initWithObjectsAndKeys:
-                    @"false", @"success",
+                    nsLevel, @"level",
+                    nsPosition, @"position",
+                    nsTime, @"time",
+                    nsBuf, @"buff",
+                    nsCpu, @"cpu",
                     nil
                 ];
-        CDVPluginResult *pluginResult = [CDVPluginResult
-                                            resultWithStatus:CDVCommandStatus_OK
-                                            messageAsDictionary:jsonObj
-                                        ];
     
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
     else {
-        BASS_ChannelPlay(modFile, FALSE); // play the stream
+    
+          
+         jsonObj = [[NSDictionary alloc]
+            initWithObjectsAndKeys:
+                @"false", @"success",
+                nil
+            ];
+
     }
+    
+    
+    CDVPluginResult *pluginResult = [CDVPluginResult
+                                    resultWithStatus:CDVCommandStatus_OK
+                                    messageAsDictionary:jsonObj
+                                ];
+
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 
 }
 

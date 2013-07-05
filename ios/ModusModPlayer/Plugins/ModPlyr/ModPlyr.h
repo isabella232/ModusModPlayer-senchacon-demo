@@ -11,7 +11,11 @@
 #include "bass.h"
 
 
-@interface ModPlyr : CDVPlugin
+@interface ModPlyr : CDVPlugin {
+    HMUSIC currentModFile;
+
+
+}
 
 //- (NSString)echo:(CDVInvokedUrlCommand*)command;
 
@@ -28,6 +32,7 @@
 
 - (void) cordovaGetFilesForPath;
 
+- (void) cordovaLoadMod;
 - (void) cordovaPlayMod;
 - (void) cordovaStopMusic;
 - (void) cordovaGetSongStatus;

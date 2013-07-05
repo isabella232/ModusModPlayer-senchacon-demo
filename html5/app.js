@@ -27,7 +27,8 @@ Ext.application({
     ],
 
     views: [
-        'Main'
+        'Main',
+        'ModPlayer'
     ],
 
     stores : [
@@ -133,19 +134,18 @@ Ext.application({
     onAfterGetModFiles : function(files) {
         files = Ext.decode(files);
 
-
-         var fileStore = Ext.create('MMP.store.ModFiles', {
+        var fileStore = Ext.create('MMP.store.ModFiles', {
                 data : files
             }),
-            fileList  = Ext.create('Ext.dataview.List', {
+            fileList = Ext.create('Ext.dataview.List', {
                 itemTpl   : '{fileName}',
                 store     : fileStore,
+                flex      : 1,
                 listeners : {
                     scope   : this,
                     itemtap : this.onFileListItemTap
                 }
             });
-
 
         this.main.addAndAnimateItem(fileList);
 //        this.main.animateActiveItem(fileList, {type:'slide', direction:'right'});
@@ -153,21 +153,60 @@ Ext.application({
     },
 
     onFileListItemTap : function(list, index, listItem, record) {
-        var filePath = record.data.path;
-
+        var data = record.data;
 
         cordova.exec(
-            function callback(directories) {
-                alert('file played')
+            function callback(data) {
+                player.setSongName(data)
             },
             function errorHandler(err) {
                 callback('Nothing to echo');
             },
             'ModPlyr',
-            'cordovaPlayMod',
-            [filePath]
+            'cordovaLoadMod',
+            [data.path]
         );
 
+
+        var player = Ext.create('MMP.view.ModPlayer', {
+            data : record.data,
+
+            listeners : {
+                play : function(view) {
+                    cordova.exec(
+                        function callback(data) {
+                            console.log(data);
+                        },
+                        function errorHandler(err) {
+                            callback('Nothing to echo');
+                        },
+                        'ModPlyr',
+                        'cordovaPlayMod',
+                        []
+                    );
+
+                },
+                stop : function() {
+                   cordova.exec(
+                        Ext.Function.bind(this.onAfterGetModFiles, this),
+            //            function callback(directories) {
+            //                directories = Ext.decode(directories);
+            //                alert(directories[0].path);
+            //            },
+                        function errorHandler(err) {
+                            callback('Nothing to echo');
+                        },
+                        'ModPlyr',
+                        'cordovaStopMusic',
+                        []
+                    );
+                }
+            }
+
+        });
+
+
+        this.main.addAndAnimateItem(player);
     },
 
 

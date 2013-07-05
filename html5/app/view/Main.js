@@ -26,9 +26,9 @@ Ext.define('MMP.view.Main', {
                 {xtype:'spacer'},
                 {
                     xtype  : 'button',
-                    ui     : 'decline',
+                    ui     : 'confirm',
                     itemId : 'stopbutton',
-                    text   : 'STOP',
+                    text   : 'TEST',
                     hidden : false
                 }
 
@@ -49,6 +49,12 @@ Ext.define('MMP.view.Main', {
 
         this.animateActiveItem(item, { type : 'slide', direction : 'left' });
         this.showBackButton();
+
+
+        var title = item.$className.split('.');
+        title = title[title.length - 1];
+        this.down('toolbar').setTitle(title)
+
     },
 
     showBackButton : function(title) {
@@ -59,15 +65,20 @@ Ext.define('MMP.view.Main', {
 
         backButton.setText(title);
         backButton.setHidden(false);
-        this.down('#stopbutton').show();
 
     },
     onBackButton : function(btn) {
         var innerItems = [].concat(this.getInnerItems());
 
+//        debugger;
         if (innerItems.length > 1) {
             var animateTo = innerItems[innerItems.length - 2];
             var currentItem = innerItems.pop();
+
+
+            var title = animateTo.$className.split('.');
+            title = title[title.length - 1];
+            this.down('toolbar').setTitle(title)
 
             this.animateActiveItem(animateTo, {
                 type      : 'slide',
@@ -78,15 +89,8 @@ Ext.define('MMP.view.Main', {
                 this.remove(currentItem);
                 if (this.getInnerItems().length == 1) {
                     btn.hide();
-                    this.down('#stopbutton').hide();
                 }
             }, 300, this)
-
-
-
-
-
-
 
         }
         else {
@@ -97,7 +101,18 @@ Ext.define('MMP.view.Main', {
 
     },
     onStopButton : function() {
-        this.fireEvent('stop');
+        cordova.exec(
+            function callback(data) {
+                debugger;
+                console.log(data);
+            },
+            function errorHandler(err) {
+                callback('Nothing to echo');
+            },
+            'ModPlyr',
+            'cordovaGetSongStatus',
+            []
+        );
     }
 
 });
