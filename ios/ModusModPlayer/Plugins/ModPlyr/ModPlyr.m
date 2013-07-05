@@ -239,7 +239,7 @@
                     @"false", @"success",
                     nil
                 ];
-          
+        
     }
     else {
         NSString *songName = [[NSString alloc] initWithCString: BASS_ChannelGetTags(currentModFile,BASS_TAG_MUSIC_NAME)];
@@ -289,7 +289,7 @@
 
 
 
-- (void) cordovaGetSongStatus:(CDVInvokedUrlCommand*)command {
+- (void) cordovaGetModStats:(CDVInvokedUrlCommand*)command {
     int level, pos, time, act;
     float *buf;
     float cpu;
@@ -351,7 +351,9 @@
 }
 
 - (void) cordovaStopMusic:(CDVInvokedUrlCommand*)command {
-    BASS_Free();
+    BASS_ChannelStop(currentModFile);
+//    BASS_Channel
+    BASS_ChannelSetPosition(currentModFile, 0, 0);
     NSLog(@"STOPPING MUSIC");
     
 }

@@ -101,18 +101,7 @@ Ext.define('MMP.view.Main', {
 
     },
     onStopButton : function() {
-        cordova.exec(
-            function callback(data) {
-                debugger;
-                console.log(data);
-            },
-            function errorHandler(err) {
-                callback('Nothing to echo');
-            },
-            'ModPlyr',
-            'cordovaGetSongStatus',
-            []
-        );
+        this.fireEvent('stop', this);
     }
 
 });

@@ -23,11 +23,14 @@ Ext.define('MMP.view.ModPlayer', {
             },
             {
                 xtype  : 'component',
-                style  : 'text-align:center; font-size: 12px; background-color: #AEAEAE;',
+                style  : 'text-align:left; font-size: 15px; background-color: #E9E9E9;',
                 itemId : 'stats',
                 height : 200,
                 tpl    : [
-
+                    '<div><b>CPU: </b> {cpu}</div>',
+                    '<div><b>Level: </b> {level}</div>',
+                    '<div><b>Position: </b> {position}</div>',
+                    '<div><b>Time: {time}</b></div>'
                 ]
             },
             {
@@ -104,6 +107,7 @@ Ext.define('MMP.view.ModPlayer', {
 
     onStopBtnTap : function() {
         this.fireEvent('stop', this);
+        this.setStats({});
     },
 
     updateSongData : function(songData) {
@@ -112,5 +116,20 @@ Ext.define('MMP.view.ModPlayer', {
 
     setSongName : function(data) {
         this.down('#songName').setHtml(data.songName);
+    },
+
+    setStats : function(stats) {
+//        debugger;
+
+        /*
+        buff: -0.03076172
+        cpu: 0.01923458
+        level: 132123416
+        position: 0
+        time: 0
+
+         */
+
+        this.down('#stats').setData(stats);
     }
 });

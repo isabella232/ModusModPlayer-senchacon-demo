@@ -62,17 +62,7 @@ Ext.application({
         this.main = Ext.create('MMP.view.Main', {
             listeners : {
                 stop : function() {
-                cordova.exec(
-//                    Ext.Function.bind(this.onAfterGetDirectories, this),
-                    function callback(directories) {
-                    },
-                    function errorHandler(err) {
-                        callback('Nothing to echo');
-                    },
-                    'ModPlyr',
-                    'cordovaStopMusic',
-                    ['']
-                );
+
                 }
             }
         });
@@ -153,29 +143,19 @@ Ext.application({
     },
 
     onFileListItemTap : function(list, index, listItem, record) {
-        var data = record.data;
-
-        cordova.exec(
-            function callback(data) {
-                player.setSongName(data)
-            },
-            function errorHandler(err) {
-                callback('Nothing to echo');
-            },
-            'ModPlyr',
-            'cordovaLoadMod',
-            [data.path]
-        );
+        var me = this,
+            data = record.data;
 
 
-        var player = Ext.create('MMP.view.ModPlayer', {
+        var player = this.player = Ext.create('MMP.view.ModPlayer', {
             data : record.data,
 
             listeners : {
                 play : function(view) {
                     cordova.exec(
                         function callback(data) {
-                            console.log(data);
+//                            console.log(data);
+                            me.startModPlayerUpdateLoop();
                         },
                         function errorHandler(err) {
                             callback('Nothing to echo');
@@ -187,6 +167,7 @@ Ext.application({
 
                 },
                 stop : function() {
+                   me.stopModPlayerUpdateLoop();
                    cordova.exec(
                         Ext.Function.bind(this.onAfterGetModFiles, this),
             //            function callback(directories) {
@@ -205,9 +186,55 @@ Ext.application({
 
         });
 
+        cordova.exec(
+            function callback(data) {
+                player.setSongName(data)
+            },
+            function errorHandler(err) {
+                callback('Nothing to echo');
+            },
+            'ModPlyr',
+            'cordovaLoadMod',
+            [data.path]
+        );
 
-        this.main.addAndAnimateItem(player);
+
+
+        this.main.addAndAnimateItem(this.player);
     },
+
+
+    startModPlayerUpdateLoop : function() {
+        var boundTimerFunction = Ext.Function.bind(this.getSongStats, this);
+        this.interval = setInterval(boundTimerFunction, 100);
+
+    },
+
+    stopModPlayerUpdateLoop : function() {
+        if (this.interval) {
+            clearInterval(this.interval);
+            delete this.interval;
+        }
+    },
+
+    getSongStats : function() {
+          var me = this,
+              player = me.player;
+
+
+          cordova.exec(
+            function callback(data) {
+                player.setStats(data);
+            },
+            function errorHandler(err) {
+                callback('Nothing to echo');
+            },
+            'ModPlyr',
+            'cordovaGetModStats',
+            ['']
+        );
+    },
+
 
 
     onUpdated: function() {

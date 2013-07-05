@@ -52,7 +52,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "302"
          endingLineNumber = "302"
-         landmarkName = "-cordovaGetSongStatus:"
+         landmarkName = "-cordovaGetModStats:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -65,7 +65,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "303"
          endingLineNumber = "303"
-         landmarkName = "-cordovaGetSongStatus:"
+         landmarkName = "-cordovaGetModStats:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -78,7 +78,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "319"
          endingLineNumber = "319"
-         landmarkName = "-cordovaGetSongStatus:"
+         landmarkName = "-cordovaGetModStats:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -91,7 +91,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "313"
          endingLineNumber = "313"
-         landmarkName = "-cordovaGetSongStatus:"
+         landmarkName = "-cordovaGetModStats:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -35,7 +35,7 @@
 - (void) cordovaLoadMod;
 - (void) cordovaPlayMod;
 - (void) cordovaStopMusic;
-- (void) cordovaGetSongStatus;
+- (void) cordovaGetModStats;
 
 - (void) echo;
 
