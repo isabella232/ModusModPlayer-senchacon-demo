@@ -184,6 +184,83 @@
 }
 
 
+// This method was copied from libbass spectrum.c :: UpdateSpectrum example
+- (NSArray*) getWaveFormData: (NSInteger *)height : (NSInteger*) width {
+    int x,y;
+
+    int SPECHEIGHT = (int)*height;
+    int SPECWIDTH = (int)*width;
+
+    DWORD specbuf[SPECHEIGHT * SPECWIDTH];
+
+    NSMutableArray *channelData  = [[NSMutableArray alloc] init];
+    NSMutableArray *channelOneData = [[NSMutableArray alloc] init];
+    NSMutableArray *channelTwoData = [[NSMutableArray alloc] init];
+    
+    int c;
+    float *buf;
+    
+    BASS_CHANNELINFO channelInfo;
+    
+    memset(specbuf, 0, sizeof(specbuf));
+    
+    BASS_ChannelGetInfo(currentModFile, &channelInfo); // get number of channels
+    
+    buf = alloca(channelInfo.chans * SPECWIDTH * sizeof(float)); // allocate buffer for data
+    
+    short dataSize = channelInfo.chans * SPECWIDTH * sizeof(float);
+    printf("data size %hd \n", dataSize);
+    
+    // get the sample data (floating-point to avoid 8 & 16 bit processing)
+    BASS_ChannelGetData(currentModFile, buf, ( channelInfo.chans * SPECWIDTH * sizeof(float) ) |BASS_DATA_FLOAT);
+    
+    
+    for ( c = 0; c < channelInfo.chans;c ++) {
+        for (x=0;x<SPECWIDTH;x++) {
+            int v = ( 1 - buf[ x * channelInfo.chans + c]) *SPECHEIGHT / 2; // invert and scale to fit display
+            printf ("v = %i\n", v);
+            
+        
+            if (v < 0) {
+                v = 0;
+            }
+            else if (v >= SPECHEIGHT) {
+                v = SPECHEIGHT - 1;
+            }
+
+            if (!x) {
+                y = v;
+            }
+            do { // draw line from previous sample...
+                if (y < v) {
+                    y++;
+                }
+                else if (y > v) {
+                    y--;
+                }
+                
+                
+                NSNumber *plotItem = [[NSNumber alloc]initWithInt: v];
+                
+                if (c == 0) {
+                    [channelOneData addObject: plotItem];
+                }
+                else {
+                    [channelTwoData addObject: plotItem];
+                }
+                
+                specbuf[ y * SPECWIDTH + x] = 1; // left=green, right=red (could add more colours to palette for more chans)
+            } while (y!=v);
+        }
+//        [data addObject:specbuf];
+    }
+    
+    [channelData addObject:channelOneData];
+    [channelData addObject:channelTwoData];
+    
+    return channelData;
+
+}
 
 #pragma mark - CORDOVA
 
@@ -283,8 +360,6 @@
                                     ];
     
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-
-
 }
 
 
@@ -312,11 +387,22 @@
 		
         BASS_ChannelGetData(currentModFile, buf, (ci.chans * 368 * sizeof(float)) | BASS_DATA_FLOAT); // get the sample data (floating-point to avoid 8 & 16 bit processing)
 
-        NSNumber *nsPosition = [[NSNumber alloc] initWithInt:pos];
+
+
+
+        
+        NSString *nsPosition = [NSString  stringWithFormat:@"(%03u:%03u)", LOWORD(pos),HIWORD(pos)];
         NSNumber *nsLevel    = [[NSNumber alloc] initWithInt:level];
         NSNumber *nsTime     = [[NSNumber alloc] initWithInt:time];
         NSNumber *nsCpu      = [[NSNumber alloc] initWithFloat: cpu];
         NSNumber *nsBuf      = [[NSNumber alloc] initWithFloat: *buf];
+        
+        
+        NSInteger *canvasWidth = (NSInteger *)[command.arguments objectAtIndex:0];
+        NSInteger *canvasHeight = (NSInteger *)[command.arguments objectAtIndex:1];
+
+        
+        NSArray *waveData = [self getWaveFormData: (NSInteger *)canvasWidth: (NSInteger *)canvasHeight];
         
         jsonObj = [[NSDictionary alloc]
                 initWithObjectsAndKeys:
@@ -325,6 +411,7 @@
                     nsTime, @"time",
                     nsBuf, @"buff",
                     nsCpu, @"cpu",
+                    waveData, @"wavedata",
                     nil
                 ];
     
@@ -375,7 +462,6 @@
     
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];    
 }
-
 
 
 

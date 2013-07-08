@@ -28,7 +28,8 @@ Ext.application({
 
     views: [
         'Main',
-        'ModPlayer'
+        'ModPlayer',
+        'Spectrum'
     ],
 
     stores : [
@@ -218,12 +219,15 @@ Ext.application({
     },
 
     getSongStats : function() {
-          var me = this,
-              player = me.player;
+        var me           = this,
+            player       = me.player,
+            spectrumSize = player.spectrum.element.getSize();
 
-
-          cordova.exec(
+        cordova.exec(
             function callback(data) {
+                console.log('modStats');
+//                debugger;
+                console.log(typeof data);
                 player.setStats(data);
             },
             function errorHandler(err) {
@@ -231,7 +235,7 @@ Ext.application({
             },
             'ModPlyr',
             'cordovaGetModStats',
-            ['']
+            [spectrumSize.width, spectrumSize.height]
         );
     },
 

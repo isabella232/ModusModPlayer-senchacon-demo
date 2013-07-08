@@ -25,13 +25,18 @@ Ext.define('MMP.view.ModPlayer', {
                 xtype  : 'component',
                 style  : 'text-align:left; font-size: 15px; background-color: #E9E9E9;',
                 itemId : 'stats',
-                height : 200,
+                height : 120,
                 tpl    : [
                     '<div><b>CPU: </b> {cpu}</div>',
                     '<div><b>Level: </b> {level}</div>',
                     '<div><b>Position: </b> {position}</div>',
                     '<div><b>Time: {time}</b></div>'
                 ]
+            },
+            {
+                xtype  : 'spectrum',
+                itemId : 'spectrum',
+                flex   : 1
             },
             {
                 xtype  : 'slider',
@@ -90,6 +95,7 @@ Ext.define('MMP.view.ModPlayer', {
     initialize : function() {
         var data = this.getData();
         this.down('#fileName').setHtml(data.fileName);
+        this.spectrum = this.down('spectrum');
         this.callParent();
     },
 
@@ -117,6 +123,7 @@ Ext.define('MMP.view.ModPlayer', {
     setSongName : function(data) {
         this.down('#songName').setHtml(data.songName);
     },
+
 
     setStats : function(stats) {
 //        debugger;
