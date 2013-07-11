@@ -10,8 +10,8 @@
  @constructor
  Create an n-point FFT based spectral analyzer.
 
- @param num_points - Number of points for transform.
- @param num_bins - Number of bins to show on canvas.
+ @param numPoints - Number of points for transform.
+ @param numBins - Number of bins to show on canvas.
  @param canvas_id - Canvas element ID.
  @param audio_context - An AudioContext instance.
  */
@@ -21,151 +21,124 @@ Ext.define('MMP.view.Spectrum', {
     xtype  : 'spectrum',
 
     config : {
-        num_points    : 0,
-        num_bins      : 0,
-        audio_context : null,
-        type          : 1,
+        numPoints    : 2048,
+        numBins      : 500,
+        type         : 2,
 
         Types : {
             FREQUENCY : 1,
             TIME      : 2
         },
 
-        style : "border: 1px solid #F00;"
+        style : "border: 1px solid #F00;",
+
+        tpl : '<canvas id="{id}" height="{height}" width="{width}" />'
     },
 
     initialize : function() {
         // TODO: Push to element config
-        this.setHtml('<canvas id="' + this.getId() + '">');
+
+        var me = this,
+            thisEl = me.element,
+            canvas;
+
+
         this.callParent();
-        var canvas = this.canvas = this.element.down('canvas');
-        canvas.fillStyle = "rgb(150, 150, 150)";
-    },
 
 
-    shitNit          : function(num_points, num_bins, canvas_id, audio_context, type) {
-        this.num_bins = num_bins;
-        this.num_points = num_points;
-        this.update_rate_ms = 50;
-        this.smoothing = 0.75;
-        this.type = type || this.getTypes().FREQUENCY;
 
-        // Number of points we actually want to display. If zero, display all points.
-        this.valid_points = 0;
+        thisEl.on('painted', function() {
+            var thisElWidth = thisEl.getWidth(),
+                thisElHeight = thisEl.getHeight();
 
-        // Determine the boundaries of the canvas.
-        this.canvas = document.getElementById(canvas_id);
-        this.width = this.canvas.width;
-        this.height = this.canvas.height;
-        if (this.type == SpectrumBox.Types.FREQUENCY) {
-            this.bar_spacing = 3;
-        }
-        else {
-            this.bar_spacing = 1;
-        }
+            me.setData({
+                id     : 'canvas-' + me.getId(),
+                width  : thisElWidth,
+                height : thisElHeight
+            });
 
-        this.ctx = this.canvas.getContext('2d');
-        this.actx = audio_context;
 
-        // Create the spectral analyzer
-        this.fft = this.actx.createAnalyser();
-        this.fft.fftSize = this.num_points;
-        this.data = new Uint8Array(this.fft.frequencyBinCount);
-    },
+            canvas = me.canvas = me.element.down('canvas').dom;
 
-    /* Returns the AudioNode of the FFT. You can route signals into this. */
-    getAudioNode     : function() {
-        return this.fft;
-    },
+            // These are for backwards compatibility.
+            me.canvasWidth  = thisElWidth;
 
-    /* Returns the canvas' 2D context. Use this to configure the look
-     of the display. */
-    getCanvasContext : function() {
-        return this.ctx;
-    },
+            me.canvasHeight = thisElHeight;
+            me.type         = me.getType();
+            me.validPoints  = 500;
 
-    /* Set the number of points to work with. */
-    setValidPoints   : function(points) {
-        this.valid_points = points;
-        return this;
-    },
+            me.canvas2dContext = canvas.getContext('2d');
+            me.data = new Uint8Array();
 
-    /* Set the domain type for the graph (TIME / FREQUENCY. */
-    setType          : function(type) {
-        this.type = type;
-        return this;
-    },
-
-    /* Enable the analyzer. Starts drawing stuff on the canvas. */
-    enable           : function() {
-        var that = this;
-        if (!this.intervalId) {
-            this.intervalId = window.setInterval(
-                function() {
-                    that.updateCanvas();
-                }, this.update_rate_ms);
-        }
-        return this;
-    },
-
-    /* Disable the analyzer. Stops drawing stuff on the canvas. */
-    disable          : function() {
-        if (this.intervalId) {
-            window.clearInterval(this.intervalId);
-            this.intervalId = undefined;
-        }
-        return this;
-    },
-
-    /* Updates the canvas display. */
-    updateCanvas      : function() {
-        // Get the frequency samples
-        debugger;
-        data = this.data;
-        if (this.type == SpectrumBox.Types.FREQUENCY) {
-            this.fft.smoothingTimeConstant = this.smoothing;
-            this.fft.getByteFrequencyData(data);
-        }
-        else {
-            this.fft.smoothingTimeConstant = 0;
-            this.fft.getByteFrequencyData(data);
-            this.fft.getByteTimeDomainData(data);
-        }
-
-        var length = data.length;
-        if (this.valid_points > 0) {
-            length = this.valid_points;
-        }
-
-        // Clear canvas then redraw graph.
-        this.ctx.clearRect(0, 0, this.width, this.height);
-
-        // Break the samples up into bins
-        var bin_size = Math.floor(length / this.num_bins);
-        for (var i = 0; i < this.num_bins; ++i) {
-            var sum = 0;
-            for (var j = 0; j < bin_size; ++j) {
-                sum += data[(i * bin_size) + j];
-            }
-
-            // Calculate the average frequency of the samples in the bin
-            var average = sum / bin_size;
-
-            // Draw the bars on the canvas
-            var bar_width = this.width / this.num_bins;
-            var scaled_average = (average / 256) * this.height;
-
-            if (this.type == SpectrumBox.Types.FREQUENCY) {
-                this.ctx.fillRect(
-                    i * bar_width, this.height,
-                    bar_width - this.bar_spacing, -scaled_average);
+            if (this.type == 1) {
+                me.barSpacing = 3;
             }
             else {
-                this.ctx.fillRect(
-                    i * bar_width, this.height - scaled_average + 2,
-                    bar_width - this.bar_spacing, -1);
+                me.barSpacing = 1;
             }
-        }
+        }, me)
+
+
+    },
+
+
+
+    /* Updates the canvas display. */
+    updateCanvas      : function(dataItems) {
+        var me              = this,
+            numBins         = me.getNumBins(),
+            canvasWidth     = me.canvasWidth,
+            canvasHeight    = me.canvasHeight,
+            canvas2dContext = me.canvas2dContext,
+            barSpacing      = me.barSpacing;
+
+        me.canvas2dContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+
+        Ext.each(dataItems, function(data, index) {
+
+            if (index < 1) {
+                canvas2dContext.fillStyle = "rgb(0, 0, 255)";
+            }
+            else {
+                canvas2dContext.fillStyle = "rgb(255, 0, 0)";
+            }
+            // Get the frequency samples
+
+            var length = data.length;
+            if (me.validPoints > 0) {
+                length = me.validPoints;
+            }
+
+            // Clear canvas then redraw graph.
+
+            // Break the samples up into bins
+            var bin_size = Math.floor(length / numBins);
+
+
+
+            for (var i = 0; i < numBins; ++i) {
+                var sum = 0;
+                for (var j = 0; j < bin_size; ++j) {
+                    sum += data[(i * bin_size) + j];
+                }
+
+                // Calculate the average frequency of the samples in the bin
+                var average = sum / bin_size;
+
+                // Draw the bars on the canvas
+                var barWidth = canvasWidth / numBins,
+                    scaledAvg = (average / 256) * canvasHeight;
+
+                if (me.type == 1) {
+    //                console.log(i, barWidth, canvasHeight, barSpacing, -scaledAvg);
+                    canvas2dContext.fillRect(i * barWidth, canvasHeight, barWidth - barSpacing, -scaledAvg);
+                }
+                else {
+    //                console.log('here')
+                    canvas2dContext.fillRect(i * barWidth, canvasHeight - scaledAvg + 2, barWidth, -1);
+                }
+            }
+        })
     }
 
 

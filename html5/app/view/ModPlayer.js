@@ -117,7 +117,7 @@ Ext.define('MMP.view.ModPlayer', {
     },
 
     updateSongData : function(songData) {
-        console.log('SongData ::: ', songData);
+//        console.log('SongData ::: ', songData);
     },
 
     setSongName : function(data) {
@@ -136,7 +136,8 @@ Ext.define('MMP.view.ModPlayer', {
         time: 0
 
          */
-
+//        debugger;
         this.down('#stats').setData(stats);
+        this.spectrum.updateCanvas(stats.waveData);
     }
 });

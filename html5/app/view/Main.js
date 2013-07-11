@@ -45,15 +45,17 @@ Ext.define('MMP.view.Main', {
     },
 
     addAndAnimateItem : function(item) {
-        this.add(item);
+        var me = this,
+            title;
 
-        this.animateActiveItem(item, { type : 'slide', direction : 'left' });
-        this.showBackButton();
+        me.add(item);
 
+        me.animateActiveItem(item, { type : 'slide', direction : 'left' });
+        me.showBackButton();
 
-        var title = item.$className.split('.');
+        title = item.$className.split('.');
         title = title[title.length - 1];
-        this.down('toolbar').setTitle(title)
+        me.down('toolbar').setTitle(title)
 
     },
 
@@ -65,40 +67,39 @@ Ext.define('MMP.view.Main', {
 
         backButton.setText(title);
         backButton.setHidden(false);
-
     },
+
     onBackButton : function(btn) {
-        var innerItems = [].concat(this.getInnerItems());
+        var me         = this,
+            innerItems = [].concat(me.getInnerItems());
 
+        me.fireEvent('back', me);
 //        debugger;
+
         if (innerItems.length > 1) {
-            var animateTo = innerItems[innerItems.length - 2];
-            var currentItem = innerItems.pop();
+            var animateTo   = innerItems[innerItems.length - 2],
+                currentItem = innerItems.pop(),
+                title       = animateTo.$className.split('.');
 
-
-            var title = animateTo.$className.split('.');
             title = title[title.length - 1];
-            this.down('toolbar').setTitle(title)
+            me.down('toolbar').setTitle(title);
 
-            this.animateActiveItem(animateTo, {
+            me.animateActiveItem(animateTo, {
                 type      : 'slide',
                 direction : 'right'
             });
 
             Ext.Function.defer(function() {
-                this.remove(currentItem);
-                if (this.getInnerItems().length == 1) {
+                me.remove(currentItem);
+                if (me.getInnerItems().length == 1) {
                     btn.hide();
                 }
-            }, 300, this)
+            }, 300);
 
         }
         else {
             btn.hide();
         }
-
-
-
     },
     onStopButton : function() {
         this.fireEvent('stop', this);

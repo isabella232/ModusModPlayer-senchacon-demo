@@ -185,21 +185,23 @@
 
 
 // This method was copied from libbass spectrum.c :: UpdateSpectrum example
-- (NSArray*) getWaveFormData: (NSInteger *)height : (NSInteger*) width {
+- (NSArray*) getWaveFormData:(NSInteger*)width  andHeight:(NSInteger*)height {
     int x,y;
 
-    int SPECHEIGHT = (int)*height;
-    int SPECWIDTH = (int)*width;
+
+    // TODO: Use width and height parameters here. Need to figure out how to cast from NSInteger to int!!!!
+    int SPECHEIGHT = 173;
+    int SPECWIDTH =  320;
 
     DWORD specbuf[SPECHEIGHT * SPECWIDTH];
 
     NSMutableArray *channelData  = [[NSMutableArray alloc] init];
     NSMutableArray *channelOneData = [[NSMutableArray alloc] init];
     NSMutableArray *channelTwoData = [[NSMutableArray alloc] init];
-    
+
     int c;
     float *buf;
-    
+
     BASS_CHANNELINFO channelInfo;
     
     memset(specbuf, 0, sizeof(specbuf));
@@ -209,7 +211,7 @@
     buf = alloca(channelInfo.chans * SPECWIDTH * sizeof(float)); // allocate buffer for data
     
     short dataSize = channelInfo.chans * SPECWIDTH * sizeof(float);
-    printf("data size %hd \n", dataSize);
+//    printf("data size %hd \n", dataSize);
     
     // get the sample data (floating-point to avoid 8 & 16 bit processing)
     BASS_ChannelGetData(currentModFile, buf, ( channelInfo.chans * SPECWIDTH * sizeof(float) ) |BASS_DATA_FLOAT);
@@ -217,8 +219,8 @@
     
     for ( c = 0; c < channelInfo.chans;c ++) {
         for (x=0;x<SPECWIDTH;x++) {
-            int v = ( 1 - buf[ x * channelInfo.chans + c]) *SPECHEIGHT / 2; // invert and scale to fit display
-            printf ("v = %i\n", v);
+            int v = ( 1 - buf[ x * channelInfo.chans + c]) * SPECHEIGHT /2; // invert and scale to fit display
+//            printf ("v = %i\n", v);
             
         
             if (v < 0) {
@@ -254,7 +256,7 @@
         }
 //        [data addObject:specbuf];
     }
-    
+
     [channelData addObject:channelOneData];
     [channelData addObject:channelTwoData];
     
@@ -321,7 +323,7 @@
     else {
         NSString *songName = [[NSString alloc] initWithCString: BASS_ChannelGetTags(currentModFile,BASS_TAG_MUSIC_NAME)];
     
-        NSLog(@"PLAYING : %s", BASS_ChannelGetTags(currentModFile,BASS_TAG_MUSIC_NAME));
+        NSLog(@"PLAYING : %s", BASS_ChannelGetTags(currentModFile, BASS_TAG_MUSIC_NAME));
         
         // This needs to be moved to a separate method;
         jsonObj = [[NSDictionary alloc]
@@ -389,8 +391,6 @@
 
 
 
-
-        
         NSString *nsPosition = [NSString  stringWithFormat:@"(%03u:%03u)", LOWORD(pos),HIWORD(pos)];
         NSNumber *nsLevel    = [[NSNumber alloc] initWithInt:level];
         NSNumber *nsTime     = [[NSNumber alloc] initWithInt:time];
@@ -401,8 +401,10 @@
         NSInteger *canvasWidth = (NSInteger *)[command.arguments objectAtIndex:0];
         NSInteger *canvasHeight = (NSInteger *)[command.arguments objectAtIndex:1];
 
+//        NSLog(@"CanvasSize %@x%@", canvasWidth, canvasHeight);
+
         
-        NSArray *waveData = [self getWaveFormData: (NSInteger *)canvasWidth: (NSInteger *)canvasHeight];
+        NSArray *waveData = [self getWaveFormData:(NSInteger *)canvasWidth andHeight:(NSInteger *)canvasHeight];
         
         jsonObj = [[NSDictionary alloc]
                 initWithObjectsAndKeys:
@@ -411,7 +413,7 @@
                     nsTime, @"time",
                     nsBuf, @"buff",
                     nsCpu, @"cpu",
-                    waveData, @"wavedata",
+                    waveData, @"waveData",
                     nil
                 ];
     
