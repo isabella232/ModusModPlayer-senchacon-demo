@@ -24,6 +24,8 @@
 - (NSMutableArray *) getFilesInDirectory;
 - (NSMutableArray *) getModFileDirectories;
 - (NSString *) getModDirectoriesAsJson;
+- (NSMutableArray *) getWaveFormData;
+- (NSMutableArray *) getSpectrumData;
 
 #pragma mark - CORDOVA
 
@@ -35,7 +37,8 @@
 - (void) cordovaLoadMod;
 - (void) cordovaPlayMod;
 - (void) cordovaStopMusic;
-- (void) cordovaGetModStats;
+- (void) cordvoaGetWaveFormData;
+- (void) cordovaGetSpectrumData;
 
 - (void) echo;
 

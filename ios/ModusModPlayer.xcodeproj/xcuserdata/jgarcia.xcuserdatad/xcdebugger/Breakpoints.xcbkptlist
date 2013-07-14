@@ -21,24 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "395005294.995334"
+         timestampString = "395365770.024333"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "272"
-         endingLineNumber = "272"
-         landmarkName = "-cordovaGetModPaths:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "395005294.995334"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "284"
-         endingLineNumber = "284"
+         startingLineNumber = "330"
+         endingLineNumber = "330"
          landmarkName = "-cordovaGetModFiles:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,12 +34,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "395005294.995334"
+         timestampString = "395365770.024333"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "379"
-         endingLineNumber = "379"
-         landmarkName = "-cordovaGetModStats:"
+         startingLineNumber = "342"
+         endingLineNumber = "342"
+         landmarkName = "-cordovaLoadMod:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -60,12 +47,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "395005294.995334"
+         timestampString = "395365770.024333"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "380"
-         endingLineNumber = "380"
-         landmarkName = "-cordovaGetModStats:"
+         startingLineNumber = "438"
+         endingLineNumber = "438"
+         landmarkName = "-cordovaGetWaveFormData:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -73,12 +60,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "395005294.995334"
+         timestampString = "395365770.024333"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "398"
-         endingLineNumber = "398"
-         landmarkName = "-cordovaGetModStats:"
+         startingLineNumber = "439"
+         endingLineNumber = "439"
+         landmarkName = "-cordovaGetWaveFormData:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -86,12 +73,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "395005294.995334"
+         timestampString = "395365770.024333"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "390"
-         endingLineNumber = "390"
-         landmarkName = "-cordovaGetModStats:"
+         startingLineNumber = "458"
+         endingLineNumber = "458"
+         landmarkName = "-cordovaGetWaveFormData:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -99,12 +86,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "395005294.995334"
+         timestampString = "395365770.024333"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "407"
-         endingLineNumber = "407"
-         landmarkName = "-cordovaGetModStats:"
+         startingLineNumber = "449"
+         endingLineNumber = "449"
+         landmarkName = "-cordovaGetWaveFormData:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
+         timestampString = "395365770.024333"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "467"
+         endingLineNumber = "467"
+         landmarkName = "-cordovaGetWaveFormData:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "395005294.995334"
+         timestampString = "395202676.495079"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "195"
-         endingLineNumber = "195"
+         startingLineNumber = "196"
+         endingLineNumber = "196"
          landmarkName = "-getWaveFormData:andHeight:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,7 +138,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "395005294.995334"
+         timestampString = "395202676.495079"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "204"
+         endingLineNumber = "204"
+         landmarkName = "-getWaveFormData:andHeight:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
+         timestampString = "395202676.495079"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "203"
@@ -151,12 +164,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-         timestampString = "395005292.12075"
+         timestampString = "395365841.43311"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "202"
-         endingLineNumber = "202"
-         landmarkName = "-getWaveFormData:andHeight:"
+         startingLineNumber = "285"
+         endingLineNumber = "285"
+         landmarkName = "-getSpectrumData"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
+         timestampString = "395365945.338556"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "284"
+         endingLineNumber = "284"
+         landmarkName = "-getSpectrumData"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

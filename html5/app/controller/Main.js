@@ -165,9 +165,8 @@ Ext.define('MMP.controller.Main', {
     startModPlayerUpdateLoop : function() {
         if (! this.interval) {
             var boundTimerFunction = Ext.Function.bind(this.getSongStats, this);
-            this.interval = setInterval(boundTimerFunction, 20);
+            this.interval = setInterval(boundTimerFunction, 50);
         }
-
     },
 
     stopModPlayerUpdateLoop : function() {
@@ -194,8 +193,8 @@ Ext.define('MMP.controller.Main', {
                 callback('Nothing to echo');
             },
             'ModPlyr',
-            'cordovaGetModStats',
-            [spectrumSize.width.toString(), spectrumSize.height.toString()]
+            'cordovaGetWaveFormData',
+            [spectrumSize.width, spectrumSize.height]
         );
     }
 

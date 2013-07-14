@@ -191,7 +191,7 @@
 
     // TODO: Use width and height parameters here. Need to figure out how to cast from NSInteger to int!!!!
     int SPECHEIGHT = 173;
-    int SPECWIDTH =  320;
+    int SPECWIDTH =  500;
 
     DWORD specbuf[SPECHEIGHT * SPECWIDTH];
 
@@ -218,6 +218,7 @@
     
     
     for ( c = 0; c < channelInfo.chans;c ++) {
+        NSNumber *plotItem;
         for (x=0;x<SPECWIDTH;x++) {
             int v = ( 1 - buf[ x * channelInfo.chans + c]) * SPECHEIGHT /2; // invert and scale to fit display
 //            printf ("v = %i\n", v);
@@ -242,19 +243,25 @@
                 }
                 
                 
-                NSNumber *plotItem = [[NSNumber alloc]initWithInt: v];
-                
-                if (c == 0) {
-                    [channelOneData addObject: plotItem];
-                }
-                else {
-                    [channelTwoData addObject: plotItem];
-                }
+                plotItem = [[NSNumber alloc]initWithInt: v];
+//                
+//                if (c == 0) {
+//                    [channelOneData addObject: plotItem];
+//                }
+//                else {
+//                    [channelTwoData addObject: plotItem];
+//                }
                 
                 specbuf[ y * SPECWIDTH + x] = 1; // left=green, right=red (could add more colours to palette for more chans)
             } while (y!=v);
+    
+            if (c == 0) {
+                [channelOneData addObject: plotItem];
+            }
+            else {
+                [channelTwoData addObject: plotItem];
+            }
         }
-//        [data addObject:specbuf];
     }
 
     [channelData addObject:channelOneData];
@@ -262,6 +269,39 @@
     
     return channelData;
 
+}
+
+
+- (NSMutableArray *) getSpectrumData {
+    int SPECHEIGHT = 173;
+    //int SPECWIDTH =  500;
+
+    float fft[SPECHEIGHT]; // get the FFT data
+    BASS_ChannelGetData(currentModFile, fft, BASS_DATA_FFT1024);
+
+    int x;
+    
+    
+    NSMutableArray *data = [[NSMutableArray alloc] init];
+    
+//    for (x = 0; x < SPECHEIGHT; x++) {
+//        y = sqrt(fft[ x + 1]) * 3 * 127; // scale it (sqrt to make low values more visible)
+//        
+//        NSNumber *plotItem = [[NSNumber alloc] initWithInt:y];
+//        [data addObject:plotItem];
+////        if (y>127) y=127; // cap it
+////        specbuf[(SPECHEIGHT-1-x)*SPECWIDTH+specpos]=palette[128+y]; // plot it
+//    }
+    // move marker onto next position
+//    specpos = ( specpos + 1 ) % SPECWIDTH;
+    
+//    for (x=0;x<SPECHEIGHT;x++) {
+        // Draws white line
+//        specbuf[ x * SPECWIDTH + specpos] = palette[255];
+//    }
+
+    
+    return data;
 }
 
 #pragma mark - CORDOVA
@@ -366,7 +406,7 @@
 
 
 
-- (void) cordovaGetModStats:(CDVInvokedUrlCommand*)command {
+- (void) cordovaGetWaveFormData:(CDVInvokedUrlCommand*)command {
     int level, pos, time, act;
     float *buf;
     float cpu;
@@ -391,7 +431,8 @@
 
 
 
-        NSString *nsPosition = [NSString  stringWithFormat:@"(%03u:%03u)", LOWORD(pos),HIWORD(pos)];
+        NSString *nsPattern  = [NSString  stringWithFormat:@"%03u", LOWORD(pos)];
+        NSString *nsRow  = [NSString  stringWithFormat:@"%03u", HIWORD(pos)];
         NSNumber *nsLevel    = [[NSNumber alloc] initWithInt:level];
         NSNumber *nsTime     = [[NSNumber alloc] initWithInt:time];
         NSNumber *nsCpu      = [[NSNumber alloc] initWithFloat: cpu];
@@ -409,7 +450,8 @@
         jsonObj = [[NSDictionary alloc]
                 initWithObjectsAndKeys:
                     nsLevel, @"level",
-                    nsPosition, @"position",
+                    nsPattern, @"pattern",
+                    nsRow, @"row",
                     nsTime, @"time",
                     nsBuf, @"buff",
                     nsCpu, @"cpu",
@@ -434,6 +476,19 @@
                                     resultWithStatus:CDVCommandStatus_OK
                                     messageAsDictionary:jsonObj
                                 ];
+
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+- (void) cordovaGetSpectrumData:(CDVInvokedUrlCommand*)command{
+
+    CDVPluginResult* pluginResult;
+    
+    
+    NSArray *spectrumData = [self getSpectrumData];
+    
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:spectrumData];
+    
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 

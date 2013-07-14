@@ -29,7 +29,7 @@ Ext.define('MMP.view.ModPlayer', {
                 tpl    : [
                     '<div><b>CPU: </b> {cpu}</div>',
                     '<div><b>Level: </b> {level}</div>',
-                    '<div><b>Position: </b> {position}</div>',
+                    '<div><b>Pattern: </b> {pattern}&nbsp; &nbsp; <b>Row:</b> {row}</div>',
                     '<div><b>Time: {time}</b></div>'
                 ]
             },
