@@ -190,7 +190,7 @@
 
 
     // TODO: Use width and height parameters here. Need to figure out how to cast from NSInteger to int!!!!
-    int SPECHEIGHT = 173;
+    int SPECHEIGHT = 213;
     int SPECWIDTH =  500;
 
     DWORD specbuf[SPECHEIGHT * SPECWIDTH];
@@ -243,7 +243,7 @@
                 }
                 
                 
-                plotItem = [[NSNumber alloc]initWithInt: v];
+                plotItem = [[NSNumber alloc] initWithInt:v];
 //                
 //                if (c == 0) {
 //                    [channelOneData addObject: plotItem];
@@ -272,26 +272,31 @@
 }
 
 
-- (NSMutableArray *) getSpectrumData {
-    int SPECHEIGHT = 173;
-    //int SPECWIDTH =  500;
-
-    float fft[SPECHEIGHT]; // get the FFT data
+- (NSArray *) getSpectrumData {
+    int SPECHEIGHT = 213;
+    
+    float fft[1024]; // get the FFT data
     BASS_ChannelGetData(currentModFile, fft, BASS_DATA_FFT1024);
 
-    int x;
+    int x, y;
     
     
-    NSMutableArray *data = [[NSMutableArray alloc] init];
+    NSMutableArray *channelData = [[NSMutableArray alloc] init];
     
-//    for (x = 0; x < SPECHEIGHT; x++) {
-//        y = sqrt(fft[ x + 1]) * 3 * 127; // scale it (sqrt to make low values more visible)
-//        
-//        NSNumber *plotItem = [[NSNumber alloc] initWithInt:y];
-//        [data addObject:plotItem];
-////        if (y>127) y=127; // cap it
-////        specbuf[(SPECHEIGHT-1-x)*SPECWIDTH+specpos]=palette[128+y]; // plot it
-//    }
+    
+    
+    for (x = 0; x < SPECHEIGHT; x++) {
+        y = 0;
+        y = sqrt(fft[ x + 1]) * 3 * 127; // scale it (sqrt to make low values more visible)
+//        NSLog(@"x=%i\n",  x);
+        if (y > 127) {
+            y = 127; // cap it
+        }
+        
+        NSNumber *plotItem = [[NSNumber alloc] initWithInt:y];
+        [channelData addObject:plotItem];
+//        specbuf[(SPECHEIGHT-1-x)*SPECWIDTH+specpos]=palette[128+y]; // plot it
+    }
     // move marker onto next position
 //    specpos = ( specpos + 1 ) % SPECWIDTH;
     
@@ -301,7 +306,7 @@
 //    }
 
     
-    return data;
+    return channelData;
 }
 
 #pragma mark - CORDOVA
@@ -417,7 +422,9 @@
     
     NSDictionary *jsonObj;
     
+    
     if ((act = BASS_ChannelIsActive(currentModFile)) ) {
+        NSString *wavDataType = [command.arguments objectAtIndex:0];
     
         level = BASS_ChannelGetLevel(currentModFile);
         pos   = BASS_ChannelGetPosition(currentModFile, BASS_POS_MUSIC_ORDER);
@@ -445,7 +452,22 @@
 //        NSLog(@"CanvasSize %@x%@", canvasWidth, canvasHeight);
 
         
-        NSArray *waveData = [self getWaveFormData:(NSInteger *)canvasWidth andHeight:(NSInteger *)canvasHeight];
+        NSArray *wavData;
+        
+        if ([wavDataType isEqual:@"wavform"]) {
+//            NSLog(@"%@", wavDataType);
+            wavData = [self getWaveFormData:(NSInteger *)canvasWidth andHeight:(NSInteger *)canvasHeight];
+     
+        }
+        else if ([wavDataType isEqual:@"spectrum"]) {
+//            NSLog(@"%@", wavDataType);
+
+            wavData = [self getSpectrumData];
+
+        }
+        else {
+            wavData = @[];
+        }
         
         jsonObj = [[NSDictionary alloc]
                 initWithObjectsAndKeys:
@@ -455,7 +477,7 @@
                     nsTime, @"time",
                     nsBuf, @"buff",
                     nsCpu, @"cpu",
-                    waveData, @"waveData",
+                    wavData, @"waveData",
                     nil
                 ];
     

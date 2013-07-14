@@ -15,18 +15,18 @@ Ext.define('MMP.view.Spectrum', {
         binMax       : 500,
         binMin       : 10,
         numBins      : 500,
-        mode         : 2,
+        mode         : 0,
         barSpacing   : 0,
 
         spectrumY    : 0,
 
         modes : [
-            1, // wave
-            2, // bars,
-            3  // spectrum
+            0, // wave
+            1, // bars,
+            2  // spectrum
         ],
 
-        style : "border: 1px solid #F00;",
+        style : "background-color: #000;",
 
         tpl : '<canvas id="{id}" height="{height}" width="{width}" />'
     },
@@ -41,8 +41,8 @@ Ext.define('MMP.view.Spectrum', {
         this.callParent();
 
         thisEl.on({
-            scope : this,
-            tap   : 'onElTapSwitchMode',
+            scope      : this,
+            tap        : 'onElTapSwitchMode',
             dragstart  : 'onElDragStart',
             dragend    : 'onElDragEnd',
             drag       : 'onElDrag'
@@ -58,7 +58,6 @@ Ext.define('MMP.view.Spectrum', {
                 height : thisElHeight
             });
 
-
             canvas = me.canvas = me.element.down('canvas').dom;
 
             // These are for backwards compatibility.
@@ -71,17 +70,16 @@ Ext.define('MMP.view.Spectrum', {
             me.data = new Uint8Array();
 
         }, me);
-
-
     },
 
     onElTapSwitchMode : function() {
-        this.setMode((this.getMode() + 1) % this.getModes().length);
+        var me = this;
+        me.setMode((me.getMode() + 1) % me.getModes().length);
 
+        me.y = 0;
+        console.log(me.canvasHeight);
+        me.canvas2dContext.clearRect(0, 0, me.canvasWidth, me.canvasHeight);
     },
-
-
-
 
     onElDragStart : function(evtObj) {
 
@@ -135,8 +133,6 @@ Ext.define('MMP.view.Spectrum', {
 
             this.setNumBins(binChange);
         }
-
-
     },
 
 
@@ -149,10 +145,8 @@ Ext.define('MMP.view.Spectrum', {
     updateCanvas      : function(dataItems) {
         var me = this;
 
-
-
         var  currentMode = me.getMode();
-        if (currentMode == 1 || currentMode == 2) {
+        if (currentMode == 0 || currentMode == 1) {
             me.drawWaveForms(dataItems);
         }
         else {
@@ -163,6 +157,10 @@ Ext.define('MMP.view.Spectrum', {
     /* Updates the canvas display. */
 
     drawWaveForms : function(dataItems) {
+        if (! dataItems) {
+            return;
+        }
+
         var me              = this,
             elHeight        = me.element.getHeight(),
             numBins         = me.getNumBins(),
@@ -173,17 +171,16 @@ Ext.define('MMP.view.Spectrum', {
             one             = 1,
             currentMode     = me.getMode();
 
-        console.log("NUM BINS >>>> ", numBins);
 
         me.canvas2dContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
 
         Ext.each(dataItems, function(data, index) {
 
             if (index < one) {
-                canvas2dContext.fillStyle = "rgba(0, 20, 177, .5)";
+                canvas2dContext.fillStyle = "rgba(255, 80, 20, 1)";
             }
             else {
-                canvas2dContext.fillStyle = "rgba(177, 20, 0, .5)";
+                canvas2dContext.fillStyle = "rgba(80, 255, 20, 1)";
             }
             // Get the frequency samples
 
@@ -212,14 +209,45 @@ Ext.define('MMP.view.Spectrum', {
                     canvas2dContext.fillRect(i * barWidth, canvasHeight, barWidth - barSpacing, -scaledAvg);
                 }
                 else {
-                    canvas2dContext.fillRect(i * barWidth, canvasHeight - scaledAvg + 2, barWidth, -1);
+                    canvas2dContext.fillRect(i * barWidth, canvasHeight - scaledAvg + 5, barWidth, -1);
                 }
             }
         });
     },
 
-    drawSpectrum : function() {
-        this.y = this.y || 0;
+    drawSpectrum : function(spectrumData) {
+        if (! spectrumData) {
+            return;
+        }
+        var  y = this.y = this.y || 0;
+
+        if (y > this.element.getWidth()) {
+            y = this.y = 0;
+        }
+
+        var x = 0,
+            height = this.element.getHeight(),
+            canvas2dContext = this.canvas2dContext,
+            yPlusOne = y + 5;
+
+        for (; x < height; x++) {
+            canvas2dContext.fillStyle = "#00FF00";
+            canvas2dContext.fillRect()
+            canvas2dContext.fillRect(yPlusOne,x,1,1);
+        }
+
+        var base     = 32,
+            rgbStart = 'rgb(',
+            rgbEnd   = ')',
+            value;
+
+        for (x = 0; x < height; x++) {
+            value = base + spectrumData[x];
+            canvas2dContext.fillStyle = rgbStart + value + ',' + value + ',' + value + rgbEnd;
+            canvas2dContext.fillRect(y, x, 5, 1);
+        }
+
+        this.y++;
     }
 
 

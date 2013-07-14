@@ -24,8 +24,8 @@
 - (NSMutableArray *) getFilesInDirectory;
 - (NSMutableArray *) getModFileDirectories;
 - (NSString *) getModDirectoriesAsJson;
-- (NSMutableArray *) getWaveFormData;
-- (NSMutableArray *) getSpectrumData;
+- (NSArray *) getWaveFormData;
+- (NSArray *) getSpectrumData;
 
 #pragma mark - CORDOVA
 

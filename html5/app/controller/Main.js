@@ -179,8 +179,17 @@ Ext.define('MMP.controller.Main', {
     getSongStats : function() {
         var me           = this,
             player       = me.player,
-            spectrumSize = player.spectrum.element.getSize();
+            spectrum     = player.spectrum,
+            spectrumSize = spectrum.element.getSize(),
+            spectrumMode = spectrum.getMode();
 
+//        console.log('SpectrumMode ' + spectrumMode);
+        if (spectrumMode == 0 || spectrumMode == 1) {
+            spectrumMode = 'wavform';
+        }
+        else if (spectrumMode == 2) {
+            spectrumMode = 'spectrum';
+        }
 
         cordova.exec(
             function callback(data) {
@@ -194,7 +203,7 @@ Ext.define('MMP.controller.Main', {
             },
             'ModPlyr',
             'cordovaGetWaveFormData',
-            [spectrumSize.width, spectrumSize.height]
+            [spectrumMode, spectrumSize.width, spectrumSize.height]
         );
     }
 

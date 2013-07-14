@@ -25,7 +25,7 @@ Ext.define('MMP.view.ModPlayer', {
                 xtype  : 'component',
                 style  : 'text-align:left; font-size: 15px; background-color: #E9E9E9;',
                 itemId : 'stats',
-                height : 120,
+                height : 80,
                 tpl    : [
                     '<div><b>CPU: </b> {cpu}</div>',
                     '<div><b>Level: </b> {level}</div>',
