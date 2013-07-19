@@ -26,6 +26,15 @@ Ext.define('MMP.view.Spectrum', {
             2  // spectrum
         ],
 
+        modeMethodMap : {
+            0 : 'drawWaveForms',
+            1 : 'drawWaveBars',
+            2 : 'drawSpectrum'
+        },
+
+        waveEchoLimit : 3,
+        waveEchoBuffer : [],
+
         style : "background-color: #000;",
 
         tpl : '<canvas id="{id}" height="{height}" width="{width}" />'
@@ -78,7 +87,14 @@ Ext.define('MMP.view.Spectrum', {
 
         me.y = 0;
         console.log(me.canvasHeight);
+        this.clearCanvas();
+    },
+
+
+    clearCanvas : function() {
+        var me = this;
         me.canvas2dContext.clearRect(0, 0, me.canvasWidth, me.canvasHeight);
+
     },
 
     onElDragStart : function(evtObj) {
@@ -146,18 +162,15 @@ Ext.define('MMP.view.Spectrum', {
         var me = this;
 
         var  currentMode = me.getMode();
-        if (currentMode == 0 || currentMode == 1) {
-            me.drawWaveForms(dataItems);
-        }
-        else {
-            me.drawSpectrum(dataItems);
-        }
+//        debugger;
+        me[me.getModeMethodMap()[currentMode]](dataItems);
     },
 
-    /* Updates the canvas display. */
 
-    drawWaveForms : function(dataItems) {
-        if (! dataItems) {
+
+    drawWaveBars : function(dataItems) {
+         if (! dataItems) {
+            this.clearCanvas();
             return;
         }
 
@@ -168,11 +181,71 @@ Ext.define('MMP.view.Spectrum', {
             canvasHeight    = me.canvasHeight,
             canvas2dContext = me.canvas2dContext,
             barSpacing      = me.getBarSpacing(),
-            one             = 1,
-            currentMode     = me.getMode();
+            one             = 1;
+
+        me.canvas2dContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+
+        Ext.each(dataItems, function(data, index) {
+
+            if (index < one) {
+                canvas2dContext.fillStyle = "rgba(255, 80, 20, 1)";
+            }
+            else {
+                canvas2dContext.fillStyle = "rgba(80, 255, 20, 1)";
+            }
+            // Get the frequency samples
+
+            var length = data.length;
+            if (me.validPoints > 0) {
+                length = me.validPoints;
+            }
+
+            var bin_size = Math.floor(length / numBins);
+            for (var i = 0; i < numBins; ++i) {
+                var sum = 0;
+                for (var j = 0; j < bin_size; ++j) {
+                    sum += data[(i * bin_size) + j];
+                }
+
+                // Calculate the average frequency of the samples in the bin
+                var average = sum / bin_size;
+
+                // Draw the bars on the canvas
+                var barWidth = canvasWidth / numBins,
+                    scaledAvg = (average / elHeight) * canvasHeight;
+
+
+                if (index < one) {
+                    scaledAvg += 50;
+                }
+
+                canvas2dContext.fillRect(
+                    i * barWidth,
+                    canvasHeight,
+                    barWidth - barSpacing,
+                    -scaledAvg
+                );
+            }
+        });
+    },
+
+    drawWaveForms : function(dataItems) {
+        if (! dataItems) {
+            this.clearCanvas();
+            return;
+        }
+
+        var me              = this,
+            elHeight        = me.element.getHeight(),
+            numBins         = me.getNumBins(),
+            canvasWidth     = me.canvasWidth,
+            canvasHeight    = me.canvasHeight,
+            canvas2dContext = me.canvas2dContext,
+            one             = 1;
 
 
         me.canvas2dContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+
 
         Ext.each(dataItems, function(data, index) {
 
@@ -205,18 +278,23 @@ Ext.define('MMP.view.Spectrum', {
                     scaledAvg = (average / elHeight) * canvasHeight;
 
 
-                if (currentMode == one) {
-                    canvas2dContext.fillRect(i * barWidth, canvasHeight, barWidth - barSpacing, -scaledAvg);
+                var offset;
+                if (index < one) {
+                    offset = -100;
                 }
                 else {
-                    canvas2dContext.fillRect(i * barWidth, canvasHeight - scaledAvg + 5, barWidth, -1);
+                    offset = 20;
                 }
+
+                canvas2dContext.fillRect(i * barWidth, (canvasHeight - scaledAvg + 2) + offset, barWidth, 5);
             }
         });
     },
 
     drawSpectrum : function(spectrumData) {
         if (! spectrumData) {
+            this.clearCanvas();
+
             return;
         }
         var  y = this.y = this.y || 0;
@@ -232,7 +310,7 @@ Ext.define('MMP.view.Spectrum', {
 
         for (; x < height; x++) {
             canvas2dContext.fillStyle = "#00FF00";
-            canvas2dContext.fillRect()
+            canvas2dContext.fillRect();
             canvas2dContext.fillRect(yPlusOne,x,1,1);
         }
 

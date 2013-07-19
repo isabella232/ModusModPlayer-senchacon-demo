@@ -273,7 +273,7 @@
 
 
 - (NSArray *) getSpectrumData {
-    int SPECHEIGHT = 213;
+    int SPECHEIGHT = 310;
     
     float fft[1024]; // get the FFT data
     BASS_ChannelGetData(currentModFile, fft, BASS_DATA_FFT1024);

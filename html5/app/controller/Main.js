@@ -165,7 +165,7 @@ Ext.define('MMP.controller.Main', {
     startModPlayerUpdateLoop : function() {
         if (! this.interval) {
             var boundTimerFunction = Ext.Function.bind(this.getSongStats, this);
-            this.interval = setInterval(boundTimerFunction, 50);
+            this.interval = setInterval(boundTimerFunction, 20);
         }
     },
 
@@ -183,7 +183,6 @@ Ext.define('MMP.controller.Main', {
             spectrumSize = spectrum.element.getSize(),
             spectrumMode = spectrum.getMode();
 
-//        console.log('SpectrumMode ' + spectrumMode);
         if (spectrumMode == 0 || spectrumMode == 1) {
             spectrumMode = 'wavform';
         }
@@ -193,9 +192,6 @@ Ext.define('MMP.controller.Main', {
 
         cordova.exec(
             function callback(data) {
-//                console.log('modStats');
-//                debugger;
-//                console.log(typeof data);
                 player.setStats(data);
             },
             function errorHandler(err) {

@@ -1,6 +1,6 @@
 Ext.define('MMP.view.Main', {
-    extend: 'Ext.Container',
-    xtype: 'main',
+    extend : 'Ext.Container',
+    xtype  : 'main',
 
     requires: [
         'Ext.TitleBar',
@@ -13,24 +13,25 @@ Ext.define('MMP.view.Main', {
         items : {
             xtype  : 'toolbar',
             itemId : 'titlebar',
+            cls    : 'main-toolbar',
             docked : 'top',
             title  : 'Prototype',
             items : [
                 {
                     xtype  : 'button',
-                    ui     : 'back',
+//                    ui     : 'back',
                     itemId : 'backbutton',
                     text   : 'Back',
                     hidden : true
                 },
-                {xtype:'spacer'},
-                {
-                    xtype  : 'button',
-                    ui     : 'confirm',
-                    itemId : 'stopbutton',
-                    text   : 'TEST',
-                    hidden : false
-                }
+                {xtype:'spacer'}
+//                {
+//                    xtype  : 'button',
+//                    ui     : 'confirm',
+//                    itemId : 'stopbutton',
+//                    text   : 'TEST',
+//                    hidden : false
+//                }
 
             ]
         },

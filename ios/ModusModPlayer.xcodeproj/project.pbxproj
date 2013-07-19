@@ -45,8 +45,10 @@
 		5AA0E66F1729F460000DC89A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AA0E66E1729F460000DC89A /* ImageIO.framework */; };
 		5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE5B34173C68D80009041E /* CoreLocation.framework */; };
 		5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */; };
+		71027CAD1794498F003A61C1 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71027CAC1794498F003A61C1 /* Accelerate.framework */; };
 		716935E41784A68A00047434 /* libbass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 716935E11784A68A00047434 /* libbass.a */; };
 		716935E51784A68A00047434 /* ModPlyr.m in Sources */ = {isa = PBXBuildFile; fileRef = 716935E31784A68A00047434 /* ModPlyr.m */; };
+		719E849A1799DBFF00CE6C52 /* libmodplug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 719E84991799DBFF00CE6C52 /* libmodplug.a */; };
 		71E7892F1784CAE00000BA2B /* mods in Resources */ = {isa = PBXBuildFile; fileRef = 71E7892E1784CAE00000BA2B /* mods */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		F840E1F1165FE0F500CFE078 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = F840E1F0165FE0F500CFE078 /* config.xml */; };
@@ -113,10 +115,13 @@
 		5AA0E66E1729F460000DC89A /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		5AEE5B34173C68D80009041E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		71027CAC1794498F003A61C1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		716935E01784A68A00047434 /* bass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bass.h; sourceTree = "<group>"; };
 		716935E11784A68A00047434 /* libbass.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbass.a; sourceTree = "<group>"; };
 		716935E21784A68A00047434 /* ModPlyr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModPlyr.h; sourceTree = "<group>"; };
 		716935E31784A68A00047434 /* ModPlyr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModPlyr.m; sourceTree = "<group>"; };
+		719E84981799D7D300CE6C52 /* libmodplug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libmodplug.h; sourceTree = "<group>"; };
+		719E84991799DBFF00CE6C52 /* libmodplug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmodplug.a; path = /Users/jgarcia/Documents/Mod_music_projects/libmodplug.a; sourceTree = "<absolute>"; };
 		71E7892E1784CAE00000BA2B /* mods */ = {isa = PBXFileReference; lastKnownFileType = folder; name = mods; path = ../mods; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ModusModPlayer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ModusModPlayer-Info.plist"; path = "../ModusModPlayer-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
@@ -128,6 +133,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				719E849A1799DBFF00CE6C52 /* libmodplug.a in Frameworks */,
+				71027CAD1794498F003A61C1 /* Accelerate.framework in Frameworks */,
 				301BF5BF109A6A2B0062928A /* CoreLocation.framework in Frameworks */,
 				5AA0E66F1729F460000DC89A /* ImageIO.framework in Frameworks */,
 				5AA0E66D1729F45B000DC89A /* OpenAL.framework in Frameworks */,
@@ -194,6 +201,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				71027CAC1794498F003A61C1 /* Accelerate.framework */,
 				71E7892E1784CAE00000BA2B /* mods */,
 				F840E1F0165FE0F500CFE078 /* config.xml */,
 				301BF56E109A69640062928A /* www */,
@@ -320,10 +328,12 @@
 		716935DF1784A68A00047434 /* ModPlyr */ = {
 			isa = PBXGroup;
 			children = (
+				719E84991799DBFF00CE6C52 /* libmodplug.a */,
 				716935E01784A68A00047434 /* bass.h */,
 				716935E11784A68A00047434 /* libbass.a */,
 				716935E21784A68A00047434 /* ModPlyr.h */,
 				716935E31784A68A00047434 /* ModPlyr.m */,
+				719E84981799D7D300CE6C52 /* libmodplug.h */,
 			);
 			path = ModPlyr;
 			sourceTree = "<group>";
@@ -518,6 +528,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ModusModPlayer/Plugins/ModPlyr\"",
+					/Users/jgarcia/Documents/Mod_music_projects,
 				);
 				PRODUCT_NAME = ModusModPlayer;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -539,6 +550,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ModusModPlayer/Plugins/ModPlyr\"",
+					/Users/jgarcia/Documents/Mod_music_projects,
 				);
 				PRODUCT_NAME = ModusModPlayer;
 				TARGETED_DEVICE_FAMILY = "1,2";
