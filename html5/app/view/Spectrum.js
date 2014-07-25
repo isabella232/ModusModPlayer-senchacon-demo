@@ -11,14 +11,15 @@ Ext.define('MMP.view.Spectrum', {
     xtype  : 'spectrum',
 
     config : {
-        numPoints    : 2048,
-        binMax       : 500,
-        binMin       : 10,
-        numBins      : 500,
-        mode         : 0,
-        barSpacing   : 0,
+        numPoints  : 2048,
+        binMax     : 500,
+        binMin     : 10,
+        numBins    : 500,
+        mode       : 1,
+        barSpacing : 0,
 
-        spectrumY    : 0,
+        spectrumY : 0,
+
 
         modes : [
             0, // wave
@@ -32,7 +33,7 @@ Ext.define('MMP.view.Spectrum', {
             2 : 'drawSpectrum'
         },
 
-        waveEchoLimit : 3,
+        waveEchoLimit  : 3,
         waveEchoBuffer : [],
 
         style : "background-color: #000;",
@@ -50,11 +51,11 @@ Ext.define('MMP.view.Spectrum', {
         this.callParent();
 
         thisEl.on({
-            scope      : this,
-            tap        : 'onElTapSwitchMode',
-            dragstart  : 'onElDragStart',
-            dragend    : 'onElDragEnd',
-            drag       : 'onElDrag'
+            scope     : this,
+            tap       : 'onElTapSwitchMode',
+            dragstart : 'onElDragStart',
+            dragend   : 'onElDragEnd',
+            drag      : 'onElDrag'
         });
 
         thisEl.on('painted', function() {
@@ -102,8 +103,6 @@ Ext.define('MMP.view.Spectrum', {
         this.isDragging = true;
         this.prevDragX = evtObj.getXY()[0];
     },
-
-
 
 
     onElDrag : function(event) {
@@ -168,7 +167,75 @@ Ext.define('MMP.view.Spectrum', {
 
 
 
+
+    drawWaveForms : function(dataItems) {
+
+        if (! dataItems) {
+            this.clearCanvas();
+            return;
+        }
+
+        var me              = this,
+            elHeight        = me.element.getHeight(),
+            numBins         = me.getNumBins(),
+            canvasWidth     = me.canvasWidth,
+            canvasHeight    = me.canvasHeight,
+            canvas2dContext = me.canvas2dContext,
+            one             = 1;
+
+
+        me.canvas2dContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+
+
+        Ext.each(dataItems, function(data, index) {
+
+            if (index < one) {
+                canvas2dContext.fillStyle = "rgba(255, 80, 20, 1)";
+            }
+            else {
+                canvas2dContext.fillStyle = "rgba(80, 255, 20, 1)";
+            }
+            // Get the frequency samples
+
+            var length = data.length;
+            if (me.validPoints > 0) {
+                length = me.validPoints;
+            }
+
+
+            debugger;
+            var bin_size = Math.floor(length / numBins);
+
+            for (var i = 0; i < numBins; ++i) {
+                var sum = 0;
+                for (var j = 0; j < bin_size; ++j) {
+                    sum += data[(i * bin_size) + j];
+                }
+
+                // Calculate the average frequency of the samples in the bin
+                var average = sum / bin_size;
+
+                // Draw the bars on the canvas
+                var barWidth = canvasWidth / numBins,
+                    scaledAvg = (average / elHeight) * canvasHeight;
+
+
+                var offset;
+                if (index < one) {
+                    offset = -100;
+                }
+                else {
+                    offset = 20;
+                }
+
+                canvas2dContext.fillRect(i * barWidth, (canvasHeight - scaledAvg + 2) + offset, barWidth, 5);
+            }
+        });
+    },
+
+
     drawWaveBars : function(dataItems) {
+
          if (! dataItems) {
             this.clearCanvas();
             return;
@@ -225,68 +292,6 @@ Ext.define('MMP.view.Spectrum', {
                     barWidth - barSpacing,
                     -scaledAvg
                 );
-            }
-        });
-    },
-
-    drawWaveForms : function(dataItems) {
-        if (! dataItems) {
-            this.clearCanvas();
-            return;
-        }
-
-        var me              = this,
-            elHeight        = me.element.getHeight(),
-            numBins         = me.getNumBins(),
-            canvasWidth     = me.canvasWidth,
-            canvasHeight    = me.canvasHeight,
-            canvas2dContext = me.canvas2dContext,
-            one             = 1;
-
-
-        me.canvas2dContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-
-
-        Ext.each(dataItems, function(data, index) {
-
-            if (index < one) {
-                canvas2dContext.fillStyle = "rgba(255, 80, 20, 1)";
-            }
-            else {
-                canvas2dContext.fillStyle = "rgba(80, 255, 20, 1)";
-            }
-            // Get the frequency samples
-
-            var length = data.length;
-            if (me.validPoints > 0) {
-                length = me.validPoints;
-            }
-
-            var bin_size = Math.floor(length / numBins);
-
-            for (var i = 0; i < numBins; ++i) {
-                var sum = 0;
-                for (var j = 0; j < bin_size; ++j) {
-                    sum += data[(i * bin_size) + j];
-                }
-
-                // Calculate the average frequency of the samples in the bin
-                var average = sum / bin_size;
-
-                // Draw the bars on the canvas
-                var barWidth = canvasWidth / numBins,
-                    scaledAvg = (average / elHeight) * canvasHeight;
-
-
-                var offset;
-                if (index < one) {
-                    offset = -100;
-                }
-                else {
-                    offset = 20;
-                }
-
-                canvas2dContext.fillRect(i * barWidth, (canvasHeight - scaledAvg + 2) + offset, barWidth, 5);
             }
         });
     },

@@ -15,7 +15,7 @@
 
 #include "bass.h"
 
-@implementation ModPlyr
+@implementation ModPlyr : CDVPlugin
 
 
 - (NSMutableArray *) getModFileDirectories: (NSString *)modPath {
@@ -210,7 +210,7 @@
     
     buf = alloca(channelInfo.chans * SPECWIDTH * sizeof(float)); // allocate buffer for data
     
-    short dataSize = channelInfo.chans * SPECWIDTH * sizeof(float);
+//    short dataSize = channelInfo.chans * SPECWIDTH * sizeof(float);
 //    printf("data size %hd \n", dataSize);
     
     // get the sample data (floating-point to avoid 8 & 16 bit processing)
@@ -221,8 +221,6 @@
         NSNumber *plotItem;
         for (x=0;x<SPECWIDTH;x++) {
             int v = ( 1 - buf[ x * channelInfo.chans + c]) * SPECHEIGHT /2; // invert and scale to fit display
-//            printf ("v = %i\n", v);
-            
         
             if (v < 0) {
                 v = 0;
@@ -244,13 +242,7 @@
                 
                 
                 plotItem = [[NSNumber alloc] initWithInt:v];
-//                
-//                if (c == 0) {
-//                    [channelOneData addObject: plotItem];
-//                }
-//                else {
-//                    [channelTwoData addObject: plotItem];
-//                }
+
                 
                 specbuf[ y * SPECWIDTH + x] = 1; // left=green, right=red (could add more colours to palette for more chans)
             } while (y!=v);

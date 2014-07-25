@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0054D7BA-102E-482E-B230-BEE066FA4342</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ModusModPlayer</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E6A03909-AF15-4C47-9DD3-06296D8E22CE</key>
+		<string>ssh://github.com/ModusCreateOrg/ModusModPlayer.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ios/ModusModPlayer.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E6A03909-AF15-4C47-9DD3-06296D8E22CE</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/ModusCreateOrg/ModusModPlayer.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E6A03909-AF15-4C47-9DD3-06296D8E22CE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E6A03909-AF15-4C47-9DD3-06296D8E22CE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ModusModPlayer</string>
+		</dict>
+	</array>
+</dict>
+</plist>

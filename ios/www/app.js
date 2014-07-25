@@ -23725,63 +23725,6 @@ Ext.define('Ext.Component', {
 /**
  *
  */
-Ext.define('Ext.layout.wrapper.Inner', {
-    config: {
-        sizeState: null,
-        container: null
-    },
-
-    constructor: function(config) {
-        this.initConfig(config);
-    },
-
-    getElement: function() {
-        return this.getContainer().bodyElement;
-    },
-
-    setInnerWrapper: Ext.emptyFn,
-
-    getInnerWrapper: Ext.emptyFn
-});
-
-/**
- *
- */
-Ext.define('Ext.layout.Abstract', {
-    mixins: [ Ext.mixin.Observable ],
-    
-    isLayout: true,
-
-    constructor: function(config) {
-        this.initialConfig = config;
-    },
-
-    setContainer: function(container) {
-        this.container = container;
-
-        this.initConfig(this.initialConfig);
-
-        return this;
-    },
-
-    onItemAdd: function() {},
-
-    onItemRemove: function() {},
-
-    onItemMove: function() {},
-
-    onItemCenteredChange: function() {},
-
-    onItemFloatingChange: function() {},
-
-    onItemDockedChange: function() {},
-
-    onItemInnerStateChange: function() {}
-});
-
-/**
- *
- */
 Ext.define('Ext.mixin.Bindable', {
     extend:  Ext.mixin.Mixin ,
 
@@ -23940,6 +23883,242 @@ Ext.define('Ext.util.Wrapper', {
 
         this.callSuper();
     }
+});
+
+/**
+ *
+ */
+Ext.define('Ext.layout.wrapper.Dock', {
+               
+                          
+      
+
+    config: {
+        direction: 'horizontal',
+        element: {
+            className: 'x-dock'
+        },
+        bodyElement: {
+            className: 'x-dock-body'
+        },
+        innerWrapper: null,
+        sizeState: false,
+        container: null
+    },
+
+    positionMap: {
+        top: 'start',
+        left: 'start',
+        bottom: 'end',
+        right: 'end'
+    },
+
+    constructor: function(config) {
+        this.items = {
+            start: [],
+            end: []
+        };
+
+        this.itemsCount = 0;
+
+        this.initConfig(config);
+    },
+
+    addItems: function(items) {
+        var i, ln, item;
+
+        for (i = 0, ln = items.length; i < ln; i++) {
+            item = items[i];
+            this.addItem(item);
+        }
+    },
+
+    addItem: function(item) {
+        var docked = item.getDocked(),
+            position = this.positionMap[docked],
+            wrapper = item.$dockWrapper,
+            container = this.getContainer(),
+            index = container.indexOf(item),
+            items = this.items,
+            sideItems = items[position],
+            itemWrapper, element, i, ln, sibling, referenceElement, siblingIndex;
+
+        if (wrapper) {
+            wrapper.removeItem(item);
+        }
+
+        item.$dockWrapper = this;
+        itemWrapper = item.link('$dockItemWrapper', new Ext.util.Wrapper({
+            className: 'x-dock-item'
+        }));
+        item.addCls('x-docked-' + docked);
+        element = itemWrapper.element;
+
+        for (i = 0, ln = sideItems.length; i < ln; i++) {
+            sibling = sideItems[i];
+            siblingIndex = container.indexOf(sibling);
+
+            if (siblingIndex > index) {
+                referenceElement = sibling.element;
+                sideItems.splice(i, 0, item);
+                break;
+            }
+        }
+
+        if (!referenceElement) {
+            sideItems.push(item);
+            referenceElement = this.getBodyElement();
+        }
+
+        this.itemsCount++;
+
+        if (position === 'start') {
+            element.insertBefore(referenceElement);
+        }
+        else {
+            element.insertAfter(referenceElement);
+        }
+
+        itemWrapper.wrap(item.element);
+        itemWrapper.bindSize(this.getDirection() === 'horizontal' ? 'width' : 'height');
+    },
+
+    removeItem: function(item) {
+        var position = item.getDocked(),
+            items = this.items[this.positionMap[position]];
+
+        item.removeCls('x-docked-' + position);
+        Ext.Array.remove(items, item);
+        item.unlink('$dockItemWrapper');
+        item.element.detach();
+        delete item.$dockWrapper;
+
+        if (--this.itemsCount === 0) {
+            this.destroy();
+        }
+    },
+
+    getItemsSlice: function(index) {
+        var container = this.getContainer(),
+            items = this.items,
+            slice = [],
+            sideItems, i, ln, item;
+
+        for (sideItems = items.start, i = 0, ln = sideItems.length; i < ln; i++) {
+            item = sideItems[i];
+            if (container.indexOf(item) > index) {
+                slice.push(item);
+            }
+        }
+
+        for (sideItems = items.end, i = 0, ln = sideItems.length; i < ln; i++) {
+            item = sideItems[i];
+            if (container.indexOf(item) > index) {
+                slice.push(item);
+            }
+        }
+
+        return slice;
+    },
+
+    applyElement: function(element) {
+        return Ext.Element.create(element);
+    },
+
+    updateElement: function(element) {
+        element.addCls('x-dock-' + this.getDirection());
+    },
+
+    applyBodyElement: function(bodyElement) {
+        return Ext.Element.create(bodyElement);
+    },
+
+    updateBodyElement: function(bodyElement) {
+        this.getElement().append(bodyElement);
+    },
+
+    updateInnerWrapper: function(innerWrapper, oldInnerWrapper) {
+        var innerElement = this.getBodyElement();
+
+        if (oldInnerWrapper && oldInnerWrapper.$outerWrapper === this) {
+            innerElement.remove(oldInnerWrapper.getElement());
+            delete oldInnerWrapper.$outerWrapper;
+        }
+
+        if (innerWrapper) {
+            innerWrapper.setSizeState(this.getSizeState());
+            innerWrapper.$outerWrapper = this;
+            innerElement.append(innerWrapper.getElement());
+        }
+    },
+
+    updateSizeState: function(state) {
+        var innerWrapper = this.getInnerWrapper();
+
+        this.getElement().setSizeState(state);
+
+        if (innerWrapper) {
+            innerWrapper.setSizeState(state);
+        }
+    },
+
+    destroy: function() {
+        var innerWrapper = this.getInnerWrapper(),
+            outerWrapper = this.$outerWrapper;
+
+        if (innerWrapper) {
+            if (outerWrapper) {
+                outerWrapper.setInnerWrapper(innerWrapper);
+            }
+            else {
+                innerWrapper.getElement().replace(this.getElement());
+                delete innerWrapper.$outerWrapper;
+            }
+        }
+
+        delete this.$outerWrapper;
+
+        this.setInnerWrapper(null);
+
+        this.unlink('_bodyElement', '_element');
+
+        this.callSuper();
+    }
+});
+
+/**
+ *
+ */
+Ext.define('Ext.layout.Abstract', {
+    mixins: [ Ext.mixin.Observable ],
+    
+    isLayout: true,
+
+    constructor: function(config) {
+        this.initialConfig = config;
+    },
+
+    setContainer: function(container) {
+        this.container = container;
+
+        this.initConfig(this.initialConfig);
+
+        return this;
+    },
+
+    onItemAdd: function() {},
+
+    onItemRemove: function() {},
+
+    onItemMove: function() {},
+
+    onItemCenteredChange: function() {},
+
+    onItemFloatingChange: function() {},
+
+    onItemDockedChange: function() {},
+
+    onItemInnerStateChange: function() {}
 });
 
 /**
@@ -24136,6 +24315,28 @@ Ext.define('Ext.layout.wrapper.BoxDock', {
 
         this.callSuper();
     }
+});
+
+/**
+ *
+ */
+Ext.define('Ext.layout.wrapper.Inner', {
+    config: {
+        sizeState: null,
+        container: null
+    },
+
+    constructor: function(config) {
+        this.initConfig(config);
+    },
+
+    getElement: function() {
+        return this.getContainer().bodyElement;
+    },
+
+    setInnerWrapper: Ext.emptyFn,
+
+    getInnerWrapper: Ext.emptyFn
 });
 
 /**
@@ -24521,416 +24722,37 @@ Ext.define('Ext.layout.Default', {
 });
 
 /**
- * @aside guide layouts
- * @aside video layouts
  *
- * Box is a superclass for the two box layouts:
- *
- * * {@link Ext.layout.HBox hbox}
- * * {@link Ext.layout.VBox vbox}
- *
- * Box itself is never used directly, but its subclasses provide flexible arrangement of child components
- * inside a {@link Ext.Container Container}. For a full overview of layouts check out the
- * [Layout Guide](#!/guide/layouts).
- *
- * ## Horizontal Box
- *
- * HBox allows you to easily lay out child components horizontally. It can size items based on a fixed width or a
- * fraction of the total width available, enabling you to achieve flexible layouts that expand or contract to fill the
- * space available.
- *
- * {@img ../guides/layouts/hbox.jpg}
- *
- * See the {@link Ext.layout.HBox HBox layout docs} for more information on using hboxes.
- *
- * ## Vertical Box
- *
- * VBox allows you to easily lay out child components verticaly. It can size items based on a fixed height or a
- * fraction of the total height available, enabling you to achieve flexible layouts that expand or contract to fill the
- * space available.
- *
- * {@img ../guides/layouts/vbox.jpg}
- *
- * See the {@link Ext.layout.VBox VBox layout docs} for more information on using vboxes.
  */
-Ext.define('Ext.layout.Box', {
+Ext.define('Ext.layout.Float', {
     extend:  Ext.layout.Default ,
 
+    alias: 'layout.float',
+
     config: {
-        orient: 'horizontal',
-
-        /**
-         * @cfg {String} align
-         * Controls how the child items of the container are aligned. Acceptable configuration values for this property are:
-         *
-         * - ** start ** : child items are packed together at left side of container
-         * - ** center ** : child items are packed together at mid-width of container
-         * - ** end ** : child items are packed together at right side of container
-         * - **stretch** : child items are stretched vertically to fill the height of the container
-         *
-         * Please see the 'Pack and Align' section of the [Layout guide](#!/guide/layouts) for a detailed example and
-         * explanation.
-         * @accessor
-         */
-        align: 'start',
-
-        /**
-         * @cfg {String} pack
-         * Controls how the child items of the container are packed together. Acceptable configuration values
-         * for this property are:
-         *
-         * - ** start ** : child items are packed together at left side of container
-         * - ** center ** : child items are packed together at mid-width of container
-         * - ** end ** : child items are packed together at right side of container
-         * - ** justify ** : child items are packed evenly across the container. Uses the 'justify-content: space-between' css property
-         *
-         * Please see the 'Pack and Align' section of the [Layout guide](#!/guide/layouts) for a detailed example and
-         * explanation.
-         * @accessor
-         */
-        pack: 'start'
+        direction: 'left'
     },
 
-    alias: 'layout.tablebox',
+    layoutClass: 'layout-float',
 
-    layoutBaseClass: 'x-layout-tablebox',
-
-    itemClass: 'x-layout-tablebox-item',
+    itemClass: 'layout-float-item',
 
     setContainer: function(container) {
         this.callSuper(arguments);
 
-        container.innerElement.addCls(this.layoutBaseClass);
-
-        container.on('flexchange', 'onItemFlexChange', this, {
-            delegate: '> component'
-        });
+        container.innerElement.addCls(this.layoutClass);
     },
 
     onItemInnerStateChange: function(item, isInner) {
         this.callSuper(arguments);
-
         item.toggleCls(this.itemClass, isInner);
     },
 
-    onItemFlexChange: function() {
+    updateDirection: function(direction, oldDirection) {
+        var prefix = 'direction-';
 
+        this.container.innerElement.swapCls(prefix + direction, prefix + oldDirection);
     }
-});
-
-/**
- * @aside guide layouts
- * @aside video layouts
- *
- * AbstractBox is a superclass for the two box layouts:
- *
- * * {@link Ext.layout.HBox hbox}
- * * {@link Ext.layout.VBox vbox}
- *
- * FlexBox itself is never used directly, but its subclasses provide flexible arrangement of child components
- * inside a {@link Ext.Container Container}. For a full overview of layouts check out the
- * [Layout Guide](#!/guide/layouts).
- *
- * ## Horizontal Box
- *
- * HBox allows you to easily lay out child components horizontally. It can size items based on a fixed width or a
- * fraction of the total width available, enabling you to achieve flexible layouts that expand or contract to fill the
- * space available.
- *
- * {@img ../guides/layouts/hbox.jpg}
- *
- * See the {@link Ext.layout.HBox HBox layout docs} for more information on using hboxes.
- *
- * ## Vertical Box
- *
- * VBox allows you to easily lay out child components verticaly. It can size items based on a fixed height or a
- * fraction of the total height available, enabling you to achieve flexible layouts that expand or contract to fill the
- * space available.
- *
- * {@img ../guides/layouts/vbox.jpg}
- *
- * See the {@link Ext.layout.VBox VBox layout docs} for more information on using vboxes.
- */
-Ext.define('Ext.layout.FlexBox', {
-    extend:  Ext.layout.Box ,
-
-    alias: 'layout.box',
-
-    config: {
-        align: 'stretch'
-    },
-
-    layoutBaseClass: 'x-layout-box',
-
-    itemClass: 'x-layout-box-item',
-
-    setContainer: function(container) {
-        this.callSuper(arguments);
-
-        this.monitorSizeFlagsChange();
-    },
-
-    applyOrient: function(orient) {
-
-        return orient;
-    },
-
-    updateOrient: function(orient, oldOrient) {
-        var container = this.container,
-            delegation = {
-                delegate: '> component'
-            };
-
-        if (orient === 'horizontal') {
-            this.sizePropertyName = 'width';
-        }
-        else {
-            this.sizePropertyName = 'height';
-        }
-
-        container.innerElement.swapCls('x-' + orient, 'x-' + oldOrient);
-
-        if (oldOrient) {
-            container.un(oldOrient === 'horizontal' ? 'widthchange' : 'heightchange', 'onItemSizeChange', this, delegation);
-            this.redrawContainer();
-        }
-
-        container.on(orient === 'horizontal' ? 'widthchange' : 'heightchange', 'onItemSizeChange', this, delegation);
-    },
-
-    onItemInnerStateChange: function(item, isInner) {
-        this.callSuper(arguments);
-
-        var flex, size;
-
-        item.toggleCls(this.itemClass, isInner);
-
-        if (isInner) {
-            flex = item.getFlex();
-            size = item.get(this.sizePropertyName);
-
-            if (flex) {
-                this.doItemFlexChange(item, flex);
-            }
-            else if (size) {
-                this.doItemSizeChange(item, size);
-            }
-        }
-
-        this.refreshItemSizeState(item);
-    },
-
-    refreshItemSizeState: function(item) {
-        var isInner = item.isInnerItem(),
-            container = this.container,
-            LAYOUT_HEIGHT = container.LAYOUT_HEIGHT,
-            LAYOUT_WIDTH = container.LAYOUT_WIDTH,
-            dimension = this.sizePropertyName,
-            layoutSizeFlags = 0,
-            containerSizeFlags = container.getSizeFlags();
-
-        if (isInner) {
-            layoutSizeFlags |= container.LAYOUT_STRETCHED;
-
-            if (this.getAlign() === 'stretch') {
-                layoutSizeFlags |= containerSizeFlags & (dimension === 'width' ? LAYOUT_HEIGHT : LAYOUT_WIDTH);
-            }
-
-            if (item.getFlex()) {
-                layoutSizeFlags |= containerSizeFlags & (dimension === 'width' ? LAYOUT_WIDTH : LAYOUT_HEIGHT);
-            }
-        }
-
-        item.setLayoutSizeFlags(layoutSizeFlags);
-    },
-
-    refreshAllItemSizedStates: function() {
-        var innerItems = this.container.innerItems,
-            i, ln, item;
-
-        for (i = 0,ln = innerItems.length; i < ln; i++) {
-            item = innerItems[i];
-            this.refreshItemSizeState(item);
-        }
-    },
-
-    onContainerSizeFlagsChange: function() {
-        this.refreshAllItemSizedStates();
-
-        this.callSuper(arguments);
-    },
-
-    onItemSizeChange: function(item, size) {
-        if (item.isInnerItem()) {
-            this.doItemSizeChange(item, size);
-        }
-    },
-
-    doItemSizeChange: function(item, size) {
-        if (size) {
-            item.setFlex(null);
-            this.redrawContainer();
-        }
-    },
-
-    onItemFlexChange: function(item, flex) {
-        if (item.isInnerItem()) {
-            this.doItemFlexChange(item, flex);
-            this.refreshItemSizeState(item);
-        }
-    },
-
-    doItemFlexChange: function(item, flex) {
-        this.setItemFlex(item, flex);
-
-        if (flex) {
-            item.set(this.sizePropertyName, null);
-        }
-        else {
-            this.redrawContainer();
-        }
-    },
-
-    redrawContainer: function() {
-        var container = this.container,
-            renderedTo = container.element.dom.parentNode;
-
-        if (renderedTo && renderedTo.nodeType !== 11) {
-            container.innerElement.redraw();
-        }
-    },
-
-    /**
-     * Sets the flex of an item in this box layout.
-     * @param {Ext.Component} item The item of this layout which you want to update the flex of.
-     * @param {Number} flex The flex to set on this method
-     */
-    setItemFlex: function(item, flex) {
-        var element = item.element;
-
-        element.toggleCls('x-flexed', !!flex);
-
-        if (!flex) {
-            flex = '';
-        }
-        else {
-            flex = String(flex);
-        }
-
-        if (Ext.browser.is.WebKit) {
-            element.dom.style.setProperty('-webkit-box-flex', flex, null);
-        }
-        else if (Ext.browser.is.IE) {
-            element.dom.style.setProperty('-ms-flex', flex + ' 0 0px', null);
-        }
-        else {
-            element.dom.style.setProperty('flex', flex + ' 0 0px', null);
-        }
-    },
-
-    convertPosition: function(position) {
-        var positionMap = this.positionMap;
-
-        if (positionMap.hasOwnProperty(position)) {
-            return positionMap[position];
-        }
-
-        return position;
-    },
-
-    applyAlign: function(align) {
-        return this.convertPosition(align);
-    },
-
-    updateAlign: function(align, oldAlign) {
-        var container = this.container;
-
-        container.innerElement.swapCls(align, oldAlign, true, 'x-align');
-
-        if (oldAlign !== undefined) {
-            this.refreshAllItemSizedStates();
-        }
-    },
-
-    applyPack: function(pack) {
-        return this.convertPosition(pack);
-    },
-
-    updatePack: function(pack, oldPack) {
-        this.container.innerElement.swapCls(pack, oldPack, true, 'x-pack');
-    }
-});
-
-/**
- * @aside guide layouts
- * @aside video layouts
- *
- * The HBox (short for horizontal box) layout makes it easy to position items horizontally in a
- * {@link Ext.Container Container}. It can size items based on a fixed width or a fraction of the total width
- * available.
- *
- * For example, an email client might have a list of messages pinned to the left, taking say one third of the available
- * width, and a message viewing panel in the rest of the screen. We can achieve this with hbox layout's *flex* config:
- *
- *     @example
- *     Ext.create('Ext.Container', {
- *         fullscreen: true,
- *         layout: 'hbox',
- *         items: [
- *             {
- *                 html: 'message list',
- *                 style: 'background-color: #5E99CC;',
- *                 flex: 1
- *             },
- *             {
- *                 html: 'message preview',
- *                 style: 'background-color: #759E60;',
- *                 flex: 2
- *             }
- *         ]
- *     });
- *
- * This will give us two boxes - one that's one third of the available width, the other being two thirds of the
- * available width:
- *
- * {@img ../guides/layouts/hbox.jpg}
- *
- * We can also specify fixed widths for child items, or mix fixed widths and flexes. For example, here we have 3 items
- * - one on each side with flex: 1, and one in the center with a fixed width of 100px:
- *
- *     @example
- *     Ext.create('Ext.Container', {
- *         fullscreen: true,
- *         layout: 'hbox',
- *         items: [
- *             {
- *                 html: 'Left item',
- *                 style: 'background-color: #759E60;',
- *                 flex: 1
- *             },
- *             {
- *                 html: 'Center item',
- *                 width: 100
- *             },
- *             {
- *                 html: 'Right item',
- *                 style: 'background-color: #5E99CC;',
- *                 flex: 1
- *             }
- *         ]
- *     });
- *
- * Which gives us an effect like this:
- *
- * {@img ../guides/layouts/hboxfixed.jpg}
- *
- * For a more detailed overview of what layouts are and the types of layouts shipped with Sencha Touch 2, check out the
- * [Layout Guide](#!/guide/layouts).
- */
-Ext.define('Ext.layout.HBox', {
-    extend:  Ext.layout.FlexBox ,
-
-    alias: 'layout.hbox'
 });
 
 /**
@@ -24976,318 +24798,6 @@ Ext.define('Ext.layout.Fit', {
         this.callSuper(arguments);
         item.toggleCls(this.itemClass, isInner);
         item.setLayoutSizeFlags(isInner ? this.container.getSizeFlags() : 0);
-    }
-});
-
-/**
- *
- */
-Ext.define('Ext.layout.Float', {
-    extend:  Ext.layout.Default ,
-
-    alias: 'layout.float',
-
-    config: {
-        direction: 'left'
-    },
-
-    layoutClass: 'layout-float',
-
-    itemClass: 'layout-float-item',
-
-    setContainer: function(container) {
-        this.callSuper(arguments);
-
-        container.innerElement.addCls(this.layoutClass);
-    },
-
-    onItemInnerStateChange: function(item, isInner) {
-        this.callSuper(arguments);
-        item.toggleCls(this.itemClass, isInner);
-    },
-
-    updateDirection: function(direction, oldDirection) {
-        var prefix = 'direction-';
-
-        this.container.innerElement.swapCls(prefix + direction, prefix + oldDirection);
-    }
-});
-
-/**
- *
- */
-Ext.define('Ext.layout.wrapper.Dock', {
-               
-                          
-      
-
-    config: {
-        direction: 'horizontal',
-        element: {
-            className: 'x-dock'
-        },
-        bodyElement: {
-            className: 'x-dock-body'
-        },
-        innerWrapper: null,
-        sizeState: false,
-        container: null
-    },
-
-    positionMap: {
-        top: 'start',
-        left: 'start',
-        bottom: 'end',
-        right: 'end'
-    },
-
-    constructor: function(config) {
-        this.items = {
-            start: [],
-            end: []
-        };
-
-        this.itemsCount = 0;
-
-        this.initConfig(config);
-    },
-
-    addItems: function(items) {
-        var i, ln, item;
-
-        for (i = 0, ln = items.length; i < ln; i++) {
-            item = items[i];
-            this.addItem(item);
-        }
-    },
-
-    addItem: function(item) {
-        var docked = item.getDocked(),
-            position = this.positionMap[docked],
-            wrapper = item.$dockWrapper,
-            container = this.getContainer(),
-            index = container.indexOf(item),
-            items = this.items,
-            sideItems = items[position],
-            itemWrapper, element, i, ln, sibling, referenceElement, siblingIndex;
-
-        if (wrapper) {
-            wrapper.removeItem(item);
-        }
-
-        item.$dockWrapper = this;
-        itemWrapper = item.link('$dockItemWrapper', new Ext.util.Wrapper({
-            className: 'x-dock-item'
-        }));
-        item.addCls('x-docked-' + docked);
-        element = itemWrapper.element;
-
-        for (i = 0, ln = sideItems.length; i < ln; i++) {
-            sibling = sideItems[i];
-            siblingIndex = container.indexOf(sibling);
-
-            if (siblingIndex > index) {
-                referenceElement = sibling.element;
-                sideItems.splice(i, 0, item);
-                break;
-            }
-        }
-
-        if (!referenceElement) {
-            sideItems.push(item);
-            referenceElement = this.getBodyElement();
-        }
-
-        this.itemsCount++;
-
-        if (position === 'start') {
-            element.insertBefore(referenceElement);
-        }
-        else {
-            element.insertAfter(referenceElement);
-        }
-
-        itemWrapper.wrap(item.element);
-        itemWrapper.bindSize(this.getDirection() === 'horizontal' ? 'width' : 'height');
-    },
-
-    removeItem: function(item) {
-        var position = item.getDocked(),
-            items = this.items[this.positionMap[position]];
-
-        item.removeCls('x-docked-' + position);
-        Ext.Array.remove(items, item);
-        item.unlink('$dockItemWrapper');
-        item.element.detach();
-        delete item.$dockWrapper;
-
-        if (--this.itemsCount === 0) {
-            this.destroy();
-        }
-    },
-
-    getItemsSlice: function(index) {
-        var container = this.getContainer(),
-            items = this.items,
-            slice = [],
-            sideItems, i, ln, item;
-
-        for (sideItems = items.start, i = 0, ln = sideItems.length; i < ln; i++) {
-            item = sideItems[i];
-            if (container.indexOf(item) > index) {
-                slice.push(item);
-            }
-        }
-
-        for (sideItems = items.end, i = 0, ln = sideItems.length; i < ln; i++) {
-            item = sideItems[i];
-            if (container.indexOf(item) > index) {
-                slice.push(item);
-            }
-        }
-
-        return slice;
-    },
-
-    applyElement: function(element) {
-        return Ext.Element.create(element);
-    },
-
-    updateElement: function(element) {
-        element.addCls('x-dock-' + this.getDirection());
-    },
-
-    applyBodyElement: function(bodyElement) {
-        return Ext.Element.create(bodyElement);
-    },
-
-    updateBodyElement: function(bodyElement) {
-        this.getElement().append(bodyElement);
-    },
-
-    updateInnerWrapper: function(innerWrapper, oldInnerWrapper) {
-        var innerElement = this.getBodyElement();
-
-        if (oldInnerWrapper && oldInnerWrapper.$outerWrapper === this) {
-            innerElement.remove(oldInnerWrapper.getElement());
-            delete oldInnerWrapper.$outerWrapper;
-        }
-
-        if (innerWrapper) {
-            innerWrapper.setSizeState(this.getSizeState());
-            innerWrapper.$outerWrapper = this;
-            innerElement.append(innerWrapper.getElement());
-        }
-    },
-
-    updateSizeState: function(state) {
-        var innerWrapper = this.getInnerWrapper();
-
-        this.getElement().setSizeState(state);
-
-        if (innerWrapper) {
-            innerWrapper.setSizeState(state);
-        }
-    },
-
-    destroy: function() {
-        var innerWrapper = this.getInnerWrapper(),
-            outerWrapper = this.$outerWrapper;
-
-        if (innerWrapper) {
-            if (outerWrapper) {
-                outerWrapper.setInnerWrapper(innerWrapper);
-            }
-            else {
-                innerWrapper.getElement().replace(this.getElement());
-                delete innerWrapper.$outerWrapper;
-            }
-        }
-
-        delete this.$outerWrapper;
-
-        this.setInnerWrapper(null);
-
-        this.unlink('_bodyElement', '_element');
-
-        this.callSuper();
-    }
-});
-
-/**
- * @aside guide layouts
- * @aside video layouts
- *
- * The VBox (short for vertical box) layout makes it easy to position items horizontally in a
- * {@link Ext.Container Container}. It can size items based on a fixed height or a fraction of the total height
- * available.
- *
- * For example, let's say we want a banner to take one third of the available height, and an information panel in the
- * rest of the screen. We can achieve this with vbox layout's *flex* config:
- *
- *     @example
- *     Ext.create('Ext.Container', {
- *         fullscreen: true,
- *         layout: 'vbox',
- *         items: [
- *             {
- *                 html: 'Awesome banner',
- *                 style: 'background-color: #759E60;',
- *                 flex: 1
- *             },
- *             {
- *                 html: 'Some wonderful information',
- *                 style: 'background-color: #5E99CC;',
- *                 flex: 2
- *             }
- *         ]
- *     });
- *
- * This will give us two boxes - one that's one third of the available height, the other being two thirds of the
- * available height:
- *
- * {@img ../guides/layouts/vbox.jpg}
- *
- * We can also specify fixed heights for child items, or mix fixed heights and flexes. For example, here we have 3
- * items - one at the top and bottom with flex: 1, and one in the center with a fixed width of 100px:
- *
- *     @example preview portrait
- *     Ext.create('Ext.Container', {
- *         fullscreen: true,
- *         layout: 'vbox',
- *         items: [
- *             {
- *                 html: 'Top item',
- *                 style: 'background-color: #5E99CC;',
- *                 flex: 1
- *             },
- *             {
- *                 html: 'Center item',
- *                 height: 100
- *             },
- *             {
- *                 html: 'Bottom item',
- *                 style: 'background-color: #759E60;',
- *                 flex: 1
- *             }
- *         ]
- *     });
- *
- * Which gives us an effect like this:
- *
- * {@img ../guides/layouts/vboxfixed.jpg}
- *
- * For a more detailed overview of what layouts are and the types of layouts shipped with Sencha Touch 2, check out the
- * [Layout Guide](#!/guide/layouts).
- *
- */
-Ext.define('Ext.layout.VBox', {
-    extend:  Ext.layout.FlexBox ,
-
-    alias: 'layout.vbox',
-
-    config: {
-        orient: 'vertical'
     }
 });
 
@@ -26977,6 +26487,496 @@ Ext.define('Ext.layout.Card', {
     destroy:  function () {
         this.callParent(arguments);
         Ext.destroy(this.getAnimation());
+    }
+});
+
+/**
+ * @aside guide layouts
+ * @aside video layouts
+ *
+ * Box is a superclass for the two box layouts:
+ *
+ * * {@link Ext.layout.HBox hbox}
+ * * {@link Ext.layout.VBox vbox}
+ *
+ * Box itself is never used directly, but its subclasses provide flexible arrangement of child components
+ * inside a {@link Ext.Container Container}. For a full overview of layouts check out the
+ * [Layout Guide](#!/guide/layouts).
+ *
+ * ## Horizontal Box
+ *
+ * HBox allows you to easily lay out child components horizontally. It can size items based on a fixed width or a
+ * fraction of the total width available, enabling you to achieve flexible layouts that expand or contract to fill the
+ * space available.
+ *
+ * {@img ../guides/layouts/hbox.jpg}
+ *
+ * See the {@link Ext.layout.HBox HBox layout docs} for more information on using hboxes.
+ *
+ * ## Vertical Box
+ *
+ * VBox allows you to easily lay out child components verticaly. It can size items based on a fixed height or a
+ * fraction of the total height available, enabling you to achieve flexible layouts that expand or contract to fill the
+ * space available.
+ *
+ * {@img ../guides/layouts/vbox.jpg}
+ *
+ * See the {@link Ext.layout.VBox VBox layout docs} for more information on using vboxes.
+ */
+Ext.define('Ext.layout.Box', {
+    extend:  Ext.layout.Default ,
+
+    config: {
+        orient: 'horizontal',
+
+        /**
+         * @cfg {String} align
+         * Controls how the child items of the container are aligned. Acceptable configuration values for this property are:
+         *
+         * - ** start ** : child items are packed together at left side of container
+         * - ** center ** : child items are packed together at mid-width of container
+         * - ** end ** : child items are packed together at right side of container
+         * - **stretch** : child items are stretched vertically to fill the height of the container
+         *
+         * Please see the 'Pack and Align' section of the [Layout guide](#!/guide/layouts) for a detailed example and
+         * explanation.
+         * @accessor
+         */
+        align: 'start',
+
+        /**
+         * @cfg {String} pack
+         * Controls how the child items of the container are packed together. Acceptable configuration values
+         * for this property are:
+         *
+         * - ** start ** : child items are packed together at left side of container
+         * - ** center ** : child items are packed together at mid-width of container
+         * - ** end ** : child items are packed together at right side of container
+         * - ** justify ** : child items are packed evenly across the container. Uses the 'justify-content: space-between' css property
+         *
+         * Please see the 'Pack and Align' section of the [Layout guide](#!/guide/layouts) for a detailed example and
+         * explanation.
+         * @accessor
+         */
+        pack: 'start'
+    },
+
+    alias: 'layout.tablebox',
+
+    layoutBaseClass: 'x-layout-tablebox',
+
+    itemClass: 'x-layout-tablebox-item',
+
+    setContainer: function(container) {
+        this.callSuper(arguments);
+
+        container.innerElement.addCls(this.layoutBaseClass);
+
+        container.on('flexchange', 'onItemFlexChange', this, {
+            delegate: '> component'
+        });
+    },
+
+    onItemInnerStateChange: function(item, isInner) {
+        this.callSuper(arguments);
+
+        item.toggleCls(this.itemClass, isInner);
+    },
+
+    onItemFlexChange: function() {
+
+    }
+});
+
+/**
+ * @aside guide layouts
+ * @aside video layouts
+ *
+ * AbstractBox is a superclass for the two box layouts:
+ *
+ * * {@link Ext.layout.HBox hbox}
+ * * {@link Ext.layout.VBox vbox}
+ *
+ * FlexBox itself is never used directly, but its subclasses provide flexible arrangement of child components
+ * inside a {@link Ext.Container Container}. For a full overview of layouts check out the
+ * [Layout Guide](#!/guide/layouts).
+ *
+ * ## Horizontal Box
+ *
+ * HBox allows you to easily lay out child components horizontally. It can size items based on a fixed width or a
+ * fraction of the total width available, enabling you to achieve flexible layouts that expand or contract to fill the
+ * space available.
+ *
+ * {@img ../guides/layouts/hbox.jpg}
+ *
+ * See the {@link Ext.layout.HBox HBox layout docs} for more information on using hboxes.
+ *
+ * ## Vertical Box
+ *
+ * VBox allows you to easily lay out child components verticaly. It can size items based on a fixed height or a
+ * fraction of the total height available, enabling you to achieve flexible layouts that expand or contract to fill the
+ * space available.
+ *
+ * {@img ../guides/layouts/vbox.jpg}
+ *
+ * See the {@link Ext.layout.VBox VBox layout docs} for more information on using vboxes.
+ */
+Ext.define('Ext.layout.FlexBox', {
+    extend:  Ext.layout.Box ,
+
+    alias: 'layout.box',
+
+    config: {
+        align: 'stretch'
+    },
+
+    layoutBaseClass: 'x-layout-box',
+
+    itemClass: 'x-layout-box-item',
+
+    setContainer: function(container) {
+        this.callSuper(arguments);
+
+        this.monitorSizeFlagsChange();
+    },
+
+    applyOrient: function(orient) {
+
+        return orient;
+    },
+
+    updateOrient: function(orient, oldOrient) {
+        var container = this.container,
+            delegation = {
+                delegate: '> component'
+            };
+
+        if (orient === 'horizontal') {
+            this.sizePropertyName = 'width';
+        }
+        else {
+            this.sizePropertyName = 'height';
+        }
+
+        container.innerElement.swapCls('x-' + orient, 'x-' + oldOrient);
+
+        if (oldOrient) {
+            container.un(oldOrient === 'horizontal' ? 'widthchange' : 'heightchange', 'onItemSizeChange', this, delegation);
+            this.redrawContainer();
+        }
+
+        container.on(orient === 'horizontal' ? 'widthchange' : 'heightchange', 'onItemSizeChange', this, delegation);
+    },
+
+    onItemInnerStateChange: function(item, isInner) {
+        this.callSuper(arguments);
+
+        var flex, size;
+
+        item.toggleCls(this.itemClass, isInner);
+
+        if (isInner) {
+            flex = item.getFlex();
+            size = item.get(this.sizePropertyName);
+
+            if (flex) {
+                this.doItemFlexChange(item, flex);
+            }
+            else if (size) {
+                this.doItemSizeChange(item, size);
+            }
+        }
+
+        this.refreshItemSizeState(item);
+    },
+
+    refreshItemSizeState: function(item) {
+        var isInner = item.isInnerItem(),
+            container = this.container,
+            LAYOUT_HEIGHT = container.LAYOUT_HEIGHT,
+            LAYOUT_WIDTH = container.LAYOUT_WIDTH,
+            dimension = this.sizePropertyName,
+            layoutSizeFlags = 0,
+            containerSizeFlags = container.getSizeFlags();
+
+        if (isInner) {
+            layoutSizeFlags |= container.LAYOUT_STRETCHED;
+
+            if (this.getAlign() === 'stretch') {
+                layoutSizeFlags |= containerSizeFlags & (dimension === 'width' ? LAYOUT_HEIGHT : LAYOUT_WIDTH);
+            }
+
+            if (item.getFlex()) {
+                layoutSizeFlags |= containerSizeFlags & (dimension === 'width' ? LAYOUT_WIDTH : LAYOUT_HEIGHT);
+            }
+        }
+
+        item.setLayoutSizeFlags(layoutSizeFlags);
+    },
+
+    refreshAllItemSizedStates: function() {
+        var innerItems = this.container.innerItems,
+            i, ln, item;
+
+        for (i = 0,ln = innerItems.length; i < ln; i++) {
+            item = innerItems[i];
+            this.refreshItemSizeState(item);
+        }
+    },
+
+    onContainerSizeFlagsChange: function() {
+        this.refreshAllItemSizedStates();
+
+        this.callSuper(arguments);
+    },
+
+    onItemSizeChange: function(item, size) {
+        if (item.isInnerItem()) {
+            this.doItemSizeChange(item, size);
+        }
+    },
+
+    doItemSizeChange: function(item, size) {
+        if (size) {
+            item.setFlex(null);
+            this.redrawContainer();
+        }
+    },
+
+    onItemFlexChange: function(item, flex) {
+        if (item.isInnerItem()) {
+            this.doItemFlexChange(item, flex);
+            this.refreshItemSizeState(item);
+        }
+    },
+
+    doItemFlexChange: function(item, flex) {
+        this.setItemFlex(item, flex);
+
+        if (flex) {
+            item.set(this.sizePropertyName, null);
+        }
+        else {
+            this.redrawContainer();
+        }
+    },
+
+    redrawContainer: function() {
+        var container = this.container,
+            renderedTo = container.element.dom.parentNode;
+
+        if (renderedTo && renderedTo.nodeType !== 11) {
+            container.innerElement.redraw();
+        }
+    },
+
+    /**
+     * Sets the flex of an item in this box layout.
+     * @param {Ext.Component} item The item of this layout which you want to update the flex of.
+     * @param {Number} flex The flex to set on this method
+     */
+    setItemFlex: function(item, flex) {
+        var element = item.element;
+
+        element.toggleCls('x-flexed', !!flex);
+
+        if (!flex) {
+            flex = '';
+        }
+        else {
+            flex = String(flex);
+        }
+
+        if (Ext.browser.is.WebKit) {
+            element.dom.style.setProperty('-webkit-box-flex', flex, null);
+        }
+        else if (Ext.browser.is.IE) {
+            element.dom.style.setProperty('-ms-flex', flex + ' 0 0px', null);
+        }
+        else {
+            element.dom.style.setProperty('flex', flex + ' 0 0px', null);
+        }
+    },
+
+    convertPosition: function(position) {
+        var positionMap = this.positionMap;
+
+        if (positionMap.hasOwnProperty(position)) {
+            return positionMap[position];
+        }
+
+        return position;
+    },
+
+    applyAlign: function(align) {
+        return this.convertPosition(align);
+    },
+
+    updateAlign: function(align, oldAlign) {
+        var container = this.container;
+
+        container.innerElement.swapCls(align, oldAlign, true, 'x-align');
+
+        if (oldAlign !== undefined) {
+            this.refreshAllItemSizedStates();
+        }
+    },
+
+    applyPack: function(pack) {
+        return this.convertPosition(pack);
+    },
+
+    updatePack: function(pack, oldPack) {
+        this.container.innerElement.swapCls(pack, oldPack, true, 'x-pack');
+    }
+});
+
+/**
+ * @aside guide layouts
+ * @aside video layouts
+ *
+ * The HBox (short for horizontal box) layout makes it easy to position items horizontally in a
+ * {@link Ext.Container Container}. It can size items based on a fixed width or a fraction of the total width
+ * available.
+ *
+ * For example, an email client might have a list of messages pinned to the left, taking say one third of the available
+ * width, and a message viewing panel in the rest of the screen. We can achieve this with hbox layout's *flex* config:
+ *
+ *     @example
+ *     Ext.create('Ext.Container', {
+ *         fullscreen: true,
+ *         layout: 'hbox',
+ *         items: [
+ *             {
+ *                 html: 'message list',
+ *                 style: 'background-color: #5E99CC;',
+ *                 flex: 1
+ *             },
+ *             {
+ *                 html: 'message preview',
+ *                 style: 'background-color: #759E60;',
+ *                 flex: 2
+ *             }
+ *         ]
+ *     });
+ *
+ * This will give us two boxes - one that's one third of the available width, the other being two thirds of the
+ * available width:
+ *
+ * {@img ../guides/layouts/hbox.jpg}
+ *
+ * We can also specify fixed widths for child items, or mix fixed widths and flexes. For example, here we have 3 items
+ * - one on each side with flex: 1, and one in the center with a fixed width of 100px:
+ *
+ *     @example
+ *     Ext.create('Ext.Container', {
+ *         fullscreen: true,
+ *         layout: 'hbox',
+ *         items: [
+ *             {
+ *                 html: 'Left item',
+ *                 style: 'background-color: #759E60;',
+ *                 flex: 1
+ *             },
+ *             {
+ *                 html: 'Center item',
+ *                 width: 100
+ *             },
+ *             {
+ *                 html: 'Right item',
+ *                 style: 'background-color: #5E99CC;',
+ *                 flex: 1
+ *             }
+ *         ]
+ *     });
+ *
+ * Which gives us an effect like this:
+ *
+ * {@img ../guides/layouts/hboxfixed.jpg}
+ *
+ * For a more detailed overview of what layouts are and the types of layouts shipped with Sencha Touch 2, check out the
+ * [Layout Guide](#!/guide/layouts).
+ */
+Ext.define('Ext.layout.HBox', {
+    extend:  Ext.layout.FlexBox ,
+
+    alias: 'layout.hbox'
+});
+
+/**
+ * @aside guide layouts
+ * @aside video layouts
+ *
+ * The VBox (short for vertical box) layout makes it easy to position items horizontally in a
+ * {@link Ext.Container Container}. It can size items based on a fixed height or a fraction of the total height
+ * available.
+ *
+ * For example, let's say we want a banner to take one third of the available height, and an information panel in the
+ * rest of the screen. We can achieve this with vbox layout's *flex* config:
+ *
+ *     @example
+ *     Ext.create('Ext.Container', {
+ *         fullscreen: true,
+ *         layout: 'vbox',
+ *         items: [
+ *             {
+ *                 html: 'Awesome banner',
+ *                 style: 'background-color: #759E60;',
+ *                 flex: 1
+ *             },
+ *             {
+ *                 html: 'Some wonderful information',
+ *                 style: 'background-color: #5E99CC;',
+ *                 flex: 2
+ *             }
+ *         ]
+ *     });
+ *
+ * This will give us two boxes - one that's one third of the available height, the other being two thirds of the
+ * available height:
+ *
+ * {@img ../guides/layouts/vbox.jpg}
+ *
+ * We can also specify fixed heights for child items, or mix fixed heights and flexes. For example, here we have 3
+ * items - one at the top and bottom with flex: 1, and one in the center with a fixed width of 100px:
+ *
+ *     @example preview portrait
+ *     Ext.create('Ext.Container', {
+ *         fullscreen: true,
+ *         layout: 'vbox',
+ *         items: [
+ *             {
+ *                 html: 'Top item',
+ *                 style: 'background-color: #5E99CC;',
+ *                 flex: 1
+ *             },
+ *             {
+ *                 html: 'Center item',
+ *                 height: 100
+ *             },
+ *             {
+ *                 html: 'Bottom item',
+ *                 style: 'background-color: #759E60;',
+ *                 flex: 1
+ *             }
+ *         ]
+ *     });
+ *
+ * Which gives us an effect like this:
+ *
+ * {@img ../guides/layouts/vboxfixed.jpg}
+ *
+ * For a more detailed overview of what layouts are and the types of layouts shipped with Sencha Touch 2, check out the
+ * [Layout Guide](#!/guide/layouts).
+ *
+ */
+Ext.define('Ext.layout.VBox', {
+    extend:  Ext.layout.FlexBox ,
+
+    alias: 'layout.vbox',
+
+    config: {
+        orient: 'vertical'
     }
 });
 
@@ -65173,6 +65173,7 @@ Ext.define('MMP.view.Spectrum', {
 
         spectrumY    : 0,
 
+
         modes : [
             0, // wave
             1, // bars,
@@ -65185,7 +65186,7 @@ Ext.define('MMP.view.Spectrum', {
             2 : 'drawSpectrum'
         },
 
-        waveEchoLimit : 3,
+        waveEchoLimit  : 3,
         waveEchoBuffer : [],
 
         style : "background-color: #000;",
@@ -65257,8 +65258,6 @@ Ext.define('MMP.view.Spectrum', {
     },
 
 
-
-
     onElDrag : function(event) {
         var me     = this,
             currX  = event.getXY()[0],
@@ -65321,67 +65320,9 @@ Ext.define('MMP.view.Spectrum', {
 
 
 
-    drawWaveBars : function(dataItems) {
-         if (! dataItems) {
-            this.clearCanvas();
-            return;
-        }
-
-        var me              = this,
-            elHeight        = me.element.getHeight(),
-            numBins         = me.getNumBins(),
-            canvasWidth     = me.canvasWidth,
-            canvasHeight    = me.canvasHeight,
-            canvas2dContext = me.canvas2dContext,
-            barSpacing      = me.getBarSpacing(),
-            one             = 1;
-
-
-        me.canvas2dContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-
-        Ext.each(dataItems, function(data, index) {
-
-            if (index < one) {
-                canvas2dContext.fillStyle = "rgba(255, 80, 20, 1)";
-            }
-            else {
-                canvas2dContext.fillStyle = "rgba(80, 255, 20, 1)";
-            }
-            // Get the frequency samples
-
-            var length = data.length;
-            if (me.validPoints > 0) {
-                length = me.validPoints;
-            }
-
-            var bin_size = Math.floor(length / numBins);
-
-            for (var i = 0; i < numBins; ++i) {
-                var sum = 0;
-                for (var j = 0; j < bin_size; ++j) {
-                    sum += data[(i * bin_size) + j];
-                }
-
-                // Calculate the average frequency of the samples in the bin
-                var average = sum / bin_size;
-
-                // Draw the bars on the canvas
-                var barWidth = canvasWidth / numBins,
-                    scaledAvg = (average / elHeight) * canvasHeight;
-
-
-                if (index < one) {
-                    scaledAvg += 50;
-                }
-
-                // bars
-                canvas2dContext.fillRect(i * barWidth, canvasHeight, barWidth - barSpacing, -scaledAvg);
-
-            }
-        });
-    },
 
     drawWaveForms : function(dataItems) {
+
         if (! dataItems) {
             this.clearCanvas();
             return;
@@ -65398,8 +65339,6 @@ Ext.define('MMP.view.Spectrum', {
 
         me.canvas2dContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
 
-//        var allData = [].concat(me.getWaveHistory())
-
 
         Ext.each(dataItems, function(data, index) {
 
@@ -65416,6 +65355,8 @@ Ext.define('MMP.view.Spectrum', {
                 length = me.validPoints;
             }
 
+
+            debugger;
             var bin_size = Math.floor(length / numBins);
 
             for (var i = 0; i < numBins; ++i) {
@@ -65441,6 +65382,69 @@ Ext.define('MMP.view.Spectrum', {
                 }
 
                 canvas2dContext.fillRect(i * barWidth, (canvasHeight - scaledAvg + 2) + offset, barWidth, 5);
+            }
+        });
+    },
+
+
+    drawWaveBars : function(dataItems) {
+
+         if (! dataItems) {
+            this.clearCanvas();
+            return;
+        }
+
+        var me              = this,
+            elHeight        = me.element.getHeight(),
+            numBins         = me.getNumBins(),
+            canvasWidth     = me.canvasWidth,
+            canvasHeight    = me.canvasHeight,
+            canvas2dContext = me.canvas2dContext,
+            barSpacing      = me.getBarSpacing(),
+            one             = 1;
+
+        me.canvas2dContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+
+        Ext.each(dataItems, function(data, index) {
+
+            if (index < one) {
+                canvas2dContext.fillStyle = "rgba(255, 80, 20, 1)";
+            }
+            else {
+                canvas2dContext.fillStyle = "rgba(80, 255, 20, 1)";
+            }
+            // Get the frequency samples
+
+            var length = data.length;
+            if (me.validPoints > 0) {
+                length = me.validPoints;
+            }
+
+            var bin_size = Math.floor(length / numBins);
+            for (var i = 0; i < numBins; ++i) {
+                var sum = 0;
+                for (var j = 0; j < bin_size; ++j) {
+                    sum += data[(i * bin_size) + j];
+                }
+
+                // Calculate the average frequency of the samples in the bin
+                var average = sum / bin_size;
+
+                // Draw the bars on the canvas
+                var barWidth = canvasWidth / numBins,
+                    scaledAvg = (average / elHeight) * canvasHeight;
+
+
+                if (index < one) {
+                    scaledAvg += 50;
+                }
+
+                canvas2dContext.fillRect(
+                    i * barWidth,
+                    canvasHeight,
+                    barWidth - barSpacing,
+                    -scaledAvg
+                );
             }
         });
     },
@@ -65816,7 +65820,6 @@ Ext.define('MMP.controller.Main', {
             spectrumSize = spectrum.element.getSize(),
             spectrumMode = spectrum.getMode();
 
-//        console.log('SpectrumMode ' + spectrumMode);
         if (spectrumMode == 0 || spectrumMode == 1) {
             spectrumMode = 'wavform';
         }
@@ -65826,9 +65829,6 @@ Ext.define('MMP.controller.Main', {
 
         cordova.exec(
             function callback(data) {
-//                console.log('modStats');
-//                debugger;
-//                console.log(typeof data);
                 player.setStats(data);
             },
             function errorHandler(err) {

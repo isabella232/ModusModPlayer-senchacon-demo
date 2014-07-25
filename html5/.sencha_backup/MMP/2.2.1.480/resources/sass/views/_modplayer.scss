@@ -1,0 +1,28 @@
+.main-toolbar {
+    background-image : -webkit-linear-gradient(top, #000000 0%, #131313 100%);
+    border-bottom: 1px solid #9E9E9E;
+
+}
+
+.main-toolbar .x-button {
+    background : none;
+    background-color : #333333;
+
+    background-image : -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(3%, #333333), color-stop(100%, #333333));
+    background-image : -webkit-linear-gradient(top, #333333, #333333 3%, #333333);
+    border           : 1px solid #111111;
+    border-top-color : #9E9E9E;
+    background-color : #333333;
+    //background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #1985d0), color-stop(3%, #1468a2), color-stop(100%, #0e4b75));
+}
+
+
+
+
+.x-button.x-button-action.x-button-pressing, .x-button.x-button-action.x-button-pressing:after, .x-button.x-button-action.x-button-pressed, .x-button.x-button-action.x-button-pressed:after, .x-button.x-button-action.x-button-active, .x-button.x-button-action.x-button-active:after, .x-toolbar .x-button.x-button-action.x-button-pressing, .x-toolbar .x-button.x-button-action.x-button-pressing:after, .x-toolbar .x-button.x-button-action.x-button-pressed, .x-toolbar .x-button.x-button-action.x-button-pressed:after, .x-toolbar .x-button.x-button-action.x-button-active, .x-toolbar .x-button.x-button-action.x-button-active:after, .x-button.x-button-action-round.x-button-pressing, .x-button.x-button-action-round.x-button-pressing:after, .x-button.x-button-action-round.x-button-pressed, .x-button.x-button-action-round.x-button-pressed:after, .x-button.x-button-action-round.x-button-active, .x-button.x-button-action-round.x-button-active:after, .x-toolbar .x-button.x-button-action-round.x-button-pressing, .x-toolbar .x-button.x-button-action-round.x-button-pressing:after, .x-toolbar .x-button.x-button-action-round.x-button-pressed, .x-toolbar .x-button.x-button-action-round.x-button-pressed:after, .x-toolbar .x-button.x-button-action-round.x-button-active, .x-toolbar .x-button.x-button-action-round.x-button-active:after, .x-button.x-button-action-small.x-button-pressing, .x-button.x-button-action-small.x-button-pressing:after, .x-button.x-button-action-small.x-button-pressed, .x-button.x-button-action-small.x-button-pressed:after, .x-button.x-button-action-small.x-button-active, .x-button.x-button-action-small.x-button-active:after, .x-toolbar .x-button.x-button-action-small.x-button-pressing, .x-toolbar .x-button.x-button-action-small.x-button-pressing:after, .x-toolbar .x-button.x-button-action-small.x-button-pressed, .x-toolbar .x-button.x-button-action-small.x-button-pressed:after, .x-toolbar .x-button.x-button-action-small.x-button-active, .x-toolbar .x-button.x-button-action-small.x-button-active:after {
+    background-image : none;
+    background-color : #333333;
+    background-image : -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(10%, #333333), color-stop(65%, #333333), color-stop(100%, #333333));
+    background-image : -webkit-linear-gradient(top, #333333, #333333 10%, #333333 65%, #333333);
+    background-image : linear-gradient(top, #333333, #333333 10%, #333333 65%, #333333)
+}

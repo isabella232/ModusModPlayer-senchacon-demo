@@ -12,7 +12,7 @@ echo $'\e[32m''building Sencha  ../ios/www' $'\e[00m'
 
 #sencha app build testing ../ios/www/ > /tmp/st2.out
 cd html5/
-sencha app build $target
+~/bin/Sencha/Cmd/3.1.2.342/sencha app build $target
 RC=$?
 cd ..
 # isError=`grep ERROR /tmp/st2.out > /dev/null 2>&1`
