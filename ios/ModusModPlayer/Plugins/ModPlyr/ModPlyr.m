@@ -54,41 +54,23 @@ static char note2charA[12]={'C','C','D','D','E','F','F','G','G','A','A','B'};
 static char note2charB[12]={'-','#','-','#','-','-','#','-','#','-','#','-'};
 static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 
-
-
 - (ModPlugFile *) getMpFile {
     return self.mpFile;
 }
 
+- (void) stopMusic {
+    if (self.mpFile) {
+        AudioQueueStop( mAudioQueue, TRUE );
+        AudioQueueReset( mAudioQueue );
+        ModPlug_Unload(self.mpFile);
+        free (loadedFileData);
+    }
+}
 
 - (void) playSong {
-//    UIAlertView *alert = [
-//        [UIAlertView alloc]
-//        initWithTitle:@"Title"
-//        message:@"App loaded"
-//        delegate:nil
-//        cancelButtonTitle:@"ok"
-//        otherButtonTitles:nil,
-//    nil];
-//    
-//    [alert show];
-    
-    
-//    NSMutableArray *dirs = [self getModFileDirectories:@""];
-//    
-//    NSString *firstDir = [dirs objectAtIndex:2];
-//    
-//    NSMutableArray *files = [self getFilesInDirectory: firstDir];
-//    NSURL *fileUrl = [files objectAtIndex:0];
-//    NSString *firstFile = [[fileUrl filePathURL] absoluteString];
-//
-//    firstFile = [[firstFile componentsSeparatedByString:@"%20"] componentsJoinedByString: @" "];
-//    firstFile = [[firstFile componentsSeparatedByString:@"file://"] componentsJoinedByString: @""];
-    
-//    [self loadFile:firstFile];
+    [self initModPlugSettings];
     [self preLoadPatterns];
 
-    [self initModPlugSettings];
     
     ModPlug_SetMasterVolume(loadedModPlugFile, 128);
     ModPlug_Seek(loadedModPlugFile, 0);
@@ -151,7 +133,7 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
     settings.mSurroundDepth=0;
     settings.mSurroundDelay=10;
     settings.mLoopCount=-1;
-    settings.mStereoSeparation=32;
+    settings.mStereoSeparation=64;
     
     ModPlug_SetSettings(&settings);
 }
@@ -241,6 +223,8 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 
 
 - (void) preLoadPatterns  {
+    // Clear the existing song patterns
+    [songPatterns removeAllObjects];
 
     NSLog(@"preLoadPatterns for %s", modName);
     NSDate *start = [NSDate date];
@@ -252,39 +236,67 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
         currPattrn,
         currRow,
         currOrder,
+        prevOrder,
         prevPattrn,
         prevRow;
     
-    prevPattrn = prevRow =  -1;
+    prevOrder = prevPattrn = prevRow =  -1;
     
     ModPlug_GetSettings(&settings);
-    settings.mLoopCount=0;
+    settings.mLoopCount = 0;
     ModPlug_SetSettings(&settings);
-
+    ModPlug_GetSettings(&settings);
+    
     
     char *buffer = malloc(sizeof(char) * SOUND_BUFFER_SIZE_SAMPLE * 2 * 2);
-    
     bytesRead = ModPlug_Read(mpFile, buffer, SOUND_BUFFER_SIZE_SAMPLE * 2 * 2);
+    
+    NSMutableDictionary *orderMapper = [[NSMutableDictionary alloc] init];
     
     // We're going to stuff row strings in here.
     NSMutableArray *patternStrings;
+    BOOL isOkToContinue = true;
     
-    while (bytesRead > 0) {
+    while (bytesRead > 0 && isOkToContinue) {
         currOrder  = ModPlug_GetCurrentOrder(mpFile);
         currPattrn = ModPlug_GetCurrentPattern(mpFile);
         currRow    = ModPlug_GetCurrentRow(mpFile);
         
         
-       NSLog(@"O %i \t P %i \t R %i", currOrder, currPattrn, currRow);
-
+//       NSLog(@"O %i \t P %i \t R %i", currOrder, currPattrn, currRow);
+       
+      
         // When we hit a new pattern, create a new array so that we can stuff strings into it.
         if (currPattrn != prevPattrn) {
 //                NSLog(@"New pattern :: #%i", currPattrn);
+
+           // This is a hacky way of testing to see if the fucking mod looped.
+           // Even though we set mLoopCount to 0 (see above this while loop),
+           // modPlug still loops on some mods. Fucker.
+           
+           
+           if (prevOrder != -1) {
+                NSString *orderKey = [NSString stringWithFormat:@"%d_", prevPattrn];
+
+                if (orderMapper[orderKey]) {
+                    isOkToContinue = false; // Set this so the loop can end!
+                    
+                    continue; // Break out of this loop fast!
+                }
+                else {
+                    // TODO: Turn to integer so we can see if we have seen it more than once.
+                    [orderMapper setObject:@"" forKey:orderKey];
+                }
+               
+           }
+
 
             // Add new pattern
             if (patternStrings) {
                 NSString *key = [NSString stringWithFormat:@"%d", prevPattrn];
                 [songPatterns setValue:patternStrings forKey:key];
+                
+                NSLog(@"%i", [[songPatterns valueForKey:key] count]);
             }
             
             patternStrings = [[NSMutableArray alloc] init];
@@ -306,12 +318,15 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
                  
         prevPattrn = currPattrn;
         prevRow    = currRow;
+        prevOrder  = currOrder;
         
         memset(buffer, 0, SOUND_BUFFER_SIZE_SAMPLE * 2 * 2);
         bytesRead = ModPlug_Read(mpFile, buffer, SOUND_BUFFER_SIZE_SAMPLE * 2 * 2);
     }
     
     NSTimeInterval timeInterval = [start timeIntervalSinceNow];
+    
+    free(buffer);
     
     NSString *message = [[NSString alloc] initWithFormat:@"Done reading %f(ms)", timeInterval];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"DONE!" message:message delegate:nil cancelButtonTitle:@"sweet" otherButtonTitles:nil, nil];
@@ -736,6 +751,11 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     // Todo : Initialize sound
     
     NSString *file = [command.arguments objectAtIndex:0];
+    
+    if (self.mpFile) {
+        [self stopMusic];
+    }
+    
     [self loadFile:file];
     
     ModPlugFile *currentModFile = self.mpFile;
@@ -910,6 +930,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 }
 
 - (void) cordovaStopMusic:(CDVInvokedUrlCommand*)command {
+    [self stopMusic];
 //    BASS_ChannelStop(currentModFile);
 ////    BASS_Channel
 //    BASS_ChannelSetPosition(currentModFile, 0, 0);
