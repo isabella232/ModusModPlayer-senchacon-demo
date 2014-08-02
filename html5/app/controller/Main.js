@@ -163,6 +163,9 @@ Ext.define('MMP.controller.Main', {
 
 
     startModPlayerUpdateLoop : function() {
+        // TODO: Re-enable
+        return;
+
         if (! this.interval) {
             var boundTimerFunction = Ext.Function.bind(this.getSongStats, this);
             this.interval = setInterval(boundTimerFunction, 20);

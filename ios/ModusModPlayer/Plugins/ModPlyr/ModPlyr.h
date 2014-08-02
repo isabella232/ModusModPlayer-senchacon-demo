@@ -7,17 +7,22 @@
 //
 
 #import <Cordova/CDV.h>
+#import "modplug.h"
 
-#include "bass.h"
+#define PLAYBACK_FREQ 44100
+#define SOUND_BUFFER_SIZE_SAMPLE (PLAYBACK_FREQ / 30)
+#define SOUND_BUFFER_NB 32
+#define MIDIFX_OFS 32
+
 
 
 @interface ModPlyr : CDVPlugin {
-    HMUSIC currentModFile;
 
 
 }
 
-//- (NSString)echo:(CDVInvokedUrlCommand*)command;
+@property ModPlugFile *mpFile;
+
 
 
 

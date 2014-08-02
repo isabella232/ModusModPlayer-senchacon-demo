@@ -65164,14 +65164,14 @@ Ext.define('MMP.view.Spectrum', {
     xtype  : 'spectrum',
 
     config : {
-        numPoints    : 2048,
-        binMax       : 500,
-        binMin       : 10,
-        numBins      : 500,
-        mode         : 0,
-        barSpacing   : 0,
+        numPoints  : 2048,
+        binMax     : 500,
+        binMin     : 10,
+        numBins    : 500,
+        mode       : 1,
+        barSpacing : 0,
 
-        spectrumY    : 0,
+        spectrumY : 0,
 
 
         modes : [
@@ -65204,11 +65204,11 @@ Ext.define('MMP.view.Spectrum', {
         this.callParent();
 
         thisEl.on({
-            scope      : this,
-            tap        : 'onElTapSwitchMode',
-            dragstart  : 'onElDragStart',
-            dragend    : 'onElDragEnd',
-            drag       : 'onElDrag'
+            scope     : this,
+            tap       : 'onElTapSwitchMode',
+            dragstart : 'onElDragStart',
+            dragend   : 'onElDragEnd',
+            drag      : 'onElDrag'
         });
 
         thisEl.on('painted', function() {
@@ -65800,6 +65800,9 @@ Ext.define('MMP.controller.Main', {
 
 
     startModPlayerUpdateLoop : function() {
+        // TODO: Re-enable
+        return;
+
         if (! this.interval) {
             var boundTimerFunction = Ext.Function.bind(this.getSongStats, this);
             this.interval = setInterval(boundTimerFunction, 20);

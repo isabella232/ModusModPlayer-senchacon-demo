@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "427834061.769472"
+            timestampString = "428632149.07433"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "420"
+            endingLineNumber = "420"
             landmarkName = "-getModFileDirectories:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "427834090.676664"
+            timestampString = "428632149.07433"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
             landmarkName = "-getModDirectoriesAsJson"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,12 +42,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "427990814.313566"
+            timestampString = "428632149.07433"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "-getWaveFormData:andHeight:"
+            startingLineNumber = "741"
+            endingLineNumber = "741"
+            landmarkName = "-cordovaLoadMod:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
+            timestampString = "428631964.075985"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "-loadFile:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

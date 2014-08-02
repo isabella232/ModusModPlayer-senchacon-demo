@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
-		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589B0D05DD56006BFB54 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.mm */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1F766FE113BBADB100FB74C0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F766FDC13BBADB100FB74C0 /* Localizable.strings */; };
@@ -46,9 +46,8 @@
 		5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE5B34173C68D80009041E /* CoreLocation.framework */; };
 		5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */; };
 		71027CAD1794498F003A61C1 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71027CAC1794498F003A61C1 /* Accelerate.framework */; };
-		716935E41784A68A00047434 /* libbass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 716935E11784A68A00047434 /* libbass.a */; };
+		712A5C77198C608A003A1DED /* libmodplug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 712A5C73198C608A003A1DED /* libmodplug.a */; };
 		716935E51784A68A00047434 /* ModPlyr.m in Sources */ = {isa = PBXBuildFile; fileRef = 716935E31784A68A00047434 /* ModPlyr.m */; };
-		719E849A1799DBFF00CE6C52 /* libmodplug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 719E84991799DBFF00CE6C52 /* libmodplug.a */; };
 		71E7892F1784CAE00000BA2B /* mods in Resources */ = {isa = PBXBuildFile; fileRef = 71E7892E1784CAE00000BA2B /* mods */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		F840E1F1165FE0F500CFE078 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = F840E1F0165FE0F500CFE078 /* config.xml */; };
@@ -80,7 +79,7 @@
 		1F766FDD13BBADB100FB74C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		1F766FE013BBADB100FB74C0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CordovaLib.xcodeproj; path = CordovaLib/CordovaLib.xcodeproj; sourceTree = "<group>"; };
 		301BF56E109A69640062928A /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = SOURCE_ROOT; };
 		301BF5B4109A6A2B0062928A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -116,12 +115,15 @@
 		5AEE5B34173C68D80009041E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		71027CAC1794498F003A61C1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		712A5C73198C608A003A1DED /* libmodplug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmodplug.a; sourceTree = "<group>"; };
+		712A5C74198C608A003A1DED /* ModPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModPlayer.h; sourceTree = "<group>"; };
+		712A5C75198C608A003A1DED /* ModPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModPlayer.m; sourceTree = "<group>"; };
+		712A5C76198C608A003A1DED /* modplug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = modplug.h; sourceTree = "<group>"; };
 		716935E01784A68A00047434 /* bass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bass.h; sourceTree = "<group>"; };
 		716935E11784A68A00047434 /* libbass.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbass.a; sourceTree = "<group>"; };
 		716935E21784A68A00047434 /* ModPlyr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModPlyr.h; sourceTree = "<group>"; };
 		716935E31784A68A00047434 /* ModPlyr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModPlyr.m; sourceTree = "<group>"; };
 		719E84981799D7D300CE6C52 /* libmodplug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libmodplug.h; sourceTree = "<group>"; };
-		719E84991799DBFF00CE6C52 /* libmodplug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmodplug.a; path = /Users/jgarcia/Documents/Mod_music_projects/libmodplug.a; sourceTree = "<absolute>"; };
 		71E7892E1784CAE00000BA2B /* mods */ = {isa = PBXFileReference; lastKnownFileType = folder; name = mods; path = ../mods; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ModusModPlayer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ModusModPlayer-Info.plist"; path = "../ModusModPlayer-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
@@ -133,8 +135,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				719E849A1799DBFF00CE6C52 /* libmodplug.a in Frameworks */,
 				71027CAD1794498F003A61C1 /* Accelerate.framework in Frameworks */,
+				712A5C77198C608A003A1DED /* libmodplug.a in Frameworks */,
 				301BF5BF109A6A2B0062928A /* CoreLocation.framework in Frameworks */,
 				5AA0E66F1729F460000DC89A /* ImageIO.framework in Frameworks */,
 				5AA0E66D1729F45B000DC89A /* OpenAL.framework in Frameworks */,
@@ -154,7 +156,6 @@
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
 				30E5649213A7FCAF007403D8 /* CoreMedia.framework in Frameworks */,
 				5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */,
-				716935E41784A68A00047434 /* libbass.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,7 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				32CA4F630368D1EE00C91783 /* ModusModPlayer-Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
+				29B97316FDCFA39411CA2CEA /* main.mm */,
 			);
 			name = "Other Sources";
 			path = ModusModPlayer;
@@ -278,6 +279,7 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				712A5C72198C608A003A1DED /* ModPlayer */,
 				716935DF1784A68A00047434 /* ModPlyr */,
 			);
 			name = Plugins;
@@ -325,10 +327,20 @@
 			path = se.lproj;
 			sourceTree = "<group>";
 		};
+		712A5C72198C608A003A1DED /* ModPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				712A5C73198C608A003A1DED /* libmodplug.a */,
+				712A5C74198C608A003A1DED /* ModPlayer.h */,
+				712A5C75198C608A003A1DED /* ModPlayer.m */,
+				712A5C76198C608A003A1DED /* modplug.h */,
+			);
+			path = ModPlayer;
+			sourceTree = "<group>";
+		};
 		716935DF1784A68A00047434 /* ModPlyr */ = {
 			isa = PBXGroup;
 			children = (
-				719E84991799DBFF00CE6C52 /* libmodplug.a */,
 				716935E01784A68A00047434 /* bass.h */,
 				716935E11784A68A00047434 /* libbass.a */,
 				716935E21784A68A00047434 /* ModPlyr.h */,
@@ -458,7 +470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D60589B0D05DD56006BFB54 /* main.mm in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				716935E51784A68A00047434 /* ModPlyr.m in Sources */,
@@ -529,6 +541,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/ModusModPlayer/Plugins/ModPlyr\"",
 					/Users/jgarcia/Documents/Mod_music_projects,
+					"$(PROJECT_DIR)/ModusModPlayer/Plugins/ModPlayer",
+					"$(PROJECT_DIR)/ModusModPlayer/Plugins/ModPlyr",
 				);
 				PRODUCT_NAME = ModusModPlayer;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -551,6 +565,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/ModusModPlayer/Plugins/ModPlyr\"",
 					/Users/jgarcia/Documents/Mod_music_projects,
+					"$(PROJECT_DIR)/ModusModPlayer/Plugins/ModPlayer",
+					"$(PROJECT_DIR)/ModusModPlayer/Plugins/ModPlyr",
 				);
 				PRODUCT_NAME = ModusModPlayer;
 				TARGETED_DEVICE_FAMILY = "1,2";
