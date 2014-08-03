@@ -35,7 +35,7 @@
     
 
     // An Object to produce the JSON below.
-    NSObject *songPatterns;
+    NSMutableDictionary *songPatterns;
     /*
     {
         patternX : [
@@ -69,7 +69,6 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 
 - (void) playSong {
     [self initModPlugSettings];
-    [self preLoadPatterns];
 
     
     ModPlug_SetMasterVolume(loadedModPlugFile, 128);
@@ -87,7 +86,7 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 }
 - (void) loadFile:(NSString *)filePath  {
     FILE *file;
-    int fileSize;
+//    int fileSize;
 
     const char* fil = [filePath cStringUsingEncoding:NSASCIIStringEncoding];
     
@@ -116,6 +115,9 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
     modName           = (char *)ModPlug_GetName(loadedModPlugFile);
     
     self.mpFile = loadedModPlugFile;
+    
+    [self preLoadPatterns];
+
 }
 
 - (void) initModPlugSettings {
@@ -223,6 +225,11 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 
 
 - (void) preLoadPatterns  {
+
+    if (songPatterns == nil) {
+        songPatterns = [[NSMutableDictionary alloc]init];
+    }
+
     // Clear the existing song patterns
     [songPatterns removeAllObjects];
 
@@ -273,8 +280,6 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
            // This is a hacky way of testing to see if the fucking mod looped.
            // Even though we set mLoopCount to 0 (see above this while loop),
            // modPlug still loops on some mods. Fucker.
-           
-           
            if (prevOrder != -1) {
                 NSString *orderKey = [NSString stringWithFormat:@"%d_", prevPattrn];
 
@@ -288,16 +293,17 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
                     [orderMapper setObject:@"" forKey:orderKey];
                 }
                
+                // Add new pattern
+                if (patternStrings) {
+                    NSString *key = [NSString stringWithFormat:@"%d", prevPattrn];
+                    [songPatterns setValue:patternStrings forKey:key];
+                    
+    //                NSLog(@"%i", [songPatterns count]);
+                }
+
+               
            }
 
-
-            // Add new pattern
-            if (patternStrings) {
-                NSString *key = [NSString stringWithFormat:@"%d", prevPattrn];
-                [songPatterns setValue:patternStrings forKey:key];
-                
-                NSLog(@"%i", [[songPatterns valueForKey:key] count]);
-            }
             
             patternStrings = [[NSMutableArray alloc] init];
         }
@@ -311,11 +317,11 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
             continue;
         }
         
-        
         NSString *rowString = [self parsePattern];
         [patternStrings addObject:rowString];
         
-                 
+        NSLog(@"Total items in patternStrings :: %i", [songPatterns count]);
+
         prevPattrn = currPattrn;
         prevRow    = currRow;
         prevOrder  = currOrder;
@@ -326,11 +332,15 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     
     NSTimeInterval timeInterval = [start timeIntervalSinceNow];
     
+    // Is this memset really needed?
+    memset(buffer, 0, SOUND_BUFFER_SIZE_SAMPLE * 2 * 2);
     free(buffer);
     
-    NSString *message = [[NSString alloc] initWithFormat:@"Done reading %f(ms)", timeInterval];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"DONE!" message:message delegate:nil cancelButtonTitle:@"sweet" otherButtonTitles:nil, nil];
-    [alert show];
+    NSString *message = [[NSString alloc] initWithFormat:@"Done pre-buffering patterns %f(ms)", timeInterval];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"DONE!" message:message delegate:nil cancelButtonTitle:@"sweet" otherButtonTitles:nil, nil];
+//    [alert show];
+
+    NSLog(@"%@", message);
     
 }
 
@@ -504,7 +514,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     NSString *appUrl    = [[NSBundle mainBundle] bundlePath];
     NSString *modsUrl   = [appUrl stringByAppendingString:@"/mods"];
     
-    NSURL *directoryUrl = [[NSURL alloc] initFileURLWithPath:modsUrl] ;
+    NSURL *directoryUrl = [[NSURL alloc] initFileURLWithPath:modsUrl];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
@@ -822,6 +832,34 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+- (void) cordovaGetPatternData:(CDVInvokedUrlCommand*)command {
+
+    NSError *jsonError;
+//    
+    NSData *jsonData = [NSJSONSerialization
+                            dataWithJSONObject:songPatterns
+                            options:NSJSONWritingPrettyPrinted
+                            error:&jsonError
+                       ];
+//
+
+//    NSDictionary *myDictionary = [NSDictionary dictionaryWithObject:@"Hello" forKey:@"World"];
+//    NSError *error;
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:myDictionary
+//                                                           options:0
+//                                                         error:&error];
+// 
+    NSString *jsonDataString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+
+    
+    CDVPluginResult *pluginResult = [CDVPluginResult
+                                    resultWithStatus:CDVCommandStatus_OK
+                                    messageAsString:jsonDataString
+                                ];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+
+
+}
 
 
 - (void) cordovaGetWaveFormData:(CDVInvokedUrlCommand*)command {
