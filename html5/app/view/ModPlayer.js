@@ -6,6 +6,8 @@ Ext.define('MMP.view.ModPlayer', {
         layout : 'vbox',
 //        height : 120,
 
+        patternData : null,
+
         items  : [
             {
                 xtype  : 'component',
@@ -28,13 +30,12 @@ Ext.define('MMP.view.ModPlayer', {
                 height : 80,
                 tpl    : [
                     '<div><b>CPU: </b> {cpu}</div>',
-                    '<div><b>Level: </b> {level}</div>',
-                    '<div><b>Pattern: </b> {pattern}&nbsp; &nbsp; <b>Row:</b> {row}</div>',
-                    '<div><b>Time: {time}</b></div>'
+                    '<div><b>Order: </b> {order}</div>',
+                    '<div><b>Pattern: </b> {pattern}&nbsp; &nbsp; <b>Row:</b> {row}</div>'
                 ]
             },
             {
-                xtype  : 'spectrum',
+                xtype  : 'component',
                 itemId : 'spectrum',
                 flex   : 1
             },
@@ -124,20 +125,25 @@ Ext.define('MMP.view.ModPlayer', {
         this.down('#songName').setHtml(data.songName);
     },
 
+    applyPatternData : function(patternData) {
+        console.log("SENCHA:: Got pattern data!");
+
+        return patternData;
+    },
+
 
     setStats : function(stats) {
 //        debugger;
 
         /*
-        buff: -0.03076172
         cpu: 0.01923458
         level: 132123416
         position: 0
         time: 0
 
          */
-//        debugger;
+        debugger;
         this.down('#stats').setData(stats);
-        this.spectrum.updateCanvas(stats.waveData);
+//        this.spectrum.updateCanvas(stats.waveData);
     }
 });

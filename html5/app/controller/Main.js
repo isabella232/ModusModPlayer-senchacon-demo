@@ -166,10 +166,12 @@ Ext.define('MMP.controller.Main', {
 
 
     getPatternData : function() {
+        var me = this;
         cordova.exec(
-            function callback(data) {
-                alert('open debugger!');
-                console.log(data);
+            function callback(patternData) {
+//                alert('open debugger!');
+//                console.log(data);
+                me.player.setPatternData(patternData);
 
             },
             function errorHandle(err) {
@@ -183,9 +185,6 @@ Ext.define('MMP.controller.Main', {
     },
 
     startModPlayerUpdateLoop : function() {
-        // TODO: Re-enable
-        return;
-
         if (! this.interval) {
             var boundTimerFunction = Ext.Function.bind(this.getSongStats, this);
             this.interval = setInterval(boundTimerFunction, 20);
@@ -200,30 +199,34 @@ Ext.define('MMP.controller.Main', {
     },
 
     getSongStats : function() {
-        var me           = this,
-            player       = me.player,
-            spectrum     = player.spectrum,
-            spectrumSize = spectrum.element.getSize(),
-            spectrumMode = spectrum.getMode();
 
-        if (spectrumMode == 0 || spectrumMode == 1) {
-            spectrumMode = 'wavform';
-        }
-        else if (spectrumMode == 2) {
-            spectrumMode = 'spectrum';
-        }
+        var me           = this,
+            player       = me.player;
+//            spectrum     = player.spectrum
+//            spectrumSize = spectrum.element.getSize(),
+//            spectrumMode = spectrum.getMode();
+
+
+//        if (spectrumMode == 0 || spectrumMode == 1) {
+//            spectrumMode = 'wavform';
+//        }
+//        else if (spectrumMode == 2) {
+//            spectrumMode = 'spectrum';
+//        }
 
         cordova.exec(
             function callback(data) {
                 player.setStats(data);
             },
             function errorHandler(err) {
-                callback('Nothing to echo');
+                console.log('getSongStats error');
             },
             'ModPlyr',
-            'cordovaGetWaveFormData',
-            [spectrumMode, spectrumSize.width, spectrumSize.height]
+            'cordovaGetStats',
+            []
+//            [spectrumMode, spectrumSize.width, spectrumSize.height]
         );
+
     }
 
 });

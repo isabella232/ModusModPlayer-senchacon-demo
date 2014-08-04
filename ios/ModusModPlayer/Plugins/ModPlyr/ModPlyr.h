@@ -18,6 +18,43 @@
 
 @interface ModPlyr : CDVPlugin {
 
+    unsigned char *genVolData,
+                  *playVolData;
+	
+    char *mp_data,
+         *modMessage;
+	
+    int numPatterns,
+        numSamples,
+        numInstr,
+        numChannels;
+    
+    ModPlugFile *loadedModPlugFile;
+    ModPlug_Settings settings;
+    
+    AudioQueueRef mAudioQueue;
+    AudioQueueBufferRef *mBuffers;
+    
+    char *loadedFileData;
+    int loadedFileSize;
+    char *modName;
+    
+    BOOL modPlugSettingsCommitted;
+    
+
+    // An Object to produce the JSON below.
+    NSMutableDictionary *songPatterns;
+    /*
+    {
+        patternX : [
+            "Pattern 1",
+            "Pattern 2"
+            "Pattern 3"
+        ]
+    
+    }
+    */
+
 
 }
 

@@ -203,7 +203,6 @@ Ext.define('MMP.view.Spectrum', {
             }
 
 
-            debugger;
             var bin_size = Math.floor(length / numBins);
 
             for (var i = 0; i < numBins; ++i) {

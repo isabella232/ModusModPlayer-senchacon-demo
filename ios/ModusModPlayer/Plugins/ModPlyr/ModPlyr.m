@@ -7,46 +7,11 @@
 //
 
 #import "ModPlyr.h"
+#import <mach/mach.h>
 
 
 @implementation ModPlyr : CDVPlugin {
     
-    unsigned char *genVolData,
-                  *playVolData;
-	
-    char *mp_data,
-    *modMessage;
-	
-    int numPatterns,
-        numSamples,
-        numInstr,
-        numChannels,
-        lastPattern; // Used for determining if we already looked at this pattern. TODO: Delete
-    
-    ModPlugFile *loadedModPlugFile;
-    ModPlug_Settings settings;
-    
-    AudioQueueRef mAudioQueue;
-    AudioQueueBufferRef *mBuffers;
-    
-    char *loadedFileData;
-    int loadedFileSize;
-    char *modName;
-    
-
-    // An Object to produce the JSON below.
-    NSMutableDictionary *songPatterns;
-    /*
-    {
-        patternX : [
-            "Pattern 1",
-            "Pattern 2"
-            "Pattern 3"
-        ]
-    
-    }
-    */
-
 
 }
 
@@ -54,23 +19,30 @@ static char note2charA[12]={'C','C','D','D','E','F','F','G','G','A','A','B'};
 static char note2charB[12]={'-','#','-','#','-','-','#','-','#','-','#','-'};
 static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 
+
+#pragma mark - libModPlug Implementation
 - (ModPlugFile *) getMpFile {
     return self.mpFile;
 }
 
 - (void) stopMusic {
     if (self.mpFile) {
-        AudioQueueStop( mAudioQueue, TRUE );
-        AudioQueueReset( mAudioQueue );
+        AudioQueueStop(mAudioQueue, TRUE);
+        AudioQueueReset(mAudioQueue);
+    }
+}
+
+- (void) unloadFile {
+    if (self.mpFile) {
         ModPlug_Unload(self.mpFile);
-        free (loadedFileData);
+        self.mpFile = nil;
+        free(loadedFileData);
     }
 }
 
 - (void) playSong {
     [self initModPlugSettings];
 
-    
     ModPlug_SetMasterVolume(loadedModPlugFile, 128);
     ModPlug_Seek(loadedModPlugFile, 0);
     
@@ -85,6 +57,7 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 
 }
 - (void) loadFile:(NSString *)filePath  {
+    [self unloadFile];
     FILE *file;
 //    int fileSize;
 
@@ -121,23 +94,27 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 }
 
 - (void) initModPlugSettings {
-    ModPlug_GetSettings(&settings);
-
-    settings.mFlags=MODPLUG_ENABLE_OVERSAMPLING;
-    settings.mChannels=2;
-    settings.mBits=16;
-    settings.mFrequency=44100;
-    settings.mResamplingMode=MODPLUG_RESAMPLE_NEAREST;
-    settings.mReverbDepth=0;
-    settings.mReverbDelay=100;
-    settings.mBassAmount=0;
-    settings.mBassRange=50;
-    settings.mSurroundDepth=0;
-    settings.mSurroundDelay=10;
-    settings.mLoopCount=-1;
-    settings.mStereoSeparation=64;
+    if (! modPlugSettingsCommitted) {
     
-    ModPlug_SetSettings(&settings);
+        ModPlug_GetSettings(&settings);
+
+        settings.mFlags=MODPLUG_ENABLE_OVERSAMPLING;
+        settings.mChannels=2;
+        settings.mBits=16;
+        settings.mFrequency=44100;
+        settings.mResamplingMode=MODPLUG_RESAMPLE_NEAREST;
+        settings.mReverbDepth=0;
+        settings.mReverbDelay=100;
+        settings.mBassAmount=0;
+        settings.mBassRange=50;
+        settings.mSurroundDepth=0;
+        settings.mSurroundDelay=10;
+        settings.mLoopCount=-1;
+        settings.mStereoSeparation=64;
+        
+        ModPlug_SetSettings(&settings);
+        modPlugSettingsCommitted = true;
+    }
 }
 
 
@@ -154,7 +131,8 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 }
 
 
-
+// TODO: Set this up so we can play another song.
+// It currently crashes because we re-initialize sound every time the play button is pressed.
 - (void) initSound {
     ModPlugFile *mpFile = self.mpFile;
 
@@ -347,7 +325,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 
 - (NSString *) parsePattern {
     
-    ModPlugFile *mpFile = self.mpFile;
+       ModPlugFile *mpFile = self.mpFile;
 
     unsigned int rowsToGet,
                  patternNote,
@@ -375,7 +353,15 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
         return @"";
     }
     
+    
+     /*
+        static char note2charA[12]={'C','C','D','D','E','F','F','G','G','A','A','B'};
+        static char note2charB[12]={'-','#','-','#','-','-','#','-','#','-','#','-'};
+        static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+    
+    */
 
+    // TODO: Fix this. (it's not actually reflecting real note data).
     // The following for loop was inspired by the Modizer project: https://github.com/yoyofr/modizer
     for (index = 0; index < numChannels; index++) {
         curPatPosition = index + (numChannels * currRow);
@@ -605,6 +591,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 
     return jsonDataString;
 }
+
 
 
 // This method was copied from libbass spectrum.c :: UpdateSpectrum example
@@ -861,6 +848,102 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 
 }
 
+// Copied from: http://stackoverflow.com/questions/8223348/ios-get-cpu-usage-from-application
+- (float) getCpuUsage {
+    kern_return_t kr;
+    task_info_data_t tinfo;
+    mach_msg_type_number_t task_info_count;
+
+    task_info_count = TASK_INFO_MAX;
+    kr = task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)tinfo, &task_info_count);
+    if (kr != KERN_SUCCESS) {
+        return -1;
+    }
+
+    task_basic_info_t      basic_info;
+    thread_array_t         thread_list;
+    mach_msg_type_number_t thread_count;
+
+    thread_info_data_t     thinfo;
+    mach_msg_type_number_t thread_info_count;
+
+    thread_basic_info_t basic_info_th;
+    uint32_t stat_thread = 0; // Mach threads
+
+    basic_info = (task_basic_info_t)tinfo;
+
+    // get threads in the task
+    kr = task_threads(mach_task_self(), &thread_list, &thread_count);
+    if (kr != KERN_SUCCESS) {
+        return -1;
+    }
+    if (thread_count > 0)
+        stat_thread += thread_count;
+
+    long tot_sec  = 0,
+         tot_usec = 0;
+    
+    float tot_cpu = 0;
+    int j;
+
+    for (j = 0; j < thread_count; j++)
+    {
+        thread_info_count = THREAD_INFO_MAX;
+        kr = thread_info(thread_list[j], THREAD_BASIC_INFO,
+                         (thread_info_t)thinfo, &thread_info_count);
+        if (kr != KERN_SUCCESS) {
+            return -1;
+        }
+
+        basic_info_th = (thread_basic_info_t)thinfo;
+
+        if (!(basic_info_th->flags & TH_FLAGS_IDLE)) {
+            tot_sec = tot_sec + basic_info_th->user_time.seconds + basic_info_th->system_time.seconds;
+            tot_usec = tot_usec + basic_info_th->system_time.microseconds + basic_info_th->system_time.microseconds;
+            tot_cpu = tot_cpu + basic_info_th->cpu_usage / (float)TH_USAGE_SCALE * 100.0;
+        }
+
+    } // for each thread
+
+    kr = vm_deallocate(mach_task_self(), (vm_offset_t)thread_list, thread_count * sizeof(thread_t));
+    assert(kr == KERN_SUCCESS);
+
+    return tot_cpu;
+}
+
+
+- (void) cordovaGetStats:(CDVInvokedUrlCommand *)command {
+    float cpuUsage   = [self getCpuUsage];
+    int   currOrder  = ModPlug_GetCurrentOrder(self.mpFile);
+    int   currPattrn = ModPlug_GetCurrentPattern(self.mpFile);
+    int   currRow    = ModPlug_GetCurrentRow(self.mpFile);
+
+
+    NSNumber *nsPattern  = [[NSNumber alloc] initWithInt:currPattrn];
+    NSNumber *nsRow      = [[NSNumber alloc] initWithInt:currRow];
+    NSNumber *nsOrder    = [[NSNumber alloc] initWithInt:currOrder];
+    NSNumber *nsCpu      = [[NSNumber alloc] initWithFloat:cpuUsage];
+
+
+    NSDictionary *jsonObj;
+
+
+    jsonObj = [[NSDictionary alloc]
+            initWithObjectsAndKeys:
+                nsPattern, @"pattern",
+                nsRow,     @"row",
+                nsOrder,   @"order",
+                nsCpu,     @"cpu",
+                nil
+            ];
+    
+    CDVPluginResult *pluginResult = [CDVPluginResult
+                        resultWithStatus:CDVCommandStatus_OK
+                        messageAsDictionary:jsonObj
+                    ];
+
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
 
 - (void) cordovaGetWaveFormData:(CDVInvokedUrlCommand*)command {
 //    int level, pos, time, act;
@@ -943,8 +1026,8 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 //            ];
 //
 //    }
-//    
-//    
+    
+    
 //    CDVPluginResult *pluginResult = [CDVPluginResult
 //                                    resultWithStatus:CDVCommandStatus_OK
 //                                    messageAsDictionary:jsonObj

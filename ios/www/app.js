@@ -65151,6 +65151,156 @@ Ext.define('MMP.view.Main', {
 
 });
 
+Ext.define('MMP.view.ModPlayer', {
+    extend :  Ext.Container ,
+
+    config : {
+
+        layout : 'vbox',
+//        height : 120,
+
+        patternData : null,
+
+        items  : [
+            {
+                xtype  : 'component',
+                itemId : 'songName',
+                style  : 'text-align:center; font-size: 14px; font-weight: bold;',
+                height : 20,
+                html   : '...'
+            },
+            {
+                xtype  : 'component',
+                itemId : 'fileName',
+                style  : 'text-align:center; font-size: 12px;',
+                height : 20,
+                html   : '...'
+            },
+            {
+                xtype  : 'component',
+                style  : 'text-align:left; font-size: 15px; background-color: #E9E9E9;',
+                itemId : 'stats',
+                height : 80,
+                tpl    : [
+                    '<div><b>CPU: </b> {cpu}</div>',
+                    '<div><b>Order: </b> {order}</div>',
+                    '<div><b>Pattern: </b> {pattern}&nbsp; &nbsp; <b>Row:</b> {row}</div>'
+                ]
+            },
+            {
+                xtype  : 'component',
+                itemId : 'spectrum',
+                flex   : 1
+            },
+            {
+                xtype  : 'slider',
+                itemId : 'slider'
+            },
+            {
+                xtype       : 'container',
+                height      : 40,
+                layout      : {
+                    type  : 'hbox',
+                    align : 'stretch'
+                },
+                defaults : {
+                    xtype : 'button',
+                    flex : 1
+                },
+                items       : [
+                    {
+                        text   : '&lt;&lt;',
+                        itemId : 'rewindbtn'
+                    },
+                    {
+                        text   : 'Play',
+                        itemId : 'playbtn',
+                        ui     : 'confirm'
+                    },
+                    {
+                        text   : '&gt;&gt;',
+                        itemId : 'fastforwardbtn'
+                    },
+                    {
+                        text   : 'STOP',
+                        itemId : 'stopbtn',
+                        ui     : 'decline'
+                    }
+                ]
+            }
+        ],
+
+        control : {
+            '#rewindbtn' : {
+                tap : 'onRewindBtnTap'
+            },
+            '#playbtn' : {
+                tap : 'onPlayBtnTap'
+            },
+            '#fastforwardbtn' : {
+                tap : 'onFastForwardBtnTap'
+            },
+            '#stopbtn' : {
+                tap : 'onStopBtnTap'
+            }
+        }
+    },
+
+    initialize : function() {
+        var data = this.getData();
+        this.down('#fileName').setHtml(data.fileName);
+        this.spectrum = this.down('spectrum');
+        this.callParent();
+    },
+
+    onRewindBtnTap : function() {
+        this.fireEvent('rewind', this);
+    },
+
+    onPlayBtnTap : function() {
+        this.fireEvent('play', this);
+    },
+
+    onFastForwardButtonTap : function() {
+        this.fireEvent('fastforward', this);
+    },
+
+    onStopBtnTap : function() {
+        this.fireEvent('stop', this);
+        this.setStats({});
+    },
+
+    updateSongData : function(songData) {
+//        console.log('SongData ::: ', songData);
+    },
+
+    setSongName : function(data) {
+        this.down('#songName').setHtml(data.songName);
+    },
+
+    applyPatternData : function(patternData) {
+        console.log("SENCHA:: Got pattern data!");
+
+        return patternData;
+    },
+
+
+    setStats : function(stats) {
+//        debugger;
+
+        /*
+        cpu: 0.01923458
+        level: 132123416
+        position: 0
+        time: 0
+
+         */
+        debugger;
+        this.down('#stats').setData(stats);
+//        this.spectrum.updateCanvas(stats.waveData);
+    }
+});
+
 /*
  @class MMP.view.Spectrum
  Based off of the code from:
@@ -65356,7 +65506,6 @@ Ext.define('MMP.view.Spectrum', {
             }
 
 
-            debugger;
             var bin_size = Math.floor(length / numBins);
 
             for (var i = 0; i < numBins; ++i) {
@@ -65491,150 +65640,6 @@ Ext.define('MMP.view.Spectrum', {
 
 });
 
-Ext.define('MMP.view.ModPlayer', {
-    extend :  Ext.Container ,
-
-    config : {
-
-        layout : 'vbox',
-//        height : 120,
-
-        items  : [
-            {
-                xtype  : 'component',
-                itemId : 'songName',
-                style  : 'text-align:center; font-size: 14px; font-weight: bold;',
-                height : 20,
-                html   : '...'
-            },
-            {
-                xtype  : 'component',
-                itemId : 'fileName',
-                style  : 'text-align:center; font-size: 12px;',
-                height : 20,
-                html   : '...'
-            },
-            {
-                xtype  : 'component',
-                style  : 'text-align:left; font-size: 15px; background-color: #E9E9E9;',
-                itemId : 'stats',
-                height : 80,
-                tpl    : [
-                    '<div><b>CPU: </b> {cpu}</div>',
-                    '<div><b>Level: </b> {level}</div>',
-                    '<div><b>Pattern: </b> {pattern}&nbsp; &nbsp; <b>Row:</b> {row}</div>',
-                    '<div><b>Time: {time}</b></div>'
-                ]
-            },
-            {
-                xtype  : 'spectrum',
-                itemId : 'spectrum',
-                flex   : 1
-            },
-            {
-                xtype  : 'slider',
-                itemId : 'slider'
-            },
-            {
-                xtype       : 'container',
-                height      : 40,
-                layout      : {
-                    type  : 'hbox',
-                    align : 'stretch'
-                },
-                defaults : {
-                    xtype : 'button',
-                    flex : 1
-                },
-                items       : [
-                    {
-                        text   : '&lt;&lt;',
-                        itemId : 'rewindbtn'
-                    },
-                    {
-                        text   : 'Play',
-                        itemId : 'playbtn',
-                        ui     : 'confirm'
-                    },
-                    {
-                        text   : '&gt;&gt;',
-                        itemId : 'fastforwardbtn'
-                    },
-                    {
-                        text   : 'STOP',
-                        itemId : 'stopbtn',
-                        ui     : 'decline'
-                    }
-                ]
-            }
-        ],
-
-        control : {
-            '#rewindbtn' : {
-                tap : 'onRewindBtnTap'
-            },
-            '#playbtn' : {
-                tap : 'onPlayBtnTap'
-            },
-            '#fastforwardbtn' : {
-                tap : 'onFastForwardBtnTap'
-            },
-            '#stopbtn' : {
-                tap : 'onStopBtnTap'
-            }
-        }
-    },
-
-    initialize : function() {
-        var data = this.getData();
-        this.down('#fileName').setHtml(data.fileName);
-        this.spectrum = this.down('spectrum');
-        this.callParent();
-    },
-
-    onRewindBtnTap : function() {
-        this.fireEvent('rewind', this);
-    },
-
-    onPlayBtnTap : function() {
-        this.fireEvent('play', this);
-    },
-
-    onFastForwardButtonTap : function() {
-        this.fireEvent('fastforward', this);
-    },
-
-    onStopBtnTap : function() {
-        this.fireEvent('stop', this);
-        this.setStats({});
-    },
-
-    updateSongData : function(songData) {
-//        console.log('SongData ::: ', songData);
-    },
-
-    setSongName : function(data) {
-        this.down('#songName').setHtml(data.songName);
-    },
-
-
-    setStats : function(stats) {
-//        debugger;
-
-        /*
-        buff: -0.03076172
-        cpu: 0.01923458
-        level: 132123416
-        position: 0
-        time: 0
-
-         */
-//        debugger;
-        this.down('#stats').setData(stats);
-        this.spectrum.updateCanvas(stats.waveData);
-    }
-});
-
 Ext.define('MMP.controller.Main', {
    extend :  Ext.app.Controller ,
 
@@ -65673,7 +65678,7 @@ Ext.define('MMP.controller.Main', {
 //                alert(directories[0].path);
 //            },
             function errorHandler(err) {
-                callback('Nothing to echo');
+
             },
             'ModPlyr',
             'cordovaGetModPaths',
@@ -65710,7 +65715,7 @@ Ext.define('MMP.controller.Main', {
 //                alert(directories[0].path);
 //            },
             function errorHandler(err) {
-                callback('Nothing to echo');
+
             },
             'ModPlyr',
             'cordovaGetModFiles',
@@ -65770,7 +65775,7 @@ Ext.define('MMP.controller.Main', {
             //                alert(directories[0].path);
             //            },
                         function errorHandler(err) {
-                            callback('Nothing to echo');
+
                         },
                         'ModPlyr',
                         'cordovaStopMusic',
@@ -65789,7 +65794,7 @@ Ext.define('MMP.controller.Main', {
                 me.getPatternData();
             },
             function errorHandler(err) {
-                callback('Nothing to echo');
+
             },
             'ModPlyr',
             'cordovaLoadMod',
@@ -65803,10 +65808,12 @@ Ext.define('MMP.controller.Main', {
 
 
     getPatternData : function() {
+        var me = this;
         cordova.exec(
-            function callback(data) {
-                alert('open debugger!');
-                console.log(data);
+            function callback(patternData) {
+//                alert('open debugger!');
+//                console.log(data);
+                me.player.setPatternData(patternData);
 
             },
             function errorHandle(err) {
@@ -65820,9 +65827,6 @@ Ext.define('MMP.controller.Main', {
     },
 
     startModPlayerUpdateLoop : function() {
-        // TODO: Re-enable
-        return;
-
         if (! this.interval) {
             var boundTimerFunction = Ext.Function.bind(this.getSongStats, this);
             this.interval = setInterval(boundTimerFunction, 20);
@@ -65837,30 +65841,34 @@ Ext.define('MMP.controller.Main', {
     },
 
     getSongStats : function() {
-        var me           = this,
-            player       = me.player,
-            spectrum     = player.spectrum,
-            spectrumSize = spectrum.element.getSize(),
-            spectrumMode = spectrum.getMode();
 
-        if (spectrumMode == 0 || spectrumMode == 1) {
-            spectrumMode = 'wavform';
-        }
-        else if (spectrumMode == 2) {
-            spectrumMode = 'spectrum';
-        }
+        var me           = this,
+            player       = me.player;
+//            spectrum     = player.spectrum
+//            spectrumSize = spectrum.element.getSize(),
+//            spectrumMode = spectrum.getMode();
+
+
+//        if (spectrumMode == 0 || spectrumMode == 1) {
+//            spectrumMode = 'wavform';
+//        }
+//        else if (spectrumMode == 2) {
+//            spectrumMode = 'spectrum';
+//        }
 
         cordova.exec(
             function callback(data) {
                 player.setStats(data);
             },
             function errorHandler(err) {
-                callback('Nothing to echo');
+                console.log('getSongStats error');
             },
             'ModPlyr',
-            'cordovaGetWaveFormData',
-            [spectrumMode, spectrumSize.width, spectrumSize.height]
+            'cordovaGetStats',
+            []
+//            [spectrumMode, spectrumSize.width, spectrumSize.height]
         );
+
     }
 
 });

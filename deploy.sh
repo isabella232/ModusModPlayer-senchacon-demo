@@ -38,4 +38,5 @@ else
 
 
 	echo "DONE.."
+	say "done"
 fi
