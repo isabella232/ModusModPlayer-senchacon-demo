@@ -65293,23 +65293,15 @@ Ext.define('MMP.view.ModPlayer', {
             return;
         }
 
-
-//
 //        var keys     = Object.keys(patternData),
 //            firstKey = keys[0],
 //            firstPat = patternData[firstKey],
 //            firstRow = firstPat[0],
 //            rowSPlit = firstRow.split(' ');
 
-
         debugger;
 
-
-
-
         console.log("SENCHA:: Got pattern data!");
-
-
 
         return patternData;
     },
@@ -65688,7 +65680,9 @@ Ext.define('MMP.controller.Main', {
 
     launch: function() {
 
+
         var me = this;
+
 
         // Initialize the main view
         me.main = Ext.create('MMP.view.Main', {
@@ -65699,7 +65693,14 @@ Ext.define('MMP.controller.Main', {
             }
         });
 
+
         Ext.Viewport.add(me.main);
+
+        me.loadMask = Ext.Viewport.add({
+            hidden  : true,
+            xtype   : 'loadmask',
+            message : 'Loading patterns'
+        });
 
         cordova.exec(
             Ext.Function.bind(me.onAfterGetDirectories, me),
@@ -65816,6 +65817,9 @@ Ext.define('MMP.controller.Main', {
 
         });
 
+
+        me.loadMask.show();
+
         // Load file
         cordova.exec(
             function callback(data) {
@@ -65841,11 +65845,18 @@ Ext.define('MMP.controller.Main', {
         var me = this;
         cordova.exec(
             function callback(patternData) {
-
+//                debugger;
                 me.player.setPatternData(patternData);
+                me.loadMask.hide();
+
 
             },
             function errorHandle(err) {
+                if (err == "notready") {
+                    Ext.Function.defer(me.getPatternData, 50, me);
+                    return;
+                }
+
                 me.player.setPatternData('none');
             },
             'ModPlyr',

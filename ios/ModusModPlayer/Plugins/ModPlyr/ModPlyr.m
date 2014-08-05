@@ -86,7 +86,11 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
     
     self.mpFile = loadedModPlugFile;
     
-    [self preLoadPatterns];
+//    [self preLoadPatterns];
+//    [myObj performSelectorInBackground:@selector(doSomething) withObject:nil];
+
+    patternsModPlugFile = ModPlug_Load(loadedFileData, loadedFileSize);
+    [self performSelectorInBackground:@selector(preLoadPatterns) withObject:nil];
 
 }
 
@@ -199,6 +203,12 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 
 
 - (void) preLoadPatterns  {
+    patternDataReady = false;
+
+    // Thread shit.
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // Top-level pool
+//    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
 
     if (songPatterns == nil) {
         songPatterns = [[NSMutableDictionary alloc]init];
@@ -211,7 +221,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     NSDate *start = [NSDate date];
     
     // do stuff...
-    ModPlugFile *mpFile = self.mpFile;
+    ModPlugFile *mpFile = patternsModPlugFile;
     
     int bytesRead,
         currPattrn,
@@ -300,10 +310,15 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     free(buffer);
     
     NSString *message = [[NSString alloc] initWithFormat:@"Done pre-buffering patterns %f(ms)", timeInterval];
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"DONE!" message:message delegate:nil cancelButtonTitle:@"sweet" otherButtonTitles:nil, nil];
-//    [alert show];
 
     NSLog(@"%@", message);
+    
+    patternDataReady = true;
+    
+    //*** Thread stuff
+    [pool release];
+    [threadDictionary setValue:[NSNumber numberWithBool:1] forKey:@"ThreadShouldExitNow"];
+    [NSThread exit];
 }
 
 
@@ -760,27 +775,32 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 
 - (void) cordovaGetPatternData:(CDVInvokedUrlCommand*)command {
 
-    NSError *jsonError;
-//    
-    NSData *jsonData = [NSJSONSerialization
-                            dataWithJSONObject:songPatterns
-                            options:NSJSONWritingPrettyPrinted
-                            error:&jsonError
-                       ];
-//
+    NSString *jsonDataString;
+    
+    if (patternDataReady) {
+        NSError *jsonError;
+       
+        NSData *jsonData;
+        
+        jsonData = [NSJSONSerialization
+                        dataWithJSONObject: (patternDataReady) ? songPatterns : @[]
+                        options:NSJSONWritingPrettyPrinted
+                        error:&jsonError
+                   ];
+        
+       
+        
+        jsonDataString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 
-//    NSDictionary *myDictionary = [NSDictionary dictionaryWithObject:@"Hello" forKey:@"World"];
-//    NSError *error;
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:myDictionary
-//                                                           options:0
-//                                                         error:&error];
-// 
-    NSString *jsonDataString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-
+    }
+    else {
+        jsonDataString = @"notready";
+    }
+    
     
     CDVPluginResult *pluginResult = [CDVPluginResult
-                                    resultWithStatus:CDVCommandStatus_OK
-                                    messageAsString:jsonDataString
+                                    resultWithStatus:(patternDataReady) ? CDVCommandStatus_OK : CDVCommandStatus_ERROR
+                                    messageAsString: jsonDataString
                                 ];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 

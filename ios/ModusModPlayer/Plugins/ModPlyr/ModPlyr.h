@@ -12,7 +12,7 @@
 
 #define PLAYBACK_FREQ 44100
 #define SOUND_BUFFER_SIZE_SAMPLE (PLAYBACK_FREQ / 30)
-#define SOUND_BUFFER_NB 4
+#define SOUND_BUFFER_NB 64
 #define MIDIFX_OFS 32
 
 
@@ -31,6 +31,7 @@
         numChannels;
     
     ModPlugFile *loadedModPlugFile;
+    ModPlugFile *patternsModPlugFile;
     ModPlug_Settings settings;
     
     AudioQueueRef mAudioQueue;
@@ -40,8 +41,11 @@
     int loadedFileSize;
     char *modName;
     
-    BOOL modPlugSettingsCommitted;
+    BOOL modPlugSettingsCommitted,
+         patternDataReady,         // Used to detect when a pattern read thread is done
+         audioShouldStop;          // Used to detect if a sound thread should exit
     
+    NSThread *soundThread;
 
     // An Object to produce the JSON below.
     NSMutableDictionary *songPatterns;

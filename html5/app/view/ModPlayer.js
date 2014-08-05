@@ -140,23 +140,15 @@ Ext.define('MMP.view.ModPlayer', {
             return;
         }
 
-
-//
 //        var keys     = Object.keys(patternData),
 //            firstKey = keys[0],
 //            firstPat = patternData[firstKey],
 //            firstRow = firstPat[0],
 //            rowSPlit = firstRow.split(' ');
 
-
         debugger;
 
-
-
-
         console.log("SENCHA:: Got pattern data!");
-
-
 
         return patternData;
     },
