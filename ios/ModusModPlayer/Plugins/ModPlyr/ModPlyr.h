@@ -6,12 +6,13 @@
 //
 //
 
+#import <mach/mach.h>
 #import <Cordova/CDV.h>
 #import "modplug.h"
 
 #define PLAYBACK_FREQ 44100
 #define SOUND_BUFFER_SIZE_SAMPLE (PLAYBACK_FREQ / 30)
-#define SOUND_BUFFER_NB 32
+#define SOUND_BUFFER_NB 4
 #define MIDIFX_OFS 32
 
 
@@ -59,8 +60,6 @@
 }
 
 @property ModPlugFile *mpFile;
-
-
 
 
 - (NSMutableArray *) getFilesInDirectory;

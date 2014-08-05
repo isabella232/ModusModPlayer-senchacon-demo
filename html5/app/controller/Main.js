@@ -144,6 +144,8 @@ Ext.define('MMP.controller.Main', {
 
         });
 
+
+
         // Load file
         cordova.exec(
             function callback(data) {
@@ -169,19 +171,17 @@ Ext.define('MMP.controller.Main', {
         var me = this;
         cordova.exec(
             function callback(patternData) {
-//                alert('open debugger!');
-//                console.log(data);
+
                 me.player.setPatternData(patternData);
 
             },
             function errorHandle(err) {
-                alert('FAILED to load pattern data')
+                me.player.setPatternData('none');
             },
             'ModPlyr',
             'cordovaGetPatternData',
             []
         )
-
     },
 
     startModPlayerUpdateLoop : function() {
@@ -216,6 +216,7 @@ Ext.define('MMP.controller.Main', {
 
         cordova.exec(
             function callback(data) {
+
                 player.setStats(data);
             },
             function errorHandler(err) {

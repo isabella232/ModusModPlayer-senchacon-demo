@@ -5,9 +5,9 @@ Ext.define("MMP.model.ModFile", {
             'path',
             {
                 name : 'fileName',
-                convert : function(v) {
-                    return v.split(' - ')[1];
-                }
+//                convert : function(v) {
+//                    return v.split(' - ')[1];
+//                }
             }
         ]
     }

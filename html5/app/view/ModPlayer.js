@@ -27,7 +27,7 @@ Ext.define('MMP.view.ModPlayer', {
                 xtype  : 'component',
                 style  : 'text-align:left; font-size: 15px; background-color: #E9E9E9;',
                 itemId : 'stats',
-                height : 80,
+                height : 60,
                 tpl    : [
                     '<div><b>CPU: </b> {cpu}</div>',
                     '<div><b>Order: </b> {order}</div>',
@@ -118,15 +118,45 @@ Ext.define('MMP.view.ModPlayer', {
     },
 
     updateSongData : function(songData) {
-//        console.log('SongData ::: ', songData);
+        console.log('SongData ::: ', songData);
     },
 
     setSongName : function(data) {
         this.down('#songName').setHtml(data.songName);
     },
 
-    applyPatternData : function(patternData) {
+    setPatternData : function(patternDataAsString) {
+        if (! patternDataAsString) {
+            return;
+        }
+
+        var patternData
+
+        try {
+            patternData = JSON.parse(patternDataAsString);
+        }
+        catch(e) {
+            alert('Could not parse JSON pattern data! #HasSads');
+            return;
+        }
+
+
+//
+//        var keys     = Object.keys(patternData),
+//            firstKey = keys[0],
+//            firstPat = patternData[firstKey],
+//            firstRow = firstPat[0],
+//            rowSPlit = firstRow.split(' ');
+
+
+        debugger;
+
+
+
+
         console.log("SENCHA:: Got pattern data!");
+
+
 
         return patternData;
     },
@@ -142,7 +172,7 @@ Ext.define('MMP.view.ModPlayer', {
         time: 0
 
          */
-        debugger;
+        this.songStats = stats;
         this.down('#stats').setData(stats);
 //        this.spectrum.updateCanvas(stats.waveData);
     }
