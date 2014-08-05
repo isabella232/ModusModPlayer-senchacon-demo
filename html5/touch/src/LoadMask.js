@@ -39,7 +39,7 @@ Ext.define('Ext.LoadMask', {
         /**
          * @cfg {String} cls
          * The CSS Class for this component
-         * @accessor
+         * @accesssor
          */
         cls: Ext.baseCSSPrefix + 'loading-mask',
 

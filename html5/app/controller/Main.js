@@ -165,8 +165,10 @@ Ext.define('Modify.controller.Main', {
                 player.setSongName(data);
 
                 me.getPatternData();
+
             },
             function errorHandler(err) {
+                me.loadMask.hide();
 
             },
             'ModPlyr',
@@ -195,6 +197,8 @@ Ext.define('Modify.controller.Main', {
                     Ext.Function.defer(me.getPatternData, 50, me);
                     return;
                 }
+
+                me.loadMask.hide();
 
                 me.player.setPatternData('none');
             },
