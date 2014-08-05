@@ -10,23 +10,16 @@
     will need to resolve manually.
 */
 
-// DO NOT DELETE - this directive is required for Sencha Cmd packages to work.
-//@require @packageOverrides
-
-//<debug>
-Ext.Loader.setPath({
-    'Ext': 'touch/src'
-});
-//</debug>
-
 Ext.application({
-    name: 'MMP',
+    name: 'Modify',
 
     requires: [
         'Ext.MessageBox'
     ],
 
-
+    views: [
+        'Main'
+    ],
 
     controllers : ['Main'],
 
@@ -49,12 +42,13 @@ Ext.application({
     },
 
     launch: function() {
+
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
 
-
+        // Initialize the main view
+        Ext.Viewport.add(Ext.create('Modify.view.Main'));
     },
-
 
     onUpdated: function() {
         Ext.Msg.confirm(

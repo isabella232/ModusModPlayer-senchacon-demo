@@ -1,4 +1,4 @@
-Ext.define("MMP.model.Directory", {
+Ext.define("Modify.model.Directory", {
     extend : 'Ext.data.Model',
     config : {
         fields : [

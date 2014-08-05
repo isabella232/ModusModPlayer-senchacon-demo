@@ -1,10 +1,10 @@
-Ext.define('MMP.store.Directories', {
+Ext.define('Modify.store.Directories', {
     extend : 'Ext.data.Store',
 
-    requires : 'MMP.model.Directory',
+    requires : 'Modify.model.Directory',
 
     config: {
-        model : 'MMP.model.Directory',
+        model : 'Modify.model.Directory',
         proxy : {
             type : 'memory'
         }

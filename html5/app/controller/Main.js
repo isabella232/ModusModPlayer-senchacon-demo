@@ -1,4 +1,4 @@
-Ext.define('MMP.controller.Main', {
+Ext.define('Modify.controller.Main', {
    extend : 'Ext.app.Controller',
 
     config : {
@@ -15,13 +15,11 @@ Ext.define('MMP.controller.Main', {
     },
 
     launch: function() {
-
-
         var me = this;
 
 
         // Initialize the main view
-        me.main = Ext.create('MMP.view.Main', {
+        me.main = Ext.create('Modify.view.Main', {
             listeners : {
                 back : function() {
                     me.stopModPlayerUpdateLoop();
@@ -31,6 +29,11 @@ Ext.define('MMP.controller.Main', {
 
 
         Ext.Viewport.add(me.main);
+        me.main.show();
+
+        if (Ext.os.is.iOS && Ext.os.version.major >= 7) {
+            Ext.select(".x-toolbar").applyStyles("height: 62px; padding-top: 15px;");
+        }
 
         me.loadMask = Ext.Viewport.add({
             hidden  : true,
@@ -56,7 +59,7 @@ Ext.define('MMP.controller.Main', {
     onAfterGetDirectories : function(directories) {
         directories = Ext.decode(directories);
 
-        var dirStore = Ext.create('MMP.store.Directories', {
+        var dirStore = Ext.create('Modify.store.Directories', {
                 data : directories
             }),
             dirList  = Ext.create('Ext.dataview.List', {
@@ -93,7 +96,7 @@ Ext.define('MMP.controller.Main', {
     onAfterGetModFiles : function(files) {
         files = Ext.decode(files);
         var me        = this,
-            fileStore = Ext.create('MMP.store.ModFiles', {
+            fileStore = Ext.create('Modify.store.ModFiles', {
                 data : files
             }),
             fileList = Ext.create('Ext.dataview.List', {
@@ -114,7 +117,7 @@ Ext.define('MMP.controller.Main', {
             data = record.data;
 
 
-        var player = me.player = Ext.create('MMP.view.ModPlayer', {
+        var player = me.player = Ext.create('Modify.view.ModPlayer', {
             data : record.data,
 
             listeners : {

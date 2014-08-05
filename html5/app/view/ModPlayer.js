@@ -1,4 +1,4 @@
-Ext.define('MMP.view.ModPlayer', {
+Ext.define('Modify.view.ModPlayer', {
     extend : 'Ext.Container',
 
     config : {

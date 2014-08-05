@@ -2,7 +2,7 @@
     /**
      * The application's namespace, used by Sencha Command to generate classes
      */
-    "name": "MMP",
+    "name": "Modify",
 
     /**
      * The file path to this application's front HTML document, relative to this app.json file
@@ -44,6 +44,10 @@
             "x-bootstrap": true
         },
         {
+            "path": "bootstrap.js",
+            "x-bootstrap": true
+        },
+        {
             "path": "app.js",
             "bundle": true,  /* Indicates that all class dependencies are concatenated into this file when build */
             "update": "delta"
@@ -69,6 +73,7 @@
     "css": [
         {
             "path": "resources/css/app.css",
+            "theme": "coupertino",
             "update": "delta"
         }
     ],
@@ -127,5 +132,5 @@
      * Uniquely generated id for this application, used as prefix for localStorage keys.
      * Normally you should never change this value.
      */
-    "id": "e68ae0fd-872f-4084-b27e-dc8a4901ea62"
+    "id": "0ce55d2b-e69f-4181-a219-b71c5410eae7"
 }

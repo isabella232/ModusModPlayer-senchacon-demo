@@ -1,12 +1,12 @@
 /*
- @class MMP.view.Spectrum
+ @class Modify.view.Spectrum
  Based off of the code from:
 
  SpectrumBox - A JavaScript spectral analyzer.
  Mohit Cheppudira - 0xfe.blogspot.com
  */
 
-Ext.define('MMP.view.Spectrum', {
+Ext.define('Modify.view.Spectrum', {
     extend : 'Ext.Component',
     xtype  : 'spectrum',
 

@@ -1,10 +1,10 @@
-Ext.define('MMP.store.ModFiles', {
+Ext.define('Modify.store.ModFiles', {
     extend : 'Ext.data.Store',
 
-    requires : 'MMP.model.ModFile',
+    requires : 'Modify.model.ModFile',
 
     config: {
-        model : 'MMP.model.ModFile',
+        model : 'Modify.model.ModFile',
         proxy : {
             type : 'memory'
         }

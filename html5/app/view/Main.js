@@ -1,4 +1,4 @@
-Ext.define('MMP.view.Main', {
+Ext.define('Modify.view.Main', {
     extend : 'Ext.Container',
     xtype  : 'main',
 

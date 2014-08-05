@@ -3,8 +3,8 @@
 target="testing";
 projName=`cat html5/app.json | grep "\"name\"" | awk -F\" '{print $4}'`
 
-buildDir="html5/build/$projName/$target"
-androidDir="android/assets/www"
+buildDir="html5/build/$target/$projName"
+#androidDir="android/assets/www"
 iosDir="ios/www/"
 cordovaSrc="cordova.www.src"
 
@@ -12,7 +12,8 @@ echo $'\e[32m''building Sencha  ../ios/www' $'\e[00m'
 
 #sencha app build testing ../ios/www/ > /tmp/st2.out
 cd html5/
-~/bin/Sencha/Cmd/3.1.2.342/sencha app build $target
+# ~/bin/Sencha/Cmd/3.1.2.342/sencha app build $target
+sencha app build $target
 RC=$?
 cd ..
 # isError=`grep ERROR /tmp/st2.out > /dev/null 2>&1`
