@@ -67,7 +67,7 @@ Ext.define('Modify.controller.Main', {
                 store     : dirStore,
                 listeners : {
                     scope   : this,
-                    itemtap : this.onDirListItemTap
+                    select : this.onDirListItemSelect
                 }
             });
 
@@ -75,8 +75,18 @@ Ext.define('Modify.controller.Main', {
 
     },
 
-    onDirListItemTap : function(list, index, listItem, record) {
+    onDirListItemSelect : function(list,  record) {
         var me = this;
+
+        Ext.Function.defer(function() {
+            list.deselectAll();
+        }, 200)
+
+//        if (this.main.isAnimating) {
+//            return;
+//        }
+//
+//        this.main.isAnimating = true;
 
         cordova.exec(
             Ext.Function.bind(me.onAfterGetModFiles, me),
@@ -104,18 +114,21 @@ Ext.define('Modify.controller.Main', {
                 store     : fileStore,
                 flex      : 1,
                 listeners : {
-                    scope   : me,
-                    itemtap : me.onFileListItemTap
+                    scope  : me,
+                    select : me.onFileListItemSelect
                 }
             });
 
         me.main.addAndAnimateItem(fileList);
     },
 
-    onFileListItemTap : function(list, index, listItem, record) {
-        var me = this,
+    onFileListItemSelect : function(list, record) {
+        var me   = this,
             data = record.data;
 
+        Ext.Function.defer(function() {
+            list.deselectAll();
+        }, 200);
 
         var player = me.player = Ext.create('Modify.view.ModPlayer', {
             data : record.data,
@@ -125,6 +138,7 @@ Ext.define('Modify.controller.Main', {
                     cordova.exec(
                         function callback(data) {
 //                            console.log(data);
+                            player.isPlaying = true;
                             me.startModPlayerUpdateLoop();
                         },
                         function errorHandler(err) {
@@ -137,8 +151,10 @@ Ext.define('Modify.controller.Main', {
 
                 },
                 stop : function() {
-                   me.stopModPlayerUpdateLoop();
-                   cordova.exec(
+                    player.isPlaying = false;
+                    me.stopModPlayerUpdateLoop();
+
+                    cordova.exec(
                         Ext.Function.bind(me.onAfterGetModFiles, me),
             //            function callback(directories) {
             //                directories = Ext.decode(directories);

@@ -1,4 +1,4 @@
-function _c9618cc1089330072a47ebd1968071f4a1c26a25(){};//@tag foundation,core
+function _e869611fabb16f16db0af6a33e6de9cef6413ad6(){};//@tag foundation,core
 //@define Ext
 
 /**
@@ -36975,7 +36975,7 @@ Ext.define('Ext.LoadMask', {
         /**
          * @cfg {String} cls
          * The CSS Class for this component
-         * @accessor
+         * @accesssor
          */
         cls: Ext.baseCSSPrefix + 'loading-mask',
 
@@ -64561,637 +64561,6 @@ Ext.define('Ext.event.recognizer.Tap', {
 
 /**
  * @private
- * Utility class used by Ext.slider.Slider - should never need to be used directly.
- */
-Ext.define('Ext.slider.Thumb', {
-    extend: 'Ext.Component',
-    xtype : 'thumb',
-
-    config: {
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        baseCls: Ext.baseCSSPrefix + 'thumb',
-
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        draggable: {
-            direction: 'horizontal'
-        }
-    },
-
-    // Strange issue where the thumbs translation value is not being set when it is not visible. Happens when the thumb 
-    // is contained within a modal panel.
-    platformConfig: [{
-        platform: ['ie10'],
-        draggable: {
-            translatable: {
-                translationMethod: 'csstransform'
-            }
-        }
-    }],
-
-    elementWidth: 0,
-
-    initialize: function() {
-        this.callParent();
-
-        this.getDraggable().onBefore({
-            dragstart: 'onDragStart',
-            drag: 'onDrag',
-            dragend: 'onDragEnd',
-            scope: this
-        });
-
-        this.element.on('resize', 'onElementResize', this);
-    },
-
-    onDragStart: function() {
-        if (this.isDisabled()) {
-            return false;
-        }
-
-        this.relayEvent(arguments);
-    },
-
-    onDrag: function() {
-        if (this.isDisabled()) {
-            return false;
-        }
-
-        this.relayEvent(arguments);
-    },
-
-    onDragEnd: function() {
-        if (this.isDisabled()) {
-            return false;
-        }
-
-        this.relayEvent(arguments);
-    },
-
-    onElementResize: function(element, info) {
-        this.elementWidth = info.width;
-    },
-
-    getElementWidth: function() {
-        return this.elementWidth;
-    }
-});
-
-/**
- * Utility class used by Ext.field.Slider.
- * @private
- */
-Ext.define('Ext.slider.Slider', {
-    extend: 'Ext.Container',
-    xtype: 'slider',
-
-               
-                           
-                               
-      
-
-    /**
-    * @event change
-    * Fires when the value changes
-    * @param {Ext.slider.Slider} this
-    * @param {Ext.slider.Thumb} thumb The thumb being changed
-    * @param {Number} newValue The new value
-    * @param {Number} oldValue The old value
-    */
-
-    /**
-    * @event dragstart
-    * Fires when the slider thumb starts a drag
-    * @param {Ext.slider.Slider} this
-    * @param {Ext.slider.Thumb} thumb The thumb being dragged
-    * @param {Array} value The start value
-    * @param {Ext.EventObject} e
-    */
-
-    /**
-    * @event drag
-    * Fires when the slider thumb starts a drag
-    * @param {Ext.slider.Slider} this
-    * @param {Ext.slider.Thumb} thumb The thumb being dragged
-    * @param {Ext.EventObject} e
-    */
-
-    /**
-    * @event dragend
-    * Fires when the slider thumb starts a drag
-    * @param {Ext.slider.Slider} this
-    * @param {Ext.slider.Thumb} thumb The thumb being dragged
-    * @param {Array} value The end value
-    * @param {Ext.EventObject} e
-    */
-    config: {
-        baseCls: 'x-slider',
-
-        /**
-         * @cfg {Object} thumbConfig The config object to factory {@link Ext.slider.Thumb} instances
-         * @accessor
-         */
-        thumbConfig: {
-            draggable: {
-                translatable: {
-                    easingX: {
-                        duration: 300,
-                        type: 'ease-out'
-                    }
-                }
-            }
-        },
-
-        /**
-         * @cfg {Number} increment The increment by which to snap each thumb when its value changes. Any thumb movement
-         * will be snapped to the nearest value that is a multiple of the increment (e.g. if increment is 10 and the user
-         * tries to move the thumb to 67, it will be snapped to 70 instead)
-         * @accessor
-         */
-        increment : 1,
-
-        /**
-         * @cfg {Number/Number[]} value The value(s) of this slider's thumbs. If you pass
-         * a number, it will assume you have just 1 thumb.
-         * @accessor
-         */
-        value: 0,
-
-        /**
-         * @cfg {Number} minValue The lowest value any thumb on this slider can be set to.
-         * @accessor
-         */
-        minValue: 0,
-
-        /**
-         * @cfg {Number} maxValue The highest value any thumb on this slider can be set to.
-         * @accessor
-         */
-        maxValue: 100,
-
-        /**
-         * @cfg {Boolean} allowThumbsOverlapping Whether or not to allow multiple thumbs to overlap each other.
-         * Setting this to true guarantees the ability to select every possible value in between {@link #minValue}
-         * and {@link #maxValue} that satisfies {@link #increment}
-         * @accessor
-         */
-        allowThumbsOverlapping: false,
-
-        /**
-         * @cfg {Boolean/Object} animation
-         * The animation to use when moving the slider. Possible properties are:
-         *
-         * - duration
-         * - easingX
-         * - easingY
-         *
-         * @accessor
-         */
-        animation: true,
-
-        /**
-         * Will make this field read only, meaning it cannot be changed with used interaction.
-         * @cfg {Boolean} readOnly
-         * @accessor
-         */
-        readOnly: false
-    },
-
-    /**
-     * @cfg {Number/Number[]} values Alias to {@link #value}
-     */
-
-    elementWidth: 0,
-
-    offsetValueRatio: 0,
-
-    activeThumb: null,
-
-    constructor: function(config) {
-        config = config || {};
-
-        if (config.hasOwnProperty('values')) {
-            config.value = config.values;
-        }
-
-        this.callParent([config]);
-    },
-
-    // @private
-    initialize: function() {
-        var element = this.element;
-
-        this.callParent();
-
-        element.on({
-            scope: this,
-            tap: 'onTap',
-            resize: 'onResize'
-        });
-
-        this.on({
-            scope: this,
-            delegate: '> thumb',
-            tap: 'onTap',
-            dragstart: 'onThumbDragStart',
-            drag: 'onThumbDrag',
-            dragend: 'onThumbDragEnd'
-        });
-
-        var thumb = this.getThumb(0);
-        if(thumb) {
-            thumb.on('resize', 'onThumbResize', this);
-        }
-    },
-
-    /**
-     * @private
-     */
-    factoryThumb: function() {
-        return Ext.factory(this.getThumbConfig(), Ext.slider.Thumb);
-    },
-
-    /**
-     * Returns the Thumb instances bound to this Slider
-     * @return {Ext.slider.Thumb[]} The thumb instances
-     */
-    getThumbs: function() {
-        return this.innerItems;
-    },
-
-    /**
-     * Returns the Thumb instance bound to this Slider
-     * @param {Number} [index=0] The index of Thumb to return.
-     * @return {Ext.slider.Thumb} The thumb instance
-     */
-    getThumb: function(index) {
-        if (typeof index != 'number') {
-            index = 0;
-        }
-
-        return this.innerItems[index];
-    },
-
-    refreshOffsetValueRatio: function() {
-        var valueRange = this.getMaxValue() - this.getMinValue(),
-            trackWidth = this.elementWidth - this.thumbWidth;
-
-        this.offsetValueRatio = trackWidth / valueRange;
-    },
-
-    onThumbResize: function(){
-        var thumb = this.getThumb(0);
-        if (thumb) {
-            this.thumbWidth = thumb.getElementWidth();
-        }
-        this.refresh();
-    },
-
-    onResize: function(element, info) {
-        this.elementWidth = info.width;
-        this.refresh();
-    },
-
-    refresh: function() {
-        this.refreshValue();
-    },
-
-    setActiveThumb: function(thumb) {
-        var oldActiveThumb = this.activeThumb;
-
-        if (oldActiveThumb && oldActiveThumb !== thumb) {
-            oldActiveThumb.setZIndex(null);
-        }
-
-        this.activeThumb = thumb;
-        thumb.setZIndex(2);
-
-        return this;
-    },
-
-    onThumbDragStart: function(thumb, e) {
-        if (e.absDeltaX <= e.absDeltaY || this.getReadOnly()) {
-            return false;
-        }
-        else {
-            e.stopPropagation();
-        }
-
-        if (this.getAllowThumbsOverlapping()) {
-            this.setActiveThumb(thumb);
-        }
-
-        this.dragStartValue = this.getValue()[this.getThumbIndex(thumb)];
-        this.fireEvent('dragstart', this, thumb, this.dragStartValue, e);
-    },
-
-    onThumbDrag: function(thumb, e, offsetX) {
-        var index = this.getThumbIndex(thumb),
-            offsetValueRatio = this.offsetValueRatio,
-            constrainedValue = this.constrainValue(this.getMinValue() + offsetX / offsetValueRatio);
-
-        e.stopPropagation();
-
-        this.setIndexValue(index, constrainedValue);
-
-        this.fireEvent('drag', this, thumb, this.getValue(), e);
-
-        return false;
-    },
-
-    setIndexValue: function(index, value, animation) {
-        var thumb = this.getThumb(index),
-            values = this.getValue(),
-            minValue = this.getMinValue(),
-            offsetValueRatio = this.offsetValueRatio,
-            increment = this.getIncrement(),
-            draggable = thumb.getDraggable();
-
-        draggable.setOffset((value - minValue) * offsetValueRatio, null, animation);
-
-        values[index] = minValue + Math.round((draggable.offset.x / offsetValueRatio) / increment) * increment;
-    },
-
-    onThumbDragEnd: function(thumb, e) {
-        this.refreshThumbConstraints(thumb);
-        var index = this.getThumbIndex(thumb),
-            newValue = this.getValue()[index],
-            oldValue = this.dragStartValue;
-
-        this.fireEvent('dragend', this, thumb, this.getValue(), e);
-        if (oldValue !== newValue) {
-            this.fireEvent('change', this, thumb, newValue, oldValue);
-        }
-    },
-
-    getThumbIndex: function(thumb) {
-        return this.getThumbs().indexOf(thumb);
-    },
-
-    refreshThumbConstraints: function(thumb) {
-        var allowThumbsOverlapping = this.getAllowThumbsOverlapping(),
-            offsetX = thumb.getDraggable().getOffset().x,
-            thumbs = this.getThumbs(),
-            index = this.getThumbIndex(thumb),
-            previousThumb = thumbs[index - 1],
-            nextThumb = thumbs[index + 1],
-            thumbWidth = this.thumbWidth;
-
-        if (previousThumb) {
-            previousThumb.getDraggable().addExtraConstraint({
-                max: {
-                    x: offsetX - ((allowThumbsOverlapping) ? 0 : thumbWidth)
-                }
-            });
-        }
-
-        if (nextThumb) {
-            nextThumb.getDraggable().addExtraConstraint({
-                min: {
-                    x: offsetX + ((allowThumbsOverlapping) ? 0 : thumbWidth)
-                }
-            });
-        }
-    },
-
-    // @private
-    onTap: function(e) {
-        if (this.isDisabled()) {
-            return;
-        }
-
-        var targetElement = Ext.get(e.target);
-
-        if (!targetElement || (Ext.browser.engineName == 'WebKit' && targetElement.hasCls('x-thumb'))) {
-            return;
-        }
-
-        var touchPointX = e.touch.point.x,
-            element = this.element,
-            elementX = element.getX(),
-            offset = touchPointX - elementX - (this.thumbWidth / 2),
-            value = this.constrainValue(this.getMinValue() + offset / this.offsetValueRatio),
-            values = this.getValue(),
-            minDistance = Infinity,
-            ln = values.length,
-            i, absDistance, testValue, closestIndex, oldValue, thumb;
-
-        if (ln === 1) {
-            closestIndex = 0;
-        }
-        else {
-            for (i = 0; i < ln; i++) {
-                testValue = values[i];
-                absDistance = Math.abs(testValue - value);
-
-                if (absDistance < minDistance) {
-                    minDistance = absDistance;
-                    closestIndex = i;
-                }
-            }
-        }
-
-        oldValue = values[closestIndex];
-        thumb = this.getThumb(closestIndex);
-
-        this.setIndexValue(closestIndex, value, this.getAnimation());
-        this.refreshThumbConstraints(thumb);
-
-        if (oldValue !== value) {
-            this.fireEvent('change', this, thumb, value, oldValue);
-        }
-    },
-
-    // @private
-    updateThumbs: function(newThumbs) {
-        this.add(newThumbs);
-    },
-
-    applyValue: function(value) {
-        var values = Ext.Array.from(value || 0),
-            filteredValues = [],
-            previousFilteredValue = this.getMinValue(),
-            filteredValue, i, ln;
-
-        for (i = 0,ln = values.length; i < ln; i++) {
-            filteredValue = this.constrainValue(values[i]);
-
-            if (filteredValue < previousFilteredValue) {
-                Ext.Logger.warn("Invalid values of '"+Ext.encode(values)+"', values at smaller indexes must " +
-                    "be smaller than or equal to values at greater indexes");
-                filteredValue = previousFilteredValue;
-            }
-
-            filteredValues.push(filteredValue);
-
-            previousFilteredValue = filteredValue;
-        }
-
-        return filteredValues;
-    },
-
-    /**
-     * Updates the sliders thumbs with their new value(s)
-     */
-    updateValue: function(newValue, oldValue) {
-        var thumbs = this.getThumbs(),
-            ln = newValue.length,
-            minValue = this.getMinValue(),
-            offset = this.offsetValueRatio,
-            i;
-
-        this.setThumbsCount(ln);
-
-        for (i = 0; i < ln; i++) {
-            thumbs[i].getDraggable().setExtraConstraint(null).setOffset((newValue[i] - minValue) * offset);
-        }
-
-        for (i = 0; i < ln; i++) {
-            this.refreshThumbConstraints(thumbs[i]);
-        }
-    },
-
-    /**
-     * @private
-     */
-    refreshValue: function() {
-        this.refreshOffsetValueRatio();
-
-        this.setValue(this.getValue());
-    },
-
-    /**
-     * @private
-     * Takes a desired value of a thumb and returns the nearest snap value. e.g if minValue = 0, maxValue = 100, increment = 10 and we
-     * pass a value of 67 here, the returned value will be 70. The returned number is constrained within {@link #minValue} and {@link #maxValue},
-     * so in the above example 68 would be returned if {@link #maxValue} was set to 68.
-     * @param {Number} value The value to snap
-     * @return {Number} The snapped value
-     */
-    constrainValue: function(value) {
-        var me = this,
-            minValue  = me.getMinValue(),
-            maxValue  = me.getMaxValue(),
-            increment = me.getIncrement(),
-            remainder;
-
-        value = parseFloat(value);
-
-        if (isNaN(value)) {
-            value = minValue;
-        }
-
-        remainder = (value - minValue) % increment;
-        value -= remainder;
-
-        if (Math.abs(remainder) >= (increment / 2)) {
-            value += (remainder > 0) ? increment : -increment;
-        }
-
-        value = Math.max(minValue, value);
-        value = Math.min(maxValue, value);
-
-        return value;
-    },
-
-    setThumbsCount: function(count) {
-        var thumbs = this.getThumbs(),
-            thumbsCount = thumbs.length,
-            i, ln, thumb;
-
-        if (thumbsCount > count) {
-            for (i = 0,ln = thumbsCount - count; i < ln; i++) {
-                thumb = thumbs[thumbs.length - 1];
-                thumb.destroy();
-            }
-        }
-        else if (thumbsCount < count) {
-            for (i = 0,ln = count - thumbsCount; i < ln; i++) {
-                this.add(this.factoryThumb());
-            }
-        }
-
-        return this;
-    },
-
-    /**
-     * Convenience method. Calls {@link #setValue}.
-     */
-    setValues: function(value) {
-        this.setValue(value);
-    },
-
-    /**
-     * Convenience method. Calls {@link #getValue}.
-     * @return {Object}
-     */
-    getValues: function() {
-        return this.getValue();
-    },
-
-    /**
-     * Sets the {@link #increment} configuration.
-     * @param {Number} increment
-     * @return {Number}
-     */
-    applyIncrement: function(increment) {
-        if (increment === 0) {
-            increment = 1;
-        }
-
-        return Math.abs(increment);
-    },
-
-    // @private
-    updateAllowThumbsOverlapping: function(newValue, oldValue) {
-        if (typeof oldValue != 'undefined') {
-            this.refreshValue();
-        }
-    },
-
-    // @private
-    updateMinValue: function(newValue, oldValue) {
-        if (typeof oldValue != 'undefined') {
-            this.refreshValue();
-        }
-    },
-
-    // @private
-    updateMaxValue: function(newValue, oldValue) {
-        if (typeof oldValue != 'undefined') {
-            this.refreshValue();
-        }
-    },
-
-    // @private
-    updateIncrement: function(newValue, oldValue) {
-        if (typeof oldValue != 'undefined') {
-            this.refreshValue();
-        }
-    },
-
-    doSetDisabled: function(disabled) {
-        this.callParent(arguments);
-
-        var items = this.getItems().items,
-            ln = items.length,
-            i;
-
-        for (i = 0; i < ln; i++) {
-            items[i].setDisabled(disabled);
-        }
-    }
-
-}, function() {
-});
-
-/**
- * @private
  */
 Ext.define('Ext.fx.runner.Css', {
     extend: 'Ext.Evented',
@@ -68144,7 +67513,7 @@ Ext.define('Modify.view.Main', {
             itemId : 'titlebar',
             cls    : 'main-toolbar',
             docked : 'top',
-            title  : 'Prototype',
+            title  : 'MODify',
             items : [
                 {
                     xtype  : 'button',
@@ -68175,17 +67544,19 @@ Ext.define('Modify.view.Main', {
     },
 
     addAndAnimateItem : function(item) {
-        var me = this,
-            title;
+        var me = this;
+//            title;
+
 
         me.add(item);
 
         me.animateActiveItem(item, { type : 'slide', direction : 'left' });
         me.showBackButton();
 
-        title = item.$className.split('.');
-        title = title[title.length - 1];
-        me.down('toolbar').setTitle(title)
+//
+//        title = item.$className.split('.');
+//        title = title[title.length - 1];
+//        me.down('toolbar').setTitle('MODify')
 
     },
 
@@ -68208,11 +67579,11 @@ Ext.define('Modify.view.Main', {
 
         if (innerItems.length > 1) {
             var animateTo   = innerItems[innerItems.length - 2],
-                currentItem = innerItems.pop(),
-                title       = animateTo.$className.split('.');
+                currentItem = innerItems.pop();
+//                title       = animateTo.$className.split('.');
 
-            title = title[title.length - 1];
-            me.down('toolbar').setTitle(title);
+//            title = title[title.length - 1];
+//            me.down('toolbar').setTitle(title);
 
             me.animateActiveItem(animateTo, {
                 type      : 'slide',
@@ -68266,7 +67637,7 @@ Ext.define("Modify.model.ModFile", {
         fields : [
             'path',
             {
-                name : 'fileName',
+                name : 'fileName'
 //                convert : function(v) {
 //                    return v.split(' - ')[1];
 //                }
@@ -68286,6 +67657,25 @@ Ext.define('Modify.store.ModFiles', {
             type : 'memory'
         }
     }
+});
+
+Ext.define('Modizer.view.Pattern', {
+    extend : 'Ext.Container',
+    xtype  : 'pattern',
+    config : {
+        html        : 'PATTERN VIEW HERE',
+        style       : 'border: 1px solid #F00',
+        patternData : null
+    },
+
+    setPatternData : function(patternData) {
+
+//        alert('open debugger');
+        console.log(patternData);
+        debugger;
+
+    }
+
 });
 
 Ext.define('Modify.view.ModPlayer', {
@@ -68315,36 +67705,34 @@ Ext.define('Modify.view.ModPlayer', {
             },
             {
                 xtype  : 'component',
-                style  : 'text-align:left; font-size: 15px; background-color: #E9E9E9;',
+                style  : 'text-align: left; font-size: 12px; background-color: #E9E9E9;',
                 itemId : 'stats',
-                height : 60,
+                height : 20,
                 tpl    : [
-                    '<div><b>CPU: </b> {cpu}</div>',
-                    '<div><b>Order: </b> {order}</div>',
-                    '<div><b>Pattern: </b> {pattern}&nbsp; &nbsp; <b>Row:</b> {row}</div>'
+                    '<div style="display: -webkit-flex; -webkit-flex-direction: row;">',
+                            '<div style="-webkit-flex: 1 1;"><b>CPU: </b> {cpu}</div>',
+                            '<div style="-webkit-flex: 1 1;"><b>Ord: </b> {order}</div>',
+                            '<div style="-webkit-flex: 1 1;"><b>Pat: </b> {pattern}</div>',
+                            '<div style="-webkit-flex: 1 1;"><b>Row:</b> {row}</div>',
+                    '</div>'
                 ]
             },
             {
-                xtype  : 'component',
-                itemId : 'spectrum',
-                flex   : 1
+                xtype : 'pattern',
+                flex  : 1
             },
+//            {
+//                xtype  : 'component',
+//                itemId : 'spectrum',
+//                flex   : 1
+//            },
             {
-                xtype  : 'slider',
-                itemId : 'slider'
-            },
-            {
-                xtype       : 'container',
-                height      : 40,
-                layout      : {
-                    type  : 'hbox',
-                    align : 'stretch'
-                },
+                xtype       : 'toolbar',
                 defaults : {
-                    xtype : 'button',
-                    flex : 1
+                    xtype : 'button'
                 },
                 items       : [
+                    { xtype : 'spacer' },
                     {
                         text   : '&lt;&lt;',
                         itemId : 'rewindbtn'
@@ -68362,7 +67750,8 @@ Ext.define('Modify.view.ModPlayer', {
                         text   : 'STOP',
                         itemId : 'stopbtn',
                         ui     : 'decline'
-                    }
+                    },
+                    { xtype : 'spacer' }
                 ]
             }
         ],
@@ -68380,13 +67769,21 @@ Ext.define('Modify.view.ModPlayer', {
             '#stopbtn' : {
                 tap : 'onStopBtnTap'
             }
+        },
+
+        emptyStats : {
+            cpu     : '--',
+            order   : '--',
+            pattern : '--',
+            row     : '--'
         }
     },
 
     initialize : function() {
         var data = this.getData();
         this.down('#fileName').setHtml(data.fileName);
-        this.spectrum = this.down('spectrum');
+//        this.spectrum = this.down('spectrum');
+        this.patternView = this.down('pattern');
         this.callParent();
     },
 
@@ -68395,6 +67792,9 @@ Ext.define('Modify.view.ModPlayer', {
     },
 
     onPlayBtnTap : function() {
+        if (this.isPlaying) {
+            return;
+        }
         this.fireEvent('play', this);
     },
 
@@ -68404,7 +67804,7 @@ Ext.define('Modify.view.ModPlayer', {
 
     onStopBtnTap : function() {
         this.fireEvent('stop', this);
-        this.setStats({});
+        this.setStats(this.getEmptyStats());
     },
 
     updateSongData : function(songData) {
@@ -68416,6 +67816,8 @@ Ext.define('Modify.view.ModPlayer', {
     },
 
     setPatternData : function(patternDataAsString) {
+        this.setStats(this.getEmptyStats());
+
         if (! patternDataAsString) {
             return;
         }
@@ -68435,8 +67837,7 @@ Ext.define('Modify.view.ModPlayer', {
 //            firstPat = patternData[firstKey],
 //            firstRow = firstPat[0],
 //            rowSPlit = firstRow.split(' ');
-
-        debugger;
+        this.patternView.setPatternData(patternData);
 
         console.log("SENCHA:: Got pattern data!");
 
@@ -68868,7 +68269,7 @@ Ext.define('Modify.controller.Main', {
                 store     : dirStore,
                 listeners : {
                     scope   : this,
-                    itemtap : this.onDirListItemTap
+                    select : this.onDirListItemSelect
                 }
             });
 
@@ -68876,8 +68277,18 @@ Ext.define('Modify.controller.Main', {
 
     },
 
-    onDirListItemTap : function(list, index, listItem, record) {
+    onDirListItemSelect : function(list,  record) {
         var me = this;
+
+        Ext.Function.defer(function() {
+            list.deselectAll();
+        }, 200)
+
+//        if (this.main.isAnimating) {
+//            return;
+//        }
+//
+//        this.main.isAnimating = true;
 
         cordova.exec(
             Ext.Function.bind(me.onAfterGetModFiles, me),
@@ -68905,18 +68316,21 @@ Ext.define('Modify.controller.Main', {
                 store     : fileStore,
                 flex      : 1,
                 listeners : {
-                    scope   : me,
-                    itemtap : me.onFileListItemTap
+                    scope  : me,
+                    select : me.onFileListItemSelect
                 }
             });
 
         me.main.addAndAnimateItem(fileList);
     },
 
-    onFileListItemTap : function(list, index, listItem, record) {
-        var me = this,
+    onFileListItemSelect : function(list, record) {
+        var me   = this,
             data = record.data;
 
+        Ext.Function.defer(function() {
+            list.deselectAll();
+        }, 200);
 
         var player = me.player = Ext.create('Modify.view.ModPlayer', {
             data : record.data,
@@ -68926,6 +68340,7 @@ Ext.define('Modify.controller.Main', {
                     cordova.exec(
                         function callback(data) {
 //                            console.log(data);
+                            player.isPlaying = true;
                             me.startModPlayerUpdateLoop();
                         },
                         function errorHandler(err) {
@@ -68938,8 +68353,10 @@ Ext.define('Modify.controller.Main', {
 
                 },
                 stop : function() {
-                   me.stopModPlayerUpdateLoop();
-                   cordova.exec(
+                    player.isPlaying = false;
+                    me.stopModPlayerUpdateLoop();
+
+                    cordova.exec(
                         Ext.Function.bind(me.onAfterGetModFiles, me),
             //            function callback(directories) {
             //                directories = Ext.decode(directories);
@@ -68966,8 +68383,10 @@ Ext.define('Modify.controller.Main', {
                 player.setSongName(data);
 
                 me.getPatternData();
+
             },
             function errorHandler(err) {
+                me.loadMask.hide();
 
             },
             'ModPlyr',
@@ -68996,6 +68415,8 @@ Ext.define('Modify.controller.Main', {
                     Ext.Function.defer(me.getPatternData, 50, me);
                     return;
                 }
+
+                me.loadMask.hide();
 
                 me.player.setPatternData('none');
             },

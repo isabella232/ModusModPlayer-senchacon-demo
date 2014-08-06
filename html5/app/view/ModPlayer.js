@@ -25,36 +25,34 @@ Ext.define('Modify.view.ModPlayer', {
             },
             {
                 xtype  : 'component',
-                style  : 'text-align:left; font-size: 15px; background-color: #E9E9E9;',
+                style  : 'text-align: left; font-size: 12px; background-color: #E9E9E9;',
                 itemId : 'stats',
-                height : 60,
+                height : 20,
                 tpl    : [
-                    '<div><b>CPU: </b> {cpu}</div>',
-                    '<div><b>Order: </b> {order}</div>',
-                    '<div><b>Pattern: </b> {pattern}&nbsp; &nbsp; <b>Row:</b> {row}</div>'
+                    '<div style="display: -webkit-flex; -webkit-flex-direction: row;">',
+                            '<div style="-webkit-flex: 1 1;"><b>CPU: </b> {cpu}</div>',
+                            '<div style="-webkit-flex: 1 1;"><b>Ord: </b> {order}</div>',
+                            '<div style="-webkit-flex: 1 1;"><b>Pat: </b> {pattern}</div>',
+                            '<div style="-webkit-flex: 1 1;"><b>Row:</b> {row}</div>',
+                    '</div>'
                 ]
             },
             {
-                xtype  : 'component',
-                itemId : 'spectrum',
-                flex   : 1
+                xtype : 'pattern',
+                flex  : 1
             },
+//            {
+//                xtype  : 'component',
+//                itemId : 'spectrum',
+//                flex   : 1
+//            },
             {
-                xtype  : 'slider',
-                itemId : 'slider'
-            },
-            {
-                xtype       : 'container',
-                height      : 40,
-                layout      : {
-                    type  : 'hbox',
-                    align : 'stretch'
-                },
+                xtype       : 'toolbar',
                 defaults : {
-                    xtype : 'button',
-                    flex : 1
+                    xtype : 'button'
                 },
                 items       : [
+                    { xtype : 'spacer' },
                     {
                         text   : '&lt;&lt;',
                         itemId : 'rewindbtn'
@@ -72,7 +70,8 @@ Ext.define('Modify.view.ModPlayer', {
                         text   : 'STOP',
                         itemId : 'stopbtn',
                         ui     : 'decline'
-                    }
+                    },
+                    { xtype : 'spacer' }
                 ]
             }
         ],
@@ -90,13 +89,21 @@ Ext.define('Modify.view.ModPlayer', {
             '#stopbtn' : {
                 tap : 'onStopBtnTap'
             }
+        },
+
+        emptyStats : {
+            cpu     : '--',
+            order   : '--',
+            pattern : '--',
+            row     : '--'
         }
     },
 
     initialize : function() {
         var data = this.getData();
         this.down('#fileName').setHtml(data.fileName);
-        this.spectrum = this.down('spectrum');
+//        this.spectrum = this.down('spectrum');
+        this.patternView = this.down('pattern');
         this.callParent();
     },
 
@@ -105,6 +112,9 @@ Ext.define('Modify.view.ModPlayer', {
     },
 
     onPlayBtnTap : function() {
+        if (this.isPlaying) {
+            return;
+        }
         this.fireEvent('play', this);
     },
 
@@ -114,7 +124,7 @@ Ext.define('Modify.view.ModPlayer', {
 
     onStopBtnTap : function() {
         this.fireEvent('stop', this);
-        this.setStats({});
+        this.setStats(this.getEmptyStats());
     },
 
     updateSongData : function(songData) {
@@ -126,6 +136,8 @@ Ext.define('Modify.view.ModPlayer', {
     },
 
     setPatternData : function(patternDataAsString) {
+        this.setStats(this.getEmptyStats());
+
         if (! patternDataAsString) {
             return;
         }
@@ -145,8 +157,7 @@ Ext.define('Modify.view.ModPlayer', {
 //            firstPat = patternData[firstKey],
 //            firstRow = firstPat[0],
 //            rowSPlit = firstRow.split(' ');
-
-        debugger;
+        this.patternView.setPatternData(patternData);
 
         console.log("SENCHA:: Got pattern data!");
 

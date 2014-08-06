@@ -4,7 +4,7 @@ Ext.define("Modify.model.ModFile", {
         fields : [
             'path',
             {
-                name : 'fileName',
+                name : 'fileName'
 //                convert : function(v) {
 //                    return v.split(' - ')[1];
 //                }

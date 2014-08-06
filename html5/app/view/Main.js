@@ -15,7 +15,7 @@ Ext.define('Modify.view.Main', {
             itemId : 'titlebar',
             cls    : 'main-toolbar',
             docked : 'top',
-            title  : 'Prototype',
+            title  : 'MODify',
             items : [
                 {
                     xtype  : 'button',
@@ -46,17 +46,19 @@ Ext.define('Modify.view.Main', {
     },
 
     addAndAnimateItem : function(item) {
-        var me = this,
-            title;
+        var me = this;
+//            title;
+
 
         me.add(item);
 
         me.animateActiveItem(item, { type : 'slide', direction : 'left' });
         me.showBackButton();
 
-        title = item.$className.split('.');
-        title = title[title.length - 1];
-        me.down('toolbar').setTitle(title)
+//
+//        title = item.$className.split('.');
+//        title = title[title.length - 1];
+//        me.down('toolbar').setTitle('MODify')
 
     },
 
@@ -79,11 +81,11 @@ Ext.define('Modify.view.Main', {
 
         if (innerItems.length > 1) {
             var animateTo   = innerItems[innerItems.length - 2],
-                currentItem = innerItems.pop(),
-                title       = animateTo.$className.split('.');
+                currentItem = innerItems.pop();
+//                title       = animateTo.$className.split('.');
 
-            title = title[title.length - 1];
-            me.down('toolbar').setTitle(title);
+//            title = title[title.length - 1];
+//            me.down('toolbar').setTitle(title);
 
             me.animateActiveItem(animateTo, {
                 type      : 'slide',

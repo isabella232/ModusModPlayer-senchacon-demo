@@ -245,57 +245,88 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     NSMutableString *orderMapper = [[NSMutableString alloc] init];
     
     // We're going to stuff row strings in here.
-    NSMutableArray *patternStrings;
+    NSMutableArray *patternStrings = [[NSMutableArray alloc]init];
     BOOL isOkToContinue = true;
     
     while (bytesRead > 0 && isOkToContinue) {
+        
+//        [NSThread sleepForTimeInterval: .1];
+        
         currOrder  = ModPlug_GetCurrentOrder(mpFile);
         currPattrn = ModPlug_GetCurrentPattern(mpFile);
         currRow    = ModPlug_GetCurrentRow(mpFile);
         
-//       NSLog(@"O %i \t P %i \t R %i", currOrder, currPattrn, currRow);
+        
+        
+//         if (currPattrn == 29) {
+//            [NSThread sleepForTimeInterval:0.1];
+
+//            printf("dafuq!\n");
+//        }
+        
+        // This detects duplicate patterns, and prevents us from having to loop over them again.
+        NSString *currPattrnKey = [NSString stringWithFormat:@"%d", currPattrn];
+        if ([songPatterns objectForKey:currPattrnKey]) {
+            bytesRead = ModPlug_Read(mpFile, buffer, bufferSize);
+
+            continue;
+        };
+        
        
-        // When we hit a new pattern, create a new array so that we can stuff strings into it.
-        if (currPattrn != prevPattrn) {
+       
+        // When we hit a new pattern, create a new array (patternStrings)
+        // so that we can stuff strings (result of parsePattern) into it.
+        if (currOrder != prevOrder && prevOrder != -1) {
+//           printf(" * NEW *    O %i \t P %i \t R %i\n", currOrder, currPattrn, currRow);
 
            // This is a hacky way of testing to see if the fucking mod looped.
            // Even though we set mLoopCount to 0 (see above this while loop),
            // modPlug still loops on some mods. Fucker.
-           if (prevOrder != -1) {
-                NSString *currOrderString = [[NSString alloc] initWithFormat:@"%i,", currOrder];
-               
-                // TODO: Get pre-load detection working properly.
-                unsigned int itemLocation = [orderMapper rangeOfString:currOrderString].location;
-               
-                if (currOrder != prevOrder && itemLocation == NSNotFound) {
-                    [orderMapper appendString:currOrderString];
-                }
-                else if (itemLocation != NSNotFound) {
-                    NSLog(@"Song is looping! Aborting query for pattern data");
-                    isOkToContinue = false; // Set this so the loop can end!
-                    
-                    continue; // Break out of this loop fast!
-                }
+            NSString *currOrderString = [[NSString alloc] initWithFormat:@"%i,", currOrder];
+           
+            // TODO: Get pre-load detection working properly.
+            unsigned int itemLocation = [orderMapper rangeOfString:currOrderString].location;
+           
+            
+           printf(" * Adding *    O %i \t P %i \t #Rows:%i\n", prevOrder, prevPattrn, [patternStrings count]);
+
+            // Add new pattern
+            NSString *key = [NSString stringWithFormat:@"%d", prevPattrn];
+            [songPatterns setObject:patternStrings forKey:key];
+
+           
+            if (currOrder != prevOrder && itemLocation == NSNotFound) {
+                [orderMapper appendString:currOrderString];
+            }
+            else if (itemLocation != NSNotFound) {
+                NSLog(@"Song is looping! Aborting query for pattern data");
+                isOkToContinue = false; // Set this so the loop can end!
                 
-                // Add new pattern
-                if (patternStrings) {
-                    NSString *key = [NSString stringWithFormat:@"%d", prevPattrn];
-                    [songPatterns setValue:patternStrings forKey:key];
-                }
-               
-           }
+                continue; // Break out of this loop fast!
+            }
+           
+           
+//            printf("Adding >> Ord: %i\t pat: %i\t row: %i\n", currOrder, currPattrn, currRow);
 
             patternStrings = [[NSMutableArray alloc] init];
+            NSMutableArray *rowData = [self parsePattern];
+            [patternStrings addObject:rowData];
         }
     
         // Move along in the song so we don't get duplicate patterns in the array.
         else if (currPattrn == prevPattrn && currRow == prevRow) {
+            
             bytesRead = ModPlug_Read(mpFile, buffer, bufferSize);
             continue;
         }
         
-        NSMutableArray *rowData = [self parsePattern];
-        [patternStrings addObject:rowData];
+        // Add the patternData
+        else {
+//            printf("Adding -> Ord: %i\t pat: %i\t row: %i\n", currOrder, currPattrn, currRow);
+            NSMutableArray *rowData = [self parsePattern];
+            [patternStrings addObject:rowData];
+            
+        }
         
         prevPattrn = currPattrn;
         prevRow    = currRow;
@@ -323,6 +354,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 
 
 - (NSMutableArray *) parsePattern {
+//    printf("    parsePattern \n");
     NSMutableArray *row = [[NSMutableArray alloc] init];
     
     ModPlugFile *mpFile = self.mpFile;
@@ -338,9 +370,8 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     }
     
     // todo: optimize (by reusing previous data);
-    int currentOrderNumber = ModPlug_GetCurrentOrder(mpFile),
-        currRow            = ModPlug_GetCurrentRow(mpFile),
-        k                  = 0,
+    int currRow = ModPlug_GetCurrentRow(mpFile),
+        k       = 0,
         index,
         curPatPosition;
     
