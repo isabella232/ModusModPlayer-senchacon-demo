@@ -288,7 +288,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
             unsigned int itemLocation = [orderMapper rangeOfString:currOrderString].location;
            
             
-           printf(" * Adding *    O %i \t P %i \t #Rows:%i\n", prevOrder, prevPattrn, [patternStrings count]);
+//           printf(" * Adding *    O %i \t P %i \t #Rows:%i\n", prevOrder, prevPattrn, [patternStrings count]);
 
             // Add new pattern
             NSString *key = [NSString stringWithFormat:@"%d", prevPattrn];
