@@ -205,8 +205,6 @@ Ext.define('Modify.controller.Main', {
 //                debugger;
                 me.player.setPatternData(patternData);
                 me.loadMask.hide();
-
-
             },
             function errorHandle(err) {
                 if (err == "notready") {

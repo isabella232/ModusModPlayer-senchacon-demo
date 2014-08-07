@@ -117,8 +117,6 @@
 		71027CAC1794498F003A61C1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		712A5C73198C608A003A1DED /* libmodplug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmodplug.a; path = ../ModPlayer/libmodplug.a; sourceTree = "<group>"; };
 		712A5C76198C608A003A1DED /* modplug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = modplug.h; path = ../ModPlayer/modplug.h; sourceTree = "<group>"; };
-		716935E01784A68A00047434 /* bass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bass.h; sourceTree = "<group>"; };
-		716935E11784A68A00047434 /* libbass.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbass.a; sourceTree = "<group>"; };
 		716935E21784A68A00047434 /* ModPlyr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModPlyr.h; sourceTree = "<group>"; };
 		716935E31784A68A00047434 /* ModPlyr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModPlyr.m; sourceTree = "<group>"; };
 		719E84981799D7D300CE6C52 /* libmodplug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libmodplug.h; sourceTree = "<group>"; };
@@ -329,8 +327,6 @@
 			children = (
 				712A5C73198C608A003A1DED /* libmodplug.a */,
 				712A5C76198C608A003A1DED /* modplug.h */,
-				716935E01784A68A00047434 /* bass.h */,
-				716935E11784A68A00047434 /* libbass.a */,
 				716935E21784A68A00047434 /* ModPlyr.h */,
 				716935E31784A68A00047434 /* ModPlyr.m */,
 				719E84981799D7D300CE6C52 /* libmodplug.h */,

@@ -12,7 +12,5 @@ Ext.define('Modizer.view.Pattern', {
 //        alert('open debugger');
         console.log(patternData);
         debugger;
-
     }
-
 });
