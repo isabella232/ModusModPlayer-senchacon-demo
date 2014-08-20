@@ -1,4 +1,4 @@
-function _e869611fabb16f16db0af6a33e6de9cef6413ad6(){};//@tag foundation,core
+function _203747a91f48196f57d8c29e1970b9835c815743(){};//@tag foundation,core
 //@define Ext
 
 /**
@@ -67667,15 +67667,51 @@ Ext.define('Modizer.view.Pattern', {
         style       : 'border: 1px solid #F00',
         patternData : null
     },
+//
+//    setPatternData : function(patternData) {
+//
+////        alert('open debugger');
+//        console.log(patternData);
+//        this.patternData = patternData;
+////        debugger;
+//    },
+    showPatternAndPosition : function(patternNumber, rowNum) {
+        if (patternNumber == '--') {
+            return;
+        }
+        var patternData = this.getPatternData(),
+            pattern     = patternData[patternNumber],
+            row;
 
-    setPatternData : function(patternData) {
 
-//        alert('open debugger');
-        console.log(patternData);
-        debugger;
+        if (pattern) {
+            row = pattern[rowNum];
+
+            debugger;
+
+            if (row) {
+                console.log('Found Pattern ' + patternNumber + ' Row ' + rowNum);
+//                alert('debugger')
+//                console.log('here')
+//                debugger;
+                this.element.dom.innerHTML = row;
+            }
+            else {
+                console.warn('I don\'t have pattern #' + pattern + ' Row #' + rowNum);
+            }
+
+
+        }
+        else {
+            console.warn('I don\'t have pattern #' + pattern);
+        }
+
+
+        console.log(patternNumber, row);
+
+
 
     }
-
 });
 
 Ext.define('Modify.view.ModPlayer', {
@@ -67847,16 +67883,9 @@ Ext.define('Modify.view.ModPlayer', {
 
     setStats : function(stats) {
 //        debugger;
-
-        /*
-        cpu: 0.01923458
-        level: 132123416
-        position: 0
-        time: 0
-
-         */
         this.songStats = stats;
         this.down('#stats').setData(stats);
+        this.patternView.showPatternAndPosition(stats.pattern, stats.row);
 //        this.spectrum.updateCanvas(stats.waveData);
     }
 });
@@ -68407,8 +68436,6 @@ Ext.define('Modify.controller.Main', {
 //                debugger;
                 me.player.setPatternData(patternData);
                 me.loadMask.hide();
-
-
             },
             function errorHandle(err) {
                 if (err == "notready") {

@@ -167,16 +167,9 @@ Ext.define('Modify.view.ModPlayer', {
 
     setStats : function(stats) {
 //        debugger;
-
-        /*
-        cpu: 0.01923458
-        level: 132123416
-        position: 0
-        time: 0
-
-         */
         this.songStats = stats;
         this.down('#stats').setData(stats);
+        this.patternView.showPatternAndPosition(stats.pattern, stats.row);
 //        this.spectrum.updateCanvas(stats.waveData);
     }
 });

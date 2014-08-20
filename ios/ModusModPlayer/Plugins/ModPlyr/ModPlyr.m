@@ -8,7 +8,6 @@
 
 #import "ModPlyr.h"
 
-
 @implementation ModPlyr : CDVPlugin {
     
 
@@ -42,7 +41,7 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 - (void) playSong {
     [self initModPlugSettings];
 
-    ModPlug_SetMasterVolume(loadedModPlugFile, 128);
+    ModPlug_SetMasterVolume(loadedModPlugFile, 1);
     ModPlug_Seek(loadedModPlugFile, 0);
     
     int len = ModPlug_GetLength(loadedModPlugFile);
@@ -202,7 +201,204 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 }
 
 
-- (void) preLoadPatterns  {
+- (void) preLoadPatterns {
+
+   patternDataReady = false;
+
+    // Thread shit.
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // Top-level pool
+    NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
+
+
+    ModPlugFile *mpFile = self.mpFile;
+    
+    
+    int numPatterns = (int) ModPlug_NumPatterns(mpFile),
+        orderNum  = 0;
+    
+    unsigned int numRows;
+    
+    ModPlugNote *currentPattern;
+    
+    
+    if (songPatterns == nil) {
+        songPatterns = [[NSMutableDictionary alloc]init];
+    }
+
+    // Clear the existing song patterns
+    [songPatterns removeAllObjects];
+
+
+    NSLog(@"START preLoadPatterns for %s", modName);
+    NSDate *start = [NSDate date];
+    
+    int totalPatterns = (int)numPatterns;
+    int patternNum;
+
+    while (orderNum != totalPatterns) {
+//        patternNum = ModPlug_GetPatternOrder(mpFile, orderNum);
+        
+        currentPattern = ModPlug_GetPattern(mpFile, patternNum, &numRows);
+        NSLog(@">> %i", orderNum);
+        
+        NSMutableArray *patternData = [self parsePattern:currentPattern withNumRows:numRows];
+        
+        // Add new pattern
+        NSString *key = [NSString stringWithFormat:@"%d", orderNum];
+        [songPatterns setObject:patternData forKey:key];
+
+        ++orderNum;
+    }
+
+//    NSLog(@"here");
+    
+    
+    
+    NSTimeInterval timeInterval = [start timeIntervalSinceNow];
+    NSString *message = [[NSString alloc] initWithFormat:@"Done pre-buffering patterns %f(ms)", timeInterval];
+    NSLog(@"%@", message);
+    
+    patternDataReady = true;
+    
+    //*** Thread stuff
+    [pool release];
+    [threadDictionary setValue:[NSNumber numberWithBool:1] forKey:@"ThreadShouldExitNow"];
+    [NSThread exit];
+
+}
+
+- (NSMutableArray *) parsePattern:(ModPlugNote *)pattern withNumRows:(unsigned int)numRows {
+    
+    
+    NSMutableArray *patternData = [[NSMutableArray alloc] init],
+                   *rowData;
+
+    int currRow = 0;
+    int totalRows = (int)numRows;
+    
+    
+    while (currRow != totalRows) {
+    
+        rowData = [[NSMutableArray alloc] init];
+        
+        // todo: optimize (by reusing previous data);
+        int k = 0,
+            chanIdx;
+        
+        unsigned int patternNote,
+                     instrument,
+                     volumeEffect,
+                     effect,
+                     volume,
+                     parameter,
+                     curPatPosition;
+
+         /*
+            static char note2charA[12]={'C','C','D','D','E','F','F','G','G','A','A','B'};
+            static char note2charB[12]={'-','#','-','#','-','-','#','-','#','-','#','-'};
+            static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+        */
+
+        // TODO: Fix this. (for some fucking reason, it's not actually reflecting real note data).
+        // The following for loop was inspired by the Modizer project: https://github.com/yoyofr/modizer
+        for (chanIdx = 0; chanIdx < numChannels; chanIdx++) {
+            char stringData[17*2];
+            k = 0;
+
+            curPatPosition = chanIdx + (numChannels *  (int)currRow);
+
+            patternNote  = pattern[curPatPosition].Note;
+            instrument   = pattern[curPatPosition].Instrument;
+            volumeEffect = pattern[curPatPosition].VolumeEffect;
+            effect       = pattern[curPatPosition].Effect;
+            volume       = pattern[curPatPosition].Volume;
+            parameter    = pattern[curPatPosition].Parameter;
+
+            if (patternNote) {
+                stringData[k++] = note2charA[(patternNote - 13) % 12];
+                stringData[k++] = note2charB[(patternNote - 13) % 12];
+                stringData[k++] = (patternNote - 13) / 12 + '0';
+            }
+            else {
+                stringData[k++] = '.';
+                stringData[k++] = '.';
+                stringData[k++] = '.';
+            }
+            stringData[k++] = '|';
+            
+            if (instrument) {
+                stringData[k++] = dec2hex[ (instrument >> 4) & 0xF ];
+                stringData[k++] = dec2hex[ instrument & 0xF ];
+            }
+            else {
+                stringData[k++] = '.';
+                stringData[k++] = '.';
+            }
+            stringData[k++] = '|';
+
+            
+            if (volume) {
+                stringData[k++] = dec2hex[ (volume >> 4) & 0xF ];
+                stringData[k++] = dec2hex[ volume & 0xF ];
+            }
+            else {
+                stringData[k++] = '.';
+                stringData[k++] = '.';
+            }
+            stringData[k++] = '|';
+            
+            if (effect) {
+                stringData[k++] = 'A' + effect;
+            }
+            else {
+                stringData[k++] = '.';
+            }
+            stringData[k++] = '|';
+            
+            if (parameter) {
+                stringData[k++] = dec2hex[(parameter >> 4) & 0xF];
+                stringData[k++] = dec2hex[parameter & 0xF];
+            }
+            else {
+                stringData[k++] = '.';
+                stringData[k++] = '.';
+            }
+            
+//            printf("%s\n", stringData);
+            
+            NSString *rowString = [[NSString alloc] initWithFormat:@"%s", stringData];
+
+            // This bit adds almost a full second of processing.
+            // TODO: Migrate to a separate thread.
+    //        NSArray *parts = [rowString componentsSeparatedByString:@"|"];
+    //        
+    //        NSDictionary *rowObject = [[NSDictionary alloc] initWithObjectsAndKeys:
+    //                [parts objectAtIndex: 0], @"instrument",
+    //                [parts objectAtIndex: 1], @"volume",
+    //                [parts objectAtIndex: 2], @"effect",
+    //                [parts objectAtIndex: 3], @"parameter",
+    //                [parts objectAtIndex: 4], @"instrument",
+    //                nil
+    //            ];
+            
+            
+            
+            [rowData addObject: rowString];
+        }
+
+    
+    
+        [patternData addObject:rowData];
+        ++currRow;
+    }
+
+
+    return patternData;
+}
+
+
+
+- (void) preLoadPatternsOLD  {
     patternDataReady = false;
 
     // Thread shit.
@@ -315,7 +511,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
         
         // Add the patternData
         else {
-//            printf("Adding -> Ord: %i\t pat: %i\t row: %i\n", currOrder, currPattrn, currRow);
+            printf("Adding -> Ord: %i\t pat: %i\t row: %i\n", currOrder, currPattrn, currRow);
             NSMutableArray *rowData = [self parsePattern];
             [patternStrings addObject:rowData];
         }
@@ -345,16 +541,16 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 }
 
 
-- (NSMutableArray *) parsePattern {
+- (NSMutableArray *) parsePatternOLD {
 //    printf("    parsePattern \n");
     NSMutableArray *row = [[NSMutableArray alloc] init];
     
     ModPlugFile *mpFile = self.mpFile;
 
-    unsigned int rowsToGet;
+    unsigned int numRows;
     int currentPatternNumber = ModPlug_GetCurrentPattern(mpFile);
 
-    ModPlugNote *pattern = ModPlug_GetPattern(mpFile, currentPatternNumber, &rowsToGet);
+    ModPlugNote *pattern = ModPlug_GetPattern(mpFile, currentPatternNumber, &numRows);
     
     if (! pattern) {
 //        NSLog(@"No Pattern for pattern# %i!!", currentPatternNumber);
@@ -377,13 +573,12 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
         static char note2charA[12]={'C','C','D','D','E','F','F','G','G','A','A','B'};
         static char note2charB[12]={'-','#','-','#','-','-','#','-','#','-','#','-'};
         static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
-    
     */
 
     // TODO: Fix this. (for some fucking reason, it's not actually reflecting real note data).
     // The following for loop was inspired by the Modizer project: https://github.com/yoyofr/modizer
     for (index = 0; index < numChannels; index++) {
-        char stringData[50];
+        char stringData[17*2];
         k = 0;
 
         curPatPosition = index + (numChannels * currRow);
@@ -445,6 +640,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
             stringData[k++] = '.';
         }
         
+        
         NSString *rowString = [[NSString alloc] initWithFormat:@"%s", stringData];
 
         // This bit adds almost a full second of processing.
@@ -461,7 +657,16 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 //            ];
         
         
+        
         [row addObject: rowString];
+    }
+    
+    
+    
+    NSEnumerator *e = [row objectEnumerator];
+    id object;
+    while (object = [e nextObject]) {
+        NSLog(@"%@", object);
     }
     
     return row;
@@ -895,10 +1100,11 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 
 
 - (void) cordovaGetStats:(CDVInvokedUrlCommand *)command {
-    float cpuUsage   = [self getCpuUsage];
-    int   currOrder  = ModPlug_GetCurrentOrder(self.mpFile);
-    int   currPattrn = ModPlug_GetCurrentPattern(self.mpFile);
-    int   currRow    = ModPlug_GetCurrentRow(self.mpFile);
+    float cpuUsage     = [self getCpuUsage];
+    int   currOrder    = ModPlug_GetCurrentOrder(self.mpFile);
+    int   currPattrn   = ModPlug_GetCurrentPattern(self.mpFile);
+    int   currRow      = ModPlug_GetCurrentRow(self.mpFile);
+    int   currPosition = ModPlug_GetCurrentRow(self.mpFile);
 
 
     NSNumber *nsPattern  = [[NSNumber alloc] initWithInt:currPattrn];
