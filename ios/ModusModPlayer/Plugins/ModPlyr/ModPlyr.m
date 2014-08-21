@@ -41,7 +41,7 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 - (void) playSong {
     [self initModPlugSettings];
 
-    ModPlug_SetMasterVolume(loadedModPlugFile, 1);
+    ModPlug_SetMasterVolume(loadedModPlugFile, 256);
     ModPlug_Seek(loadedModPlugFile, 0);
     
     int len = ModPlug_GetLength(loadedModPlugFile);
@@ -236,12 +236,14 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     int patternNum;
 
     while (orderNum != totalPatterns) {
-//        patternNum = ModPlug_GetPatternOrder(mpFile, orderNum);
+        patternNum = ModPlug_GetPatternNumberAtOrder(mpFile, orderNum);
         
         currentPattern = ModPlug_GetPattern(mpFile, patternNum, &numRows);
         NSLog(@">> %i", orderNum);
         
-        NSMutableArray *patternData = [self parsePattern:currentPattern withNumRows:numRows];
+        int totalRows = (int *)numRows;
+        
+        NSMutableArray *patternData = [self parsePattern:currentPattern withNumRows:totalRows];
         
         // Add new pattern
         NSString *key = [NSString stringWithFormat:@"%d", orderNum];
@@ -267,14 +269,13 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 
 }
 
-- (NSMutableArray *) parsePattern:(ModPlugNote *)pattern withNumRows:(unsigned int)numRows {
+- (NSMutableArray *) parsePattern:(ModPlugNote *)pattern withNumRows:(int)totalRows {
     
     
     NSMutableArray *patternData = [[NSMutableArray alloc] init],
                    *rowData;
 
     int currRow = 0;
-    int totalRows = (int)numRows;
     
     
     while (currRow != totalRows) {
