@@ -41,7 +41,7 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 - (void) playSong {
     [self initModPlugSettings];
 
-    ModPlug_SetMasterVolume(loadedModPlugFile, 4);
+    ModPlug_SetMasterVolume(loadedModPlugFile, 256);
     ModPlug_Seek(loadedModPlugFile, 0);
     
     int len = ModPlug_GetLength(loadedModPlugFile);
@@ -303,7 +303,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
         // TODO: Fix this. (for some fucking reason, it's not actually reflecting real note data).
         // The following for loop was inspired by the Modizer project: https://github.com/yoyofr/modizer
         for (chanIdx = 0; chanIdx < numChannels; chanIdx++) {
-            char stringData[17*2];
+            char stringData[13 * sizeof(char)];
             k = 0;
 
             curPatPosition = chanIdx + (numChannels *  (int)currRow);
@@ -325,7 +325,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
                 stringData[k++] = '.';
                 stringData[k++] = '.';
             }
-            stringData[k++] = '|';
+            stringData[k++] = ' ';
             
             if (instrument) {
                 stringData[k++] = dec2hex[ (instrument >> 4) & 0xF ];
@@ -335,7 +335,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
                 stringData[k++] = '.';
                 stringData[k++] = '.';
             }
-            stringData[k++] = '|';
+            stringData[k++] = ' ';
 
             
             if (volume) {
@@ -346,7 +346,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
                 stringData[k++] = '.';
                 stringData[k++] = '.';
             }
-            stringData[k++] = '|';
+            stringData[k++] = ' ';
             
             if (effect) {
                 stringData[k++] = 'A' + effect;
@@ -354,7 +354,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
             else {
                 stringData[k++] = '.';
             }
-            stringData[k++] = '|';
+            stringData[k++] = ' ';
             
             if (parameter) {
                 stringData[k++] = dec2hex[(parameter >> 4) & 0xF];

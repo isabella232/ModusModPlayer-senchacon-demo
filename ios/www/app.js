@@ -1,4 +1,4 @@
-function _60ac1718603c6d47a450cfc49f24707e34c5c9d3(){};//@tag foundation,core
+function _a9cbb9d689e8dadf9e09bf78754e8c3a50570b7b(){};//@tag foundation,core
 //@define Ext
 
 /**
@@ -67662,26 +67662,38 @@ Ext.define('Modify.store.ModFiles', {
 Ext.define('Modizer.view.Pattern', {
     extend : 'Ext.Container',
     xtype  : 'pattern',
+    id     : 'pattern',
     config : {
-        style       : 'border: 1px solid #F00',
         patternData : null,
-        data        : null,
-        tpl         : [
-            '<table style="border-bottom: 1px solid #00F;">',
-                '<tpl for=".">',
-                    '<tr>',
-                    '<td>LULZ</td>',
-//                        '<tpl for="{values}">',
-//                            '<td>{.}</td>',
-//                        '</tpl>',
-                    '</tr>',
-                '</tpl>',
-            '</table>'
-        ]
+        scrollable  : {
+            direction  : 'both',
+            indicators : false
+        },
+        items : {
+            xtype  : 'component',
+            style  : 'border: 1px solid #F00',
+            itemId : 'pattern',
+            data   : null,
+            tpl    : [
+                '<table style="width: 100%; font-family: monospace; font-size: 10px;">',
+                    '<tpl for=".">',
+
+                        '<tr style="background-color: {[xindex % 2 === 0 ? "#EFEFEF;" : "#FFF;"]}">',
+                            '<td style="border-right: 1px solid #F00;">{#}</td>',
+                            '<tpl for=".">',
+                                '<td style="padding: 0 5px 0 5px; border-right: 1px solid #F00;">{.}</td>',
+                            '</tpl>',
+                        '</tr>',
+                    '</tpl>',
+                '</table>'
+            ]
+        }
     },
 //
     applyPatternData : function(patternData) {
         this.numChannels = patternData[0][0].length;
+
+        this.down('#pattern').setWidth((this.numChannels * 95) + 50);
 
 
         this.prevPatternNum = this.prevRowNum = -1;
@@ -67711,13 +67723,14 @@ Ext.define('Modizer.view.Pattern', {
             if (row) {
                 if (patternNum != this.prevPatternNum) {
                     console.log(' >>>> PATTERN ' + patternNum);
-                    this.setData(pattern);
+
+                    this.down('#pattern').setData(pattern);
                     // Switch patterns
                 }
 
                 if (rowNum != this.prevRowNum) {
                     // Animate rows
-                    console.log(patternNum, rowNum);
+//                    console.log(patternNum, rowNum);
 
 //                console.log('Found Pattern ' + patternNumber + ' Row ' + rowNum);
 //                alert('debugger')
@@ -67725,7 +67738,7 @@ Ext.define('Modizer.view.Pattern', {
 //                debugger;
                 }
 
-                this.element.dom.innerHTML = patternNum  + ' --  ' +  rowNum;
+//                this.element.dom.innerHTML = patternNum  + ' --  ' +  rowNum;
                 this.prevPatternNum = patternNum;
                 this.prevRowNum = rowNum;
             }
@@ -67751,7 +67764,7 @@ Ext.define('Modify.view.ModPlayer', {
 
     config : {
 
-        layout : 'vbox',
+        layout : 'auto',
 //        height : 120,
 
         patternData : null,
@@ -67762,6 +67775,7 @@ Ext.define('Modify.view.ModPlayer', {
                 itemId : 'songName',
                 style  : 'text-align:center; font-size: 14px; font-weight: bold;',
                 height : 20,
+                docked : 'top',
                 html   : '...'
             },
             {
@@ -67769,6 +67783,7 @@ Ext.define('Modify.view.ModPlayer', {
                 itemId : 'fileName',
                 style  : 'text-align:center; font-size: 12px;',
                 height : 20,
+                docked : 'top',
                 html   : '...'
             },
             {
@@ -67776,6 +67791,7 @@ Ext.define('Modify.view.ModPlayer', {
                 style  : 'text-align: left; font-size: 12px; background-color: #E9E9E9;',
                 itemId : 'stats',
                 height : 20,
+                docked : 'top',
                 tpl    : [
                     '<div style="display: -webkit-flex; -webkit-flex-direction: row;">',
                         '<div style="-webkit-flex: 1 1;"><b>CPU: </b> {cpu}</div>',
@@ -67787,7 +67803,7 @@ Ext.define('Modify.view.ModPlayer', {
             },
             {
                 xtype : 'pattern',
-                flex  : 1
+                height : '100%'
             },
 //            {
 //                xtype  : 'component',
@@ -67796,6 +67812,7 @@ Ext.define('Modify.view.ModPlayer', {
 //            },
             {
                 xtype    : 'toolbar',
+                docked   : 'bottom',
                 defaults : {
                     xtype : 'button'
                 },

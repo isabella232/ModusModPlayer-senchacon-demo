@@ -3,7 +3,7 @@ Ext.define('Modify.view.ModPlayer', {
 
     config : {
 
-        layout : 'vbox',
+        layout : 'auto',
 //        height : 120,
 
         patternData : null,
@@ -14,6 +14,7 @@ Ext.define('Modify.view.ModPlayer', {
                 itemId : 'songName',
                 style  : 'text-align:center; font-size: 14px; font-weight: bold;',
                 height : 20,
+                docked : 'top',
                 html   : '...'
             },
             {
@@ -21,6 +22,7 @@ Ext.define('Modify.view.ModPlayer', {
                 itemId : 'fileName',
                 style  : 'text-align:center; font-size: 12px;',
                 height : 20,
+                docked : 'top',
                 html   : '...'
             },
             {
@@ -28,6 +30,7 @@ Ext.define('Modify.view.ModPlayer', {
                 style  : 'text-align: left; font-size: 12px; background-color: #E9E9E9;',
                 itemId : 'stats',
                 height : 20,
+                docked : 'top',
                 tpl    : [
                     '<div style="display: -webkit-flex; -webkit-flex-direction: row;">',
                         '<div style="-webkit-flex: 1 1;"><b>CPU: </b> {cpu}</div>',
@@ -39,7 +42,7 @@ Ext.define('Modify.view.ModPlayer', {
             },
             {
                 xtype : 'pattern',
-                flex  : 1
+                height : '100%'
             },
 //            {
 //                xtype  : 'component',
@@ -48,6 +51,7 @@ Ext.define('Modify.view.ModPlayer', {
 //            },
             {
                 xtype    : 'toolbar',
+                docked   : 'bottom',
                 defaults : {
                     xtype : 'button'
                 },
