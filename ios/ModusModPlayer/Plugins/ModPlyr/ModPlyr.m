@@ -41,7 +41,7 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 - (void) playSong {
     [self initModPlugSettings];
 
-    ModPlug_SetMasterVolume(loadedModPlugFile, 1);
+    ModPlug_SetMasterVolume(loadedModPlugFile, 256);
     ModPlug_Seek(loadedModPlugFile, 0);
     
     int len = ModPlug_GetLength(loadedModPlugFile);

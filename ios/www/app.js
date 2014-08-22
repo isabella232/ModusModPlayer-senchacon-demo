@@ -1,4 +1,4 @@
-function _0796499216d7850df3f1522488caa590a84d2de9(){};//@tag foundation,core
+function _f37bff42601beb636ae1fd5d4b30dfeca79214f8(){};//@tag foundation,core
 //@define Ext
 
 /**
@@ -67671,9 +67671,9 @@ Ext.define('Modizer.view.Pattern', {
         },
         items : {
             xtype  : 'component',
-            style  : 'border: 1px solid #F00',
+//            style  : 'border: 1px solid #F00',
             itemId : 'pattern',
-            data   : null,
+            data   : [],
             tpl    : [
                 '<table style="width: 100%; font-family: monospace; font-size: 10px;">',
                     '<tpl for=".">',
@@ -67738,11 +67738,9 @@ Ext.define('Modizer.view.Pattern', {
                     if (this.prevRowEl) {
                         var origColor = (rowNum % 2 == 0) ? '#EFEFEF' : '#FFF';
                         this.prevRowEl.style.backgroundColor = origColor;
-                        // reset style
                     }
 
-                    childNodes[rowNum].style.backgroundColor = '#fff3db';
-
+                    childNodes[rowNum].style.backgroundColor = '#a8c5ff';
 
                     this.prevRowEl = childNodes[rowNum];
 
@@ -68518,7 +68516,7 @@ Ext.define('Modify.controller.Main', {
     startModPlayerUpdateLoop : function() {
         if (! this.interval) {
             var boundTimerFunction = Ext.Function.bind(this.getSongStats, this);
-            this.interval = setInterval(boundTimerFunction, 20);
+            this.interval = setInterval(boundTimerFunction, 10);
         }
     },
 

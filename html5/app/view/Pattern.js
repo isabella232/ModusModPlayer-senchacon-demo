@@ -10,9 +10,9 @@ Ext.define('Modizer.view.Pattern', {
         },
         items : {
             xtype  : 'component',
-            style  : 'border: 1px solid #F00',
+//            style  : 'border: 1px solid #F00',
             itemId : 'pattern',
-            data   : null,
+            data   : [],
             tpl    : [
                 '<table style="width: 100%; font-family: monospace; font-size: 10px;">',
                     '<tpl for=".">',
@@ -79,7 +79,7 @@ Ext.define('Modizer.view.Pattern', {
                         this.prevRowEl.style.backgroundColor = origColor;
                     }
 
-                    childNodes[rowNum].style.backgroundColor = '#fff3db';
+                    childNodes[rowNum].style.backgroundColor = '#a8c5ff';
 
                     this.prevRowEl = childNodes[rowNum];
 
