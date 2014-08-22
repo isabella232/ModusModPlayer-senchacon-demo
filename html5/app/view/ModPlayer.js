@@ -30,10 +30,10 @@ Ext.define('Modify.view.ModPlayer', {
                 height : 20,
                 tpl    : [
                     '<div style="display: -webkit-flex; -webkit-flex-direction: row;">',
-                            '<div style="-webkit-flex: 1 1;"><b>CPU: </b> {cpu}</div>',
-                            '<div style="-webkit-flex: 1 1;"><b>Ord: </b> {order}</div>',
-                            '<div style="-webkit-flex: 1 1;"><b>Pat: </b> {pattern}</div>',
-                            '<div style="-webkit-flex: 1 1;"><b>Row:</b> {row}</div>',
+                        '<div style="-webkit-flex: 1 1;"><b>CPU: </b> {cpu}</div>',
+                        '<div style="-webkit-flex: 1 1;"><b>Ord: </b> {order}</div>',
+                        '<div style="-webkit-flex: 1 1;"><b>Pat: </b> {pattern}</div>',
+                        '<div style="-webkit-flex: 1 1;"><b>Row: </b> {row}</div>',
                     '</div>'
                 ]
             },
@@ -47,11 +47,11 @@ Ext.define('Modify.view.ModPlayer', {
 //                flex   : 1
 //            },
             {
-                xtype       : 'toolbar',
+                xtype    : 'toolbar',
                 defaults : {
                     xtype : 'button'
                 },
-                items       : [
+                items    : [
                     { xtype : 'spacer' },
                     {
                         text   : '&lt;&lt;',
@@ -169,6 +169,7 @@ Ext.define('Modify.view.ModPlayer', {
 //        debugger;
         this.songStats = stats;
         stats.cpu = (! isNaN(stats.cpu)) ? stats.cpu.toFixed(2) : stats.cpu;
+//        console.log(stats.cpu);
 
         this.down('#stats').setData(stats);
         this.patternView.showPatternAndPosition(stats.pattern, stats.row);

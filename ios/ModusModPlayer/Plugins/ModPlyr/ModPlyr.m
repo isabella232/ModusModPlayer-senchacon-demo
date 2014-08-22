@@ -41,7 +41,7 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 - (void) playSong {
     [self initModPlugSettings];
 
-    ModPlug_SetMasterVolume(loadedModPlugFile, 256);
+    ModPlug_SetMasterVolume(loadedModPlugFile, 4);
     ModPlug_Seek(loadedModPlugFile, 0);
     
     int len = ModPlug_GetLength(loadedModPlugFile);
@@ -183,7 +183,7 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 
 
 void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer) {
-    NSLog(@"Buffer is being filled");
+//    NSLog(@"Buffer is being filled");
     ModPlyr *modPlayer = (__bridge ModPlyr*)data;
     ModPlugFile *mpFile = modPlayer.mpFile;
     
@@ -246,7 +246,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
         NSMutableArray *patternData = [self parsePattern:currentPattern withNumRows:totalRows];
         
         // Add new pattern
-        NSString *key = [NSString stringWithFormat:@"%d", orderNum];
+        NSString *key = [NSString stringWithFormat:@"%d", patternNum];
         [songPatterns setObject:patternData forKey:key];
 
         ++orderNum;

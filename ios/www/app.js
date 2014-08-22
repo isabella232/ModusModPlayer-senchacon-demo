@@ -1,4 +1,4 @@
-function _203747a91f48196f57d8c29e1970b9835c815743(){};//@tag foundation,core
+function _60ac1718603c6d47a450cfc49f24707e34c5c9d3(){};//@tag foundation,core
 //@define Ext
 
 /**
@@ -67663,51 +67663,83 @@ Ext.define('Modizer.view.Pattern', {
     extend : 'Ext.Container',
     xtype  : 'pattern',
     config : {
-        html        : 'PATTERN VIEW HERE',
         style       : 'border: 1px solid #F00',
-        patternData : null
+        patternData : null,
+        data        : null,
+        tpl         : [
+            '<table style="border-bottom: 1px solid #00F;">',
+                '<tpl for=".">',
+                    '<tr>',
+                    '<td>LULZ</td>',
+//                        '<tpl for="{values}">',
+//                            '<td>{.}</td>',
+//                        '</tpl>',
+                    '</tr>',
+                '</tpl>',
+            '</table>'
+        ]
     },
 //
-//    setPatternData : function(patternData) {
-//
-////        alert('open debugger');
+    applyPatternData : function(patternData) {
+        this.numChannels = patternData[0][0].length;
+
+
+        this.prevPatternNum = this.prevRowNum = -1;
+
+//        alert('open debugger');
 //        console.log(patternData);
-//        this.patternData = patternData;
-////        debugger;
-//    },
-    showPatternAndPosition : function(patternNumber, rowNum) {
-        if (patternNumber == '--') {
+        this.patternData = patternData;
+        return patternData;
+    },
+    showPatternAndPosition : function(patternNum, rowNum) {
+        var patternData = this.getPatternData();
+
+
+        if (! patternData || patternNum == '--' || rowNum == this.prevRowNum) {
             return;
         }
-        var patternData = this.getPatternData(),
-            pattern     = patternData[patternNumber],
+
+        var pattern = patternData[patternNum],
             row;
 
 
         if (pattern) {
             row = pattern[rowNum];
 
-            debugger;
+//            debugger;
 
             if (row) {
-                console.log('Found Pattern ' + patternNumber + ' Row ' + rowNum);
+                if (patternNum != this.prevPatternNum) {
+                    console.log(' >>>> PATTERN ' + patternNum);
+                    this.setData(pattern);
+                    // Switch patterns
+                }
+
+                if (rowNum != this.prevRowNum) {
+                    // Animate rows
+                    console.log(patternNum, rowNum);
+
+//                console.log('Found Pattern ' + patternNumber + ' Row ' + rowNum);
 //                alert('debugger')
 //                console.log('here')
 //                debugger;
-                this.element.dom.innerHTML = row;
+                }
+
+                this.element.dom.innerHTML = patternNum  + ' --  ' +  rowNum;
+                this.prevPatternNum = patternNum;
+                this.prevRowNum = rowNum;
             }
             else {
-                console.warn('I don\'t have pattern #' + pattern + ' Row #' + rowNum);
+                console.warn('Not Found ::' + patternNum + ' Row #' + rowNum);
             }
 
 
         }
         else {
-            console.warn('I don\'t have pattern #' + pattern);
+            console.warn('Not Found ::' + patternNum);
         }
 
 
-        console.log(patternNumber, row);
 
 
 
@@ -67746,10 +67778,10 @@ Ext.define('Modify.view.ModPlayer', {
                 height : 20,
                 tpl    : [
                     '<div style="display: -webkit-flex; -webkit-flex-direction: row;">',
-                            '<div style="-webkit-flex: 1 1;"><b>CPU: </b> {cpu}</div>',
-                            '<div style="-webkit-flex: 1 1;"><b>Ord: </b> {order}</div>',
-                            '<div style="-webkit-flex: 1 1;"><b>Pat: </b> {pattern}</div>',
-                            '<div style="-webkit-flex: 1 1;"><b>Row:</b> {row}</div>',
+                        '<div style="-webkit-flex: 1 1;"><b>CPU: </b> {cpu}</div>',
+                        '<div style="-webkit-flex: 1 1;"><b>Ord: </b> {order}</div>',
+                        '<div style="-webkit-flex: 1 1;"><b>Pat: </b> {pattern}</div>',
+                        '<div style="-webkit-flex: 1 1;"><b>Row: </b> {row}</div>',
                     '</div>'
                 ]
             },
@@ -67763,11 +67795,11 @@ Ext.define('Modify.view.ModPlayer', {
 //                flex   : 1
 //            },
             {
-                xtype       : 'toolbar',
+                xtype    : 'toolbar',
                 defaults : {
                     xtype : 'button'
                 },
-                items       : [
+                items    : [
                     { xtype : 'spacer' },
                     {
                         text   : '&lt;&lt;',
@@ -67884,6 +67916,9 @@ Ext.define('Modify.view.ModPlayer', {
     setStats : function(stats) {
 //        debugger;
         this.songStats = stats;
+        stats.cpu = (! isNaN(stats.cpu)) ? stats.cpu.toFixed(2) : stats.cpu;
+//        console.log(stats.cpu);
+
         this.down('#stats').setData(stats);
         this.patternView.showPatternAndPosition(stats.pattern, stats.row);
 //        this.spectrum.updateCanvas(stats.waveData);
