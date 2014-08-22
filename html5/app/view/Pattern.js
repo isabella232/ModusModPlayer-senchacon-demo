@@ -17,9 +17,9 @@ Ext.define('Modizer.view.Pattern', {
                 '<table style="width: 100%; font-family: monospace; font-size: 10px;">',
                     '<tpl for=".">',
                         '<tr style="background-color: {[xindex % 2 === 0 ? "#EFEFEF;" : "#FFF;"]}">',
-                            '<td style="border-right: 1px solid #F00;">{#}</td>',
+                            '<td style="border-right: 1px solid #AFAFAF;">{#}</td>',
                             '<tpl for=".">',
-                                '<td style="padding: 0 5px 0 5px; border-right: 1px solid #F00;">{.}</td>',
+                                '<td style="padding: 0 5px 0 5px; border-right: 1px solid #AFAFAF;">{.}</td>',
                             '</tpl>',
                         '</tr>',
                     '</tpl>',
@@ -32,6 +32,8 @@ Ext.define('Modizer.view.Pattern', {
         this.numChannels = patternData[0][0].length;
 
         this.down('#pattern').setWidth((this.numChannels * 95) + 50);
+
+        this.prevRowEl = null;
 
 
         this.prevPatternNum = this.prevRowNum = -1;
@@ -67,13 +69,20 @@ Ext.define('Modizer.view.Pattern', {
                 }
 
                 if (rowNum != this.prevRowNum) {
+                    // xindex % 2 === 0 ? "#EFEFEF;" : "#FFF;"
                     // Animate rows
-//                    console.log(patternNum, rowNum);
+                    debugger;
+                    var childNodes = this.element.query('tbody')[0].childNodes;
 
-//                console.log('Found Pattern ' + patternNumber + ' Row ' + rowNum);
-//                alert('debugger')
-//                console.log('here')
-//                debugger;
+                    if (this.prevRowEl) {
+                        var origColor = (rowNum % 2 == 0) ? '#EFEFEF' : '#FFF';
+                        this.prevRowEl.style.backgroundColor = origColor;
+                    }
+
+                    childNodes[rowNum].style.backgroundColor = '#fff3db';
+
+                    this.prevRowEl = childNodes[rowNum];
+
                 }
 
 //                this.element.dom.innerHTML = patternNum  + ' --  ' +  rowNum;
