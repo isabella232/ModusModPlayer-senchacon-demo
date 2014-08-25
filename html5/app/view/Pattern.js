@@ -46,6 +46,7 @@ Ext.define('Modizer.view.Pattern', {
     showPatternAndPosition : function(patternNum, rowNum) {
         var patternData = this.getPatternData();
 
+        window.item = this;
 
         if (! patternData || patternNum == '--' || rowNum == this.prevRowNum) {
             return;

@@ -1,4 +1,4 @@
-function _df93fe673665c8b8ad45b3cce2d0c8aaa88a8bf7(){};//@tag foundation,core
+function _103ce4e33317f25b6c46cee5436c78d8dd8750c8(){};//@tag foundation,core
 //@define Ext
 
 /**
@@ -67707,6 +67707,7 @@ Ext.define('Modizer.view.Pattern', {
     showPatternAndPosition : function(patternNum, rowNum) {
         var patternData = this.getPatternData();
 
+        window.item = this;
 
         if (! patternData || patternNum == '--' || rowNum == this.prevRowNum) {
             return;
