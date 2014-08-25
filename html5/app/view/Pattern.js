@@ -58,30 +58,30 @@ Ext.define('Modizer.view.Pattern', {
         if (pattern) {
             row = pattern[rowNum];
 
-//            debugger;
-
             if (row) {
                 if (patternNum != this.prevPatternNum) {
                     console.log(' >>>> PATTERN ' + patternNum);
 
                     this.down('#pattern').setData(pattern);
+                    this.tBodyNodes = this.element.query('tbody')[0].childNodes;
                     // Switch patterns
                 }
 
                 if (rowNum != this.prevRowNum) {
                     // xindex % 2 === 0 ? "#EFEFEF;" : "#FFF;"
                     // Animate rows
-                    debugger;
-                    var childNodes = this.element.query('tbody')[0].childNodes;
+
+                    var childNodes = this.tBodyNodes,
+                        child =  childNodes[rowNum];
 
                     if (this.prevRowEl) {
                         var origColor = (rowNum % 2 == 0) ? '#EFEFEF' : '#FFF';
                         this.prevRowEl.style.backgroundColor = origColor;
                     }
 
-                    childNodes[rowNum].style.backgroundColor = '#a8c5ff';
+                    child.style.backgroundColor = '#a8c5ff';
 
-                    this.prevRowEl = childNodes[rowNum];
+                    this.prevRowEl = child;
 
                 }
 
@@ -98,9 +98,6 @@ Ext.define('Modizer.view.Pattern', {
         else {
             console.warn('Not Found ::' + patternNum);
         }
-
-
-
 
 
     }

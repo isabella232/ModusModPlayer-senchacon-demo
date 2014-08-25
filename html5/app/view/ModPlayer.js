@@ -168,14 +168,13 @@ Ext.define('Modify.view.ModPlayer', {
         return patternData;
     },
 
-
     setStats : function(stats) {
 //        debugger;
         this.songStats = stats;
-        stats.cpu = (! isNaN(stats.cpu)) ? stats.cpu.toFixed(2) : stats.cpu;
+//        stats.cpu = (! isNaN(stats.cpu)) ? stats.cpu.toFixed(2) : stats.cpu;
 //        console.log(stats.cpu);
 
-        this.down('#stats').setData(stats);
+//        this.down('#stats').setData(stats);
         this.patternView.showPatternAndPosition(stats.pattern, stats.row);
 //        this.spectrum.updateCanvas(stats.waveData);
     }

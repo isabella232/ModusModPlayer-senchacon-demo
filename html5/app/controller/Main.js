@@ -204,6 +204,7 @@ Ext.define('Modify.controller.Main', {
             function callback(patternData) {
 //                debugger;
                 me.player.setPatternData(patternData);
+                me.player.patternView.showPatternAndPosition(0, 0);
                 me.loadMask.hide();
             },
             function errorHandle(err) {
@@ -254,7 +255,6 @@ Ext.define('Modify.controller.Main', {
 
         cordova.exec(
             function callback(data) {
-
                 player.setStats(data);
             },
             function errorHandler(err) {
