@@ -21,9 +21,8 @@ Ext.define('Modify.controller.Main', {
         // Initialize the main view
         me.main = Ext.create('Modify.view.Main', {
             listeners : {
-                back : function() {
-                    me.stopModPlayerUpdateLoop();
-                }
+                scope : me,
+                back  : me.stopModPlayerUpdateLoop
             }
         });
 
@@ -43,10 +42,6 @@ Ext.define('Modify.controller.Main', {
 
         cordova.exec(
             Ext.Function.bind(me.onAfterGetDirectories, me),
-//            function callback(directories) {
-//                directories = Ext.decode(directories);
-//                alert(directories[0].path);
-//            },
             function errorHandler(err) {
 
             },
@@ -54,10 +49,12 @@ Ext.define('Modify.controller.Main', {
             'cordovaGetModPaths',
             ['']
         );
+
     },
 
     onAfterGetDirectories : function(directories) {
         directories = Ext.decode(directories);
+        var me = this;
 
         var dirStore = Ext.create('Modify.store.Directories', {
                 data : directories
@@ -66,12 +63,26 @@ Ext.define('Modify.controller.Main', {
                 itemTpl   : '{dirName}',
                 store     : dirStore,
                 listeners : {
-                    scope   : this,
-                    select : this.onDirListItemSelect
+                    scope   : me,
+                    select : me.onDirListItemSelect
                 }
             });
 
-        this.main.add(dirList);
+        me.main.add(dirList);
+
+
+        // TODO: Disable/remove after development
+        Ext.Function.defer(function() {
+//            var r = dirList.getStore().getAt(0);
+//            me.onDirListItemSelect(dirList, r);
+////
+//            Ext.Function.defer(function() {
+//                var fileList = me.main.down('#fileList');
+//                r = fileList.getStore().getAt(0);
+//                me.onFileListItemSelect(fileList, r)
+//            }, 300)
+
+        }, 1);
 
     },
 
@@ -80,20 +91,11 @@ Ext.define('Modify.controller.Main', {
 
         Ext.Function.defer(function() {
             list.deselectAll();
-        }, 200)
+        }, 200);
 
-//        if (this.main.isAnimating) {
-//            return;
-//        }
-//
-//        this.main.isAnimating = true;
 
         cordova.exec(
             Ext.Function.bind(me.onAfterGetModFiles, me),
-//            function callback(directories) {
-//                directories = Ext.decode(directories);
-//                alert(directories[0].path);
-//            },
             function errorHandler(err) {
 
             },
@@ -110,6 +112,7 @@ Ext.define('Modify.controller.Main', {
                 data : files
             }),
             fileList = Ext.create('Ext.dataview.List', {
+                itemId    : 'fileList',
                 itemTpl   : '{fileName}',
                 store     : fileStore,
                 flex      : 1,
@@ -120,6 +123,7 @@ Ext.define('Modify.controller.Main', {
             });
 
         me.main.addAndAnimateItem(fileList);
+
     },
 
     onFileListItemSelect : function(list, record) {
@@ -204,8 +208,16 @@ Ext.define('Modify.controller.Main', {
             function callback(patternData) {
 //                debugger;
                 me.player.setPatternData(patternData);
+
                 me.player.patternView.showPatternAndPosition(0, 0);
-                me.loadMask.hide();
+
+                setTimeout(function(){
+                    me.player.patternView.prevRowNum = me.player.patternView.prevPatternNum -1;
+                    me.player.patternView.showPatternAndPosition(0, 0);
+
+                    me.loadMask.hide();
+                }, 150);
+
             },
             function errorHandle(err) {
                 if (err == "notready") {

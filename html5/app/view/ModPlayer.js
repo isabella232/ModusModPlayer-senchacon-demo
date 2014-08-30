@@ -23,22 +23,7 @@ Ext.define('Modify.view.ModPlayer', {
                 style  : 'text-align:center; font-size: 12px;',
                 height : 20,
                 docked : 'top',
-                html   : '...'
-            },
-            {
-                xtype  : 'component',
-                style  : 'text-align: left; font-size: 12px; background-color: #E9E9E9;',
-                itemId : 'stats',
-                height : 20,
-                docked : 'top',
-                tpl    : [
-                    '<div style="display: -webkit-flex; -webkit-flex-direction: row;">',
-                        '<div style="-webkit-flex: 1 1;"><b>CPU: </b> {cpu}</div>',
-                        '<div style="-webkit-flex: 1 1;"><b>Ord: </b> {order}</div>',
-                        '<div style="-webkit-flex: 1 1;"><b>Pat: </b> {pattern}</div>',
-                        '<div style="-webkit-flex: 1 1;"><b>Row: </b> {row}</div>',
-                    '</div>'
-                ]
+                html   : ''
             },
             {
                 xtype : 'pattern',

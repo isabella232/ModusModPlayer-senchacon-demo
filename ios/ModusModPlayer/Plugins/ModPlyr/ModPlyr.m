@@ -41,7 +41,7 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 - (void) playSong {
     [self initModPlugSettings];
 
-    ModPlug_SetMasterVolume(loadedModPlugFile, 2);
+    ModPlug_SetMasterVolume(loadedModPlugFile, 256);
     ModPlug_Seek(loadedModPlugFile, 0);
     
     int len = ModPlug_GetLength(loadedModPlugFile);
@@ -136,7 +136,21 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
     UInt32 err;
     float mVolume = 1.0f;
     
-    /* We force this format for iPhone */
+    /*
+    
+       (AudioStreamBasicDescription) mDataFormat = {
+          mSampleRate = 44100
+          mFormatID = 1819304813
+          mFormatFlags = 12
+          mBytesPerPacket = 4
+          mFramesPerPacket = 1
+          mBytesPerFrame = 4
+          mChannelsPerFrame = 2
+          mBitsPerChannel = 16
+          mReserved = 1
+        }
+    */
+    
     mDataFormat.mFormatID         = kAudioFormatLinearPCM;
     mDataFormat.mFormatFlags      = kLinearPCMFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
 	mDataFormat.mSampleRate       = PLAYBACK_FREQ;
@@ -145,22 +159,23 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
     mDataFormat.mBytesPerFrame    = (mDataFormat.mBitsPerChannel >> 3) * mDataFormat.mChannelsPerFrame;
     mDataFormat.mFramesPerPacket  = 1;
     mDataFormat.mBytesPerPacket   = mDataFormat.mBytesPerFrame;
+    
 
     err = AudioQueueNewOutput(&mDataFormat,
-                         audioCallback,
-                         CFBridgingRetain(self),
-                         CFRunLoopGetCurrent(),
-                         kCFRunLoopCommonModes,
-                         0,
-                         &mAudioQueue);
+                             audioCallback,
+                             CFBridgingRetain(self),
+                             CFRunLoopGetCurrent(),
+                             kCFRunLoopCommonModes,
+                             0,
+                             &mAudioQueue);
 
     /* Create associated buffers */
-    mBuffers = (AudioQueueBufferRef*) malloc( sizeof(AudioQueueBufferRef) * SOUND_BUFFER_NB );
+    mBuffers = (AudioQueueBufferRef*) malloc( sizeof(AudioQueueBufferRef) * NUM_BUFFERS );
     
     int bufferSize = SOUND_BUFFER_SIZE_SAMPLE * 2 * 2,
         bytesRead;
 
-    for (int i = 0; i < SOUND_BUFFER_NB; i++) {
+    for (int i = 0; i < NUM_BUFFERS; i++) {
 		AudioQueueBufferRef mBuffer;
 		err = AudioQueueAllocateBuffer(mAudioQueue, bufferSize, &mBuffer );
 		
@@ -170,14 +185,49 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
         bytesRead = ModPlug_Read(mpFile, (char*)mBuffer->mAudioData, bufferSize);
         
         AudioQueueEnqueueBuffer(mAudioQueue, mBuffers[i], 0, NULL);
+        
+        SInt16 *frames = mBuffer->mAudioData;
+        
+        [self convertAudioToFloat:frames];
+        
     }
     
     
     /* Set initial playback volume */
     err = AudioQueueSetParameter(mAudioQueue, kAudioQueueParam_Volume, mVolume );
     err = AudioQueueStart(mAudioQueue, NULL );
+    
+//    AudioQueueProcessingTapRef tapRef;
+//
+//    
+//    OSStatus tapStatus = AudioQueueProcessingTapNew(
+//        mAudioQueue,
+//        CFBridgingRetain(self),
+//        audioTap,
+//        kAudioQueueProcessingTap_Siphon,
+//        (unsigned long*)bufferSize,
+//        &mDataFormat,
+//        &tapRef
+//    );
+//    
+    
+//    NSLog(@"Audio Tap Status: %u", (int)tapStatus);
+    
+    
 }
 
+
+void audioTap(void *                          inClientData,
+              AudioQueueProcessingTapRef      inAQTap,
+              UInt32                          inNumberFrames,
+              AudioTimeStamp *                ioTimeStamp,
+              UInt32 *                        ioFlags,
+              UInt32 *                        outNumberFrames,
+              AudioBufferList *               ioData) {
+    
+    // Nothing to do here yet
+    
+}
 
 void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer) {
 //    NSLog(@"Buffer is being filled");
@@ -186,7 +236,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     
     int bytesRead;
     
-    mBuffer->mAudioDataByteSize = SOUND_BUFFER_SIZE_SAMPLE*2*2;
+//    mBuffer->mAudioDataByteSize = SOUND_BUFFER_SIZE_SAMPLE*2*2;
     bytesRead = ModPlug_Read(mpFile, (char*)mBuffer->mAudioData, mBuffer->mAudioDataByteSize);
 
     if (bytesRead < 1) {
@@ -194,7 +244,20 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
         bytesRead = ModPlug_Read(mpFile, (char*)mBuffer->mAudioData, mBuffer->mAudioDataByteSize);
     }
   
+  
+    // Convert the signed int to float
+    
+    SInt16 *frames = mBuffer->mAudioData;
+    [modPlayer convertAudioToFloat:frames];
+  
     AudioQueueEnqueueBuffer(mQueue, mBuffer, 0, NULL);
+}
+
+- (void) convertAudioToFloat:(SInt16 *)frames {
+    float ltFrameVal = frames[0] / 32768.0f;
+    float rtFrameVal = frames[1] / 32768.0f;
+    
+    printf("\t%f\t\t%f\n", ltFrameVal, rtFrameVal);
 }
 
 
@@ -236,7 +299,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
         patternNum = ModPlug_GetPatternNumberAtOrder(mpFile, orderNum);
         
         currentPattern = ModPlug_GetPattern(mpFile, patternNum, &numRows);
-        NSLog(@">> %i", orderNum);
+//        NSLog(@">> %i", orderNum);
         
         int totalRows = (int *)numRows;
         
@@ -300,12 +363,11 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
         // TODO: Fix this. (for some fucking reason, it's not actually reflecting real note data).
         // The following for loop was inspired by the Modizer project: https://github.com/yoyofr/modizer
         for (chanIdx = 0; chanIdx < numChannels; chanIdx++) {
-            char stringData[13 * sizeof(char)];
+            char stringData[14],
+                 *sd = stringData;
             
 //            NSLog(@"sizeof(char) == %lu", sizeof(char));
             
-            k = 0;
-
             curPatPosition = chanIdx + (numChannels *  (int)currRow);
 
             patternNote  = pattern[curPatPosition].Note;
@@ -316,56 +378,60 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
             parameter    = pattern[curPatPosition].Parameter;
 
             if (patternNote) {
-                stringData[k++] = note2charA[(patternNote - 13) % 12];
-                stringData[k++] = note2charB[(patternNote - 13) % 12];
-                stringData[k++] = (patternNote - 13) / 12 + '0';
+                *sd++ = note2charA[(patternNote - 13) % 12];
+                *sd++ = note2charB[(patternNote - 13) % 12];
+                *sd++ = (patternNote - 13) / 12 + '0';
             }
             else {
-                stringData[k++] = '.';
-                stringData[k++] = '.';
-                stringData[k++] = '.';
+                *sd++ = '.';
+                *sd++ = '.';
+                *sd++ = '.';
             }
-            stringData[k++] = ' ';
+            *sd++ = ' ';
             
             if (instrument) {
-                stringData[k++] = dec2hex[ (instrument >> 4) & 0xF ];
-                stringData[k++] = dec2hex[ instrument & 0xF ];
+                *sd++ = dec2hex[ (instrument >> 4) & 0xF ];
+                *sd++ = dec2hex[ instrument & 0xF ];
             }
             else {
-                stringData[k++] = '.';
-                stringData[k++] = '.';
+                *sd++ = '.';
+                *sd++ = '.';
             }
-            stringData[k++] = ' ';
+            *sd++ = ' ';
 
             
             if (volume) {
-                stringData[k++] = dec2hex[ (volume >> 4) & 0xF ];
-                stringData[k++] = dec2hex[ volume & 0xF ];
+                *sd++ = dec2hex[ (volume >> 4) & 0xF ];
+                *sd++ = dec2hex[ volume & 0xF ];
             }
             else {
-                stringData[k++] = '.';
-                stringData[k++] = '.';
+                *sd++ = '.';
+                *sd++ = '.';
             }
-            stringData[k++] = ' ';
+            *sd++ = ' ';
             
             if (effect) {
-                stringData[k++] = 'A' + effect;
+                *sd++ = 'A' + effect;
             }
             else {
-                stringData[k++] = '.';
+                *sd++ = '.';
             }
-            stringData[k++] = ' ';
+            *sd++ = ' ';
             
             if (parameter) {
-                stringData[k++] = dec2hex[(parameter >> 4) & 0xF];
-                stringData[k++] = dec2hex[parameter & 0xF];
+                *sd++ = dec2hex[(parameter >> 4) & 0xF];
+                *sd++ = dec2hex[parameter & 0xF];
             }
             else {
-                stringData[k++] = '.';
-                stringData[k++] = '.';
+                *sd++ = '.';
+                *sd++ = '.';
             }
             
-//            printf("%s\n", stringData);
+            // Null terminate the string.
+            *sd++ = '\0';
+            
+            
+//            printf("%lu\n", strlen(stringData));
             
             NSString *rowString = [[NSString alloc] initWithFormat:@"%s", stringData];
 
@@ -381,8 +447,6 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     //                [parts objectAtIndex: 4], @"instrument",
     //                nil
     //            ];
-            
-            
             
             [rowData addObject: rowString];
         }
