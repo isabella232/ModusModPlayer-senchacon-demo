@@ -61,6 +61,8 @@
 
 }
 
+@property BOOL *generateAudioData;
+
 @property ModPlugFile *mpFile;
 
 

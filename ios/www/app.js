@@ -1,4 +1,4 @@
-function _fcfad04e9282b6fa1fd7cd5b5de24d3c34feecd1(){};//@tag foundation,core
+function _230873815c0c6c7c70ba41bfac67197f3db55f1f(){};//@tag foundation,core
 //@define Ext
 
 /**
@@ -67522,14 +67522,14 @@ Ext.define('Modify.view.Main', {
                     text   : 'Back',
                     hidden : true
                 },
-                {xtype:'spacer'}
-//                {
-//                    xtype  : 'button',
-//                    ui     : 'confirm',
-//                    itemId : 'stopbutton',
-//                    text   : 'TEST',
-//                    hidden : false
-//                }
+                {xtype:'spacer'},
+                {
+                    xtype  : 'button',
+                    ui     : 'confirm',
+                    itemId : 'stopbutton',
+                    text   : 'TEST',
+                    hidden : false
+                }
 
             ]
         },
@@ -67603,7 +67603,22 @@ Ext.define('Modify.view.Main', {
         }
     },
     onStopButton : function() {
-        this.fireEvent('stop', this);
+
+        cordova.exec(
+            function callback(data) {
+                console.log('got waveform data')
+
+                debugger;
+                console.log(data);
+            },
+            function errorHandler(err) {
+                console.log('getSongStats error');
+            },
+            'ModPlyr',
+            'cordovaGetWaveFormData',
+            ['waveform', 500, 230]
+//            [spectrumMode, spectrumSize.width, spectrumSize.height]
+        );
     }
 
 });
@@ -68418,14 +68433,14 @@ Ext.define('Modify.controller.Main', {
 
         // TODO: Disable/remove after development
         Ext.Function.defer(function() {
-//            var r = dirList.getStore().getAt(0);
-//            me.onDirListItemSelect(dirList, r);
-////
-//            Ext.Function.defer(function() {
-//                var fileList = me.main.down('#fileList');
-//                r = fileList.getStore().getAt(0);
-//                me.onFileListItemSelect(fileList, r)
-//            }, 300)
+            var r = dirList.getStore().getAt(0);
+            me.onDirListItemSelect(dirList, r);
+//
+            Ext.Function.defer(function() {
+                var fileList = me.main.down('#fileList');
+                r = fileList.getStore().getAt(0);
+                me.onFileListItemSelect(fileList, r)
+            }, 300)
 
         }, 1);
 

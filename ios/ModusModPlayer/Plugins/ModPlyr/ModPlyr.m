@@ -9,6 +9,8 @@
 #import "ModPlyr.h"
 
 @implementation ModPlyr : CDVPlugin {
+    NSMutableArray *waveFormData;
+    int waveFormDataSize;
     
 
 }
@@ -56,6 +58,14 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 }
 - (void) loadFile:(NSString *)filePath  {
     [self unloadFile];
+    self.generateAudioData = true;
+    
+    if (!waveFormData) {
+        // TODO: Make waveFormDataSizeLimit Dynamic
+        waveFormDataSize = 500;
+        waveFormData = [[NSMutableArray alloc] initWithCapacity:waveFormDataSize];
+    }
+    
     FILE *file;
     
     const char* fil = [filePath cStringUsingEncoding:NSASCIIStringEncoding];
@@ -173,6 +183,7 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
     mBuffers = (AudioQueueBufferRef*) malloc( sizeof(AudioQueueBufferRef) * NUM_BUFFERS );
     
     int bufferSize = SOUND_BUFFER_SIZE_SAMPLE * 2 * 2,
+//    int bufferSize = 512,
         bytesRead;
 
     for (int i = 0; i < NUM_BUFFERS; i++) {
@@ -184,11 +195,13 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
         
         bytesRead = ModPlug_Read(mpFile, (char*)mBuffer->mAudioData, bufferSize);
         
+//        printf("bytes read: %i\n", bytesRead);
+        
         AudioQueueEnqueueBuffer(mAudioQueue, mBuffers[i], 0, NULL);
         
         SInt16 *frames = mBuffer->mAudioData;
         
-        [self convertAudioToFloat:frames];
+        [self convertAudioSamplesToFloat:frames];
         
     }
     
@@ -229,6 +242,7 @@ void audioTap(void *                          inClientData,
     
 }
 
+// Executed within a different context (not this class);
 void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer) {
 //    NSLog(@"Buffer is being filled");
     ModPlyr *modPlayer = (__bridge ModPlyr*)data;
@@ -236,7 +250,6 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     
     int bytesRead;
     
-//    mBuffer->mAudioDataByteSize = SOUND_BUFFER_SIZE_SAMPLE*2*2;
     bytesRead = ModPlug_Read(mpFile, (char*)mBuffer->mAudioData, mBuffer->mAudioDataByteSize);
 
     if (bytesRead < 1) {
@@ -245,19 +258,33 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     }
   
   
-    // Convert the signed int to float
+//      printf("bytes read: %i\n", bytesRead);
+
+  // Convert the signed int to float
+    if (modPlayer.generateAudioData) {
+        SInt16 *frames = mBuffer->mAudioData;
+        [modPlayer convertAudioSamplesToFloat:frames];
+    }
     
-    SInt16 *frames = mBuffer->mAudioData;
-    [modPlayer convertAudioToFloat:frames];
-  
     AudioQueueEnqueueBuffer(mQueue, mBuffer, 0, NULL);
 }
 
-- (void) convertAudioToFloat:(SInt16 *)frames {
-    float ltFrameVal = frames[0] / 32768.0f;
-    float rtFrameVal = frames[1] / 32768.0f;
+- (void) convertAudioSamplesToFloat:(SInt16 *)frames {
+    NSNumber *ltFrameVal = [NSNumber numberWithFloat:(frames[0] / 32767.5)];
+    NSNumber *rtFrameVal = [NSNumber numberWithFloat:(frames[1] / 32767.5)];
     
-    printf("\t%f\t\t%f\n", ltFrameVal, rtFrameVal);
+//    NSLog(@"L: \t%@\t\tR:\t%@\n", ltFrameVal, rtFrameVal);
+//    printf("L: \t%f\t\tR:\t%i\n", (frames[0] / 32767.5), frames[1]);
+
+    NSArray *audioFrame = [[NSArray alloc] initWithObjects:ltFrameVal, rtFrameVal, nil];
+    
+    if ([waveFormData count] >= waveFormDataSize) {
+        [waveFormData removeObjectAtIndex:0];
+    }
+    
+    [waveFormData addObject:audioFrame];
+//    printf("waveFormData size: %i\n", [waveFormData count]);
+    
 }
 
 
@@ -301,7 +328,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
         currentPattern = ModPlug_GetPattern(mpFile, patternNum, &numRows);
 //        NSLog(@">> %i", orderNum);
         
-        int totalRows = (int *)numRows;
+        int totalRows = (int)numRows;
         
         NSMutableArray *patternData = [self parsePattern:currentPattern withNumRows:totalRows];
         
@@ -313,8 +340,6 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     }
 
 //    NSLog(@"here");
-    
-    
     
     NSTimeInterval timeInterval = [start timeIntervalSinceNow];
     NSString *message = [[NSString alloc] initWithFormat:@"Done pre-buffering patterns %f(ms)", timeInterval];
@@ -563,81 +588,87 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 
 // This method was copied from libbass spectrum.c :: UpdateSpectrum example
 - (NSArray*) getWaveFormData:(NSInteger*)width  andHeight:(NSInteger*)height {
-//    int x,y;
+    int x,y;
+
+    // TODO: Use width and height parameters here. Need to figure out how to cast from NSInteger to int!!!!
+    int SPECHEIGHT = 213;
+    int SPECWIDTH =  500;
+
+
+    NSMutableArray *channelData    = [[NSMutableArray alloc] init];
+    NSMutableArray *channelOneData = [[NSMutableArray alloc] init];
+    NSMutableArray *channelTwoData = [[NSMutableArray alloc] init];
+    
+    NSArray *frame;
+    
+    if ([waveFormData count] < SPECWIDTH) {
+        return @[];
+    }
+
+    int c = 0;
+    int target;
+    while (c < 2) {
+//        NSLog(@"frame[0] = %@ \t frame[1] = %@\n", [frame objectAtIndex:0], [frame objectAtIndex:1]);
+   
+        NSNumber *plotItem;
+        for (x=0; x < (SPECWIDTH / 2); x++) {
+//            NSNumber val =
+            target = x * 2 + c;
+//            
+//            NSLog(@"target = %i", target);
 //
-//
-//    // TODO: Use width and height parameters here. Need to figure out how to cast from NSInteger to int!!!!
-//    int SPECHEIGHT = 213;
-//    int SPECWIDTH =  500;
-//
-//    DWORD specbuf[SPECHEIGHT * SPECWIDTH];
-//
-//    NSMutableArray *channelData    = [[NSMutableArray alloc] init];
-//    NSMutableArray *channelOneData = [[NSMutableArray alloc] init];
-//    NSMutableArray *channelTwoData = [[NSMutableArray alloc] init];
-//
-//    int c;
-//    float *buf;
-//
-//    BASS_CHANNELINFO channelInfo;
-//    
-//    memset(specbuf, 0, sizeof(specbuf));
-//    
-//    BASS_ChannelGetInfo(currentModFile, &channelInfo); // get number of channels
-//    
-//    buf = alloca(channelInfo.chans * SPECWIDTH * sizeof(float)); // allocate buffer for data
-//    
-////    short dataSize = channelInfo.chans * SPECWIDTH * sizeof(float);
-////    printf("data size %hd \n", dataSize);
-//    
-//    // get the sample data (floating-point to avoid 8 & 16 bit processing)
-//    BASS_ChannelGetData(currentModFile, buf, ( channelInfo.chans * SPECWIDTH * sizeof(float) ) |BASS_DATA_FLOAT);
-//    
-//    
-//    for ( c = 0; c < channelInfo.chans;c ++) {
-//        NSNumber *plotItem;
-//        for (x=0;x<SPECWIDTH;x++) {
-//            int v = ( 1 - buf[ x * channelInfo.chans + c]) * SPECHEIGHT /2; // invert and scale to fit display
-//        
-//            if (v < 0) {
-//                v = 0;
-//            }
-//            else if (v >= SPECHEIGHT) {
-//                v = SPECHEIGHT - 1;
-//            }
-//
-//            if (!x) {
-//                y = v;
-//            }
-//            do { // draw line from previous sample...
-//                if (y < v) {
-//                    y++;
-//                }
-//                else if (y > v) {
-//                    y--;
-//                }
-//                
-//                
-//                plotItem = [[NSNumber alloc] initWithInt:v];
-//
-//                
-//                specbuf[ y * SPECWIDTH + x] = 1; // left=green, right=red (could add more colours to palette for more chans)
-//            } while (y!=v);
-//    
-//            if (c == 0) {
-//                [channelOneData addObject: plotItem];
-//            }
-//            else {
-//                [channelTwoData addObject: plotItem];
-//            }
-//        }
-//    }
-//
-//    [channelData addObject:channelOneData];
-//    [channelData addObject:channelTwoData];
-//    
-//    return channelData;
-    return [[NSArray alloc] init];
+            if (target >= SPECWIDTH) {
+                continue;
+            }
+
+            
+            frame = [waveFormData objectAtIndex:target];
+            
+            float val = [[frame objectAtIndex:c] floatValue];
+            
+            int v = ( 1 - val) * SPECHEIGHT / 2; // invert and scale to fit display
+        
+            if (v < 0) {
+                v = 0;
+            }
+            else if (v >= SPECHEIGHT) {
+                v = SPECHEIGHT - 1;
+            }
+
+            if (!x) {
+                y = v;
+            }
+            do { // draw line from previous sample...
+                if (y < v) {
+                    y++;
+                }
+                else if (y > v) {
+                    y--;
+                }
+                
+                
+                plotItem = [[NSNumber alloc] initWithInt:v];
+
+            } while (y != v);
+    
+            if (c == 0) {
+                [channelOneData addObject:plotItem];
+            }
+            else {
+                [channelTwoData addObject:plotItem];
+            }
+        }
+        
+        ++c;
+    
+    }
+    printf("Total waveFormData: %i\n\n", [waveFormData count]);
+    
+
+    [channelData addObject:channelOneData];
+    [channelData addObject:channelTwoData];
+    
+    return channelData;
 }
 
 
@@ -882,17 +913,18 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 
 
 - (void) cordovaGetStats:(CDVInvokedUrlCommand *)command {
-    float cpuUsage     = [self getCpuUsage];
-    int   currOrder    = ModPlug_GetCurrentOrder(self.mpFile);
-    int   currPattrn   = ModPlug_GetCurrentPattern(self.mpFile);
-    int   currRow      = ModPlug_GetCurrentRow(self.mpFile);
-    int   currPosition = ModPlug_GetCurrentRow(self.mpFile);
+    float cpuUsage   = [self getCpuUsage];
+    int   currOrder  = ModPlug_GetCurrentOrder(self.mpFile);
+    int   currPattrn = ModPlug_GetCurrentPattern(self.mpFile);
+    int   currRow    = ModPlug_GetCurrentRow(self.mpFile);
+//    int   currPosition = ModPlug_GetCurrentRow(self.mpFile);
 
 
-    NSNumber *nsPattern  = [[NSNumber alloc] initWithInt:currPattrn];
-    NSNumber *nsRow      = [[NSNumber alloc] initWithInt:currRow];
-    NSNumber *nsOrder    = [[NSNumber alloc] initWithInt:currOrder];
-    NSNumber *nsCpu      = [[NSNumber alloc] initWithFloat:cpuUsage];
+    NSNumber *nsPattern = [[NSNumber alloc] initWithInt:currPattrn];
+    NSNumber *nsRow     = [[NSNumber alloc] initWithInt:currRow];
+    NSNumber *nsOrder   = [[NSNumber alloc] initWithInt:currOrder];
+    NSNumber *nsCpu     = [[NSNumber alloc] initWithFloat:cpuUsage];
+//    NSNumber *nsCurPos   = [[NSNumber alloc] initWithInt:currPosition];
 
 
     NSDictionary *jsonObj;
@@ -904,106 +936,73 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
                 nsRow,     @"row",
                 nsOrder,   @"order",
                 nsCpu,     @"cpu",
+//                nsCurPos,  @"position",
                 nil
             ];
     
     CDVPluginResult *pluginResult = [CDVPluginResult
-                        resultWithStatus:CDVCommandStatus_OK
-                        messageAsDictionary:jsonObj
-                    ];
+            resultWithStatus:CDVCommandStatus_OK
+            messageAsDictionary:jsonObj
+        ];
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void) cordovaGetWaveFormData:(CDVInvokedUrlCommand*)command {
-//    int level, pos, time, act;
+    int level, pos, time, act;
 //    float *buf;
-//    float cpu;
-//    
-//    BASS_CHANNELINFO ci;
-//    BASS_ChannelGetInfo(currentModFile, &ci); // get number of channels
-//
-//    
-//    NSDictionary *jsonObj;
-//    
-//    
-//    if ((act = BASS_ChannelIsActive(currentModFile)) ) {
-//        NSString *wavDataType = [command.arguments objectAtIndex:0];
-//    
-//        level = BASS_ChannelGetLevel(currentModFile);
-//        pos   = BASS_ChannelGetPosition(currentModFile, BASS_POS_MUSIC_ORDER);
-//        time  = BASS_ChannelBytes2Seconds(currentModFile, pos);
-//        cpu   = BASS_GetCPU();
-//        
-//        
-//        buf = alloca(ci.chans * 368 * sizeof(float)); // allocate buffer for data
-//		
-//        BASS_ChannelGetData(currentModFile, buf, (ci.chans * 368 * sizeof(float)) | BASS_DATA_FLOAT); // get the sample data (floating-point to avoid 8 & 16 bit processing)
-//
-//
-//
-//        NSString *nsPattern  = [NSString  stringWithFormat:@"%03u", LOWORD(pos)];
-//        NSString *nsRow  = [NSString  stringWithFormat:@"%03u", HIWORD(pos)];
-//        NSNumber *nsLevel    = [[NSNumber alloc] initWithInt:level];
-//        NSNumber *nsTime     = [[NSNumber alloc] initWithInt:time];
-//        NSNumber *nsCpu      = [[NSNumber alloc] initWithFloat: cpu];
-//        NSNumber *nsBuf      = [[NSNumber alloc] initWithFloat: *buf];
-//        
-//        
-//        NSInteger *canvasWidth = (NSInteger *)[command.arguments objectAtIndex:0];
-//        NSInteger *canvasHeight = (NSInteger *)[command.arguments objectAtIndex:1];
-//
-////        NSLog(@"CanvasSize %@x%@", canvasWidth, canvasHeight);
-//
-//        
-//        NSArray *wavData;
-//        
-//        if ([wavDataType isEqual:@"wavform"]) {
-////            NSLog(@"%@", wavDataType);
-//            wavData = [self getWaveFormData:(NSInteger *)canvasWidth andHeight:(NSInteger *)canvasHeight];
-//     
-//        }
-//        else if ([wavDataType isEqual:@"spectrum"]) {
-////            NSLog(@"%@", wavDataType);
-//
-//            wavData = [self getSpectrumData];
-//
-//        }
-//        else {
-//            wavData = @[];
-//        }
-//        
-//        jsonObj = [[NSDictionary alloc]
-//                initWithObjectsAndKeys:
-//                    nsLevel, @"level",
-//                    nsPattern, @"pattern",
-//                    nsRow, @"row",
-//                    nsTime, @"time",
-//                    nsBuf, @"buff",
-//                    nsCpu, @"cpu",
-//                    wavData, @"waveData",
-//                    nil
-//                ];
-//    
-//    }
-//    else {
-//    
-//          
-//         jsonObj = [[NSDictionary alloc]
-//            initWithObjectsAndKeys:
-//                @"false", @"success",
-//                nil
-//            ];
-//
-//    }
+    float cpu;
+    
+    NSDictionary *jsonObj;
     
     
-//    CDVPluginResult *pluginResult = [CDVPluginResult
-//                                    resultWithStatus:CDVCommandStatus_OK
-//                                    messageAsDictionary:jsonObj
-//                                ];
-//
-//    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    NSString *wavDataType = [command.arguments objectAtIndex:0];
+    
+        
+//    buf = alloca(ci.chans * 368 * sizeof(float)); // allocate buffer for data
+    
+//    BASS_ChannelGetData(currentModFile, buf, (ci.chans * 368 * sizeof(float)) | BASS_DATA_FLOAT); // get the sample data (floating-point to avoid 8 & 16 bit processing)
+
+    
+    NSInteger *canvasWidth  = (NSInteger *)[command.arguments objectAtIndex:0];
+    NSInteger *canvasHeight = (NSInteger *)[command.arguments objectAtIndex:1];
+    
+    NSArray *wavData;
+    
+    if ([wavDataType isEqual:@"waveform"]) {
+//            NSLog(@"%@", wavDataType);
+        wavData = [self getWaveFormData:(NSInteger *)canvasWidth andHeight:(NSInteger *)canvasHeight];
+ 
+    }
+    else if ([wavDataType isEqual:@"spectrum"]) {
+//            NSLog(@"%@", wavDataType);
+
+        wavData = [self getSpectrumData];
+
+    }
+    else {
+        wavData = @[];
+    }
+    
+    jsonObj = [[NSDictionary alloc]
+            initWithObjectsAndKeys:
+//                nsLevel, @"level",
+//                nsPattern, @"pattern",
+//                nsRow, @"row",
+//                nsTime, @"time",
+//                nsBuf, @"buff",
+//                nsCpu, @"cpu",
+                wavData, @"waveData",
+                nil
+            ];
+
+    
+    CDVPluginResult *pluginResult = [CDVPluginResult
+                                    resultWithStatus:CDVCommandStatus_OK
+                                    messageAsDictionary:jsonObj
+                                ];
+
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void) cordovaGetSpectrumData:(CDVInvokedUrlCommand*)command{

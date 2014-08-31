@@ -24,14 +24,14 @@ Ext.define('Modify.view.Main', {
                     text   : 'Back',
                     hidden : true
                 },
-                {xtype:'spacer'}
-//                {
-//                    xtype  : 'button',
-//                    ui     : 'confirm',
-//                    itemId : 'stopbutton',
-//                    text   : 'TEST',
-//                    hidden : false
-//                }
+                {xtype:'spacer'},
+                {
+                    xtype  : 'button',
+                    ui     : 'confirm',
+                    itemId : 'stopbutton',
+                    text   : 'TEST',
+                    hidden : false
+                }
 
             ]
         },
@@ -105,7 +105,22 @@ Ext.define('Modify.view.Main', {
         }
     },
     onStopButton : function() {
-        this.fireEvent('stop', this);
+
+        cordova.exec(
+            function callback(data) {
+                console.log('got waveform data')
+
+                debugger;
+                console.log(data);
+            },
+            function errorHandler(err) {
+                console.log('getSongStats error');
+            },
+            'ModPlyr',
+            'cordovaGetWaveFormData',
+            ['waveform', 500, 230]
+//            [spectrumMode, spectrumSize.width, spectrumSize.height]
+        );
     }
 
 });

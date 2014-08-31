@@ -73,14 +73,14 @@ Ext.define('Modify.controller.Main', {
 
         // TODO: Disable/remove after development
         Ext.Function.defer(function() {
-//            var r = dirList.getStore().getAt(0);
-//            me.onDirListItemSelect(dirList, r);
-////
-//            Ext.Function.defer(function() {
-//                var fileList = me.main.down('#fileList');
-//                r = fileList.getStore().getAt(0);
-//                me.onFileListItemSelect(fileList, r)
-//            }, 300)
+            var r = dirList.getStore().getAt(0);
+            me.onDirListItemSelect(dirList, r);
+//
+            Ext.Function.defer(function() {
+                var fileList = me.main.down('#fileList');
+                r = fileList.getStore().getAt(0);
+                me.onFileListItemSelect(fileList, r)
+            }, 300)
 
         }, 1);
 
