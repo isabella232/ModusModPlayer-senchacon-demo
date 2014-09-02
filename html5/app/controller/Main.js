@@ -14,6 +14,16 @@ Ext.define('Modify.controller.Main', {
         ]
     },
 
+    buttonTextToXtypeDict : {
+        'Patterns' : 'pattern',
+        'Spectrum' : 'spectrum'
+    },
+
+    updateLoopModeDict : {
+        pattern  : 'pattern',
+        waveform : 'waveform'
+    },
+
     launch: function() {
         var me = this;
 
@@ -21,8 +31,9 @@ Ext.define('Modify.controller.Main', {
         // Initialize the main view
         me.main = Ext.create('Modify.view.Main', {
             listeners : {
-                scope : me,
-                back  : me.stopModPlayerUpdateLoop
+                scope     : me,
+                back      : me.stopModPlayerUpdateLoop,
+                vizselect : me.onMainVizSelect
             }
         });
 
@@ -71,15 +82,30 @@ Ext.define('Modify.controller.Main', {
         me.main.add(dirList);
 
 
+//        return;
         // TODO: Disable/remove after development
         Ext.Function.defer(function() {
-            var r = dirList.getStore().getAt(0);
+            var r = dirList.getStore().getAt(4);
             me.onDirListItemSelect(dirList, r);
 //
             Ext.Function.defer(function() {
                 var fileList = me.main.down('#fileList');
-                r = fileList.getStore().getAt(0);
-                me.onFileListItemSelect(fileList, r)
+                r = fileList.getStore().getAt(1);
+                me.onFileListItemSelect(fileList, r);
+
+                setTimeout(function() {
+                    var player = Ext.ComponentQuery.query('player')[0];
+                    player.fireEvent('play', player);
+
+                    me.onMainVizSelect();
+
+                    setTimeout(function() {
+                        var btn = me.actionSheet.getInnerItems()[1];
+                        me.actionSheet.hide();
+                        me.onVizChange(btn);
+                    }, 250)
+
+                }, 50)
             }, 300)
 
         }, 1);
@@ -182,7 +208,7 @@ Ext.define('Modify.controller.Main', {
         // Load file
         cordova.exec(
             function callback(data) {
-                player.setSongName(data);
+                player.setSongName(data.songName);
 
                 me.getPatternData();
 
@@ -197,7 +223,6 @@ Ext.define('Modify.controller.Main', {
         );
 
 
-
         this.main.addAndAnimateItem(this.player);
     },
 
@@ -209,14 +234,14 @@ Ext.define('Modify.controller.Main', {
 //                debugger;
                 me.player.setPatternData(patternData);
 
-                me.player.patternView.showPatternAndPosition(0, 0);
+//                me.player.patternView.showPatternAndPosition(0, 0);
 
-                setTimeout(function(){
-                    me.player.patternView.prevRowNum = me.player.patternView.prevPatternNum -1;
-                    me.player.patternView.showPatternAndPosition(0, 0);
-
+//                setTimeout(function(){
+//                    me.player.patternView.prevRowNum = me.player.patternView.prevPatternNum -1;
+//                    me.player.patternView.showPatternAndPosition(0, 0);
+//
                     me.loadMask.hide();
-                }, 150);
+//                }, 150);
 
             },
             function errorHandle(err) {
@@ -236,7 +261,8 @@ Ext.define('Modify.controller.Main', {
     },
 
     startModPlayerUpdateLoop : function() {
-        if (! this.interval) {
+        if (! this.interval && this.vizMode) {
+            console.log('startModPlayerUpdateLoop();');
             var boundTimerFunction = Ext.Function.bind(this.getSongStats, this);
             this.interval = setInterval(boundTimerFunction, 10);
         }
@@ -251,11 +277,9 @@ Ext.define('Modify.controller.Main', {
 
     getSongStats : function() {
 
-        var me           = this,
-            player       = me.player;
-//            spectrum     = player.spectrum
-//            spectrumSize = spectrum.element.getSize(),
-//            spectrumMode = spectrum.getMode();
+        var me        = this,
+            player    = me.player,
+            playerViz = player.getInnerAt(0);
 
 
 //        if (spectrumMode == 0 || spectrumMode == 1) {
@@ -264,6 +288,23 @@ Ext.define('Modify.controller.Main', {
 //        else if (spectrumMode == 2) {
 //            spectrumMode = 'spectrum';
 //        }
+
+
+        var dataType = me.updateLoopModeDict[me.vizMode],
+            args;
+
+        if (me.vizMode == 'spectrum') {
+            var spectrumSize = playerViz.element.getSize(),
+                spectrumMode = playerViz.getMode();
+
+            args = [me.vizMode, spectrumSize.width, spectrumSize.height];
+        }
+        else if (me.vizMode == 'pattern') {
+            args = [me.vizMode];
+        }
+        else {
+            args = [];
+        }
 
         cordova.exec(
             function callback(data) {
@@ -274,9 +315,88 @@ Ext.define('Modify.controller.Main', {
             },
             'ModPlyr',
             'cordovaGetStats',
-            []
-//            [spectrumMode, spectrumSize.width, spectrumSize.height]
+            args
         );
+
+    },
+
+    onMainVizSelect : function(view) {
+        var me = this;
+
+        if (! this.actionSheet) {
+
+            this.actionSheet = Ext.create('Ext.ActionSheet', {
+                items : [
+                    {
+                        text    : 'Patterns',
+                        scope   : me,
+                        handler : me.onVizChange
+                    },
+                    {
+                        text    : 'Spectrum',
+                        scope   : me,
+                        handler : me.onVizChange
+                    },
+                    {
+                        text     : 'Note Dots',
+                        scope    : me,
+                        disabled : true,
+                        handler  : me.onVizChange
+                    },
+                    {
+                        text    : 'None',
+                        scope   : me,
+                        handler : me.onVizChange
+                    }
+                ]
+            });
+
+            Ext.Viewport.add(this.actionSheet);
+
+        }
+
+        this.actionSheet.show();
+    },
+
+
+
+
+    onVizChange : function(btn) {
+        var me = this,
+            player = me.main.down('player'),
+            xtype;
+
+        xtype = this.buttonTextToXtypeDict[btn.getText()];
+
+        this.stopModPlayerUpdateLoop();
+
+        player.removeInnerAt(0);
+        delete me.vizMode;
+//        me.player
+
+        // Give time for the update loop to finish executing!
+        Ext.Function.defer(function() {
+            if (xtype) {
+                console.log('PLAYER adding ' + xtype);
+                me.vizMode = xtype;
+
+                var item = player.add({
+                    xtype  : xtype,
+                    height : '100%'
+                });
+                me.startModPlayerUpdateLoop();
+
+                if (item.xtype == 'pattern') {
+                    item.setPatternData(player.patternData);
+                }
+
+                window.vizItem = item;
+                window.player = player;
+                player.vizItem = item;
+            }
+
+            me.actionSheet.hide();
+        }, 50);
 
     }
 

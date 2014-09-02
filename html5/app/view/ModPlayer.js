@@ -1,34 +1,29 @@
 Ext.define('Modify.view.ModPlayer', {
     extend : 'Ext.Container',
 
-    config : {
+    xtype : 'player',
 
+    config : {
         layout : 'auto',
-//        height : 120,
 
         patternData : null,
 
         items  : [
             {
                 xtype  : 'component',
-                itemId : 'songName',
-                style  : 'text-align:center; font-size: 14px; font-weight: bold;',
-                height : 20,
+                itemId : 'songStatus',
+                style  : 'text-align:center;',
+                height : 40,
                 docked : 'top',
-                html   : '...'
+                tpl    : [
+                    '<div style="font-size: 14px; font-weight: bold; text-align:center;">{songName}</div>',
+                    '<div style="font-size: 12px;text-align:center;">{fileName}</div>'
+                ]
             },
-            {
-                xtype  : 'component',
-                itemId : 'fileName',
-                style  : 'text-align:center; font-size: 12px;',
-                height : 20,
-                docked : 'top',
-                html   : ''
-            },
-            {
-                xtype : 'pattern',
-                height : '100%'
-            },
+//            {
+//                xtype : 'pattern',
+//                height : '100%'
+//            },
 //            {
 //                xtype  : 'component',
 //                itemId : 'spectrum',
@@ -90,9 +85,9 @@ Ext.define('Modify.view.ModPlayer', {
 
     initialize : function() {
         var data = this.getData();
-        this.down('#fileName').setHtml(data.fileName);
+        this.down('#songStatus').setData(data.fileName);
 //        this.spectrum = this.down('spectrum');
-        this.patternView = this.down('pattern');
+//        this.patternView = this.down('pattern');
         this.callParent();
     },
 
@@ -120,8 +115,16 @@ Ext.define('Modify.view.ModPlayer', {
         console.log('SongData ::: ', songData);
     },
 
-    setSongName : function(data) {
-        this.down('#songName').setHtml(data.songName);
+    setSongName : function(songName) {
+        var myData = this.getData();
+        myData.songName = songName;
+        this.setData(myData);
+        this.down('#songStatus').setData(myData);
+
+//        alert('open debuhhr');
+//        console.log('here')
+//        debugger;
+//        this.down('#songName').setHtml(data.songName);
     },
 
     setPatternData : function(patternDataAsString) {
@@ -146,7 +149,11 @@ Ext.define('Modify.view.ModPlayer', {
 //            firstPat = patternData[firstKey],
 //            firstRow = firstPat[0],
 //            rowSPlit = firstRow.split(' ');
-        this.patternView.setPatternData(patternData);
+//        if (this.patternView) {
+//            this.patternView.setPatternData(patternData);
+//
+//        }
+        this.patternData = patternData;
 
         console.log("SENCHA:: Got pattern data!");
 
@@ -154,13 +161,30 @@ Ext.define('Modify.view.ModPlayer', {
     },
 
     setStats : function(stats) {
+//        console.log('player.setStats()')
 //        debugger;
         this.songStats = stats;
 //        stats.cpu = (! isNaN(stats.cpu)) ? stats.cpu.toFixed(2) : stats.cpu;
 //        console.log(stats.cpu);
 
 //        this.down('#stats').setData(stats);
-        this.patternView.showPatternAndPosition(stats.pattern, stats.row);
-//        this.spectrum.updateCanvas(stats.waveData);
+
+        var vizItem = this.vizItem;
+        if (vizItem) {
+            // Todo: normalize methods for viz items
+            if (vizItem.xtype == 'pattern')  {
+                vizItem.showPatternAndPosition(stats.pattern, stats.row);
+            }
+            else if (vizItem.xtype == 'spectrum') {
+                vizItem.updateCanvas(stats);
+            }
+            else {
+                console.log('NO vizItem.xtype');
+            }
+        }
+        else {
+            console.log('NO VIZ ITEM!');
+        }
+
     }
 });

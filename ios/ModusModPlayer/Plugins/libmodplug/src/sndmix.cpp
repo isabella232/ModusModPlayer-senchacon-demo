@@ -9,8 +9,8 @@
 #include "tables.h"
 
 #ifdef MODPLUG_TRACKER
-#define ENABLE_STEREOVU
 #endif
+#define ENABLE_STEREOVU
 
 // Volume ramp length, in 1/10 ms
 #define VOLUMERAMPLEN	146	// 1.46ms = 64 samples at 44.1kHz

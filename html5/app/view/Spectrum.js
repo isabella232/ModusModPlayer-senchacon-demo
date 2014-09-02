@@ -11,7 +11,7 @@ Ext.define('Modify.view.Spectrum', {
     xtype  : 'spectrum',
 
     config : {
-        numPoints  : 2048,
+        numPoints  : 500,
         binMax     : 500,
         binMin     : 10,
         numBins    : 500,
@@ -36,10 +36,13 @@ Ext.define('Modify.view.Spectrum', {
         waveEchoLimit  : 3,
         waveEchoBuffer : [],
 
-        style : "background-color: #000;",
+//        style : "background-color: #FFF;",
 
         tpl : '<canvas id="{id}" height="{height}" width="{width}" />'
     },
+
+    ltChannelData : [],
+    rtChannelData : [],
 
     initialize : function() {
         // TODO: Push to element config
@@ -157,12 +160,26 @@ Ext.define('Modify.view.Spectrum', {
     },
 
 
-    updateCanvas      : function(dataItems) {
+    updateCanvas      : function(data) {
         var me = this;
 
-        var  currentMode = me.getMode();
+//        console.log('Spectrum.updateCanvas()');
+
+//        var  currentMode = me.getMode();
 //        debugger;
-        me[me.getModeMethodMap()[currentMode]](dataItems);
+//        me[me.getModeMethodMap()[currentMode]](dataItems);
+
+        var ltChannelData = me.ltChannelData,
+            rtChannelData = me.rtChannelData,
+            numBins       = me.getNumBins();
+
+        (ltChannelData.length >= numBins) && ltChannelData.shift();
+        (rtChannelData.length >= numBins) && rtChannelData.shift();
+
+        ltChannelData.push(data.ltChannelPlot);
+        rtChannelData.push(data.rtChannelPlot);
+
+        me.drawWaveForms([ltChannelData, rtChannelData]);
     },
 
 
@@ -171,6 +188,8 @@ Ext.define('Modify.view.Spectrum', {
     drawWaveForms : function(dataItems) {
 
         if (! dataItems) {
+//            console.log('No data items for spectrum')
+//            debugger;
             this.clearCanvas();
             return;
         }
@@ -189,11 +208,12 @@ Ext.define('Modify.view.Spectrum', {
 
         Ext.each(dataItems, function(data, index) {
 
+            debugger;
             if (index < one) {
                 canvas2dContext.fillStyle = "rgba(255, 80, 20, 1)";
             }
             else {
-                canvas2dContext.fillStyle = "rgba(80, 255, 20, 1)";
+                canvas2dContext.fillStyle = "rgba(12, 0, 184, 1)";
             }
             // Get the frequency samples
 
@@ -257,7 +277,7 @@ Ext.define('Modify.view.Spectrum', {
                 canvas2dContext.fillStyle = "rgba(255, 80, 20, 1)";
             }
             else {
-                canvas2dContext.fillStyle = "rgba(80, 255, 20, 1)";
+                canvas2dContext.fillStyle = "rgba(12, 0, 184, 1)";
             }
             // Get the frequency samples
 

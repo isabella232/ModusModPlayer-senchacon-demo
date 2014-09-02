@@ -12,7 +12,7 @@
 
 #define PLAYBACK_FREQ 44100
 #define SOUND_BUFFER_SIZE_SAMPLE (PLAYBACK_FREQ / 30)
-#define NUM_BUFFERS 8
+#define NUM_BUFFERS 128
 #define MIDIFX_OFS 32
 
 @interface ModPlyr : CDVPlugin {

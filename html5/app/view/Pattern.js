@@ -1,7 +1,7 @@
-Ext.define('Modizer.view.Pattern', {
+Ext.define('Modify.view.Pattern', {
     extend : 'Ext.Container',
     xtype  : 'pattern',
-    id     : 'pattern',
+
     config : {
         patternData : null,
         scrollable  : {
@@ -44,24 +44,15 @@ Ext.define('Modizer.view.Pattern', {
             thisElement.appendChild(this.indicatorEl);
 
             window.ie = this.indicatorEl;
-
         }
-        this.numChannels = patternData[0][0].length;
 
+        this.numChannels = patternData[0][0].length;
 
         this.down('#pattern').setWidth((this.numChannels * 95) + 50);
 
-
-        this.prevRowEl = null;
-
-
         this.prevPatternNum = this.prevRowNum = -1;
 
-//        alert('open debugger');
-//        console.log(patternData);
         this.patternData = patternData;
-
-
 
         return patternData;
     },
@@ -99,66 +90,6 @@ Ext.define('Modizer.view.Pattern', {
                 }
 
                 scroller.scrollTo(0, scrollTo);
-                this.prevPatternNum = patternNum;
-                this.prevRowNum = rowNum;
-            }
-            else {
-                console.warn('Not Found ::' + patternNum + ' Row #' + rowNum);
-            }
-
-
-        }
-        else {
-            console.warn('Not Found ::' + patternNum);
-        }
-
-
-    },
-
-    showPatternAndPositionOld : function(patternNum, rowNum) {
-        var patternData = this.getPatternData();
-
-        window.item = this;
-
-        if (! patternData || patternNum == '--' || rowNum == this.prevRowNum) {
-            return;
-        }
-
-        var pattern = patternData[patternNum],
-            row;
-
-
-        if (pattern) {
-            row = pattern[rowNum];
-
-            if (row) {
-                if (patternNum != this.prevPatternNum) {
-                    console.log(' >>>> PATTERN ' + patternNum);
-
-                    this.down('#pattern').setData(pattern);
-                    this.tBodyNodes = this.element.query('tbody')[0].childNodes;
-                    // Switch patterns
-                }
-
-                if (rowNum != this.prevRowNum) {
-                    // xindex % 2 === 0 ? "#EFEFEF;" : "#FFF;"
-                    // Animate rows
-
-                    var childNodes = this.tBodyNodes,
-                        child =  childNodes[rowNum];
-
-                    if (this.prevRowEl) {
-                        var origColor = (rowNum % 2 == 0) ? '#EFEFEF' : '#FFF';
-                        this.prevRowEl.style.backgroundColor = origColor;
-                    }
-
-                    child.style.backgroundColor = '#a8c5ff';
-
-                    this.prevRowEl = child;
-
-                }
-
-//                this.element.dom.innerHTML = patternNum  + ' --  ' +  rowNum;
                 this.prevPatternNum = patternNum;
                 this.prevRowNum = rowNum;
             }

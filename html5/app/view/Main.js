@@ -4,7 +4,9 @@ Ext.define('Modify.view.Main', {
 
     requires: [
         'Ext.TitleBar',
-        'Ext.dataview.List'
+        'Ext.dataview.List',
+        'Modify.view.Pattern',
+        'Modify.view.Spectrum'
     ],
     config: {
         layout : {
@@ -27,20 +29,19 @@ Ext.define('Modify.view.Main', {
                 {xtype:'spacer'},
                 {
                     xtype  : 'button',
-                    ui     : 'confirm',
-                    itemId : 'stopbutton',
-                    text   : 'TEST',
-                    hidden : false
+//                    ui     : 'confirm',
+                    itemId : 'vizbutton',
+                    text   : 'Viz',
+                    hidden : true
                 }
-
             ]
         },
         control : {
             '#backbutton' :{
                 tap : 'onBackButton'
             },
-            '#stopbutton' :{
-                tap : 'onStopButton'
+            '#vizbutton' :{
+                tap : 'onVizButton'
             }
         }
     },
@@ -55,6 +56,11 @@ Ext.define('Modify.view.Main', {
         me.animateActiveItem(item, { type : 'slide', direction : 'left' });
         me.showBackButton();
 
+
+        if (item.xtype == 'player') {
+            me.down('#vizbutton').show();
+
+        }
 //
 //        title = item.$className.split('.');
 //        title = title[title.length - 1];
@@ -72,7 +78,7 @@ Ext.define('Modify.view.Main', {
         backButton.setHidden(false);
     },
 
-    onBackButton : function(btn) {
+    onBackButton : function(backButton) {
         var me         = this,
             innerItems = [].concat(me.getInnerItems());
 
@@ -82,6 +88,18 @@ Ext.define('Modify.view.Main', {
         if (innerItems.length > 1) {
             var animateTo   = innerItems[innerItems.length - 2],
                 currentItem = innerItems.pop();
+
+            if (currentItem.xtype == 'player') {
+                me.down('#vizbutton').hide();
+
+            }
+
+            var numItems = me.getInnerItems().length;
+
+            if (numItems == 2) {
+                backButton.hide();
+            }
+
 //                title       = animateTo.$className.split('.');
 
 //            title = title[title.length - 1];
@@ -94,33 +112,16 @@ Ext.define('Modify.view.Main', {
 
             Ext.Function.defer(function() {
                 me.remove(currentItem);
-                if (me.getInnerItems().length == 1) {
-                    btn.hide();
-                }
             }, 300);
 
         }
         else {
-            btn.hide();
+            backButton.hide();
         }
     },
-    onStopButton : function() {
 
-        cordova.exec(
-            function callback(data) {
-                console.log('got waveform data')
-
-                debugger;
-                console.log(data);
-            },
-            function errorHandler(err) {
-                console.log('getSongStats error');
-            },
-            'ModPlyr',
-            'cordovaGetWaveFormData',
-            ['waveform', 500, 230]
-//            [spectrumMode, spectrumSize.width, spectrumSize.height]
-        );
+    onVizButton : function() {
+        this.fireEvent('vizselect', this);
     }
 
 });

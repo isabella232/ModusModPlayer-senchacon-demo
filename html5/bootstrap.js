@@ -32,8 +32,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLResultSetRowList": "touch/src/device/sqlite/Sencha.js",
   "Ext.device.sqlite.SQLTransaction": "touch/src/device/sqlite/Sencha.js",
   "Ext.draw.engine.SvgContext.Gradient": "touch/src/draw/engine/SvgContext.js",
-  "Modify": "app",
-  "Modizer": "app"
+  "Modify": "app"
 });
 
 Ext.ClassManager.addNameAlternateMappings({
@@ -778,8 +777,8 @@ Ext.ClassManager.addNameAlternateMappings({
   "Modify.store.ModFiles": [],
   "Modify.view.Main": [],
   "Modify.view.ModPlayer": [],
-  "Modify.view.Spectrum": [],
-  "Modizer.view.Pattern": []
+  "Modify.view.Pattern": [],
+  "Modify.view.Spectrum": []
 });
 
 Ext.ClassManager.addNameAliasMappings({
@@ -1743,12 +1742,14 @@ Ext.ClassManager.addNameAliasMappings({
   "Modify.view.Main": [
     "widget.main"
   ],
-  "Modify.view.ModPlayer": [],
+  "Modify.view.ModPlayer": [
+    "widget.player"
+  ],
+  "Modify.view.Pattern": [
+    "widget.pattern"
+  ],
   "Modify.view.Spectrum": [
     "widget.spectrum"
-  ],
-  "Modizer.view.Pattern": [
-    "widget.pattern"
   ]
 });
 

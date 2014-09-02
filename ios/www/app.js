@@ -1,4 +1,4 @@
-function _230873815c0c6c7c70ba41bfac67197f3db55f1f(){};//@tag foundation,core
+function _26114c4a5d7f8d57c7e5f9ae54c930110d8764f4(){};//@tag foundation,core
 //@define Ext
 
 /**
@@ -35162,6 +35162,91 @@ Ext.define('Ext.Sheet', {
 });
 
 /**
+ * {@link Ext.ActionSheet ActionSheets} are used to display a list of {@link Ext.Button buttons} in a popup dialog.
+ *
+ * The key difference between ActionSheet and {@link Ext.Sheet} is that ActionSheets are docked at the bottom of the
+ * screen, and the {@link #defaultType} is set to {@link Ext.Button button}.
+ *
+ * ## Example
+ *
+ *     @example preview miniphone
+ *     var actionSheet = Ext.create('Ext.ActionSheet', {
+ *         items: [
+ *             {
+ *                 text: 'Delete draft',
+ *                 ui  : 'decline'
+ *             },
+ *             {
+ *                 text: 'Save draft'
+ *             },
+ *             {
+ *                 text: 'Cancel',
+ *                 ui  : 'confirm'
+ *             }
+ *         ]
+ *     });
+ *
+ *     Ext.Viewport.add(actionSheet);
+ *     actionSheet.show();
+ *
+ * As you can see from the code above, you no longer have to specify a `xtype` when creating buttons within a {@link Ext.ActionSheet ActionSheet},
+ * because the {@link #defaultType} is set to {@link Ext.Button button}.
+ *
+ */
+Ext.define('Ext.ActionSheet', {
+    extend: 'Ext.Sheet',
+    alias : 'widget.actionsheet',
+                             
+
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        baseCls: Ext.baseCSSPrefix + 'sheet-action',
+
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        left: 0,
+
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        right: 0,
+
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        bottom: 0,
+
+        // @hide
+        centered: false,
+
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        height: 'auto',
+
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        defaultType: 'button'
+    },
+
+    platformConfig: [{
+        theme: ['Windows'],
+        top: 0,
+        bottom: null
+    }]
+});
+
+/**
  * The Connection class encapsulates a connection to the page's originating domain, allowing requests to be made either
  * to a configured URL, or to a URL specified at request time.
  *
@@ -67496,188 +67581,10 @@ Ext.define('Ext.viewport.Viewport', {
  * you should **not** use {@link Ext#onReady}.
  */
 
-Ext.define('Modify.view.Main', {
-    extend : 'Ext.Container',
-    xtype  : 'main',
-
-               
-                       
-                           
-      
-    config: {
-        layout : {
-            type : 'card'
-        },
-        items : {
-            xtype  : 'toolbar',
-            itemId : 'titlebar',
-            cls    : 'main-toolbar',
-            docked : 'top',
-            title  : 'MODify',
-            items : [
-                {
-                    xtype  : 'button',
-//                    ui     : 'back',
-                    itemId : 'backbutton',
-                    text   : 'Back',
-                    hidden : true
-                },
-                {xtype:'spacer'},
-                {
-                    xtype  : 'button',
-                    ui     : 'confirm',
-                    itemId : 'stopbutton',
-                    text   : 'TEST',
-                    hidden : false
-                }
-
-            ]
-        },
-        control : {
-            '#backbutton' :{
-                tap : 'onBackButton'
-            },
-            '#stopbutton' :{
-                tap : 'onStopButton'
-            }
-        }
-    },
-
-    addAndAnimateItem : function(item) {
-        var me = this;
-//            title;
-
-
-        me.add(item);
-
-        me.animateActiveItem(item, { type : 'slide', direction : 'left' });
-        me.showBackButton();
-
-//
-//        title = item.$className.split('.');
-//        title = title[title.length - 1];
-//        me.down('toolbar').setTitle('MODify')
-
-    },
-
-    showBackButton : function(title) {
-        title = title || 'Back';
-
-        var backButton = this.backButton || (this.backButton = this.down('#backbutton'));
-
-
-        backButton.setText(title);
-        backButton.setHidden(false);
-    },
-
-    onBackButton : function(btn) {
-        var me         = this,
-            innerItems = [].concat(me.getInnerItems());
-
-        me.fireEvent('back', me);
-//        debugger;
-
-        if (innerItems.length > 1) {
-            var animateTo   = innerItems[innerItems.length - 2],
-                currentItem = innerItems.pop();
-//                title       = animateTo.$className.split('.');
-
-//            title = title[title.length - 1];
-//            me.down('toolbar').setTitle(title);
-
-            me.animateActiveItem(animateTo, {
-                type      : 'slide',
-                direction : 'right'
-            });
-
-            Ext.Function.defer(function() {
-                me.remove(currentItem);
-                if (me.getInnerItems().length == 1) {
-                    btn.hide();
-                }
-            }, 300);
-
-        }
-        else {
-            btn.hide();
-        }
-    },
-    onStopButton : function() {
-
-        cordova.exec(
-            function callback(data) {
-                console.log('got waveform data')
-
-                debugger;
-                console.log(data);
-            },
-            function errorHandler(err) {
-                console.log('getSongStats error');
-            },
-            'ModPlyr',
-            'cordovaGetWaveFormData',
-            ['waveform', 500, 230]
-//            [spectrumMode, spectrumSize.width, spectrumSize.height]
-        );
-    }
-
-});
-
-Ext.define("Modify.model.Directory", {
-    extend : 'Ext.data.Model',
-    config : {
-        fields : [
-            'dirName',
-            'path'
-        ]
-    }
-});
-
-Ext.define('Modify.store.Directories', {
-    extend : 'Ext.data.Store',
-
-                                        
-
-    config: {
-        model : 'Modify.model.Directory',
-        proxy : {
-            type : 'memory'
-        }
-    }
-});
-
-Ext.define("Modify.model.ModFile", {
-    extend : 'Ext.data.Model',
-    config : {
-        fields : [
-            'path',
-            {
-                name : 'fileName'
-//                convert : function(v) {
-//                    return v.split(' - ')[1];
-//                }
-            }
-        ]
-    }
-});
-
-Ext.define('Modify.store.ModFiles', {
-    extend : 'Ext.data.Store',
-
-                                      
-
-    config: {
-        model : 'Modify.model.ModFile',
-        proxy : {
-            type : 'memory'
-        }
-    }
-});
-
-Ext.define('Modizer.view.Pattern', {
+Ext.define('Modify.view.Pattern', {
     extend : 'Ext.Container',
     xtype  : 'pattern',
-    id     : 'pattern',
+
     config : {
         patternData : null,
         scrollable  : {
@@ -67720,24 +67627,15 @@ Ext.define('Modizer.view.Pattern', {
             thisElement.appendChild(this.indicatorEl);
 
             window.ie = this.indicatorEl;
-
         }
-        this.numChannels = patternData[0][0].length;
 
+        this.numChannels = patternData[0][0].length;
 
         this.down('#pattern').setWidth((this.numChannels * 95) + 50);
 
-
-        this.prevRowEl = null;
-
-
         this.prevPatternNum = this.prevRowNum = -1;
 
-//        alert('open debugger');
-//        console.log(patternData);
         this.patternData = patternData;
-
-
 
         return patternData;
     },
@@ -67789,233 +67687,6 @@ Ext.define('Modizer.view.Pattern', {
         }
 
 
-    },
-
-    showPatternAndPositionOld : function(patternNum, rowNum) {
-        var patternData = this.getPatternData();
-
-        window.item = this;
-
-        if (! patternData || patternNum == '--' || rowNum == this.prevRowNum) {
-            return;
-        }
-
-        var pattern = patternData[patternNum],
-            row;
-
-
-        if (pattern) {
-            row = pattern[rowNum];
-
-            if (row) {
-                if (patternNum != this.prevPatternNum) {
-                    console.log(' >>>> PATTERN ' + patternNum);
-
-                    this.down('#pattern').setData(pattern);
-                    this.tBodyNodes = this.element.query('tbody')[0].childNodes;
-                    // Switch patterns
-                }
-
-                if (rowNum != this.prevRowNum) {
-                    // xindex % 2 === 0 ? "#EFEFEF;" : "#FFF;"
-                    // Animate rows
-
-                    var childNodes = this.tBodyNodes,
-                        child =  childNodes[rowNum];
-
-                    if (this.prevRowEl) {
-                        var origColor = (rowNum % 2 == 0) ? '#EFEFEF' : '#FFF';
-                        this.prevRowEl.style.backgroundColor = origColor;
-                    }
-
-                    child.style.backgroundColor = '#a8c5ff';
-
-                    this.prevRowEl = child;
-
-                }
-
-//                this.element.dom.innerHTML = patternNum  + ' --  ' +  rowNum;
-                this.prevPatternNum = patternNum;
-                this.prevRowNum = rowNum;
-            }
-            else {
-                console.warn('Not Found ::' + patternNum + ' Row #' + rowNum);
-            }
-
-
-        }
-        else {
-            console.warn('Not Found ::' + patternNum);
-        }
-
-
-    }
-});
-
-Ext.define('Modify.view.ModPlayer', {
-    extend : 'Ext.Container',
-
-    config : {
-
-        layout : 'auto',
-//        height : 120,
-
-        patternData : null,
-
-        items  : [
-            {
-                xtype  : 'component',
-                itemId : 'songName',
-                style  : 'text-align:center; font-size: 14px; font-weight: bold;',
-                height : 20,
-                docked : 'top',
-                html   : '...'
-            },
-            {
-                xtype  : 'component',
-                itemId : 'fileName',
-                style  : 'text-align:center; font-size: 12px;',
-                height : 20,
-                docked : 'top',
-                html   : ''
-            },
-            {
-                xtype : 'pattern',
-                height : '100%'
-            },
-//            {
-//                xtype  : 'component',
-//                itemId : 'spectrum',
-//                flex   : 1
-//            },
-            {
-                xtype    : 'toolbar',
-                docked   : 'bottom',
-                defaults : {
-                    xtype : 'button'
-                },
-                items    : [
-                    { xtype : 'spacer' },
-                    {
-                        text   : '&lt;&lt;',
-                        itemId : 'rewindbtn'
-                    },
-                    {
-                        text   : 'Play',
-                        itemId : 'playbtn',
-                        ui     : 'confirm'
-                    },
-                    {
-                        text   : '&gt;&gt;',
-                        itemId : 'fastforwardbtn'
-                    },
-                    {
-                        text   : 'STOP',
-                        itemId : 'stopbtn',
-                        ui     : 'decline'
-                    },
-                    { xtype : 'spacer' }
-                ]
-            }
-        ],
-
-        control : {
-            '#rewindbtn' : {
-                tap : 'onRewindBtnTap'
-            },
-            '#playbtn' : {
-                tap : 'onPlayBtnTap'
-            },
-            '#fastforwardbtn' : {
-                tap : 'onFastForwardBtnTap'
-            },
-            '#stopbtn' : {
-                tap : 'onStopBtnTap'
-            }
-        },
-
-        emptyStats : {
-            cpu     : '--',
-            order   : '--',
-            pattern : '--',
-            row     : '--'
-        }
-    },
-
-    initialize : function() {
-        var data = this.getData();
-        this.down('#fileName').setHtml(data.fileName);
-//        this.spectrum = this.down('spectrum');
-        this.patternView = this.down('pattern');
-        this.callParent();
-    },
-
-    onRewindBtnTap : function() {
-        this.fireEvent('rewind', this);
-    },
-
-    onPlayBtnTap : function() {
-        if (this.isPlaying) {
-            return;
-        }
-        this.fireEvent('play', this);
-    },
-
-    onFastForwardButtonTap : function() {
-        this.fireEvent('fastforward', this);
-    },
-
-    onStopBtnTap : function() {
-        this.fireEvent('stop', this);
-        this.setStats(this.getEmptyStats());
-    },
-
-    updateSongData : function(songData) {
-        console.log('SongData ::: ', songData);
-    },
-
-    setSongName : function(data) {
-        this.down('#songName').setHtml(data.songName);
-    },
-
-    setPatternData : function(patternDataAsString) {
-        this.setStats(this.getEmptyStats());
-
-        if (! patternDataAsString) {
-            return;
-        }
-
-        var patternData
-
-        try {
-            patternData = JSON.parse(patternDataAsString);
-        }
-        catch(e) {
-            alert('Could not parse JSON pattern data! #HasSads');
-            return;
-        }
-
-//        var keys     = Object.keys(patternData),
-//            firstKey = keys[0],
-//            firstPat = patternData[firstKey],
-//            firstRow = firstPat[0],
-//            rowSPlit = firstRow.split(' ');
-        this.patternView.setPatternData(patternData);
-
-        console.log("SENCHA:: Got pattern data!");
-
-        return patternData;
-    },
-
-    setStats : function(stats) {
-//        debugger;
-        this.songStats = stats;
-//        stats.cpu = (! isNaN(stats.cpu)) ? stats.cpu.toFixed(2) : stats.cpu;
-//        console.log(stats.cpu);
-
-//        this.down('#stats').setData(stats);
-        this.patternView.showPatternAndPosition(stats.pattern, stats.row);
-//        this.spectrum.updateCanvas(stats.waveData);
     }
 });
 
@@ -68032,7 +67703,7 @@ Ext.define('Modify.view.Spectrum', {
     xtype  : 'spectrum',
 
     config : {
-        numPoints  : 2048,
+        numPoints  : 500,
         binMax     : 500,
         binMin     : 10,
         numBins    : 500,
@@ -68057,10 +67728,13 @@ Ext.define('Modify.view.Spectrum', {
         waveEchoLimit  : 3,
         waveEchoBuffer : [],
 
-        style : "background-color: #000;",
+//        style : "background-color: #FFF;",
 
         tpl : '<canvas id="{id}" height="{height}" width="{width}" />'
     },
+
+    ltChannelData : [],
+    rtChannelData : [],
 
     initialize : function() {
         // TODO: Push to element config
@@ -68178,12 +67852,26 @@ Ext.define('Modify.view.Spectrum', {
     },
 
 
-    updateCanvas      : function(dataItems) {
+    updateCanvas      : function(data) {
         var me = this;
 
-        var  currentMode = me.getMode();
+//        console.log('Spectrum.updateCanvas()');
+
+//        var  currentMode = me.getMode();
 //        debugger;
-        me[me.getModeMethodMap()[currentMode]](dataItems);
+//        me[me.getModeMethodMap()[currentMode]](dataItems);
+
+        var ltChannelData = me.ltChannelData,
+            rtChannelData = me.rtChannelData,
+            numBins       = me.getNumBins();
+
+        (ltChannelData.length >= numBins) && ltChannelData.shift();
+        (rtChannelData.length >= numBins) && rtChannelData.shift();
+
+        ltChannelData.push(data.ltChannelPlot);
+        rtChannelData.push(data.rtChannelPlot);
+
+        me.drawWaveForms([ltChannelData, rtChannelData]);
     },
 
 
@@ -68192,6 +67880,8 @@ Ext.define('Modify.view.Spectrum', {
     drawWaveForms : function(dataItems) {
 
         if (! dataItems) {
+//            console.log('No data items for spectrum')
+//            debugger;
             this.clearCanvas();
             return;
         }
@@ -68210,11 +67900,12 @@ Ext.define('Modify.view.Spectrum', {
 
         Ext.each(dataItems, function(data, index) {
 
+            debugger;
             if (index < one) {
                 canvas2dContext.fillStyle = "rgba(255, 80, 20, 1)";
             }
             else {
-                canvas2dContext.fillStyle = "rgba(80, 255, 20, 1)";
+                canvas2dContext.fillStyle = "rgba(12, 0, 184, 1)";
             }
             // Get the frequency samples
 
@@ -68278,7 +67969,7 @@ Ext.define('Modify.view.Spectrum', {
                 canvas2dContext.fillStyle = "rgba(255, 80, 20, 1)";
             }
             else {
-                canvas2dContext.fillStyle = "rgba(80, 255, 20, 1)";
+                canvas2dContext.fillStyle = "rgba(12, 0, 184, 1)";
             }
             // Get the frequency samples
 
@@ -68358,6 +68049,376 @@ Ext.define('Modify.view.Spectrum', {
 
 });
 
+Ext.define('Modify.view.Main', {
+    extend : 'Ext.Container',
+    xtype  : 'main',
+
+               
+                       
+                            
+                              
+                              
+      
+    config: {
+        layout : {
+            type : 'card'
+        },
+        items : {
+            xtype  : 'toolbar',
+            itemId : 'titlebar',
+            cls    : 'main-toolbar',
+            docked : 'top',
+            title  : 'MODify',
+            items : [
+                {
+                    xtype  : 'button',
+//                    ui     : 'back',
+                    itemId : 'backbutton',
+                    text   : 'Back',
+                    hidden : true
+                },
+                {xtype:'spacer'},
+                {
+                    xtype  : 'button',
+//                    ui     : 'confirm',
+                    itemId : 'vizbutton',
+                    text   : 'Viz',
+                    hidden : true
+                }
+            ]
+        },
+        control : {
+            '#backbutton' :{
+                tap : 'onBackButton'
+            },
+            '#vizbutton' :{
+                tap : 'onVizButton'
+            }
+        }
+    },
+
+    addAndAnimateItem : function(item) {
+        var me = this;
+//            title;
+
+
+        me.add(item);
+
+        me.animateActiveItem(item, { type : 'slide', direction : 'left' });
+        me.showBackButton();
+
+
+        if (item.xtype == 'player') {
+            me.down('#vizbutton').show();
+
+        }
+//
+//        title = item.$className.split('.');
+//        title = title[title.length - 1];
+//        me.down('toolbar').setTitle('MODify')
+
+    },
+
+    showBackButton : function(title) {
+        title = title || 'Back';
+
+        var backButton = this.backButton || (this.backButton = this.down('#backbutton'));
+
+
+        backButton.setText(title);
+        backButton.setHidden(false);
+    },
+
+    onBackButton : function(backButton) {
+        var me         = this,
+            innerItems = [].concat(me.getInnerItems());
+
+        me.fireEvent('back', me);
+//        debugger;
+
+        if (innerItems.length > 1) {
+            var animateTo   = innerItems[innerItems.length - 2],
+                currentItem = innerItems.pop();
+
+            if (currentItem.xtype == 'player') {
+                me.down('#vizbutton').hide();
+
+            }
+
+            var numItems = me.getInnerItems().length;
+
+            if (numItems == 2) {
+                backButton.hide();
+            }
+
+//                title       = animateTo.$className.split('.');
+
+//            title = title[title.length - 1];
+//            me.down('toolbar').setTitle(title);
+
+            me.animateActiveItem(animateTo, {
+                type      : 'slide',
+                direction : 'right'
+            });
+
+            Ext.Function.defer(function() {
+                me.remove(currentItem);
+            }, 300);
+
+        }
+        else {
+            backButton.hide();
+        }
+    },
+
+    onVizButton : function() {
+        this.fireEvent('vizselect', this);
+    }
+
+});
+
+Ext.define("Modify.model.Directory", {
+    extend : 'Ext.data.Model',
+    config : {
+        fields : [
+            'dirName',
+            'path'
+        ]
+    }
+});
+
+Ext.define('Modify.store.Directories', {
+    extend : 'Ext.data.Store',
+
+                                        
+
+    config: {
+        model : 'Modify.model.Directory',
+        proxy : {
+            type : 'memory'
+        }
+    }
+});
+
+Ext.define("Modify.model.ModFile", {
+    extend : 'Ext.data.Model',
+    config : {
+        fields : [
+            'path',
+            {
+                name : 'fileName'
+//                convert : function(v) {
+//                    return v.split(' - ')[1];
+//                }
+            }
+        ]
+    }
+});
+
+Ext.define('Modify.store.ModFiles', {
+    extend : 'Ext.data.Store',
+
+                                      
+
+    config: {
+        model : 'Modify.model.ModFile',
+        proxy : {
+            type : 'memory'
+        }
+    }
+});
+
+Ext.define('Modify.view.ModPlayer', {
+    extend : 'Ext.Container',
+
+    xtype : 'player',
+
+    config : {
+        layout : 'auto',
+
+        patternData : null,
+
+        items  : [
+            {
+                xtype  : 'component',
+                itemId : 'songStatus',
+                style  : 'text-align:center;',
+                height : 40,
+                docked : 'top',
+                tpl    : [
+                    '<div style="font-size: 14px; font-weight: bold; text-align:center;">{songName}</div>',
+                    '<div style="font-size: 12px;text-align:center;">{fileName}</div>'
+                ]
+            },
+//            {
+//                xtype : 'pattern',
+//                height : '100%'
+//            },
+//            {
+//                xtype  : 'component',
+//                itemId : 'spectrum',
+//                flex   : 1
+//            },
+            {
+                xtype    : 'toolbar',
+                docked   : 'bottom',
+                defaults : {
+                    xtype : 'button'
+                },
+                items    : [
+                    { xtype : 'spacer' },
+                    {
+                        text   : '&lt;&lt;',
+                        itemId : 'rewindbtn'
+                    },
+                    {
+                        text   : 'Play',
+                        itemId : 'playbtn',
+                        ui     : 'confirm'
+                    },
+                    {
+                        text   : '&gt;&gt;',
+                        itemId : 'fastforwardbtn'
+                    },
+                    {
+                        text   : 'STOP',
+                        itemId : 'stopbtn',
+                        ui     : 'decline'
+                    },
+                    { xtype : 'spacer' }
+                ]
+            }
+        ],
+
+        control : {
+            '#rewindbtn' : {
+                tap : 'onRewindBtnTap'
+            },
+            '#playbtn' : {
+                tap : 'onPlayBtnTap'
+            },
+            '#fastforwardbtn' : {
+                tap : 'onFastForwardBtnTap'
+            },
+            '#stopbtn' : {
+                tap : 'onStopBtnTap'
+            }
+        },
+
+        emptyStats : {
+            cpu     : '--',
+            order   : '--',
+            pattern : '--',
+            row     : '--'
+        }
+    },
+
+    initialize : function() {
+        var data = this.getData();
+        this.down('#songStatus').setData(data.fileName);
+//        this.spectrum = this.down('spectrum');
+//        this.patternView = this.down('pattern');
+        this.callParent();
+    },
+
+    onRewindBtnTap : function() {
+        this.fireEvent('rewind', this);
+    },
+
+    onPlayBtnTap : function() {
+        if (this.isPlaying) {
+            return;
+        }
+        this.fireEvent('play', this);
+    },
+
+    onFastForwardButtonTap : function() {
+        this.fireEvent('fastforward', this);
+    },
+
+    onStopBtnTap : function() {
+        this.fireEvent('stop', this);
+        this.setStats(this.getEmptyStats());
+    },
+
+    updateSongData : function(songData) {
+        console.log('SongData ::: ', songData);
+    },
+
+    setSongName : function(songName) {
+        var myData = this.getData();
+        myData.songName = songName;
+        this.setData(myData);
+        this.down('#songStatus').setData(myData);
+
+//        alert('open debuhhr');
+//        console.log('here')
+//        debugger;
+//        this.down('#songName').setHtml(data.songName);
+    },
+
+    setPatternData : function(patternDataAsString) {
+        this.setStats(this.getEmptyStats());
+
+        if (! patternDataAsString) {
+            return;
+        }
+
+        var patternData
+
+        try {
+            patternData = JSON.parse(patternDataAsString);
+        }
+        catch(e) {
+            alert('Could not parse JSON pattern data! #HasSads');
+            return;
+        }
+
+//        var keys     = Object.keys(patternData),
+//            firstKey = keys[0],
+//            firstPat = patternData[firstKey],
+//            firstRow = firstPat[0],
+//            rowSPlit = firstRow.split(' ');
+//        if (this.patternView) {
+//            this.patternView.setPatternData(patternData);
+//
+//        }
+        this.patternData = patternData;
+
+        console.log("SENCHA:: Got pattern data!");
+
+        return patternData;
+    },
+
+    setStats : function(stats) {
+//        console.log('player.setStats()')
+//        debugger;
+        this.songStats = stats;
+//        stats.cpu = (! isNaN(stats.cpu)) ? stats.cpu.toFixed(2) : stats.cpu;
+//        console.log(stats.cpu);
+
+//        this.down('#stats').setData(stats);
+
+        var vizItem = this.vizItem;
+        if (vizItem) {
+            // Todo: normalize methods for viz items
+            if (vizItem.xtype == 'pattern')  {
+                vizItem.showPatternAndPosition(stats.pattern, stats.row);
+            }
+            else if (vizItem.xtype == 'spectrum') {
+                vizItem.updateCanvas(stats);
+            }
+            else {
+                console.log('NO vizItem.xtype');
+            }
+        }
+        else {
+            console.log('NO VIZ ITEM!');
+        }
+
+    }
+});
+
 Ext.define('Modify.controller.Main', {
    extend : 'Ext.app.Controller',
 
@@ -68374,6 +68435,16 @@ Ext.define('Modify.controller.Main', {
         ]
     },
 
+    buttonTextToXtypeDict : {
+        'Patterns' : 'pattern',
+        'Spectrum' : 'spectrum'
+    },
+
+    updateLoopModeDict : {
+        pattern  : 'pattern',
+        waveform : 'waveform'
+    },
+
     launch: function() {
         var me = this;
 
@@ -68381,8 +68452,9 @@ Ext.define('Modify.controller.Main', {
         // Initialize the main view
         me.main = Ext.create('Modify.view.Main', {
             listeners : {
-                scope : me,
-                back  : me.stopModPlayerUpdateLoop
+                scope     : me,
+                back      : me.stopModPlayerUpdateLoop,
+                vizselect : me.onMainVizSelect
             }
         });
 
@@ -68431,15 +68503,30 @@ Ext.define('Modify.controller.Main', {
         me.main.add(dirList);
 
 
+//        return;
         // TODO: Disable/remove after development
         Ext.Function.defer(function() {
-            var r = dirList.getStore().getAt(0);
+            var r = dirList.getStore().getAt(4);
             me.onDirListItemSelect(dirList, r);
 //
             Ext.Function.defer(function() {
                 var fileList = me.main.down('#fileList');
-                r = fileList.getStore().getAt(0);
-                me.onFileListItemSelect(fileList, r)
+                r = fileList.getStore().getAt(1);
+                me.onFileListItemSelect(fileList, r);
+
+                setTimeout(function() {
+                    var player = Ext.ComponentQuery.query('player')[0];
+                    player.fireEvent('play', player);
+
+                    me.onMainVizSelect();
+
+                    setTimeout(function() {
+                        var btn = me.actionSheet.getInnerItems()[1];
+                        me.actionSheet.hide();
+                        me.onVizChange(btn);
+                    }, 250)
+
+                }, 50)
             }, 300)
 
         }, 1);
@@ -68542,7 +68629,7 @@ Ext.define('Modify.controller.Main', {
         // Load file
         cordova.exec(
             function callback(data) {
-                player.setSongName(data);
+                player.setSongName(data.songName);
 
                 me.getPatternData();
 
@@ -68557,7 +68644,6 @@ Ext.define('Modify.controller.Main', {
         );
 
 
-
         this.main.addAndAnimateItem(this.player);
     },
 
@@ -68569,14 +68655,14 @@ Ext.define('Modify.controller.Main', {
 //                debugger;
                 me.player.setPatternData(patternData);
 
-                me.player.patternView.showPatternAndPosition(0, 0);
+//                me.player.patternView.showPatternAndPosition(0, 0);
 
-                setTimeout(function(){
-                    me.player.patternView.prevRowNum = me.player.patternView.prevPatternNum -1;
-                    me.player.patternView.showPatternAndPosition(0, 0);
-
+//                setTimeout(function(){
+//                    me.player.patternView.prevRowNum = me.player.patternView.prevPatternNum -1;
+//                    me.player.patternView.showPatternAndPosition(0, 0);
+//
                     me.loadMask.hide();
-                }, 150);
+//                }, 150);
 
             },
             function errorHandle(err) {
@@ -68596,7 +68682,8 @@ Ext.define('Modify.controller.Main', {
     },
 
     startModPlayerUpdateLoop : function() {
-        if (! this.interval) {
+        if (! this.interval && this.vizMode) {
+            console.log('startModPlayerUpdateLoop();');
             var boundTimerFunction = Ext.Function.bind(this.getSongStats, this);
             this.interval = setInterval(boundTimerFunction, 10);
         }
@@ -68611,11 +68698,9 @@ Ext.define('Modify.controller.Main', {
 
     getSongStats : function() {
 
-        var me           = this,
-            player       = me.player;
-//            spectrum     = player.spectrum
-//            spectrumSize = spectrum.element.getSize(),
-//            spectrumMode = spectrum.getMode();
+        var me        = this,
+            player    = me.player,
+            playerViz = player.getInnerAt(0);
 
 
 //        if (spectrumMode == 0 || spectrumMode == 1) {
@@ -68624,6 +68709,23 @@ Ext.define('Modify.controller.Main', {
 //        else if (spectrumMode == 2) {
 //            spectrumMode = 'spectrum';
 //        }
+
+
+        var dataType = me.updateLoopModeDict[me.vizMode],
+            args;
+
+        if (me.vizMode == 'spectrum') {
+            var spectrumSize = playerViz.element.getSize(),
+                spectrumMode = playerViz.getMode();
+
+            args = [me.vizMode, spectrumSize.width, spectrumSize.height];
+        }
+        else if (me.vizMode == 'pattern') {
+            args = [me.vizMode];
+        }
+        else {
+            args = [];
+        }
 
         cordova.exec(
             function callback(data) {
@@ -68634,9 +68736,88 @@ Ext.define('Modify.controller.Main', {
             },
             'ModPlyr',
             'cordovaGetStats',
-            []
-//            [spectrumMode, spectrumSize.width, spectrumSize.height]
+            args
         );
+
+    },
+
+    onMainVizSelect : function(view) {
+        var me = this;
+
+        if (! this.actionSheet) {
+
+            this.actionSheet = Ext.create('Ext.ActionSheet', {
+                items : [
+                    {
+                        text    : 'Patterns',
+                        scope   : me,
+                        handler : me.onVizChange
+                    },
+                    {
+                        text    : 'Spectrum',
+                        scope   : me,
+                        handler : me.onVizChange
+                    },
+                    {
+                        text     : 'Note Dots',
+                        scope    : me,
+                        disabled : true,
+                        handler  : me.onVizChange
+                    },
+                    {
+                        text    : 'None',
+                        scope   : me,
+                        handler : me.onVizChange
+                    }
+                ]
+            });
+
+            Ext.Viewport.add(this.actionSheet);
+
+        }
+
+        this.actionSheet.show();
+    },
+
+
+
+
+    onVizChange : function(btn) {
+        var me = this,
+            player = me.main.down('player'),
+            xtype;
+
+        xtype = this.buttonTextToXtypeDict[btn.getText()];
+
+        this.stopModPlayerUpdateLoop();
+
+        player.removeInnerAt(0);
+        delete me.vizMode;
+//        me.player
+
+        // Give time for the update loop to finish executing!
+        Ext.Function.defer(function() {
+            if (xtype) {
+                console.log('PLAYER adding ' + xtype);
+                me.vizMode = xtype;
+
+                var item = player.add({
+                    xtype  : xtype,
+                    height : '100%'
+                });
+                me.startModPlayerUpdateLoop();
+
+                if (item.xtype == 'pattern') {
+                    item.setPatternData(player.patternData);
+                }
+
+                window.vizItem = item;
+                window.player = player;
+                player.vizItem = item;
+            }
+
+            me.actionSheet.hide();
+        }, 50);
 
     }
 
