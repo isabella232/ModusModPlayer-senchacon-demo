@@ -247,7 +247,7 @@ Ext.define('Modify.view.Spectrum', {
                     offset = 20;
                 }
 
-                canvas2dContext.fillRect(i * barWidth, (canvasHeight - scaledAvg + 2) + offset, barWidth, 5);
+                canvas2dContext.lineTo(i * barWidth, (canvasHeight - scaledAvg + 2) + offset, barWidth, 5);
             }
         });
     },
