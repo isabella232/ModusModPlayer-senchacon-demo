@@ -82,7 +82,7 @@ Ext.define('Modify.controller.Main', {
         me.main.add(dirList);
 
 
-//        return;
+        return;
         // TODO: Disable/remove after development
         Ext.Function.defer(function() {
             var r = dirList.getStore().getAt(4);

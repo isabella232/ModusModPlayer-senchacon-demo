@@ -11,12 +11,10 @@
 @implementation ModPlyr : CDVPlugin {
     int waveFormDataSize;
     
-    int ltChannelPlot;
-    int rtChannelPlot;
     
-    double ltFrameVal;
-    double rtFrameVal;
-
+    SInt16 *sampleData;
+    
+    BOOL processingSampleData;
     
 }
 
@@ -34,6 +32,9 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
     if (self.mpFile) {
         AudioQueueStop(mAudioQueue, TRUE);
         AudioQueueReset(mAudioQueue);
+        if (sampleData) {
+            free(sampleData);
+        }
     }
 }
 
@@ -42,6 +43,7 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
         ModPlug_Unload(self.mpFile);
         self.mpFile = nil;
         free(loadedFileData);
+//        free(sampleData);
     }
 }
 
@@ -67,16 +69,14 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
     
     // TODO: Make waveFormDataSizeLimit Dynamic
     waveFormDataSize = 500;
-    ltChannelPlot = 0;
-    rtChannelPlot = 0;
-    ltFrameVal = 0;
-    rtFrameVal = 0;
+
     
     FILE *file;
     
     const char* fil = [filePath cStringUsingEncoding:NSASCIIStringEncoding];
     
     file = fopen(fil, "rb");
+    
     
     if (file == NULL) {
       return;
@@ -104,6 +104,7 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 //    [self preLoadPatterns];
 //    [myObj performSelectorInBackground:@selector(doSomething) withObject:nil];
 
+    // TODO: Better exception handling.
     patternsModPlugFile = ModPlug_Load(loadedFileData, loadedFileSize);
     [self performSelectorInBackground:@selector(preLoadPatterns) withObject:nil];
 
@@ -111,22 +112,22 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
 
 - (void) initModPlugSettings {
     if (! modPlugSettingsCommitted) {
-    
+     
         ModPlug_GetSettings(&settings);
 
-        settings.mFlags=MODPLUG_ENABLE_OVERSAMPLING;
-        settings.mChannels=2;
-        settings.mBits=16;
-        settings.mFrequency=44100;
-        settings.mResamplingMode=MODPLUG_RESAMPLE_NEAREST;
-        settings.mReverbDepth=0;
-        settings.mReverbDelay=100;
-        settings.mBassAmount=0;
-        settings.mBassRange=50;
-        settings.mSurroundDepth=0;
-        settings.mSurroundDelay=10;
-        settings.mLoopCount=-1;
-        settings.mStereoSeparation=64;
+        settings.mFlags            = MODPLUG_ENABLE_OVERSAMPLING;
+        settings.mChannels         = 2;
+        settings.mBits             = 16;
+        settings.mFrequency        = 44100;
+        settings.mResamplingMode   = MODPLUG_RESAMPLE_NEAREST;
+        settings.mReverbDepth      = 0;
+        settings.mReverbDelay      = 100;
+        settings.mBassAmount       = 0;
+        settings.mBassRange        = 50;
+        settings.mSurroundDepth    = 0;
+        settings.mSurroundDelay    = 10;
+        settings.mLoopCount        = -1;
+        settings.mStereoSeparation = 64;
         
         ModPlug_SetSettings(&settings);
         modPlugSettingsCommitted = true;
@@ -188,9 +189,11 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
     /* Create associated buffers */
     mBuffers = (AudioQueueBufferRef*) malloc( sizeof(AudioQueueBufferRef) * NUM_BUFFERS );
     
-//    int bufferSize = SOUND_BUFFER_SIZE_SAMPLE * 2 * 2,
-    int bufferSize = 512,
+    int bufferSize = SOUND_BUFFER_SIZE_SAMPLE * 2 * 2,
+//    int bufferSize = 1024,
+//    int bufferSize = 512,
         bytesRead;
+
 
     for (int i = 0; i < NUM_BUFFERS; i++) {
 		AudioQueueBufferRef mBuffer;
@@ -207,9 +210,10 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
         
         SInt16 *frames = mBuffer->mAudioData;
         
-        [self convertAudioSamplesToFloat:frames];
-        
+        [self copyBufferData:frames withBufferSize:bufferSize];
     }
+    
+    
     
     
     /* Set initial playback volume */
@@ -250,7 +254,6 @@ void audioTap(void *                          inClientData,
 
 // Executed within a different context (not this class);
 void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer) {
-//    NSLog(@"Buffer is being filled");
     ModPlyr *modPlayer = (__bridge ModPlyr*)data;
     ModPlugFile *mpFile = modPlayer.mpFile;
     
@@ -263,13 +266,10 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
         bytesRead = ModPlug_Read(mpFile, (char*)mBuffer->mAudioData, mBuffer->mAudioDataByteSize);
     }
   
-  
-//      printf("bytes read: %i\n", bytesRead);
-
   // Convert the signed int to float
     if (modPlayer.generateAudioData) {
         SInt16 *frames = mBuffer->mAudioData;
-        [modPlayer convertAudioSamplesToFloat:frames];
+        [modPlayer copyBufferData:frames withBufferSize:bytesRead];
     }
     
     AudioQueueEnqueueBuffer(mQueue, mBuffer, 0, NULL);
@@ -281,7 +281,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
    patternDataReady = false;
 
     // Thread shit.
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // Top-level pool
+//    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // Top-level pool
     NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
 
 
@@ -336,7 +336,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     patternDataReady = true;
     
     //*** Thread stuff
-    [pool release];
+//    [pool release];
     [threadDictionary setValue:[NSNumber numberWithBool:1] forKey:@"ThreadShouldExitNow"];
     [NSThread exit];
 
@@ -525,7 +525,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     
     NSURL *directoryUrl = [[NSURL alloc] initFileURLWithPath:path];
     
-    NSFileManager *fileManager = [[[NSFileManager alloc] init] autorelease];
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
     
     NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
     
@@ -572,74 +572,160 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     return jsonDataString;
 }
 
+- (void) pauseMusic {
+    NSLog(@"pauseMusic()");
 
+}
 
-- (void) convertAudioSamplesToFloat:(SInt16 *)frames {
-    ltFrameVal = (frames[0] / 32767.5);
-    rtFrameVal = (frames[1] / 32767.5);
+- (void) copyBufferData:(SInt16 *)frames withBufferSize:(int)size {
+//    ltFrameVal = (frames[0] / 32767.5);
+//    rtFrameVal = (frames[1] / 32767.5);
+//    
+    
+    if (!processingSampleData) {
+        if (sampleData) {
+            free(sampleData);
+        }
+        sampleData = malloc(sizeof(SInt16) * size);
+    
+        memcpy(sampleData, frames, size);
+    }
+// TODO: calculate the audio data
+
 }
 
 
 // This method was copied from libbass spectrum.c :: UpdateSpectrum example
-- (void) getWaveFormData:(NSInteger*)width  andHeight:(NSInteger*)height {
+//- (void) getWaveFormData:(NSInteger*)width  andHeight:(NSInteger*)height {
+//    int x,y;
+//
+//    int SPECHEIGHT = 213;
+//
+//    int c = 0;
+//
+////    printf("ltFrameVal : \t\t %f \t rtFrameVal : %f\n", ltFrameVal, rtFrameVal);
+//
+//    while (c < 2) {
+//        float val;
+//        
+//        val = (c == 0) ? ltFrameVal : rtFrameVal;
+//        
+//        int v = (1 - val) * SPECHEIGHT / 2; // invert and scale to fit display
+//    
+//        if (v < 0) {
+//            v = 0;
+//        }
+//        else if (v >= SPECHEIGHT) {
+//            v = SPECHEIGHT - 1;
+//        }
+//
+//        y = v;
+//        
+//        do { // draw line from previous sample...
+//            if (y < v) {
+//                y++;
+//            }
+//            else if (y > v) {
+//                y--;
+//            }
+//            
+//            
+//        } while (y != v);
+//        
+//
+//        if (c == 0) {
+//            ltChannelPlot = v;
+//        }
+//        else {
+//            rtChannelPlot = v;
+//        }
+//        
+//        ++c;
+//    
+//    }
+////    printf("L: %i \t\t R: %i \n", ltChannelPlot, rtChannelPlot);
+//
+////    printf("Total waveFormData: %i\n\n", [waveFormData count]);
+//    
+//
+////    [channelData addObject:channelOneData];
+////    [channelData addObject:channelTwoData];
+//    
+////    [channelOneData release];
+////    [channelTwoData release];
+//    
+////    return [[NSArray alloc] initWithObjects:];
+//}
+
+
+- (NSMutableArray*) getWaveFormData:(NSInteger*)width  andHeight:(NSInteger*)height {
     int x,y;
 
+    processingSampleData = true;
+    // TODO: Use width and height parameters here. Need to figure out how to cast from NSInteger to int!!!!
     int SPECHEIGHT = 213;
+    int SPECWIDTH =  500;
 
-    int c = 0;
 
-//    printf("ltFrameVal : \t\t %f \t rtFrameVal : %f\n", ltFrameVal, rtFrameVal);
+    NSMutableArray *channelData    = [[NSMutableArray alloc] init];
+    NSMutableArray *channelOneData = [[NSMutableArray alloc] init];
+    NSMutableArray *channelTwoData = [[NSMutableArray alloc] init];
 
-    while (c < 2) {
-        float val;
-        
-        val = (c == 0) ? ltFrameVal : rtFrameVal;
-        
-        int v = (1 - val) * SPECHEIGHT / 2; // invert and scale to fit display
+    int c;
     
-        if (v < 0) {
-            v = 0;
-        }
-        else if (v >= SPECHEIGHT) {
-            v = SPECHEIGHT - 1;
-        }
+    SInt16 *buf = sampleData;
+    
+    for ( c = 0; c < 2;c ++) {
+        for (x=0;x<SPECWIDTH;x++) {
+            NSNumber *plotItem;
 
-        y = v;
-        
-        do { // draw line from previous sample...
-            if (y < v) {
-                y++;
-            }
-            else if (y > v) {
-                y--;
-            }
+            int val = x * 2 + c;
+            SInt16 itemRaw = buf[ val ];
+            float item = itemRaw / 32767.5;
             
             
-        } while (y != v);
+//            printf("%f\n", item);
+            int v = ( 1 - item) * SPECHEIGHT /2; // invert and scale to fit display
         
+            if (v < 0) {
+                v = 0;
+            }
+            else if (v >= SPECHEIGHT) {
+                v = SPECHEIGHT - 1;
+            }
 
-        if (c == 0) {
-            ltChannelPlot = v;
-        }
-        else {
-            rtChannelPlot = v;
-        }
-        
-        ++c;
+            if (!x) {
+                y = v;
+            }
+            do { // draw line from previous sample...
+                if (y < v) {
+                    y++;
+                }
+                else if (y > v) {
+                    y--;
+                }
+                
+                
+                plotItem = [[NSNumber alloc] initWithInt:v];
+
+            } while (y!=v);
     
+            if (c == 0) {
+                [channelOneData addObject: plotItem];
+            }
+            else {
+                [channelTwoData addObject: plotItem];
+
+            }
+        }
     }
-//    printf("L: %i \t\t R: %i \n", ltChannelPlot, rtChannelPlot);
 
-//    printf("Total waveFormData: %i\n\n", [waveFormData count]);
+    [channelData addObject:channelOneData];
+    [channelData addObject:channelTwoData];
     
+    processingSampleData = false;
+    return channelData;
 
-//    [channelData addObject:channelOneData];
-//    [channelData addObject:channelTwoData];
-    
-//    [channelOneData release];
-//    [channelTwoData release];
-    
-//    return [[NSArray alloc] initWithObjects:];
 }
 
 
@@ -913,16 +999,20 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     }
     else if ([dataType isEqualToString:@"spectrum"]) {
 
-        NSInteger *canvasWidth  = (NSInteger *)[command.arguments objectAtIndex:1];
-        NSInteger *canvasHeight = (NSInteger *)[command.arguments objectAtIndex:2];
+//        NSInteger *canvasWidth  = (NSInteger *)[command.arguments objectAtIndex:1];
+//        NSInteger *canvasHeight = (NSInteger *)[command.arguments objectAtIndex:2];
+        NSInteger *canvasWidth  = 500;
+        NSInteger *canvasHeight = 233;
+
 //        NSString  *waveDataType = [command.arguments objectAtIndex:3];
         NSString *waveDataType = @"waveform";
         
+        NSMutableArray *waveData;
         
         if ([waveDataType isEqual:@"waveform"]) {
-            [self getWaveFormData:(NSInteger *)canvasWidth andHeight:(NSInteger *)canvasHeight];
+//            [self getWaveFormData:(NSInteger *)canvasWidth andHeight:(NSInteger *)canvasHeight];
             
-//            waveData = [self getWaveFormData:(NSInteger *)canvasWidth andHeight:(NSInteger *)canvasHeight];
+            waveData = [self getWaveFormData:(NSInteger *)canvasWidth andHeight:(NSInteger *)canvasHeight];
         }
         else if ([waveDataType isEqual:@"spectrum"]) {
 //            waveData = [[[NSMutableArray alloc] init] autorelease];
@@ -932,17 +1022,19 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 //            waveData = [[[NSMutableArray alloc] init] autorelease];
         }
         
-        NSNumber *lt = [[[NSNumber alloc] initWithInt:ltChannelPlot] autorelease];
-        NSNumber *rt = [[[NSNumber alloc] initWithInt:rtChannelPlot] autorelease];
+//        NSNumber *lt = [[[NSNumber alloc] initWithInt:ltChannelPlot] autorelease];
+//        NSNumber *rt = [[[NSNumber alloc] initWithInt:rtChannelPlot] autorelease];
         
 //        NSLog(@"lt : %i \t\t rt : %i", ltChannelPlot, rtChannelPlot);
         
         jsonObj = [[NSDictionary alloc]
             initWithObjectsAndKeys:
-                lt, @"ltChannelPlot",
-                rt, @"rtChannelPlot",
+                waveData, @"waveData",
                 nil
             ];
+        
+//        [waveData release];
+
 
     }
     

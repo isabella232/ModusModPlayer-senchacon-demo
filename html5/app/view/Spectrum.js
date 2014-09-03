@@ -11,7 +11,7 @@ Ext.define('Modify.view.Spectrum', {
     xtype  : 'spectrum',
 
     config : {
-        numPoints  : 500,
+        numPoints  : 2048,
         binMax     : 500,
         binMin     : 10,
         numBins    : 500,
@@ -160,7 +160,20 @@ Ext.define('Modify.view.Spectrum', {
     },
 
 
-    updateCanvas      : function(data) {
+    updateCanvas      : function(dataItems) {
+        var me = this;
+
+//        console.log('Spectrum.updateCanvas()');
+
+        var  currentMode = me.getMode();
+//        debugger;
+//        me[me.getModeMethodMap()[currentMode]](dataItems);
+
+        me.drawWaveForms(dataItems);
+    },
+
+
+    updateCanvasNew      : function(data) {
         var me = this;
 
 //        console.log('Spectrum.updateCanvas()');
@@ -173,17 +186,27 @@ Ext.define('Modify.view.Spectrum', {
             rtChannelData = me.rtChannelData,
             numBins       = me.getNumBins();
 
+        if (data.ltChannelPlot == undefined) {
+            data.ltChannelPlot = 0;
+        }
+
+        if (data.rtChannelPlot == undefined) {
+            data.rtChannelPlot = 0;
+        }
+
+//        console.log('data.ltChannelPlot >> ' + data.ltChannelPlot);
+//        console.log('data.rtChannelPlot >> ' + data.rtChannelPlot);
+
         (ltChannelData.length >= numBins) && ltChannelData.shift();
         (rtChannelData.length >= numBins) && rtChannelData.shift();
 
         ltChannelData.push(data.ltChannelPlot);
         rtChannelData.push(data.rtChannelPlot);
 
+
+
         me.drawWaveForms([ltChannelData, rtChannelData]);
     },
-
-
-
 
     drawWaveForms : function(dataItems) {
 
@@ -208,7 +231,7 @@ Ext.define('Modify.view.Spectrum', {
 
         Ext.each(dataItems, function(data, index) {
 
-            debugger;
+//            debugger;
             if (index < one) {
                 canvas2dContext.fillStyle = "rgba(255, 80, 20, 1)";
             }
@@ -247,11 +270,96 @@ Ext.define('Modify.view.Spectrum', {
                     offset = 20;
                 }
 
-                canvas2dContext.lineTo(i * barWidth, (canvasHeight - scaledAvg + 2) + offset, barWidth, 5);
+                canvas2dContext.fillRect(i * barWidth, (canvasHeight - scaledAvg + 2) + offset, barWidth, 5);
             }
         });
     },
 
+
+
+    drawWaveFormsNew : function(dataItems) {
+
+        if (! dataItems) {
+//            console.log('No data items for spectrum')
+//            debugger;
+            this.clearCanvas();
+            return;
+        }
+
+        var me              = this,
+            elHeight        = me.element.getHeight(),
+            numBins         = me.getNumBins(),
+            canvasWidth     = me.canvasWidth,
+            canvasHeight    = me.canvasHeight,
+            canvas2dContext = me.canvas2dContext,
+            one             = 1;
+
+
+        me.canvas2dContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+
+
+        Ext.each(dataItems, function(data, index) {
+
+//            debugger;
+            if (index < one) {
+                canvas2dContext.fillStyle = "rgba(255, 80, 20, 1)";
+            }
+            else {
+                canvas2dContext.fillStyle = "rgba(12, 0, 184, 1)";
+            }
+
+
+            // Get the frequency samples
+
+            var length = data.length;
+            if (me.validPoints > 0) {
+                length = me.validPoints;
+            }
+
+
+            var bin_size = Math.floor(length / numBins);
+
+            for (var i = 0; i < numBins; ++i) {
+                if (i > data.length)  {
+//                    debugger;
+                    return;
+                }
+                var sum = 0;
+                var itemIndex;
+                for (var j = 0; j < bin_size; ++j) {
+                    itemIndex = (i * bin_size) + j;
+                    if (itemIndex > length) {
+//                        debugger;
+                        return;
+                    }
+                    sum += data[itemIndex];
+                }
+
+                // Calculate the average frequency of the samples in the bin
+                var average = sum / bin_size;
+
+                // Draw the bars on the canvas
+                var barWidth = canvasWidth / numBins,
+                    scaledAvg = (average / elHeight) * canvasHeight;
+
+
+                var offset;
+                if (index < one) {
+                    offset = -100;
+                }
+                else {
+                    offset = 20;
+                }
+                var x = i * barWidth;
+                var y = (canvasHeight - scaledAvg + 2) + offset;
+
+//                console.log(x + ' ' + y);
+
+
+                canvas2dContext.fillRect(x, y, barWidth, 5);
+            }
+        });
+    },
 
     drawWaveBars : function(dataItems) {
 
@@ -302,7 +410,7 @@ Ext.define('Modify.view.Spectrum', {
 
 
                 if (index < one) {
-                    scaledAvg += 50;
+                    scaledAvg += 0;
                 }
 
                 canvas2dContext.fillRect(

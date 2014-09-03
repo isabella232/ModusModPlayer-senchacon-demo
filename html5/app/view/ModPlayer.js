@@ -176,7 +176,7 @@ Ext.define('Modify.view.ModPlayer', {
                 vizItem.showPatternAndPosition(stats.pattern, stats.row);
             }
             else if (vizItem.xtype == 'spectrum') {
-                vizItem.updateCanvas(stats);
+                vizItem.updateCanvas(stats.waveData);
             }
             else {
                 console.log('NO vizItem.xtype');
