@@ -1,4 +1,4 @@
-function _e9abebfb1fc0f38154ea3a7bc1b24859ada99ac2(){};//@tag foundation,core
+function _43b18805d238a76bd28d0617391ffd3558625c00(){};//@tag foundation,core
 //@define Ext
 
 /**
@@ -67704,9 +67704,9 @@ Ext.define('Modify.view.Spectrum', {
 
     config : {
         numPoints  : 2048,
-        binMax     : 500,
+        binMax     : 1000,
         binMin     : 10,
-        numBins    : 500,
+        numBins    : 1000,
         mode       : 1,
         barSpacing : 0,
 
@@ -67769,10 +67769,10 @@ Ext.define('Modify.view.Spectrum', {
             me.canvasWidth  = thisElWidth;
 
             me.canvasHeight = thisElHeight;
-            me.validPoints  = 500;
+            me.validPoints  = 1000;
 
             me.canvas2dContext = canvas.getContext('2d');
-            me.data = new Uint8Array();
+//            me.data = new Uint8Array();
 
         }, me);
     },
@@ -67859,9 +67859,9 @@ Ext.define('Modify.view.Spectrum', {
 
         var  currentMode = me.getMode();
 //        debugger;
-//        me[me.getModeMethodMap()[currentMode]](dataItems);
+        me[me.getModeMethodMap()[currentMode]](dataItems);
 
-        me.drawWaveForms(dataItems);
+//        me.drawWaveForms(dataItems);
     },
 
 
@@ -67956,13 +67956,13 @@ Ext.define('Modify.view.Spectrum', {
 
                 var offset;
                 if (index < one) {
-                    offset = -100;
+                    offset = (canvasHeight * .05);
                 }
                 else {
-                    offset = 20;
+                    offset = canvasHeight * .45;
                 }
 
-                canvas2dContext.fillRect(i * barWidth, (canvasHeight - scaledAvg + 2) + offset, barWidth, 5);
+                canvas2dContext.fillRect(i * barWidth, ((canvasHeight / 2) - scaledAvg + 2) + offset, barWidth, 5);
             }
         });
     },
@@ -68157,6 +68157,181 @@ Ext.define('Modify.view.Spectrum', {
 
 });
 
+Ext.define('Modify.view.NoteDots', {
+    extend : 'Ext.Container',
+    xtype  : 'notedots',
+
+    config : {
+        patternData : null,
+//        style  : 'border: 1px solid #F00',
+        tpl    : '<canvas id="{id}" height="{height}" width="{width}" />'
+
+    },
+//
+     initialize : function() {
+        // TODO: Push to element config
+
+        var me = this,
+            thisEl = me.element,
+            canvas;
+
+        this.callParent();
+//
+//        thisEl.on({
+//            scope     : this,
+//            tap       : 'onElTapSwitchMode',
+//            dragstart : 'onElDragStart',
+//            dragend   : 'onElDragEnd',
+//            drag      : 'onElDrag'
+//        });
+
+        thisEl.on('painted', function() {
+            console.log('thisEl painted')
+            var thisElWidth  = thisEl.getWidth(),
+                thisElHeight = thisEl.getHeight();
+
+            me.setData({
+                id     : 'canvas-' + me.getId(),
+                width  : thisElWidth,
+                height : thisElHeight
+            });
+
+            canvas = me.canvas = me.element.down('canvas').dom;
+
+            // These are for backwards compatibility.
+            me.canvasWidth  = thisElWidth;
+
+            me.canvasHeight = thisElHeight;
+            me.validPoints  = 1000;
+
+            me.canvas2dContext = canvas.getContext('2d');
+        }, me);
+    },
+
+
+
+    clearCanvas : function() {
+        var me = this;
+        me.canvas2dContext.clearRect(0, 0, me.canvasWidth, me.canvasHeight);
+
+    },
+
+    applyPatternData : function(patternData) {
+        this.numChannels = patternData[0][0].length;
+        this.patternData = patternData;
+        return patternData;
+    },
+
+    showPatternAndPosition : function(patternNum, rowNum) {
+        var patternData = this.getPatternData();
+
+        if (! patternData || patternNum == '--' || rowNum == this.prevRowNum) {
+            return;
+        }
+
+        var pattern = patternData[patternNum],
+            row;
+
+        if (pattern) {
+            row = pattern[rowNum];
+
+            if (row) {
+                this.updateCanvas(row);
+
+                this.prevRowNum = rowNum;
+            }
+            else {
+                console.warn('Not Found ::' + patternNum + ' Row #' + rowNum);
+            }
+
+        }
+        else {
+            console.warn('Not Found ::' + patternNum);
+        }
+
+
+    },
+
+    notes : {
+
+        'C-' : 1,
+        'C#' : 2,
+        'D-' : 3,
+        'D#' : 4,
+        'E-' : 5,
+        'F-' : 6,
+        'F#' : 7,
+        'G-' : 8,
+        'G#' : 9,
+        'A-' : 10,
+        'A#' : 11,
+        'B'  : 12
+    },
+
+
+    /*
+        row example:
+        [
+            "C-4 01 .. . ..",
+            "C-6 02 09 . ..",
+            "C-3 03 30 L 0A",
+            "... .. 0A . ..",
+            "F-5 03 0A . ..",
+            "... .. 0A . ..",
+            "C-7 .. .. . ..",
+            "D#6 .. .. . .."
+        ]
+
+     */
+    updateCanvas      : function(row) {
+        var me = this;
+        window.item = this;
+
+        me.clearCanvas();
+
+//        stackBlurCanvasRGBA(me.canvas.id, 0, 0, this.canvasWidth, this.canvasHeight, 1);
+
+        //grid width and height
+        var canvasWidth  = me.canvasWidth,
+            canvasHeight = me.canvasHeight,
+            context      = me.canvas2dContext;
+
+        var notesPerScale= 12,
+            numScales    = 6,
+            boxesPerRow  = notesPerScale * numScales,
+            boxWidth     = canvasWidth / boxesPerRow,
+            boxHeight    = canvasHeight / this.numChannels,
+            radius       = boxHeight / 4,
+            arcVal       = 2 * Math.PI;
+
+
+
+
+        context.fillStyle = "rgba(80, 80, 255, 1)";
+        Ext.each(row, function(channel, channelNum) {
+            var note           = channel.substr(0,2),
+                octave         = channel.substr(2,1),
+                noteMultiplier = me.notes[note],
+                x              = (boxWidth * noteMultiplier) * +octave,
+                y              = boxHeight * channelNum;
+
+
+//            context.fillRect(x, y, boxWidth, boxHeight);
+
+            context.beginPath();
+            context.arc(x, y + radius + 20, radius, 0, arcVal, false);
+            context.fill();
+//            context.stroke();
+
+        });
+
+
+
+//        me.drawWaveForms(dataItems);
+    }
+
+});
+
 Ext.define('Modify.view.Main', {
     extend : 'Ext.Container',
     xtype  : 'main',
@@ -68165,6 +68340,7 @@ Ext.define('Modify.view.Main', {
                        
                             
                               
+                               
                               
       
     config: {
@@ -68510,10 +68686,10 @@ Ext.define('Modify.view.ModPlayer', {
         var vizItem = this.vizItem;
         if (vizItem) {
             // Todo: normalize methods for viz items
-            if (vizItem.xtype == 'pattern')  {
+            if (vizItem.showPatternAndPosition)  {
                 vizItem.showPatternAndPosition(stats.pattern, stats.row);
             }
-            else if (vizItem.xtype == 'spectrum') {
+            else if (vizItem.updateCanvas) {
                 vizItem.updateCanvas(stats.waveData);
             }
             else {
@@ -68544,12 +68720,14 @@ Ext.define('Modify.controller.Main', {
     },
 
     buttonTextToXtypeDict : {
-        'Patterns' : 'pattern',
-        'Spectrum' : 'spectrum'
+        'Patterns'  : 'pattern',
+        'Spectrum'  : 'spectrum',
+        'Note Dots' : 'notedots'
     },
 
     updateLoopModeDict : {
         pattern  : 'pattern',
+        notedots : 'pattern',
         waveform : 'waveform'
     },
 
@@ -68614,22 +68792,22 @@ Ext.define('Modify.controller.Main', {
         return;
         // TODO: Disable/remove after development
         Ext.Function.defer(function() {
-            var r = dirList.getStore().getAt(4);
+            var r = dirList.getStore().getAt(0);
             me.onDirListItemSelect(dirList, r);
 //
             Ext.Function.defer(function() {
                 var fileList = me.main.down('#fileList');
-                r = fileList.getStore().getAt(1);
+                r = fileList.getStore().getAt(0);
                 me.onFileListItemSelect(fileList, r);
 
                 setTimeout(function() {
                     var player = Ext.ComponentQuery.query('player')[0];
-                    player.fireEvent('play', player);
+//                    player.fireEvent('play', player);
 
                     me.onMainVizSelect();
 
                     setTimeout(function() {
-                        var btn = me.actionSheet.getInnerItems()[1];
+                        var btn = me.actionSheet.getInnerItems()[2];
                         me.actionSheet.hide();
                         me.onVizChange(btn);
                     }, 250)
@@ -68828,8 +69006,8 @@ Ext.define('Modify.controller.Main', {
 
             args = [me.vizMode, spectrumSize.width, spectrumSize.height];
         }
-        else if (me.vizMode == 'pattern') {
-            args = [me.vizMode];
+        else if (me.vizMode == 'pattern' || me.vizMode == 'notedots') {
+            args = ['pattern'];
         }
         else {
             args = [];
@@ -68869,7 +69047,6 @@ Ext.define('Modify.controller.Main', {
                     {
                         text     : 'Note Dots',
                         scope    : me,
-                        disabled : true,
                         handler  : me.onVizChange
                     },
                     {
@@ -68886,8 +69063,6 @@ Ext.define('Modify.controller.Main', {
 
         this.actionSheet.show();
     },
-
-
 
 
     onVizChange : function(btn) {
@@ -68915,9 +69090,10 @@ Ext.define('Modify.controller.Main', {
                 });
                 me.startModPlayerUpdateLoop();
 
-                if (item.xtype == 'pattern') {
+                if (item.setPatternData) {
                     item.setPatternData(player.patternData);
                 }
+
 
                 window.vizItem = item;
                 window.player = player;

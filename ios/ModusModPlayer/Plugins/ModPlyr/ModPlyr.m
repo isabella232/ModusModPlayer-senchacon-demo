@@ -33,6 +33,8 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
         AudioQueueStop(mAudioQueue, TRUE);
         AudioQueueReset(mAudioQueue);
         if (sampleData) {
+            printf(">> stopMusic free(sampleData);\n");
+
             free(sampleData);
         }
     }
@@ -582,8 +584,9 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 //    rtFrameVal = (frames[1] / 32767.5);
 //    
     
-    if (!processingSampleData) {
+    if (! processingSampleData) {
         if (sampleData) {
+//            printf(">> copyBufferData free(sampleData);\n");
             free(sampleData);
         }
         sampleData = malloc(sizeof(SInt16) * size);
@@ -595,76 +598,13 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 }
 
 
-// This method was copied from libbass spectrum.c :: UpdateSpectrum example
-//- (void) getWaveFormData:(NSInteger*)width  andHeight:(NSInteger*)height {
-//    int x,y;
-//
-//    int SPECHEIGHT = 213;
-//
-//    int c = 0;
-//
-////    printf("ltFrameVal : \t\t %f \t rtFrameVal : %f\n", ltFrameVal, rtFrameVal);
-//
-//    while (c < 2) {
-//        float val;
-//        
-//        val = (c == 0) ? ltFrameVal : rtFrameVal;
-//        
-//        int v = (1 - val) * SPECHEIGHT / 2; // invert and scale to fit display
-//    
-//        if (v < 0) {
-//            v = 0;
-//        }
-//        else if (v >= SPECHEIGHT) {
-//            v = SPECHEIGHT - 1;
-//        }
-//
-//        y = v;
-//        
-//        do { // draw line from previous sample...
-//            if (y < v) {
-//                y++;
-//            }
-//            else if (y > v) {
-//                y--;
-//            }
-//            
-//            
-//        } while (y != v);
-//        
-//
-//        if (c == 0) {
-//            ltChannelPlot = v;
-//        }
-//        else {
-//            rtChannelPlot = v;
-//        }
-//        
-//        ++c;
-//    
-//    }
-////    printf("L: %i \t\t R: %i \n", ltChannelPlot, rtChannelPlot);
-//
-////    printf("Total waveFormData: %i\n\n", [waveFormData count]);
-//    
-//
-////    [channelData addObject:channelOneData];
-////    [channelData addObject:channelTwoData];
-//    
-////    [channelOneData release];
-////    [channelTwoData release];
-//    
-////    return [[NSArray alloc] initWithObjects:];
-//}
-
-
 - (NSMutableArray*) getWaveFormData:(NSInteger*)width  andHeight:(NSInteger*)height {
     int x,y;
 
     processingSampleData = true;
     // TODO: Use width and height parameters here. Need to figure out how to cast from NSInteger to int!!!!
     int SPECHEIGHT = 213;
-    int SPECWIDTH =  500;
+    int SPECWIDTH =  1000;
 
 
     NSMutableArray *channelData    = [[NSMutableArray alloc] init];
@@ -676,11 +616,12 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     SInt16 *buf = sampleData;
     
     for ( c = 0; c < 2;c ++) {
-        for (x=0;x<SPECWIDTH;x++) {
+        for (x = 0; x < SPECWIDTH; x++) {
             NSNumber *plotItem;
 
             int val = x * 2 + c;
             SInt16 itemRaw = buf[ val ];
+            
             float item = itemRaw / 32767.5;
             
             

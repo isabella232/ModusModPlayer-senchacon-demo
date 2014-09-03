@@ -15,12 +15,14 @@ Ext.define('Modify.controller.Main', {
     },
 
     buttonTextToXtypeDict : {
-        'Patterns' : 'pattern',
-        'Spectrum' : 'spectrum'
+        'Patterns'  : 'pattern',
+        'Spectrum'  : 'spectrum',
+        'Note Dots' : 'notedots'
     },
 
     updateLoopModeDict : {
         pattern  : 'pattern',
+        notedots : 'pattern',
         waveform : 'waveform'
     },
 
@@ -85,22 +87,22 @@ Ext.define('Modify.controller.Main', {
         return;
         // TODO: Disable/remove after development
         Ext.Function.defer(function() {
-            var r = dirList.getStore().getAt(4);
+            var r = dirList.getStore().getAt(0);
             me.onDirListItemSelect(dirList, r);
 //
             Ext.Function.defer(function() {
                 var fileList = me.main.down('#fileList');
-                r = fileList.getStore().getAt(1);
+                r = fileList.getStore().getAt(0);
                 me.onFileListItemSelect(fileList, r);
 
                 setTimeout(function() {
                     var player = Ext.ComponentQuery.query('player')[0];
-                    player.fireEvent('play', player);
+//                    player.fireEvent('play', player);
 
                     me.onMainVizSelect();
 
                     setTimeout(function() {
-                        var btn = me.actionSheet.getInnerItems()[1];
+                        var btn = me.actionSheet.getInnerItems()[2];
                         me.actionSheet.hide();
                         me.onVizChange(btn);
                     }, 250)
@@ -299,8 +301,8 @@ Ext.define('Modify.controller.Main', {
 
             args = [me.vizMode, spectrumSize.width, spectrumSize.height];
         }
-        else if (me.vizMode == 'pattern') {
-            args = [me.vizMode];
+        else if (me.vizMode == 'pattern' || me.vizMode == 'notedots') {
+            args = ['pattern'];
         }
         else {
             args = [];
@@ -340,7 +342,6 @@ Ext.define('Modify.controller.Main', {
                     {
                         text     : 'Note Dots',
                         scope    : me,
-                        disabled : true,
                         handler  : me.onVizChange
                     },
                     {
@@ -357,8 +358,6 @@ Ext.define('Modify.controller.Main', {
 
         this.actionSheet.show();
     },
-
-
 
 
     onVizChange : function(btn) {
@@ -386,9 +385,10 @@ Ext.define('Modify.controller.Main', {
                 });
                 me.startModPlayerUpdateLoop();
 
-                if (item.xtype == 'pattern') {
+                if (item.setPatternData) {
                     item.setPatternData(player.patternData);
                 }
+
 
                 window.vizItem = item;
                 window.player = player;

@@ -777,6 +777,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Modify.store.ModFiles": [],
   "Modify.view.Main": [],
   "Modify.view.ModPlayer": [],
+  "Modify.view.NoteDots": [],
   "Modify.view.Pattern": [],
   "Modify.view.Spectrum": []
 });
@@ -1744,6 +1745,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Modify.view.ModPlayer": [
     "widget.player"
+  ],
+  "Modify.view.NoteDots": [
+    "widget.notedots"
   ],
   "Modify.view.Pattern": [
     "widget.pattern"

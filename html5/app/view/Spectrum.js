@@ -12,9 +12,9 @@ Ext.define('Modify.view.Spectrum', {
 
     config : {
         numPoints  : 2048,
-        binMax     : 500,
+        binMax     : 1000,
         binMin     : 10,
-        numBins    : 500,
+        numBins    : 1000,
         mode       : 1,
         barSpacing : 0,
 
@@ -77,10 +77,10 @@ Ext.define('Modify.view.Spectrum', {
             me.canvasWidth  = thisElWidth;
 
             me.canvasHeight = thisElHeight;
-            me.validPoints  = 500;
+            me.validPoints  = 1000;
 
             me.canvas2dContext = canvas.getContext('2d');
-            me.data = new Uint8Array();
+//            me.data = new Uint8Array();
 
         }, me);
     },
@@ -167,9 +167,9 @@ Ext.define('Modify.view.Spectrum', {
 
         var  currentMode = me.getMode();
 //        debugger;
-//        me[me.getModeMethodMap()[currentMode]](dataItems);
+        me[me.getModeMethodMap()[currentMode]](dataItems);
 
-        me.drawWaveForms(dataItems);
+//        me.drawWaveForms(dataItems);
     },
 
 
@@ -264,13 +264,13 @@ Ext.define('Modify.view.Spectrum', {
 
                 var offset;
                 if (index < one) {
-                    offset = -100;
+                    offset = (canvasHeight * .05);
                 }
                 else {
-                    offset = 20;
+                    offset = canvasHeight * .45;
                 }
 
-                canvas2dContext.fillRect(i * barWidth, (canvasHeight - scaledAvg + 2) + offset, barWidth, 5);
+                canvas2dContext.fillRect(i * barWidth, ((canvasHeight / 2) - scaledAvg + 2) + offset, barWidth, 5);
             }
         });
     },

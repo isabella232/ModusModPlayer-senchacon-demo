@@ -172,10 +172,10 @@ Ext.define('Modify.view.ModPlayer', {
         var vizItem = this.vizItem;
         if (vizItem) {
             // Todo: normalize methods for viz items
-            if (vizItem.xtype == 'pattern')  {
+            if (vizItem.showPatternAndPosition)  {
                 vizItem.showPatternAndPosition(stats.pattern, stats.row);
             }
-            else if (vizItem.xtype == 'spectrum') {
+            else if (vizItem.updateCanvas) {
                 vizItem.updateCanvas(stats.waveData);
             }
             else {

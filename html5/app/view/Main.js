@@ -6,7 +6,8 @@ Ext.define('Modify.view.Main', {
         'Ext.TitleBar',
         'Ext.dataview.List',
         'Modify.view.Pattern',
-        'Modify.view.Spectrum'
+        'Modify.view.Spectrum',
+        'Modify.view.NoteDots'
     ],
     config: {
         layout : {
