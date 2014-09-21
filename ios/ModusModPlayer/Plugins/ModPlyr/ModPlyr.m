@@ -354,6 +354,8 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     NSMutableArray *patternData = [[NSMutableArray alloc] init],
                    *rowData;
 
+    return patternData;
+    
     
     int currRow = 0;
     
@@ -478,8 +480,8 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     }
 
 
-    return [[NSMutableArray alloc]init];
-//    return patternData;
+//    return [[NSMutableArray alloc]init];
+    return patternData;
 }
 
 
