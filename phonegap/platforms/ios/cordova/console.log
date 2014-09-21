@@ -1,0 +1,12 @@
+2014-09-21 08:48:41.049 MODify[6830:138286] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/jgarcia/Library/Developer/CoreSimulator/Devices/FE32D9BA-79F1-44A5-A1CB-92745C3D901F/data/Containers/Data/Application/0C374452-4DF7-4A4E-A9B5-130589A4C6B7/Library/Cookies/Cookies.binarycookies
+2014-09-21 08:48:41.145 MODify[6830:138286] Multi-tasking -> Device: YES, App: YES
+2014-09-21 08:48:41.166 MODify[6830:138286] Unlimited access to network resources
+2014-09-21 08:48:41.170 MODify[6830:138286] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-09-21 08:48:41.898 MODify[6830:138286] Resetting plugins due to page load.
+2014-09-21 08:48:42.004 MODify[6830:138286] Finished load of: file:///Users/jgarcia/Library/Developer/CoreSimulator/Devices/FE32D9BA-79F1-44A5-A1CB-92745C3D901F/data/Containers/Bundle/Application/0AAEF5D3-C21C-4314-891E-5B3141643AAB/MODify.app/www/index.html
