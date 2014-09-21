@@ -84,7 +84,7 @@ Ext.define('Modify.controller.Main', {
         me.main.add(dirList);
 
 
-        return;
+//        return;
         // TODO: Disable/remove after development
         Ext.Function.defer(function() {
             var r = dirList.getStore().getAt(0);
@@ -97,10 +97,11 @@ Ext.define('Modify.controller.Main', {
 
                 setTimeout(function() {
                     var player = Ext.ComponentQuery.query('player')[0];
-//                    player.fireEvent('play', player);
+                    player.fireEvent('play', player);
 
                     me.onMainVizSelect();
 
+                    return;
                     setTimeout(function() {
                         var btn = me.actionSheet.getInnerItems()[2];
                         me.actionSheet.hide();

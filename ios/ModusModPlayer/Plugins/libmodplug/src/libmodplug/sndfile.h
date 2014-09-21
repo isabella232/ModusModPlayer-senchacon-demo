@@ -373,6 +373,7 @@ typedef struct _INSTRUMENTHEADER
 // Channel Struct
 typedef struct _MODCHANNEL
 {
+    int channelNumber;
 	// First 32-bytes: Most used mixing information: don't change it
 	signed char * pCurrentSample;
 	DWORD nPos;

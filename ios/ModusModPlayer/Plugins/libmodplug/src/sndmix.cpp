@@ -253,10 +253,13 @@ UINT CSoundFile::Read(LPVOID lpDestBuffer, UINT cbBuffer)
 	else if (gnBitsPerSample == 24) { lSampleSize *= 3; pCvt = X86_Convert32To24; }
 	else if (gnBitsPerSample == 32) { lSampleSize *= 4; pCvt = X86_Convert32To32; }
 #endif
-	lMax = cbBuffer / lSampleSize;
+	
+    lMax = cbBuffer / lSampleSize;
 	if ((!lMax) || (!lpBuffer) || (!m_nChannels)) return 0;
-	lRead = lMax;
-	if (m_dwSongFlags & SONG_ENDREACHED) goto MixDone;
+	
+    lRead = lMax;
+	
+    if (m_dwSongFlags & SONG_ENDREACHED) goto MixDone;
 	while (lRead > 0)
 	{
 		// Update Channel Data
@@ -402,8 +405,7 @@ BOOL CSoundFile::ProcessRow()
 					m_nCurrentPattern = m_nRestartPos;
 					m_nRow = 0;
 					if ((Order[m_nCurrentPattern] >= MAX_PATTERNS) || (!Patterns[Order[m_nCurrentPattern]])) return FALSE;
-				} else
-				{
+				} else {
 					m_nCurrentPattern++;
 				}
 				m_nPattern = (m_nCurrentPattern < MAX_ORDERS) ? Order[m_nCurrentPattern] : 0xFF;

@@ -128,6 +128,7 @@ void ModPlug_SeekOrder(ModPlugFile* file,int order);
 int ModPlug_GetModuleType(ModPlugFile* file);
 char* ModPlug_GetMessage(ModPlugFile* file);
 
+void ModPlug_GetChannelData(ModPlugFile * file);
 
 #ifndef MODPLUG_NO_FILESAVE
 /*

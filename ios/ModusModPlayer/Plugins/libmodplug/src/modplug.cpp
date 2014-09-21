@@ -140,6 +140,7 @@ void ModPlug_Unload(ModPlugFile* file)
 
 int ModPlug_Read(ModPlugFile* file, void* buffer, int size)
 {
+    printf("> > > >     ModPlug_Read()\n");
 	return file->mSoundFile.Read(buffer, size) * ModPlug::gSampleSize;
 }
 
@@ -325,4 +326,17 @@ void ModPlug_SetSettings(const ModPlug_Settings* settings)
 {
 	memcpy(&ModPlug::gSettings, settings, sizeof(ModPlug_Settings));
 	ModPlug::UpdateSettings(false); // do not update basic config.
+}
+
+
+void ModPlug_GetChannelData(ModPlugFile* file) {
+    MODCHANNEL *channels = file->mSoundFile.Chn;
+    unsigned int numChannels = file->mSoundFile.GetNumChannels();
+    
+    for (int i=0; i < numChannels; i++) {
+//        printf("%i : %f ", i, (DWORD)channels[i].dwFlags / 32767.5);
+//        printf("%i : %i ", i, (uint32_t)file->mSoundFile.ChnMix[i]);
+    }
+    
+//    printf("\n");
 }

@@ -284,6 +284,7 @@ CzWINDOWEDFIR::~CzWINDOWEDFIR()
 
 CzWINDOWEDFIR sfir;
 
+
 // ----------------------------------------------------------------------------
 // MIXING MACROS
 // ----------------------------------------------------------------------------
@@ -291,7 +292,7 @@ CzWINDOWEDFIR sfir;
 	register MODCHANNEL * const pChn = pChannel;\
 	nPos = pChn->nPosLo;\
 	const signed char *p = (signed char *)(pChn->pCurrentSample+pChn->nPos);\
-	if (pChn->dwFlags & CHN_STEREO) p += pChn->nPos;\
+    if (pChn->dwFlags & CHN_STEREO) p += pChn->nPos;\
 	int *pvol = pbuffer;\
 	do {
 
@@ -308,6 +309,9 @@ CzWINDOWEDFIR sfir;
 	} while (pvol < pbufmax);\
 	pChn->nPos += nPos >> 16;\
 	pChn->nPosLo = nPos & 0xFFFF;
+
+//    printf("%i >> %f\n", pChn->channelNumber, (float)((long)pChn->nPos  / 32767.5));
+
 
 #define SNDMIX_ENDSAMPLELOOP8	SNDMIX_ENDSAMPLELOOP
 #define SNDMIX_ENDSAMPLELOOP16	SNDMIX_ENDSAMPLELOOP
@@ -1481,7 +1485,11 @@ UINT CSoundFile::CreateStereoMix(int count)
 	if (gnChannels > 2) X86_InitMixBuffer(MixRearBuffer, count*2);
 #endif
 	nchused = nchmixed = 0;
-	for (UINT nChn=0; nChn<m_nMixChannels; nChn++)
+	if (m_nMixChannels > 0) {
+//        printf("%i",m_nMixChannels);
+    }
+    
+    for (UINT nChn=0; nChn<m_nMixChannels; nChn++)
 	{
 		const LPMIXINTERFACE *pMixFuncTable;
 		MODCHANNEL * const pChannel = &Chn[ChnMix[nChn]];
@@ -1492,6 +1500,10 @@ UINT CSoundFile::CreateStereoMix(int count)
 
 		if (!pChannel->pCurrentSample) continue;
 		nMasterCh = (ChnMix[nChn] < m_nChannels) ? ChnMix[nChn]+1 : pChannel->nMasterChn;
+        
+        pChannel->channelNumber = (int)nMasterCh;
+        
+//        printf("%i ", pChannel->channelNumber);
 		pOfsR = &gnDryROfsVol;
 		pOfsL = &gnDryLOfsVol;
 		nFlags = 0;
@@ -1557,6 +1569,9 @@ UINT CSoundFile::CreateStereoMix(int count)
 		}
 		// Should we mix this channel ?
 		UINT naddmix;
+        
+        
+        
 		if (((nchmixed >= m_nMaxMixChannels) && (!(gdwSoundSetup & SNDMIX_DIRECTTODISK)))
 		 || ((!pChannel->nRampLength) && (!(pChannel->nLeftVol|pChannel->nRightVol))))
 		{
@@ -1571,17 +1586,31 @@ UINT CSoundFile::CreateStereoMix(int count)
 		{
 			// Choose function for mixing
 			LPMIXINTERFACE pMixFunc;
-			pMixFunc = (pChannel->nRampLength) ? pMixFuncTable[nFlags|MIXNDX_RAMP] : pMixFuncTable[nFlags];
-			int *pbufmax = pbuffer + (nSmpCount*2);
+			if (pChannel->nRampLength) {
+                int xx = nFlags|MIXNDX_RAMP;
+                pMixFunc = pMixFuncTable[xx];
+            }
+            else {
+                pMixFunc = pMixFuncTable[nFlags];
+			}
+            int *pbufmax = pbuffer + (nSmpCount*2);
 			pChannel->nROfs = - *(pbufmax-2);
 			pChannel->nLOfs = - *(pbufmax-1);
+            
 			pMixFunc(pChannel, pbuffer, pbufmax);
-			pChannel->nROfs += *(pbufmax-2);
+			
+            pChannel->nROfs += *(pbufmax-2);
 			pChannel->nLOfs += *(pbufmax-1);
-			pbuffer = pbufmax;
+            printf("%i >> %f\n", pChannel->channelNumber, (float)((short)pChannel->nROfs  / 32767.5));
+
+            
+            pbuffer = pbufmax;
 			naddmix = 1;
 
 		}
+        
+        
+        
 		nsamples -= nSmpCount;
 		if (pChannel->nRampLength)
 		{
@@ -1602,6 +1631,7 @@ UINT CSoundFile::CreateStereoMix(int count)
 		if (nsamples > 0) goto SampleLooping;
 		nchmixed += naddmix;
 	}
+//    printf("\n");
 	return nchused;
 }
 
@@ -2211,7 +2241,9 @@ void MPPASMCALL X86_StereoFill(int *pBuffer, UINT nSamples, LPLONG lpROfs, LPLON
 		lofs -= x_l;
 		pBuffer[i*2] = x_r;
 		pBuffer[i*2+1] = x_l;
+
 	}
+    
 	*lpROfs = rofs;
 	*lpLOfs = lofs;
 }

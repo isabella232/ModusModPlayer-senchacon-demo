@@ -9,13 +9,121 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431399033.538428"
+            filePath = "ModusModPlayer/Plugins/libmodplug/src/fastmix.cpp"
+            timestampString = "431570883.913979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
-            landmarkName = "-preLoadPatterns"
+            startingLineNumber = "302"
+            endingLineNumber = "302">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ModusModPlayer/Plugins/libmodplug/src/fastmix.cpp"
+            timestampString = "431570883.913979"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "301"
+            endingLineNumber = "301">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ModusModPlayer/Plugins/libmodplug/src/fastmix.cpp"
+            timestampString = "431571637.744358"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1495"
+            endingLineNumber = "1495"
+            landmarkName = "CSoundFile::CreateStereoMix(int count)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ModusModPlayer/Plugins/libmodplug/src/fastmix.cpp"
+            timestampString = "431571637.744358"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1509"
+            endingLineNumber = "1509"
+            landmarkName = "CSoundFile::CreateStereoMix(int count)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ModusModPlayer/Plugins/libmodplug/src/fastmix.cpp"
+            timestampString = "431571637.744358"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1508"
+            endingLineNumber = "1508"
+            landmarkName = "CSoundFile::CreateStereoMix(int count)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ModusModPlayer/Plugins/libmodplug/src/fastmix.cpp"
+            timestampString = "431571637.744358"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1507"
+            endingLineNumber = "1507"
+            landmarkName = "CSoundFile::CreateStereoMix(int count)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ModusModPlayer/Plugins/libmodplug/src/fastmix.cpp"
+            timestampString = "431571637.744358"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1589"
+            endingLineNumber = "1589"
+            landmarkName = "CSoundFile::CreateStereoMix(int count)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ModusModPlayer/Plugins/libmodplug/src/fastmix.cpp"
+            timestampString = "431571637.744358"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1594"
+            endingLineNumber = "1594"
+            landmarkName = "CSoundFile::CreateStereoMix(int count)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,11 +134,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431399033.538428"
+            timestampString = "432950375.864131"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "358"
-            endingLineNumber = "358"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
             landmarkName = "-parsePattern:withNumRows:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +150,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431399033.538428"
+            timestampString = "432950378.736303"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
             landmarkName = "-parsePattern:withNumRows:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,27 +166,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431399033.538428"
+            timestampString = "432950485.662298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
-            landmarkName = "-preLoadPatterns"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431399033.538428"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "364"
-            endingLineNumber = "364"
+            startingLineNumber = "456"
+            endingLineNumber = "456"
             landmarkName = "-parsePattern:withNumRows:"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,27 +182,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431399033.538428"
+            timestampString = "432950518.800579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
-            landmarkName = "-preLoadPatterns"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431399033.538428"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "400"
-            endingLineNumber = "400"
+            startingLineNumber = "476"
+            endingLineNumber = "476"
             landmarkName = "-parsePattern:withNumRows:"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,91 +198,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431399033.538428"
+            timestampString = "432950521.339215"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "-initSound"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431399033.538428"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
-            landmarkName = "-initSound"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431399033.538428"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
-            landmarkName = "-initSound"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431446063.064022"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "915"
-            endingLineNumber = "915"
-            landmarkName = "-cordovaGetStats:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431446063.064022"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "924"
-            endingLineNumber = "924"
-            landmarkName = "-cordovaGetStats:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431399033.538428"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
+            startingLineNumber = "471"
+            endingLineNumber = "471"
             landmarkName = "-parsePattern:withNumRows:"
             landmarkType = "5">
          </BreakpointContent>
@@ -218,108 +214,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431399033.538428"
+            timestampString = "432950615.226261"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "480"
-            endingLineNumber = "480"
-            landmarkName = "-getModDirectoriesAsJson"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431446063.064022"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "967"
-            endingLineNumber = "967"
-            landmarkName = "-cordovaGetStats:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431446063.064022"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "972"
-            endingLineNumber = "972"
-            landmarkName = "-cordovaGetStats:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431446063.064022"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "973"
-            endingLineNumber = "973"
-            landmarkName = "-cordovaGetStats:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431399033.538428"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
-            landmarkName = "-initSound"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431446063.064022"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "616"
-            endingLineNumber = "616"
-            landmarkName = "-getWaveFormData:andHeight:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ModusModPlayer/Plugins/ModPlyr/ModPlyr.m"
-            timestampString = "431446063.064022"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "668"
-            endingLineNumber = "668"
-            landmarkName = "-getWaveFormData:andHeight:"
+            startingLineNumber = "482"
+            endingLineNumber = "482"
+            landmarkName = "-parsePattern:withNumRows:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

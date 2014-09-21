@@ -35,7 +35,7 @@ static char dec2hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D'
         if (sampleData) {
             printf(">> stopMusic free(sampleData);\n");
 
-            free(sampleData);
+//            free(sampleData);
         }
     }
 }
@@ -256,11 +256,14 @@ void audioTap(void *                          inClientData,
 
 // Executed within a different context (not this class);
 void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer) {
+    
     ModPlyr *modPlayer = (__bridge ModPlyr*)data;
     ModPlugFile *mpFile = modPlayer.mpFile;
     
     int bytesRead;
     
+    
+    ModPlug_GetChannelData(mpFile);
     bytesRead = ModPlug_Read(mpFile, (char*)mBuffer->mAudioData, mBuffer->mAudioDataByteSize);
 
     if (bytesRead < 1) {
@@ -320,6 +323,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
         
         int totalRows = (int)numRows;
         
+        
         NSMutableArray *patternData = [self parsePattern:currentPattern withNumRows:totalRows];
         
         // Add new pattern
@@ -350,11 +354,12 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     NSMutableArray *patternData = [[NSMutableArray alloc] init],
                    *rowData;
 
+    
     int currRow = 0;
     
     
-    while (currRow != totalRows) {
-    
+    while (currRow < totalRows) {
+        printf("Current row %i\n", currRow);
         rowData = [[NSMutableArray alloc] init];
         
         // todo: optimize (by reusing previous data);
@@ -473,7 +478,8 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     }
 
 
-    return patternData;
+    return [[NSMutableArray alloc]init];
+//    return patternData;
 }
 
 

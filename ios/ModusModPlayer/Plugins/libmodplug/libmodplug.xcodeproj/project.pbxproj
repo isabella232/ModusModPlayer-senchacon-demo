@@ -160,7 +160,6 @@
 				338AE184121ABC7C00A9EA9F /* sndfile.h */,
 				338AE185121ABC7C00A9EA9F /* stdafx.h */,
 				338AE181121ABC7C00A9EA9F /* fastmix.cpp */,
-				338AE182121ABC7C00A9EA9F /* libmodplug */,
 				338AE186121ABC7C00A9EA9F /* load_669.cpp */,
 				338AE187121ABC7C00A9EA9F /* load_abc.cpp */,
 				338AE188121ABC7C00A9EA9F /* load_amf.cpp */,
@@ -198,13 +197,6 @@
 				338AE1A9121ABC7C00A9EA9F /* tables.h */,
 			);
 			path = src;
-			sourceTree = "<group>";
-		};
-		338AE182121ABC7C00A9EA9F /* libmodplug */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = libmodplug;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,6 +241,8 @@
 /* Begin PBXProject section */
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "libmodplug" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
