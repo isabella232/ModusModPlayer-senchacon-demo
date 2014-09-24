@@ -1,0 +1,1101 @@
+Tlibmodplug
+v6
+r1
+cCheck dependencies
+cProcessPCH++ /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch.pch libmodplug_Prefix.pch normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/fastmix.o /www/tmp/modizer/libmodplug/src/fastmix.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_669.o /www/tmp/modizer/libmodplug/src/load_669.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_abc.o /www/tmp/modizer/libmodplug/src/load_abc.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_amf.o /www/tmp/modizer/libmodplug/src/load_amf.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ams.o /www/tmp/modizer/libmodplug/src/load_ams.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dbm.o /www/tmp/modizer/libmodplug/src/load_dbm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dmf.o /www/tmp/modizer/libmodplug/src/load_dmf.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dsm.o /www/tmp/modizer/libmodplug/src/load_dsm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_far.o /www/tmp/modizer/libmodplug/src/load_far.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_it.o /www/tmp/modizer/libmodplug/src/load_it.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_j2b.o /www/tmp/modizer/libmodplug/src/load_j2b.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mdl.o /www/tmp/modizer/libmodplug/src/load_mdl.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_med.o /www/tmp/modizer/libmodplug/src/load_med.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mid.o /www/tmp/modizer/libmodplug/src/load_mid.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mod.o /www/tmp/modizer/libmodplug/src/load_mod.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mt2.o /www/tmp/modizer/libmodplug/src/load_mt2.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mtm.o /www/tmp/modizer/libmodplug/src/load_mtm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_okt.o /www/tmp/modizer/libmodplug/src/load_okt.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_pat.o /www/tmp/modizer/libmodplug/src/load_pat.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_psm.o /www/tmp/modizer/libmodplug/src/load_psm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ptm.o /www/tmp/modizer/libmodplug/src/load_ptm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_s3m.o /www/tmp/modizer/libmodplug/src/load_s3m.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_stm.o /www/tmp/modizer/libmodplug/src/load_stm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ult.o /www/tmp/modizer/libmodplug/src/load_ult.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_umx.o /www/tmp/modizer/libmodplug/src/load_umx.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_wav.o /www/tmp/modizer/libmodplug/src/load_wav.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_xm.o /www/tmp/modizer/libmodplug/src/load_xm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/mmcmp.o /www/tmp/modizer/libmodplug/src/mmcmp.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/modplug.o /www/tmp/modizer/libmodplug/src/modplug.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_dsp.o /www/tmp/modizer/libmodplug/src/snd_dsp.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_flt.o /www/tmp/modizer/libmodplug/src/snd_flt.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_fx.o /www/tmp/modizer/libmodplug/src/snd_fx.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndfile.o /www/tmp/modizer/libmodplug/src/sndfile.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndmix.o /www/tmp/modizer/libmodplug/src/sndmix.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cLibtool /www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/liblibmodplug.a normal i386
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk
+c00000000534852CE0000000000000198
+t1397248718
+s408
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/SDKSettings.plist
+c00000000531FA88100000000000003B4
+t1394583681
+s948
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/CoreServices/SystemVersion.plist
+c00000000531FA88F000000000000019E
+t1394583695
+s414
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c00000000531FA896000000000088D8C0
+t1394583702
+s8968384
+
+N/var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch.pch
+t1406903375
+s121200
+
+N/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/liblibmodplug.a
+t2
+s0
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/fastmix.o
+t1408629405
+s153724
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/libmodplug.LinkFileList
+c0000000053F5F7EB0000000000001004
+t1408628715
+s4100
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_669.o
+t1408629405
+s34728
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_abc.o
+t1408629405
+s203656
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_amf.o
+t1408629405
+s40032
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ams.o
+t1408629405
+s48288
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dbm.o
+t1408629405
+s40424
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dmf.o
+t1408629405
+s44168
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dsm.o
+t1408629405
+s34292
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_far.o
+t1408629405
+s35068
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_it.o
+t1408629405
+s58640
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_j2b.o
+t1408629405
+s1460
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mdl.o
+t1408629405
+s44944
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_med.o
+t1408629405
+s51696
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mid.o
+t1408629405
+s82584
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mod.o
+t1408629405
+s42168
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mt2.o
+t1408629405
+s46048
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mtm.o
+t1408629405
+s34192
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_okt.o
+t1408629405
+s35116
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_pat.o
+t1408629405
+s77732
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_psm.o
+t1408629405
+s38996
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ptm.o
+t1408629405
+s34708
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_s3m.o
+t1408629405
+s40704
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_stm.o
+t1408629405
+s33908
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ult.o
+t1408629405
+s34780
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_umx.o
+t1408629405
+s30764
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_wav.o
+t1408629405
+s35512
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_xm.o
+t1408629405
+s46764
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/mmcmp.o
+t1408629405
+s14692
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/modplug.o
+t1408629405
+s48480
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_dsp.o
+t1408629405
+s54180
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_flt.o
+t1408629405
+s31740
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_fx.o
+t1408629405
+s96884
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndfile.o
+t1408629405
+s78588
+
+N/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndmix.o
+t1408629405
+s64084
+
+N/www/tmp/modizer/libmodplug/libmodplug_Prefix.pch
+c0000000052013FB300000000000000DA
+t1375813555
+s218
+
+N/www/tmp/modizer/libmodplug/src/fastmix.cpp
+c0000000052013FB3000000000001062E
+t1375813555
+s67118
+
+N/www/tmp/modizer/libmodplug/src/load_669.cpp
+c0000000052013FB3000000000000161E
+t1375813555
+s5662
+
+N/www/tmp/modizer/libmodplug/src/load_abc.cpp
+c0000000052384D920000000000023058
+t1379421586
+s143448
+
+N/www/tmp/modizer/libmodplug/src/load_amf.cpp
+c0000000052384D920000000000002E7B
+t1379421586
+s11899
+
+N/www/tmp/modizer/libmodplug/src/load_ams.cpp
+c0000000052013FB3000000000000420B
+t1375813555
+s16907
+
+N/www/tmp/modizer/libmodplug/src/load_dbm.cpp
+c0000000052013FB300000000000027A9
+t1375813555
+s10153
+
+N/www/tmp/modizer/libmodplug/src/load_dmf.cpp
+c0000000052013FB30000000000003EDD
+t1375813555
+s16093
+
+N/www/tmp/modizer/libmodplug/src/load_dsm.cpp
+c0000000052384D92000000000000169F
+t1379421586
+s5791
+
+N/www/tmp/modizer/libmodplug/src/load_far.cpp
+c0000000052013FB30000000000001A2E
+t1375813555
+s6702
+
+N/www/tmp/modizer/libmodplug/src/load_it.cpp
+c0000000052013FB3000000000000B1FB
+t1375813555
+s45563
+
+N/www/tmp/modizer/libmodplug/src/load_j2b.cpp
+c0000000052013FB3000000000000010E
+t1375813555
+s270
+
+N/www/tmp/modizer/libmodplug/src/load_mdl.cpp
+c0000000052013FB30000000000003998
+t1375813555
+s14744
+
+N/www/tmp/modizer/libmodplug/src/load_med.cpp
+c0000000052384D920000000000007112
+t1379421586
+s28946
+
+N/www/tmp/modizer/libmodplug/src/load_mid.cpp
+c0000000052384D92000000000000D025
+t1379421586
+s53285
+
+N/www/tmp/modizer/libmodplug/src/load_mod.cpp
+c0000000052013FB30000000000003F30
+t1375813555
+s16176
+
+N/www/tmp/modizer/libmodplug/src/load_mt2.cpp
+c0000000052013FB30000000000004305
+t1375813555
+s17157
+
+N/www/tmp/modizer/libmodplug/src/load_mtm.cpp
+c0000000052384D920000000000001285
+t1379421586
+s4741
+
+N/www/tmp/modizer/libmodplug/src/load_okt.cpp
+c0000000052013FB300000000000016A6
+t1375813555
+s5798
+
+N/www/tmp/modizer/libmodplug/src/load_pat.cpp
+c0000000053D2AF7B0000000000009D82
+t1406316411
+s40322
+
+N/www/tmp/modizer/libmodplug/src/load_psm.cpp
+c0000000052013FB300000000000070A9
+t1375813555
+s28841
+
+N/www/tmp/modizer/libmodplug/src/load_ptm.cpp
+c0000000052013FB30000000000001817
+t1375813555
+s6167
+
+N/www/tmp/modizer/libmodplug/src/load_s3m.cpp
+c0000000052013FB30000000000004805
+t1375813555
+s18437
+
+N/www/tmp/modizer/libmodplug/src/load_stm.cpp
+c0000000052013FB30000000000001778
+t1375813555
+s6008
+
+N/www/tmp/modizer/libmodplug/src/load_ult.cpp
+c0000000052013FB300000000000015E5
+t1375813555
+s5605
+
+N/www/tmp/modizer/libmodplug/src/load_umx.cpp
+c0000000052013FB30000000000000563
+t1375813555
+s1379
+
+N/www/tmp/modizer/libmodplug/src/load_wav.cpp
+c0000000052013FB300000000000019E2
+t1375813555
+s6626
+
+N/www/tmp/modizer/libmodplug/src/load_xm.cpp
+c0000000052013FB30000000000006698
+t1375813555
+s26264
+
+N/www/tmp/modizer/libmodplug/src/mmcmp.cpp
+c0000000052384D920000000000002621
+t1379421586
+s9761
+
+N/www/tmp/modizer/libmodplug/src/modplug.cpp
+c0000000053F503000000000000001E10
+t1408566016
+s7696
+
+N/www/tmp/modizer/libmodplug/src/snd_dsp.cpp
+c0000000052013FB30000000000003A15
+t1375813555
+s14869
+
+N/www/tmp/modizer/libmodplug/src/snd_flt.cpp
+c0000000052013FB300000000000009BE
+t1375813555
+s2494
+
+N/www/tmp/modizer/libmodplug/src/snd_fx.cpp
+c0000000052013FB3000000000000FE3B
+t1375813555
+s65083
+
+N/www/tmp/modizer/libmodplug/src/sndfile.cpp
+c0000000052384D92000000000000B8AF
+t1379421586
+s47279
+
+N/www/tmp/modizer/libmodplug/src/sndmix.cpp
+c0000000052013FB30000000000008C68
+t1375813555
+s35944
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/fastmix.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_669.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_abc.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_amf.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_ams.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_dbm.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_dmf.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_dsm.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_far.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_it.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_j2b.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_mdl.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_med.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_mid.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_mod.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_mt2.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_mtm.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_okt.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_pat.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_psm.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_ptm.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_s3m.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_stm.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_ult.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_umx.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_wav.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/load_xm.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/mmcmp.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/modplug.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/snd_dsp.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/snd_flt.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/snd_fx.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/sndfile.cpp
+r0
+
+CBuild AST from /www/tmp/modizer/libmodplug/src/sndmix.cpp
+r0
+
+CCheck dependencies
+r0
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependenciescb49f41c32a6b941^a7ec1c1d32a6b941^---0#1#1#--18"Check dependencies36"C6987603-D326-4456-A520-496AB7496B8B-
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/fastmix.o /www/tmp/modizer/libmodplug/src/fastmix.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.117198
+e430322205.590239
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/fastmix.o
+x/www/tmp/modizer/libmodplug/src/fastmix.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/fastmix.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection51"Compile /www/tmp/modizer/libmodplug/src/fastmix.cpp176"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/fastmix.o src/fastmix.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler04041f1d32a6b941^7e1a971d32a6b941^---0#0#1#-19%DVTDocumentLocation2@50"file:///www/tmp/modizer/libmodplug/src/fastmix.cpp0000000000000000^3100"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/fastmix.o src/fastmix.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/fastmix.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/fastmix.dia -c /www/tmp/modizer/libmodplug/src/fastmix.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/fastmix.o36"20AEAF7B-06E1-4FB3-BB91-DA449011A46A-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_669.o /www/tmp/modizer/libmodplug/src/load_669.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.117406
+e430322205.338780
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_669.o
+x/www/tmp/modizer/libmodplug/src/load_669.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_669.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_669.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_669.o src/load_669.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compilercd041f1d32a6b941^d3c1561d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_669.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_669.o src/load_669.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_669.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_669.dia -c /www/tmp/modizer/libmodplug/src/load_669.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_669.o36"A0E9A4A3-6849-4ECD-ABA5-9D89E88BFCDF-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_abc.o /www/tmp/modizer/libmodplug/src/load_abc.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.117553
+e430322205.728058
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_abc.o
+x/www/tmp/modizer/libmodplug/src/load_abc.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_abc.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+d/www/tmp/modizer/libmodplug/src/load_pat.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_abc.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_abc.o src/load_abc.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler29071f1d32a6b941^cc62ba1d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_abc.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_abc.o src/load_abc.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_abc.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_abc.dia -c /www/tmp/modizer/libmodplug/src/load_abc.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_abc.o36"79B291EA-377A-4BDB-A6F5-4301EEB87EDF-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_amf.o /www/tmp/modizer/libmodplug/src/load_amf.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.117728
+e430322205.338736
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_amf.o
+x/www/tmp/modizer/libmodplug/src/load_amf.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_amf.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_amf.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_amf.o src/load_amf.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compilerc0031f1d32a6b941^41b8561d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_amf.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_amf.o src/load_amf.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_amf.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_amf.dia -c /www/tmp/modizer/libmodplug/src/load_amf.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_amf.o36"5FED08D8-7E2B-460D-9EBD-9050E8827B64-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ams.o /www/tmp/modizer/libmodplug/src/load_ams.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.117896
+e430322205.339379
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ams.o
+x/www/tmp/modizer/libmodplug/src/load_ams.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_ams.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_ams.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ams.o src/load_ams.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler70061f1d32a6b941^b1dc561d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_ams.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ams.o src/load_ams.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ams.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ams.dia -c /www/tmp/modizer/libmodplug/src/load_ams.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ams.o36"A2AD2C4B-3618-4E59-B795-227A0826CD18-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dbm.o /www/tmp/modizer/libmodplug/src/load_dbm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.118072
+e430322205.338694
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dbm.o
+x/www/tmp/modizer/libmodplug/src/load_dbm.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_dbm.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_dbm.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dbm.o src/load_dbm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler32051f1d32a6b941^a9bf561d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_dbm.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dbm.o src/load_dbm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dbm.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dbm.dia -c /www/tmp/modizer/libmodplug/src/load_dbm.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dbm.o36"8B7E6A14-F288-442C-BBD0-0682823DF155-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dmf.o /www/tmp/modizer/libmodplug/src/load_dmf.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.118246
+e430322205.339217
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dmf.o
+x/www/tmp/modizer/libmodplug/src/load_dmf.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_dmf.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_dmf.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dmf.o src/load_dmf.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compilera3061f1d32a6b941^95d7561d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_dmf.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dmf.o src/load_dmf.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dmf.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dmf.dia -c /www/tmp/modizer/libmodplug/src/load_dmf.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dmf.o36"02ADC91C-9E0A-4293-90CB-2C12437F0EDF-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dsm.o /www/tmp/modizer/libmodplug/src/load_dsm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.118485
+e430322205.338723
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dsm.o
+x/www/tmp/modizer/libmodplug/src/load_dsm.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_dsm.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_dsm.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dsm.o src/load_dsm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler7d071f1d32a6b941^7ec5561d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_dsm.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dsm.o src/load_dsm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dsm.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dsm.dia -c /www/tmp/modizer/libmodplug/src/load_dsm.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_dsm.o36"2CE3CE4C-C79E-4639-A069-CD80D0BA3745-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_far.o /www/tmp/modizer/libmodplug/src/load_far.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.339143
+e430322205.414151
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_far.o
+x/www/tmp/modizer/libmodplug/src/load_far.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_far.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_far.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_far.o src/load_far.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compilerc7f2561d32a6b941^53066a1d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_far.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_far.o src/load_far.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_far.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_far.dia -c /www/tmp/modizer/libmodplug/src/load_far.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_far.o36"C3C5C58E-E26A-4A38-9C60-FDE0692CFFB5-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_it.o /www/tmp/modizer/libmodplug/src/load_it.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.339615
+e430322205.455715
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_it.o
+x/www/tmp/modizer/libmodplug/src/load_it.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_it.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/it_defs.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection51"Compile /www/tmp/modizer/libmodplug/src/load_it.cpp176"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_it.o src/load_it.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compilerab04571d32a6b941^34a2741d32a6b941^---0#0#1#-19%DVTDocumentLocation2@50"file:///www/tmp/modizer/libmodplug/src/load_it.cpp0000000000000000^3100"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_it.o src/load_it.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_it.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_it.dia -c /www/tmp/modizer/libmodplug/src/load_it.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_it.o36"16859285-352D-4E08-BE33-C1B9B4328024-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_j2b.o /www/tmp/modizer/libmodplug/src/load_j2b.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.339922
+e430322205.390120
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_j2b.o
+x/www/tmp/modizer/libmodplug/src/load_j2b.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_j2b.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_j2b.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_j2b.o src/load_j2b.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compilerc11a571d32a6b941^d2df631d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_j2b.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_j2b.o src/load_j2b.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_j2b.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_j2b.dia -c /www/tmp/modizer/libmodplug/src/load_j2b.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_j2b.o36"6C20EC84-5C07-4809-9677-99298A192B55-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mdl.o /www/tmp/modizer/libmodplug/src/load_mdl.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.340192
+e430322205.431450
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mdl.o
+x/www/tmp/modizer/libmodplug/src/load_mdl.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_mdl.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_mdl.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mdl.o src/load_mdl.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler9434571d32a6b941^44896e1d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_mdl.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mdl.o src/load_mdl.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mdl.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mdl.dia -c /www/tmp/modizer/libmodplug/src/load_mdl.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mdl.o36"6D5AACB9-E36A-4360-8062-79FA9C706595-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_med.o /www/tmp/modizer/libmodplug/src/load_med.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.340514
+e430322205.437523
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_med.o
+x/www/tmp/modizer/libmodplug/src/load_med.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_med.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_med.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_med.o src/load_med.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler8c49571d32a6b941^e701701d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_med.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_med.o src/load_med.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_med.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_med.dia -c /www/tmp/modizer/libmodplug/src/load_med.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_med.o36"886E05E6-E983-4A0C-BA88-8C0E6D827660-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mid.o /www/tmp/modizer/libmodplug/src/load_mid.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.340981
+e430322205.510623
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mid.o
+x/www/tmp/modizer/libmodplug/src/load_mid.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_mid.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+d/www/tmp/modizer/libmodplug/src/load_pat.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_mid.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mid.o src/load_mid.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compilerf772571d32a6b941^8676821d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_mid.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mid.o src/load_mid.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mid.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mid.dia -c /www/tmp/modizer/libmodplug/src/load_mid.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mid.o36"5286E33A-A2D6-4807-9AC4-0CBF775D5402-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mod.o /www/tmp/modizer/libmodplug/src/load_mod.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.391491
+e430322205.487192
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mod.o
+x/www/tmp/modizer/libmodplug/src/load_mod.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_mod.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+d/www/tmp/modizer/libmodplug/src/tables.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_mod.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mod.o src/load_mod.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compilerfc51641d32a6b941^88b97c1d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_mod.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mod.o src/load_mod.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mod.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mod.dia -c /www/tmp/modizer/libmodplug/src/load_mod.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mod.o36"02AFF22D-B30C-4408-81C1-60509BF89EE0-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mt2.o /www/tmp/modizer/libmodplug/src/load_mt2.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.414776
+e430322205.510351
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mt2.o
+x/www/tmp/modizer/libmodplug/src/load_mt2.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_mt2.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_mt2.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mt2.o src/load_mt2.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compilerd8486a1d32a6b941^f4a6821d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_mt2.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mt2.o src/load_mt2.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mt2.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mt2.dia -c /www/tmp/modizer/libmodplug/src/load_mt2.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mt2.o36"72F515EE-3E4D-4458-B9CF-5D60383B0D10-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mtm.o /www/tmp/modizer/libmodplug/src/load_mtm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.432300
+e430322205.504471
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mtm.o
+x/www/tmp/modizer/libmodplug/src/load_mtm.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_mtm.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_mtm.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mtm.o src/load_mtm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compileracc66e1d32a6b941^0f26811d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_mtm.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mtm.o src/load_mtm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mtm.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mtm.dia -c /www/tmp/modizer/libmodplug/src/load_mtm.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_mtm.o36"59480B9D-543A-4DCA-8FB3-45F27D49BAB0-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_okt.o /www/tmp/modizer/libmodplug/src/load_okt.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.438112
+e430322205.513217
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_okt.o
+x/www/tmp/modizer/libmodplug/src/load_okt.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_okt.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_okt.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_okt.o src/load_okt.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler978f701d32a6b941^5262831d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_okt.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_okt.o src/load_okt.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_okt.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_okt.dia -c /www/tmp/modizer/libmodplug/src/load_okt.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_okt.o36"F158FE98-E20A-4E09-8E1A-761C594E180E-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_pat.o /www/tmp/modizer/libmodplug/src/load_pat.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.457154
+e430322205.622414
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_pat.o
+x/www/tmp/modizer/libmodplug/src/load_pat.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_pat.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+d/www/tmp/modizer/libmodplug/src/load_pat.h
+o/www/tmp/modizer/libmodplug/src/load_pat.cpp:564:19: warning: unused variable 'fsize' [-Wunused-variable]
+o    unsigned long fsize;
+o                  ^
+o1 warning generated.
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_pat.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_pat.o src/load_pat.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler1022751d32a6b941^67ba9f1d32a6b941^-172"/www/tmp/modizer/libmodplug/src/load_pat.cpp:564:19: warning: unused variable 'fsize' [-Wunused-variable]    unsigned long fsize;                  ^1 warning generated.1(36%IDEClangDiagnosticActivityLogMessage2@23"Unused variable 'fsize'-430322205#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@51"file:///www/tmp/modizer/libmodplug/src/load_pat.cpp0000000000000000^563#18#563#18#12702#0#19"Unused Entity Issue--0#0#1#-19%DVTDocumentLocation4@51"file:///www/tmp/modizer/libmodplug/src/load_pat.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_pat.o src/load_pat.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_pat.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_pat.dia -c /www/tmp/modizer/libmodplug/src/load_pat.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_pat.o36"92E579CC-0CA1-46B1-8BBD-5C243C5E2810-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_psm.o /www/tmp/modizer/libmodplug/src/load_psm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.491252
+e430322205.584405
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_psm.o
+x/www/tmp/modizer/libmodplug/src/load_psm.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_psm.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_psm.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_psm.o src/load_psm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler51dc7d1d32a6b941^2fa2951d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_psm.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_psm.o src/load_psm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_psm.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_psm.dia -c /www/tmp/modizer/libmodplug/src/load_psm.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_psm.o36"71EBAD05-30AA-409F-BBC6-AA869112D7DD-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ptm.o /www/tmp/modizer/libmodplug/src/load_ptm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.506034
+e430322205.583364
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ptm.o
+x/www/tmp/modizer/libmodplug/src/load_ptm.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_ptm.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_ptm.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ptm.o src/load_ptm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compilerf4a3811d32a6b941^da58951d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_ptm.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ptm.o src/load_ptm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ptm.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ptm.dia -c /www/tmp/modizer/libmodplug/src/load_ptm.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ptm.o36"7F174838-DE32-4255-88DC-264868182212-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_s3m.o /www/tmp/modizer/libmodplug/src/load_s3m.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.510991
+e430322205.606937
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_s3m.o
+x/www/tmp/modizer/libmodplug/src/load_s3m.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_s3m.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+d/www/tmp/modizer/libmodplug/src/tables.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_s3m.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_s3m.o src/load_s3m.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler7de8821d32a6b941^02619b1d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_s3m.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_s3m.o src/load_s3m.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_s3m.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_s3m.dia -c /www/tmp/modizer/libmodplug/src/load_s3m.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_s3m.o36"7342BC9E-D98F-4F35-B151-174B29188853-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_stm.o /www/tmp/modizer/libmodplug/src/load_stm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.514191
+e430322205.585898
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_stm.o
+x/www/tmp/modizer/libmodplug/src/load_stm.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_stm.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_stm.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_stm.o src/load_stm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler19fe831d32a6b941^00fe951d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_stm.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_stm.o src/load_stm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_stm.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_stm.dia -c /www/tmp/modizer/libmodplug/src/load_stm.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_stm.o36"A195F485-D14B-4B18-9308-CA8C647280A3-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ult.o /www/tmp/modizer/libmodplug/src/load_ult.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.517154
+e430322205.594629
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ult.o
+x/www/tmp/modizer/libmodplug/src/load_ult.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_ult.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_ult.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ult.o src/load_ult.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler8d7e841d32a6b941^323a981d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_ult.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ult.o src/load_ult.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ult.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ult.dia -c /www/tmp/modizer/libmodplug/src/load_ult.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_ult.o36"5B7AFB49-82AA-4A82-AFB6-A403FA1C3EE6-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_umx.o /www/tmp/modizer/libmodplug/src/load_umx.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.584668
+e430322205.653345
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_umx.o
+x/www/tmp/modizer/libmodplug/src/load_umx.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_umx.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_umx.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_umx.o src/load_umx.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler5cc6951d32a6b941^4cffa61d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_umx.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_umx.o src/load_umx.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_umx.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_umx.dia -c /www/tmp/modizer/libmodplug/src/load_umx.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_umx.o36"D7145F6D-83D8-49E6-9F06-F1E6E4E541B0-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_wav.o /www/tmp/modizer/libmodplug/src/load_wav.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.585668
+e430322205.659800
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_wav.o
+x/www/tmp/modizer/libmodplug/src/load_wav.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_wav.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /www/tmp/modizer/libmodplug/src/load_wav.cpp178"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_wav.o src/load_wav.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler4705961d32a6b941^adf6a81d32a6b941^---0#0#1#-19%DVTDocumentLocation2@51"file:///www/tmp/modizer/libmodplug/src/load_wav.cpp0000000000000000^3106"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_wav.o src/load_wav.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_wav.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_wav.dia -c /www/tmp/modizer/libmodplug/src/load_wav.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_wav.o36"43844676-60D7-4A51-99E3-FDBB9FCC1F28-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_xm.o /www/tmp/modizer/libmodplug/src/load_xm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.588142
+e430322205.694312
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_xm.o
+x/www/tmp/modizer/libmodplug/src/load_xm.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/load_xm.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection51"Compile /www/tmp/modizer/libmodplug/src/load_xm.cpp176"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_xm.o src/load_xm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler0ec0961d32a6b941^c47cb11d32a6b941^---0#0#1#-19%DVTDocumentLocation2@50"file:///www/tmp/modizer/libmodplug/src/load_xm.cpp0000000000000000^3100"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_xm.o src/load_xm.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_xm.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_xm.dia -c /www/tmp/modizer/libmodplug/src/load_xm.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_xm.o36"F2E0E68F-C592-4302-AE1C-5AF7292D1FAE-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/mmcmp.o /www/tmp/modizer/libmodplug/src/mmcmp.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.590469
+e430322205.661548
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/mmcmp.o
+x/www/tmp/modizer/libmodplug/src/mmcmp.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/mmcmp.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection49"Compile /www/tmp/modizer/libmodplug/src/mmcmp.cpp172"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/mmcmp.o src/mmcmp.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compilerff3e971d32a6b941^0b5da91d32a6b941^---0#0#1#-19%DVTDocumentLocation2@48"file:///www/tmp/modizer/libmodplug/src/mmcmp.cpp0000000000000000^3088"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/mmcmp.o src/mmcmp.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/mmcmp.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/mmcmp.dia -c /www/tmp/modizer/libmodplug/src/mmcmp.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/mmcmp.o36"0939EFC3-66BF-4B0D-A1BD-A2AFE0C5237B-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/modplug.o /www/tmp/modizer/libmodplug/src/modplug.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.595875
+e430322205.689615
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/modplug.o
+x/www/tmp/modizer/libmodplug/src/modplug.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/modplug.cpp
+d/www/tmp/modizer/libmodplug/src/modplug.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection51"Compile /www/tmp/modizer/libmodplug/src/modplug.cpp176"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/modplug.o src/modplug.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compilere8a3981d32a6b941^118bb01d32a6b941^---0#0#1#-19%DVTDocumentLocation2@50"file:///www/tmp/modizer/libmodplug/src/modplug.cpp0000000000000000^3100"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/modplug.o src/modplug.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/modplug.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/modplug.dia -c /www/tmp/modizer/libmodplug/src/modplug.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/modplug.o36"7E2DA62C-B4ED-49D5-B7FB-CF0FD08B61F1-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_dsp.o /www/tmp/modizer/libmodplug/src/snd_dsp.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.608505
+e430322205.693956
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_dsp.o
+x/www/tmp/modizer/libmodplug/src/snd_dsp.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/snd_dsp.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection51"Compile /www/tmp/modizer/libmodplug/src/snd_dsp.cpp176"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_dsp.o src/snd_dsp.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler6edf9b1d32a6b941^6ea7b11d32a6b941^---0#0#1#-19%DVTDocumentLocation2@50"file:///www/tmp/modizer/libmodplug/src/snd_dsp.cpp0000000000000000^3100"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_dsp.o src/snd_dsp.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_dsp.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_dsp.dia -c /www/tmp/modizer/libmodplug/src/snd_dsp.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_dsp.o36"089503C8-CA72-4C6E-BE15-846A8E1E7CAD-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_flt.o /www/tmp/modizer/libmodplug/src/snd_flt.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.622667
+e430322205.702044
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_flt.o
+x/www/tmp/modizer/libmodplug/src/snd_flt.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/snd_flt.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection51"Compile /www/tmp/modizer/libmodplug/src/snd_flt.cpp176"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_flt.o src/snd_flt.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compileracc59f1d32a6b941^6bb9b31d32a6b941^---0#0#1#-19%DVTDocumentLocation2@50"file:///www/tmp/modizer/libmodplug/src/snd_flt.cpp0000000000000000^3100"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_flt.o src/snd_flt.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_flt.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_flt.dia -c /www/tmp/modizer/libmodplug/src/snd_flt.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_flt.o36"5D3A7E04-C6C6-4ECB-8E52-553AAE80F638-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_fx.o /www/tmp/modizer/libmodplug/src/snd_fx.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.654616
+e430322205.787786
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_fx.o
+x/www/tmp/modizer/libmodplug/src/snd_fx.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/snd_fx.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+d/www/tmp/modizer/libmodplug/src/tables.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection50"Compile /www/tmp/modizer/libmodplug/src/snd_fx.cpp174"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_fx.o src/snd_fx.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compilerd0d4a71d32a6b941^c5aec91d32a6b941^---0#0#1#-19%DVTDocumentLocation2@49"file:///www/tmp/modizer/libmodplug/src/snd_fx.cpp0000000000000000^3094"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_fx.o src/snd_fx.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_fx.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_fx.dia -c /www/tmp/modizer/libmodplug/src/snd_fx.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/snd_fx.o36"67BF2807-2520-47DF-98CC-5C6B9BB0F686-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndfile.o /www/tmp/modizer/libmodplug/src/sndfile.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.660116
+e430322205.776987
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndfile.o
+x/www/tmp/modizer/libmodplug/src/sndfile.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/sndfile.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection51"Compile /www/tmp/modizer/libmodplug/src/sndfile.cpp176"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndfile.o src/sndfile.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compilerbe15a91d32a6b941^c8eac61d32a6b941^---0#0#1#-19%DVTDocumentLocation2@50"file:///www/tmp/modizer/libmodplug/src/sndfile.cpp0000000000000000^3100"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndfile.o src/sndfile.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndfile.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndfile.dia -c /www/tmp/modizer/libmodplug/src/sndfile.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndfile.o36"81E0F380-0316-4C4F-8878-5EE304C7384E-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CCompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndmix.o /www/tmp/modizer/libmodplug/src/sndmix.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s430322205.662761
+e430322205.759578
+r1
+xCompileC
+xbuild/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndmix.o
+x/www/tmp/modizer/libmodplug/src/sndmix.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/www/tmp/modizer/libmodplug/src/sndmix.cpp
+d/www/tmp/modizer/libmodplug/src/libmodplug/stdafx.h
+d/www/tmp/modizer/libmodplug/src/libmodplug/sndfile.h
+d/www/tmp/modizer/libmodplug/src/tables.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection50"Compile /www/tmp/modizer/libmodplug/src/sndmix.cpp174"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndmix.o src/sndmix.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler69c7a91d32a6b941^f773c21d32a6b941^---0#0#1#-19%DVTDocumentLocation2@49"file:///www/tmp/modizer/libmodplug/src/sndmix.cpp0000000000000000^3094"CompileC build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndmix.o src/sndmix.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /www/tmp/modizer/libmodplug    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DHAVE_SETENV -DHAVE_SINF -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -Wno-sign-conversion -mios-simulator-version-min=4.0 -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-generated-files.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-own-target-headers.hmap -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-all-target-headers.hmap -iquote /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/libmodplug-project-headers.hmap -I/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources/i386 -I/www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/DerivedSources -F/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -include /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch -MMD -MT dependencies -MF /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndmix.d --serialize-diagnostics /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndmix.dia -c /www/tmp/modizer/libmodplug/src/sndmix.cpp -o /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/sndmix.o36"0A4A146B-3C67-4129-835A-069B35EF35BB-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CLibtool /www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/liblibmodplug.a normal i386
+s430322205.791108
+e430322205.810572
+r1
+xLibtool
+x/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/liblibmodplug.a
+xnormal
+xi386
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_j2b.o has no symbols
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection63"Libtool build/Debug-iphonesimulator/liblibmodplug.a normal i38663"Libtool build/Debug-iphonesimulator/liblibmodplug.a normal i3863694ca1d32a6b941^c748da1d32a6b941^-397"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/load_j2b.o has no symbols-0#0#1#--892"Libtool build/Debug-iphonesimulator/liblibmodplug.a normal i386    cd /www/tmp/modizer/libmodplug    export IPHONEOS_DEPLOYMENT_TARGET=4.0    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool -static -arch_only i386 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -L/www/tmp/modizer/libmodplug/build/Debug-iphonesimulator -filelist /www/tmp/modizer/libmodplug/build/libmodplug.build/Debug-iphonesimulator/libmodplug.build/Objects-normal/i386/libmodplug.LinkFileList -ObjC -framework Foundation -o /www/tmp/modizer/libmodplug/build/Debug-iphonesimulator/liblibmodplug.a36"A720A66F-A68E-4189-A4BA-23F25F92A76B-
+bBB24FFE6-59DF-4A25-8964-78D47B3D9B80
+
+CProcessPCH++ /Users/jgarcia/Library/Developer/Xcode/DerivedData/libmodplug-gtksxcleeszsmehcuuxywhuiecqn/Index/PrecompiledHeaders/libmodplug_Prefix-ghdrwfzoabhswjbawgucrsysvfzl_ast/libmodplug_Prefix.pch.pch libmodplug_Prefix.pch normal i386 c++ com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CProcessPCH++ /var/folders/c_/xmdrs8b10ls3z_4v_n09yy280000gn/C/com.apple.DeveloperTools/5.1.1-5B1008/Xcode/SharedPrecompiledHeaders/libmodplug_Prefix-gvgyeysiladanefnhxyetmuapovt/libmodplug_Prefix.pch.pch libmodplug_Prefix.pch normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+

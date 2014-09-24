@@ -1,0 +1,26 @@
+dependencies: \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVViewController.m \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDV.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVAvailability.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVPlugin.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVPluginResult.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/NSMutableArray+QueueAdditions.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVCommandDelegate.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVInvokedUrlCommand.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVViewController.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVCommandQueue.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVWhitelist.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVScreenOrientationDelegate.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVURLProtocol.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVDebug.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVLocalStorage.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVTimer.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/NSArray+Comparisons.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/NSData+Base64.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/NSDictionary+Extensions.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/UIDevice+Extensions.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVJSON.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVCommandDelegateImpl.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVConfigParser.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVUserAgentUtil.h \
+  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVWebViewDelegate.h
