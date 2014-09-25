@@ -4,8 +4,23 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {}
+        "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"XMP\"><param name=\"ios-package\" value=\"XMP\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
     },
-    "installed_plugins": {},
+    "installed_plugins": {
+        "org.moduscreate.xmp": {
+            "PACKAGE_NAME": "com.moduscreate.MODify"
+        }
+    },
     "dependent_plugins": {}
 }
