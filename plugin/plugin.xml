@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="org.apache.cordova.device" version="0.2.3">
-	<name>Device</name>
-	<description>Cordova Device Plugin</description>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="org.moduscreate.xmp" version="0.0.1">
+	<name>XMP</name>
+	<description>LibXMP Player</description>
 	<license>Apache 2.0</license>
 	<keywords>cordova,device</keywords>
-	<js-module src="www/device.js" name="device">
-            <!-- <clobbers target="device" /> -->
-        </js-module>
-        <platform name="ios">
-            <config-file target="config.xml" parent="/*">
-                <feature name="Device">
-                    <param name="ios-package" value="CDVDevice"/>
-                </feature>
-            </config-file>
-            <header-file src="src/ios/CDVDevice.h" />
-            <source-file src="src/ios/CDVDevice.m" />
-        </platform>
+    <js-module src="src/ios/XMP.js" name="XMP">
+        <clobbers target="XMP" />
+    </js-module>
+
+    <engines>
+        <engine name="cordova" version="&gt;=3.0.0" />
+    </engines>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="XMP">
+                <param name="ios-package" value="XMP"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/XMP.h" />
+        <source-file src="src/ios/XMP.m" />        
+        <!-- ToDo: Remove ModPlyr.* -->
+        <header-file src="src/ios/ModPlyr.h" />
+        <source-file src="src/ios/ModPlyr.m" />
+
+        <header-file src="src/ios/libXMP/libLibXMP.h" />
+        <source-file src="src/ios/libXMP/libLibXMP.a" framework="true" compiler-flags="-fno-objc-arc" />
+
+    </platform>
 </plugin>
