@@ -6,16 +6,12 @@
 //
 //
 
+#import <mach/mach.h>
+#import <Cordova/CDV.h>
+#import "libLibXMP.h"
 
-#import "XMP.h"
+@interface XMP : CDVPlugin  {}
 
-@implementation XMP  {}
-
-- (void) test:(CDVInvokedUrlCommand *) command {
-    NSLog(@"Objective Test");
-    
-    
-}
 
 
 @end
