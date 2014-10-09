@@ -1,3 +1,3 @@
 dependencies: \
-  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVUserAgentUtil.m \
-  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/CDVUserAgentUtil.h
+  /www/ModusModPlayer/cordova/platforms/ios/CordovaLib/Classes/CDVUserAgentUtil.m \
+  /www/ModusModPlayer/cordova/platforms/ios/CordovaLib/Classes/CDVUserAgentUtil.h

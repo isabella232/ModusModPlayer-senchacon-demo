@@ -40,9 +40,6 @@
      */
     "js": [
         {
-            "path" : "blur.js"
-        },
-        {
             "path": "touch/sencha-touch.js",
             "x-bootstrap": true
         },

@@ -1,3 +1,3 @@
 dependencies: \
-  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/NSDictionary+Extensions.m \
-  /www/ModusModPlayer/phonegap/platforms/ios/CordovaLib/Classes/NSDictionary+Extensions.h
+  /www/ModusModPlayer/cordova/platforms/ios/CordovaLib/Classes/NSDictionary+Extensions.m \
+  /www/ModusModPlayer/cordova/platforms/ios/CordovaLib/Classes/NSDictionary+Extensions.h
