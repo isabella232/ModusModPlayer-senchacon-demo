@@ -611,29 +611,32 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 }
 
 
-- (NSMutableArray*) getWaveFormData:(NSInteger*)width  andHeight:(NSInteger*)height {
+- (NSArray*) getWaveFormData:(NSInteger*)width  andHeight:(NSInteger*)height {
     int x,y;
 
-    processingSampleData = true;
+    processingSampleData = YES;
     // TODO: Use width and height parameters here. Need to figure out how to cast from NSInteger to int!!!!
     int SPECHEIGHT = 213;
     int SPECWIDTH =  1000;
 
 
-    NSMutableArray *channelData    = [[NSMutableArray alloc] init];
     NSMutableArray *channelOneData = [[NSMutableArray alloc] init];
     NSMutableArray *channelTwoData = [[NSMutableArray alloc] init];
 
-    int c;
+    int c,
+        val;
     
-    SInt16 *buf = sampleData;
+    SInt16 *buf = sampleData,
+           itemRaw;
     
-    for ( c = 0; c < 2;c ++) {
+    
+    for (c = 0; c < 2; c++) {
         for (x = 0; x < SPECWIDTH; x++) {
             NSNumber *plotItem;
 
-            int val = x * 2 + c;
-            SInt16 itemRaw = buf[ val ];
+            val = x * 2 + c;
+            
+            itemRaw = buf[val];
             
             float item = itemRaw / 32767.5;
             
@@ -674,10 +677,13 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
         }
     }
 
-    [channelData addObject:channelOneData];
-    [channelData addObject:channelTwoData];
+
+    NSArray *channelData    = [[NSArray alloc] initWithObjects:channelOneData, channelTwoData, nil];
+
+//    [channelData addObject:channelOneData];
+//    [channelData addObject:channelTwoData];
     
-    processingSampleData = false;
+    processingSampleData = NO;
     return channelData;
 
 }
@@ -961,7 +967,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 //        NSString  *waveDataType = [command.arguments objectAtIndex:3];
         NSString *waveDataType = @"waveform";
         
-        NSMutableArray *waveData;
+        NSArray *waveData;
         
         if ([waveDataType isEqual:@"waveform"]) {
 //            [self getWaveFormData:(NSInteger *)canvasWidth andHeight:(NSInteger *)canvasHeight];

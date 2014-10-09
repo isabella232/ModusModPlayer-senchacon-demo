@@ -1,0 +1,24 @@
+dependencies: \
+  /www/ModusModPlayer/cordova/platforms/ios/ModPlyr/Plugins/org.moduscreate.modplyr/ModPlyr.m \
+  /www/ModusModPlayer/cordova/platforms/ios/ModPlyr/Plugins/org.moduscreate.modplyr/ModPlyr.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDV.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDVAvailability.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDVPlugin.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDVPluginResult.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/NSMutableArray+QueueAdditions.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDVCommandDelegate.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDVInvokedUrlCommand.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDVViewController.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDVCommandQueue.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDVWhitelist.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDVScreenOrientationDelegate.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDVURLProtocol.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDVDebug.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDVLocalStorage.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDVTimer.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/NSArray+Comparisons.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/NSData+Base64.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/NSDictionary+Extensions.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/UIDevice+Extensions.h \
+  /www/ModusModPlayer/cordova/platforms/ios/build/emulator/include/Cordova/CDVJSON.h \
+  /www/ModusModPlayer/cordova/platforms/ios/ModPlyr/Plugins/org.moduscreate.modplyr/modplug.h

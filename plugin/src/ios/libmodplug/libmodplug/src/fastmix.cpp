@@ -1485,9 +1485,9 @@ UINT CSoundFile::CreateStereoMix(int count)
 	if (gnChannels > 2) X86_InitMixBuffer(MixRearBuffer, count*2);
 #endif
 	nchused = nchmixed = 0;
-	if (m_nMixChannels > 0) {
+//	if (m_nMixChannels > 0) {
 //        printf("%i",m_nMixChannels);
-    }
+//    }
     
     for (UINT nChn=0; nChn<m_nMixChannels; nChn++)
 	{
@@ -1601,7 +1601,7 @@ UINT CSoundFile::CreateStereoMix(int count)
 			
             pChannel->nROfs += *(pbufmax-2);
 			pChannel->nLOfs += *(pbufmax-1);
-            printf("%i >> %f\n", pChannel->channelNumber, (float)((short)pChannel->nROfs  / 32767.5));
+//            printf("%i >> %f\n", pChannel->channelNumber, (float)((short)pChannel->nROfs  / 32767.5));
 
             
             pbuffer = pbufmax;

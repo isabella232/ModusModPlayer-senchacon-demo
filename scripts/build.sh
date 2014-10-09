@@ -20,6 +20,7 @@ if [ $RC -ne 0 ]; then
 	cat /tmp/st2.out
 	exit 1
 else 	
+
 	echo $'\e[32m''Sencha build DONE' $'\e[00m'
 
 	echo `pwd`
@@ -30,11 +31,13 @@ else
 	rm -rf $cordovaDir/* 
 
 	echo "Copying to Cordova..."
-	mv $buildDir/ $cordovaDir/
+	cp -Rf $buildDir/* $cordovaDir/
 
+	echo ">>>> `pwd`"
 	echo "Building Cordova iOS..."
 	cd cordova
-	cordova build ios
+	echo ">>>> `pwd`"
+	phonegap build ios
 
 	echo $'\e[32m''DONE!' $'\e[00m'
 	exit 0
