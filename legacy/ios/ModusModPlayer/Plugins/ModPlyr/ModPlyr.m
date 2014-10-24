@@ -283,6 +283,8 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 
 - (void) preLoadPatterns {
 
+
+
    patternDataReady = false;
 
     // Thread shit.
@@ -606,7 +608,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 }
 
 
-- (NSMutableArray*) getWaveFormData:(NSInteger*)width  andHeight:(NSInteger*)height {
+- (NSArray *) getWaveFormData:(NSInteger*)width  andHeight:(NSInteger*)height {
     int x,y;
 
     processingSampleData = true;
@@ -615,17 +617,16 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     int SPECWIDTH =  1000;
 
 
-    NSMutableArray *channelData    = [[NSMutableArray alloc] init];
     NSMutableArray *channelOneData = [[NSMutableArray alloc] init];
     NSMutableArray *channelTwoData = [[NSMutableArray alloc] init];
 
     int c;
     
     SInt16 *buf = sampleData;
+    NSNumber *plotItem;
     
     for ( c = 0; c < 2;c ++) {
         for (x = 0; x < SPECWIDTH; x++) {
-            NSNumber *plotItem;
 
             int val = x * 2 + c;
             SInt16 itemRaw = buf[ val ];
@@ -666,13 +667,15 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
                 [channelTwoData addObject: plotItem];
 
             }
+            
+            
         }
     }
-
-    [channelData addObject:channelOneData];
-    [channelData addObject:channelTwoData];
     
-    processingSampleData = false;
+    
+    NSArray *channelData = [[NSArray alloc] initWithObjects:channelOneData, channelTwoData, nil];
+
+   processingSampleData = false;
     return channelData;
 
 }
@@ -956,7 +959,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 //        NSString  *waveDataType = [command.arguments objectAtIndex:3];
         NSString *waveDataType = @"waveform";
         
-        NSMutableArray *waveData;
+        NSArray *waveData;
         
         if ([waveDataType isEqual:@"waveform"]) {
 //            [self getWaveFormData:(NSInteger *)canvasWidth andHeight:(NSInteger *)canvasHeight];
@@ -975,12 +978,16 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 //        NSNumber *rt = [[[NSNumber alloc] initWithInt:rtChannelPlot] autorelease];
         
 //        NSLog(@"lt : %i \t\t rt : %i", ltChannelPlot, rtChannelPlot);
-        
+//        
         jsonObj = [[NSDictionary alloc]
             initWithObjectsAndKeys:
                 waveData, @"waveData",
                 nil
             ];
+
+//         jsonObj = [[NSDictionary alloc] initWithObjectsAndKeys:
+//            false, @"success",
+//            nil];
         
 //        [waveData release];
 

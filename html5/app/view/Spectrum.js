@@ -12,9 +12,9 @@ Ext.define('Modify.view.Spectrum', {
 
     config : {
         numPoints  : 2048,
-        binMax     : 1000,
+        binMax     : 500,
         binMin     : 10,
-        numBins    : 1000,
+        numBins    : 500,
         mode       : 1,
         barSpacing : 0,
 
@@ -77,7 +77,7 @@ Ext.define('Modify.view.Spectrum', {
             me.canvasWidth  = thisElWidth;
 
             me.canvasHeight = thisElHeight;
-            me.validPoints  = 1000;
+            me.validPoints  = 500;
 
             me.canvas2dContext = canvas.getContext('2d');
 //            me.data = new Uint8Array();

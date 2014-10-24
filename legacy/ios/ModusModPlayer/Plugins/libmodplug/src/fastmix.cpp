@@ -1601,7 +1601,7 @@ UINT CSoundFile::CreateStereoMix(int count)
 			
             pChannel->nROfs += *(pbufmax-2);
 			pChannel->nLOfs += *(pbufmax-1);
-            printf("%i >> %f\n", pChannel->channelNumber, (float)((short)pChannel->nROfs  / 32767.5));
+//            printf("%i >> %f\n", pChannel->channelNumber, (float)((short)pChannel->nROfs  / 32767.5));
 
             
             pbuffer = pbufmax;

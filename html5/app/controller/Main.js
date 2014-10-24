@@ -218,7 +218,6 @@ Ext.define('Modify.controller.Main', {
             },
             function errorHandler(err) {
                 me.loadMask.hide();
-
             },
             'ModPlyr',
             'cordovaLoadMod',

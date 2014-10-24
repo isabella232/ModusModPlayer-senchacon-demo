@@ -616,8 +616,8 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 
     processingSampleData = YES;
     // TODO: Use width and height parameters here. Need to figure out how to cast from NSInteger to int!!!!
-    int SPECHEIGHT = 213;
-    int SPECWIDTH =  1000;
+    int SPECHEIGHT = 213,
+        SPECWIDTH =  1000;
 
 
     NSMutableArray *channelOneData = [[NSMutableArray alloc] init];
@@ -626,19 +626,23 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
     int c,
         val;
     
+    float divisor = 32767.5;
+    
     SInt16 *buf = sampleData,
            itemRaw;
+    
+    NSNumber *plotItem;
     
     
     for (c = 0; c < 2; c++) {
         for (x = 0; x < SPECWIDTH; x++) {
-            NSNumber *plotItem;
+//            NSNumber *plotItem;
 
             val = x * 2 + c;
             
             itemRaw = buf[val];
             
-            float item = itemRaw / 32767.5;
+            float item = itemRaw / divisor;
             
             
 //            printf("%f\n", item);
@@ -662,8 +666,8 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
                     y--;
                 }
                 
-                
-                plotItem = [[NSNumber alloc] initWithInt:v];
+                plotItem = [NSNumber numberWithInt:v];
+//                plotItem = [NSNumber numberWithInt:7];
 
             } while (y!=v);
     
@@ -674,6 +678,7 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
                 [channelTwoData addObject: plotItem];
 
             }
+            plotItem = nil;
         }
     }
 

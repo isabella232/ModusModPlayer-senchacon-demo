@@ -1,4 +1,4 @@
-function _6b58ddc49cbedae874e42f8e9eb875399894f12b(){};//@tag foundation,core
+function _df64167ae1ceaaeae8c6cc3463bbcb2c1bd71efd(){};//@tag foundation,core
 //@define Ext
 
 /**
@@ -67704,9 +67704,9 @@ Ext.define('Modify.view.Spectrum', {
 
     config : {
         numPoints  : 2048,
-        binMax     : 1000,
+        binMax     : 500,
         binMin     : 10,
-        numBins    : 1000,
+        numBins    : 500,
         mode       : 1,
         barSpacing : 0,
 
@@ -67769,7 +67769,7 @@ Ext.define('Modify.view.Spectrum', {
             me.canvasWidth  = thisElWidth;
 
             me.canvasHeight = thisElHeight;
-            me.validPoints  = 1000;
+            me.validPoints  = 500;
 
             me.canvas2dContext = canvas.getContext('2d');
 //            me.data = new Uint8Array();
@@ -68648,7 +68648,7 @@ Ext.define('Modify.view.ModPlayer', {
             return;
         }
 
-        var patternData
+        var patternData;
 
         try {
             patternData = JSON.parse(patternDataAsString);
@@ -68675,6 +68675,7 @@ Ext.define('Modify.view.ModPlayer', {
     },
 
     setStats : function(stats) {
+
 //        console.log('player.setStats()')
 //        debugger;
         this.songStats = stats;
@@ -68954,7 +68955,7 @@ Ext.define('Modify.controller.Main', {
             },
             function errorHandle(err) {
                 if (err == "notready") {
-                    Ext.Function.defer(me.getPatternData, 50, me);
+                    Ext.Function.defer(me.getPatternData, 10, me);
                     return;
                 }
 
@@ -68972,7 +68973,7 @@ Ext.define('Modify.controller.Main', {
         if (! this.interval && this.vizMode) {
             console.log('startModPlayerUpdateLoop();');
             var boundTimerFunction = Ext.Function.bind(this.getSongStats, this);
-            this.interval = setInterval(boundTimerFunction, 10);
+            this.interval = setInterval(boundTimerFunction, 40);
         }
     },
 

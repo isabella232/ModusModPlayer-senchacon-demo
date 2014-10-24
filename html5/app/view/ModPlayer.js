@@ -134,7 +134,7 @@ Ext.define('Modify.view.ModPlayer', {
             return;
         }
 
-        var patternData
+        var patternData;
 
         try {
             patternData = JSON.parse(patternDataAsString);
@@ -161,6 +161,7 @@ Ext.define('Modify.view.ModPlayer', {
     },
 
     setStats : function(stats) {
+
 //        console.log('player.setStats()')
 //        debugger;
         this.songStats = stats;

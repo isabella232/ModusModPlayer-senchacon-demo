@@ -1,0 +1,11 @@
+2014-10-09 09:48:45.519 ModPlyr[7197:80b] Multi-tasking -> Device: YES, App: YES
+2014-10-09 09:48:45.534 ModPlyr[7197:80b] Unlimited access to network resources
+2014-10-09 09:48:45.537 ModPlyr[7197:80b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-10-09 09:48:45.904 ModPlyr[7197:80b] Resetting plugins due to page load.
+2014-10-09 09:48:45.999 ModPlyr[7197:80b] Finished load of: file:///Users/jgarcia/Library/Developer/CoreSimulator/Devices/D3A17D97-3AF8-4B6F-9F56-B25E49180A73/data/Applications/46192F70-3A7D-48CF-9689-99BDA81C7CB1/ModPlyr.app/www/index.html

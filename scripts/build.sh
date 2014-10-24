@@ -10,7 +10,8 @@ cordovaDir="cordova/www"
 echo $'\e[32m''building Sencha ' $'\e[00m'
 
 cd html5/
-
+ls
+pwd
 sencha app build $target
 RC=$?
 cd ..
@@ -32,6 +33,8 @@ else
 
 	echo "Copying to Cordova..."
 	cp -Rf $buildDir/* $cordovaDir/
+	cp $cordovaDir/../www.orig/config.xml $cordovaDir/
+	rm -rf $buildDir/
 
 	echo ">>>> `pwd`"
 	echo "Building Cordova iOS..."
