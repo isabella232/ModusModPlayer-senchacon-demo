@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B4A357A1-EBD0-47EF-A0C1-71825A506766</string>
+	<key>IDESourceControlProjectName</key>
+	<string>libopenmpt</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>16CE14A2D81CCE323D476004724594AEF6B38C0A</key>
+		<string>github.com:facebook/react-native.git</string>
+		<key>5B9F7EDB4FC4C12B50C07A3DCC64A9AC23ED3F5D</key>
+		<string>github.com:ModusCreateOrg/libOpenMPT-ios.git</string>
+		<key>D9A849C02A719AE7A46EC69260F84F218E9DF91F</key>
+		<string>github.com:ModusCreateOrg/react-native-mod-player.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>libopenmpt/libopenmpt.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>16CE14A2D81CCE323D476004724594AEF6B38C0A</key>
+		<string>../../../../../../..</string>
+		<key>5B9F7EDB4FC4C12B50C07A3DCC64A9AC23ED3F5D</key>
+		<string>../../..</string>
+		<key>D9A849C02A719AE7A46EC69260F84F218E9DF91F</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:ModusCreateOrg/libOpenMPT-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5B9F7EDB4FC4C12B50C07A3DCC64A9AC23ED3F5D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>16CE14A2D81CCE323D476004724594AEF6B38C0A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>..</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D9A849C02A719AE7A46EC69260F84F218E9DF91F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>..</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5B9F7EDB4FC4C12B50C07A3DCC64A9AC23ED3F5D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>libOpenMPT</string>
+		</dict>
+	</array>
+</dict>
+</plist>

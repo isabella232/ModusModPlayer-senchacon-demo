@@ -1,0 +1,10 @@
+{
+    "org.moduscreate.MCKGMP": {
+        "source": {
+            "type": "local",
+            "path": "mod_player_plugin"
+        },
+        "is_top_level": true,
+        "variables": {}
+    }
+}

@@ -1,0 +1,28 @@
+//
+//  RCEGamePlayerInterface.h
+//  UIExplorer
+//
+//  Created by Jesus Garcia on 3/7/15.
+//  Copyright (c) 2015 Facebook. All rights reserved.
+//
+
+#import <Cordova/CDV.h>
+
+#import "MCModPlayer.h"
+
+#import <QuartzCore/QuartzCore.h>
+
+@interface MCModPlayerInterface : CDVPlugin
+
+@property NSDictionary *modInfo;
+
+@property int currentRow;
+@property int currentPattern;
+@property int currentOrder;
+@property double then;
+
+- (void) audioRouteChanged:(NSNotification *)notification;
+
+
+@end
+

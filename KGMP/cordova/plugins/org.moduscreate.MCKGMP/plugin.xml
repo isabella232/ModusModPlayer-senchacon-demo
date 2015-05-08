@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="org.moduscreate.MCKGMP" version="0.0.1">
+	<name>MCKGMP</name>
+	<description>Modus Create KeyGenMusic Player</description>
+	<license>Apache 2.0</license>
+	<keywords>cordova,device</keywords>
+    <js-module src="src/ios/MCKGMP.js" name="MCKGMP">
+        <clobbers target="MCKGMP" />
+    </js-module>
+
+    <engines>
+        <engine name="cordova" version="&gt;=3.0.0" />
+    </engines>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="MCKGMP">
+                <param name="ios-package" value="MCKGMP"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/MCFsTool.h" />
+        <source-file src="src/ios/MCFSTool.m" />
+
+        <header-file src="src/ios/MCModPlayer.h" />
+        <source-file src="src/ios/MCModPlayer.m" />
+
+        <header-file src="src/ios/MCModPlayerInterface.h" />
+        <source-file src="src/ios/MCModPlayerInterface.m" />
+
+        <header-file src="src/ios/players/MC_OMPT.h" />
+        <source-file src="src/ios/players/MC_OMPT.m" />       
+
+
+
+        <header-file src="src/ios/libOpenMPT/src/libopenmpt.h" />
+        
+        <framework src="AudioToolbox.framework" weak="true" />
+        <!-- <source-file src="src/ios/libModPlyr/libModPlyr.a" framework="true" compiler-flags="-fno-objc-arc" /> -->
+        <!-- <source-file src="src/ios/libModPlyr/libLibModPlyr.a" framework="true" compiler-flags="-fno-objc-arc" /> -->
+
+    </platform>
+</plugin>
