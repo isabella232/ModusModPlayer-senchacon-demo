@@ -32,7 +32,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLResultSet": "touch/src/device/sqlite/Sencha.js",
   "Ext.device.sqlite.SQLResultSetRowList": "touch/src/device/sqlite/Sencha.js",
   "Ext.device.sqlite.SQLTransaction": "touch/src/device/sqlite/Sencha.js",
-  "KGMP": "app"
+  "Modify": "app"
 });
 
 Ext.ClassManager.addNameAlternateMappings({
@@ -667,7 +667,16 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.viewport.WindowsPhone": [
     "Ext.viewport.WP"
   ],
-  "KGMP.view.Main": []
+  "Modify.controller.Main": [],
+  "Modify.model.Directory": [],
+  "Modify.model.ModFile": [],
+  "Modify.store.Directories": [],
+  "Modify.store.ModFiles": [],
+  "Modify.view.Main": [],
+  "Modify.view.ModPlayer": [],
+  "Modify.view.NoteDots": [],
+  "Modify.view.Pattern": [],
+  "Modify.view.Spectrum": []
 });
 
 Ext.ClassManager.addNameAliasMappings({
@@ -1399,8 +1408,25 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.Ios": [],
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [],
-  "KGMP.view.Main": [
+  "Modify.controller.Main": [],
+  "Modify.model.Directory": [],
+  "Modify.model.ModFile": [],
+  "Modify.store.Directories": [],
+  "Modify.store.ModFiles": [],
+  "Modify.view.Main": [
     "widget.main"
+  ],
+  "Modify.view.ModPlayer": [
+    "widget.player"
+  ],
+  "Modify.view.NoteDots": [
+    "widget.notedots"
+  ],
+  "Modify.view.Pattern": [
+    "widget.patternview"
+  ],
+  "Modify.view.Spectrum": [
+    "widget.spectrum"
   ]
 });
 

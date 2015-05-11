@@ -12,13 +12,13 @@
 //@synthesize bridge = _bridge;
 
 
-- (instancetype) init {
-    if (self = [super init]) {
-        [self configureCommandCenter];
-            NSLog(@"MCModPlayerInterface init");
+- (CDVPlugin*)initWithWebView:(UIWebView*)theWebView {
+    if (self = [super initWithWebView:theWebView]) {
+//        [self configureCommandCenter];
+        NSLog(@"MCModPlayerInterface pluginInitialize");
         
         MCModPlayerInterface *interface = self;
-        NSString *formatString = @"%i";
+        NSString *eformatString = @"window.updatePlayerViewPattern(%i, %i, %i);";
         
         
         self.then = CACurrentMediaTime();
@@ -33,11 +33,13 @@
             int diff = (now - interface.then) * 1000;
             
             if (interface.currentOrder != ord || interface.currentPattern != pat || interface.currentRow != row) {
-                printf("Emitting event O:%i P:%i R:%i    Time Diff: %i(ms)\n", ord, pat, row, diff);
+//                printf("Emitting event O:%i P:%i R:%i    Time Diff: %i(ms)\n", ord, pat, row, diff);
                 fflush(stdout);
                 interface.then = now;
                 
-//                
+                NSString* jsString = [NSString stringWithFormat:eformatString, ord, pat, row];
+                [self.webView stringByEvaluatingJavaScriptFromString:jsString];
+
 //                [_bridge.eventDispatcher sendDeviceEventWithName:@"rowPatternUpdate" body:@[
 //                    
 //                    [[NSNumber alloc] initWithInt:ord],
@@ -48,9 +50,9 @@
 //                ]];
                 
                 
-                interface.currentRow     = row;
-                interface.currentOrder   = ord;
-                interface.currentPattern = pat;
+                self.currentRow     = row;
+                self.currentOrder   = ord;
+                self.currentPattern = pat;
             
             }
             
@@ -62,7 +64,9 @@
     return nil;
 }
 
-
+- (void) boot:(CDVInvokedUrlCommand*)command {
+    [self respond:command withData:@{}];
+}
 
 - (void) respond:(CDVInvokedUrlCommand*)command withData:(id)resultData {
     NSError *jsonError;
@@ -93,7 +97,7 @@
     MCModPlayer *player = [MCModPlayer sharedManager];
     
     NSDictionary *modInfo = [player initializeSound:path];
-    printf("                  ---------          \n");
+    printf("                  ---------\n");
 
     self.currentRow     = nil;
     self.currentPattern = nil;
@@ -156,7 +160,7 @@
 
 - (void) pause:(CDVInvokedUrlCommand*)command {
     [[MCModPlayer sharedManager] pause];
-    [self respond:command withData:nil];
+    [self respond:command withData:@{}];
 
 }
 
@@ -172,7 +176,7 @@
         [player resume];
     }
     
-    [self respond:command withData:nil];
+    [self respond:command withData:@{}];
     
 }
 

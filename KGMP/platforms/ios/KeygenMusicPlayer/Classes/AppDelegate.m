@@ -41,28 +41,28 @@
 
 - (id)init {
     
-    MCFsTool *fsTool = [[MCFsTool alloc] init];
+//    MCFsTool *fsTool = [[MCFsTool alloc] init];
     
-    NSArray *allDirs = [fsTool getContentsOfDirectory:nil];
-    NSDictionary *firstDir = [allDirs objectAtIndex:0];
-    
-    NSArray *firstDirContents = [fsTool getContentsOfDirectory:[firstDir valueForKey:@"path:"]];
-    
-    NSDictionary *secondDir = [firstDirContents objectAtIndex:0];
-    
-    NSArray *secondDirContents = [fsTool getContentsOfDirectory:[secondDir valueForKey:@"path"]];
-    
-    NSDictionary *targetFile = [secondDirContents objectAtIndex:0];
-
-    
-    
-    MCModPlayer *player = [MCModPlayer sharedManager];
-    
-    
-    NSString *path = [targetFile valueForKey:@"path"];
-    NSDictionary *modInfo = [player initializeSound:path];
-    
-    [player play];
+//    NSArray *allDirs = [fsTool getContentsOfDirectory:nil];
+//    NSDictionary *firstDir = [allDirs objectAtIndex:0];
+//    
+//    NSArray *firstDirContents = [fsTool getContentsOfDirectory:[firstDir valueForKey:@"path:"]];
+//    
+//    NSDictionary *secondDir = [firstDirContents objectAtIndex:0];
+//    
+//    NSArray *secondDirContents = [fsTool getContentsOfDirectory:[secondDir valueForKey:@"path"]];
+//    
+//    NSDictionary *targetFile = [secondDirContents objectAtIndex:0];
+//
+//    
+//    
+//    MCModPlayer *player = [MCModPlayer sharedManager];
+//    
+//    
+//    NSString *path = [targetFile valueForKey:@"path"];
+//    NSDictionary *modInfo = [player initializeSound:path];
+//    
+//    [player play];
     
 
     /** If you need to do any extra app-specific initialization, you can do it here

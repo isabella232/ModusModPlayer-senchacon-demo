@@ -14,6 +14,7 @@
 + (id)sharedManager {
     static MCModPlayer *sharedMyManager = nil;
     static dispatch_once_t onceToken;
+//    NSLog(@"MCModPlayer sharedManater()");
   
     dispatch_once(&onceToken, ^{
         sharedMyManager = [[self alloc] init];
@@ -57,7 +58,9 @@
 
 
 - (void) registerInfoCallback:(void(^)(int32_t *playerState))updateInterfaceBlock {
+    NSLog(@"registerInfoCallback registerInfoCallback registerInfoCallback registerInfoCallback registerInfoCallback");
     self.updateInterfaceBlock = updateInterfaceBlock;
+    
 }
 
 // Executed within a different context (not this class);
@@ -71,10 +74,10 @@ void audioCallback(void *data, AudioQueueRef mQueue, AudioQueueBufferRef mBuffer
 //    printf("+Ord: %i     Pat: %i     Row: %i\n", playerState[0], playerState[1], playerState[2]);
 
     
-    if (player.appActive) {
+//    if (player.appActive) {
         // TODO: Should we use GCD to execute this method in the main queue??
         [player notifyInterface:playerState];
-    }
+//    }
 }
 
 

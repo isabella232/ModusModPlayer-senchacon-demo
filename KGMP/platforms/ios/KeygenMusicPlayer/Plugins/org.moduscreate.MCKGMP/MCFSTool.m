@@ -50,7 +50,7 @@
 - (NSMutableArray *) getContentsOfDirectory:(NSString*)path {
    
        
-    if (path == nil) {
+    if (path == nil || [path isEqualToString:@""]) {
         NSString *appUrl  = [[NSBundle mainBundle] bundlePath];
         path = [appUrl stringByAppendingString: @"/KEYGENMUSiC MusicPack"];
     }

@@ -140,6 +140,8 @@
         [patternOrders addObject:[[NSNumber alloc] initWithInt:orderPattern]];
     }
     
+    NSDictionary *patternsDict = [self getPatterns:myLoadedMpFile];
+    
     
     return @{
         @"name"        : nsName ?: @"",
@@ -161,7 +163,7 @@
         @"bpm"         : [[NSNumber alloc] initWithInt:bpm],
         @"length"      : [[NSNumber alloc] initWithInt:length],
         @"patternOrds" : patternOrders,
-//        @"patterns"    : patternsDict,
+        @"patterns"    : patternsDict,
         @"niceName"    : niceName
     };
 

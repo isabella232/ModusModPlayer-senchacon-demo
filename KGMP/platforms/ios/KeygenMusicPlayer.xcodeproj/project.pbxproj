@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.mm */; };
@@ -28,6 +27,7 @@
 		30B4F30219D5E07200D9F7D8 /* Default-Landscape-736h.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B4F2FF19D5E07200D9F7D8 /* Default-Landscape-736h.png */; };
 		30C1856619D5FC0A00212699 /* icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30C1856519D5FC0A00212699 /* icon-60@3x.png */; };
 		30FC414916E50CA1004E6F35 /* icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FC414816E50CA1004E6F35 /* icon-72@2x.png */; };
+		51F243AE85CC47BABE503C3E /* libopenmpt.xcodeproj in Frameworks */ = {isa = PBXBuildFile; fileRef = B38CCBBC68094CDDA5A414AE /* libopenmpt.xcodeproj */; };
 		5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */; };
 		7179E3791AFCF9D400824646 /* liblibopenmpt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7179E3781AFCF97500824646 /* liblibopenmpt.a */; };
 		7179E37E1AFCFDA400824646 /* MCFSTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D860F02DC46C5B8B8CCCD /* MCFSTool.m */; };
@@ -144,6 +144,7 @@
 		88BBC9F8224143F082CA60B8 /* MC_OMPT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MC_OMPT.m; path = org.moduscreate.MCKGMP/MC_OMPT.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* KeygenMusicPlayer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "KeygenMusicPlayer-Info.plist"; path = "../KeygenMusicPlayer-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		A81DFA75CEAD47478855AFE3 /* MCModPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCModPlayer.h; path = org.moduscreate.MCKGMP/MCModPlayer.h; sourceTree = "<group>"; };
+		B38CCBBC68094CDDA5A414AE /* libopenmpt.xcodeproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = unknown; name = libopenmpt.xcodeproj; path = src/ios/libOpenMPT/libopenmpt/libopenmpt.xcodeproj; sourceTree = "<group>"; };
 		CE34748044BD47B18321D12F /* MCModPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCModPlayer.m; path = org.moduscreate.MCKGMP/MCModPlayer.m; sourceTree = "<group>"; };
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
 		EB87FDF21871DA7A0020F90C /* merges */ = {isa = PBXFileReference; lastKnownFileType = folder; name = merges; path = ../../merges; sourceTree = "<group>"; };
@@ -172,6 +173,7 @@
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
 				7179E3791AFCF9D400824646 /* liblibopenmpt.a in Frameworks */,
+				51F243AE85CC47BABE503C3E /* libopenmpt.xcodeproj in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +257,7 @@
 				5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */,
+				B38CCBBC68094CDDA5A414AE /* libopenmpt.xcodeproj */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

@@ -11,7 +11,7 @@
 */
 
 Ext.application({
-    name: 'KGMP',
+    name: 'Modify',
 
     requires: [
         'Ext.MessageBox'
@@ -20,6 +20,8 @@ Ext.application({
     views: [
         'Main'
     ],
+
+    controllers : ['Main'],
 
     icon: {
         '57': 'resources/icons/Icon.png',
@@ -40,11 +42,12 @@ Ext.application({
     },
 
     launch: function() {
+
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
 
         // Initialize the main view
-        Ext.Viewport.add(Ext.create('KGMP.view.Main'));
+        Ext.Viewport.add(Ext.create('Modify.view.Main'));
     },
 
     onUpdated: function() {

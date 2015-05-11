@@ -68,7 +68,7 @@ void interrruptCallback (void *inUserData,UInt32 interruptionState );
 - (NSDictionary *) initializeSound:(NSString *)path;
 
 
-- (float *) getBufferData:(NSString *)channel;
+//- (float *) getBufferData:(NSString *)channel;
 - (NSMutableDictionary *) getInfo:(NSString *)path;
 
 - (NSDictionary *)getAllPatterns:(NSString *)path;
