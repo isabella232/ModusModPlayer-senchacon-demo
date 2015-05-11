@@ -157,9 +157,9 @@ Ext.define('Modify.controller.Main', {
     onDirListItemSelect : function(list,  record) {
         var me = this;
 
-        // Ext.Function.defer(function() {
-        //     list.deselectAll();
-        // }, 200);
+        Ext.Function.defer(function() {
+            list.deselectAll();
+        }, 200);
 
         cordova.exec(
             Ext.Function.bind(me.onAfterGetModFiles, me),
@@ -197,9 +197,9 @@ Ext.define('Modify.controller.Main', {
         var me   = this,
             data = record.data;
 
-        // Ext.Function.defer(function() {
-        //     list.deselectAll();
-        // }, 200);
+        Ext.Function.defer(function() {
+            list.deselectAll();
+        }, 200);
 
         var player = me.player = Ext.create('Modify.view.ModPlayer', {
             data : record.data,

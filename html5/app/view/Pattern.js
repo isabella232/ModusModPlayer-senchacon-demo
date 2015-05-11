@@ -118,7 +118,7 @@ Ext.define('Modify.view.Pattern', {
                     scrollTo = (elementCenter * -1) - (11 * rowNum);
                 }
 
-                console.log('scrollTo ' + scrollTo + 'px', elementCenter, (11 * rowNum))
+                // console.log('scrollTo ' + scrollTo + 'px', elementCenter, (11 * rowNum))
 
                 patternView.element.applyStyles({
                     top : scrollTo + 'px'
