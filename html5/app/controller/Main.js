@@ -49,14 +49,6 @@ Ext.define('Modify.controller.Main', {
             ['']
         );
 
-
-/*
-    <feature name="MCKGMP">
-        <param name="ios-package" value="MCModPlayerInterface" />
-        <param name="ios-package" value="MCFsTool" />
-    </feature>
-*/
-
         Ext.Viewport.add(me.main);
         me.main.show();
 
@@ -230,6 +222,91 @@ Ext.define('Modify.controller.Main', {
                         'MCModPlayerInterface',
                         'pause',
                         []
+                    );
+                },
+
+                next : function() {
+                    me.stopModPlayerUpdateLoop();  
+                    var storeData = record.stores[0].data.items,
+                        index     = storeData.indexOf(record),
+                        total     = storeData.length, 
+                        newIndex;
+
+
+                    newIndex = index + 1;
+
+                    if (newIndex >= total) {
+                        newIndex = 0;                          
+                    }
+
+                    console.log('NEXT', newIndex, record);
+
+
+                    record = storeData[newIndex]; 
+                    
+                    data = record.data;
+                    
+
+                    cordova.exec(
+                        function callback(modInfo) {
+                            modInfo = JSON.parse(modInfo)[0];
+                            console.log(modInfo)
+
+                            // debugger;
+                            player.setSongName(modInfo);
+                            // me.getPatternData(modInfo.patterns);
+                            me.injectPatternView(modInfo);
+                            player.isPlaying = false;
+                            player.onPlayBtnTap();
+                            
+                        },
+                        function errorHandler(err) {
+                            me.loadMask.hide();
+
+                        },
+                        'MCModPlayerInterface',
+                        'loadFile',
+                        [data.path]
+                    );
+                },
+
+                previous : function() {
+                    me.stopModPlayerUpdateLoop();  
+                    var storeData = record.stores[0].data.items,
+                        index     = storeData.indexOf(record),
+                        total     = storeData.length,
+                        newIndex  = index - 1;
+
+                    if (newIndex <= 0) {
+                        newIndex = total - 1;                        
+                    }
+                    console.log('PREV', newIndex, record);
+
+                    record = storeData[newIndex];
+
+                    data = record.data;
+
+
+                    cordova.exec(
+                        function callback(modInfo) {
+                            modInfo = JSON.parse(modInfo)[0];
+                            console.log(modInfo)
+
+                            // debugger;
+                            player.setSongName(modInfo);
+                            // me.getPatternData(modInfo.patterns);
+                            me.injectPatternView(modInfo);
+                            player.isPlaying = false;
+                            player.onPlayBtnTap();
+                            
+                        },
+                        function errorHandler(err) {
+                            me.loadMask.hide();
+
+                        },
+                        'MCModPlayerInterface',
+                        'loadFile',
+                        [data.path]
                     );
                 }
             }

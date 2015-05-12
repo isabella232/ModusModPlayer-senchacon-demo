@@ -39,7 +39,7 @@ Ext.define('Modify.view.ModPlayer', {
                     { xtype : 'spacer' },
                     {
                         text   : '&lt;&lt;',
-                        itemId : 'rewindbtn'
+                        itemId : 'prevbtn'
                     },
                     {
                         text   : 'Play',
@@ -48,7 +48,7 @@ Ext.define('Modify.view.ModPlayer', {
                     },
                     {
                         text   : '&gt;&gt;',
-                        itemId : 'fastforwardbtn'
+                        itemId : 'nextbtn'
                     },
                     // {
                     //     text   : 'STOP',
@@ -61,17 +61,14 @@ Ext.define('Modify.view.ModPlayer', {
         ],
 
         control : {
-            '#rewindbtn' : {
-                tap : 'onRewindBtnTap'
+            '#prevbtn' : {
+                tap : 'onPrevBtnTap'
             },
             '#playbtn' : {
                 tap : 'onPlayBtnTap'
             },
-            '#fastforwardbtn' : {
-                tap : 'onFastForwardBtnTap'
-            },
-            '#stopbtn' : {
-                tap : 'onStopBtnTap'
+            '#nextbtn' : {
+                tap : 'onNextBtnTap'
             }
         },
 
@@ -91,8 +88,8 @@ Ext.define('Modify.view.ModPlayer', {
         this.callParent();
     },
 
-    onRewindBtnTap : function() {
-        this.fireEvent('rewind', this);
+    onPrevBtnTap : function() {
+        this.fireEvent('previous', this);
     },
 
     onPlayBtnTap : function() {
@@ -105,24 +102,19 @@ Ext.define('Modify.view.ModPlayer', {
         this.setPauseMode();
     },
 
-    onFastForwardButtonTap : function() {
-        this.fireEvent('fastforward', this);
+    onNextBtnTap : function() {
+        this.fireEvent('next', this);
     },
 
-    onStopBtnTap : function() {
-        this.fireEvent('stop', this);
-        this.setStats(this.getEmptyStats());
-    },
 
     updateSongData : function(songData) {
         console.log('SongData ::: ', songData);
     },
 
-    setSongName : function(songName) {
-        var myData = this.getData();
+    setSongName : function(modInfo) {
 
-        this.setData(myData);
-        this.down('#songStatus').setData(myData);
+        this.setData(modInfo);
+        this.down('#songStatus').setData(modInfo);
 
 //        alert('open debuhhr');
 //        console.log('here')

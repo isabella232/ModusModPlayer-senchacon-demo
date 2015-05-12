@@ -1,4 +1,4 @@
-function _39fc43dcfe2cb496f19d22bc0c17c2dac799efd9(){};//@tag foundation,core
+function _eefb13a0945a9157bac5a2563101152ad8ff510d(){};//@tag foundation,core
 //@define Ext
 /**
  * @class Ext
@@ -58939,7 +58939,7 @@ Ext.define('Modify.view.Pattern', {
                 if (rowNum != this.prevRowNum) {
                     scrollTo = (elementCenter * -1) - (11 * rowNum);
                 }
-                console.log('scrollTo ' + scrollTo + 'px', elementCenter, (11 * rowNum));
+                // console.log('scrollTo ' + scrollTo + 'px', elementCenter, (11 * rowNum))
                 patternView.element.applyStyles({
                     top: scrollTo + 'px'
                 });
@@ -59610,7 +59610,7 @@ Ext.define('Modify.view.ModPlayer', {
                     },
                     {
                         text: '&lt;&lt;',
-                        itemId: 'rewindbtn'
+                        itemId: 'prevbtn'
                     },
                     {
                         text: 'Play',
@@ -59619,7 +59619,7 @@ Ext.define('Modify.view.ModPlayer', {
                     },
                     {
                         text: '&gt;&gt;',
-                        itemId: 'fastforwardbtn'
+                        itemId: 'nextbtn'
                     },
                     // {
                     //     text   : 'STOP',
@@ -59633,17 +59633,14 @@ Ext.define('Modify.view.ModPlayer', {
             }
         ],
         control: {
-            '#rewindbtn': {
-                tap: 'onRewindBtnTap'
+            '#prevbtn': {
+                tap: 'onPrevBtnTap'
             },
             '#playbtn': {
                 tap: 'onPlayBtnTap'
             },
-            '#fastforwardbtn': {
-                tap: 'onFastForwardBtnTap'
-            },
-            '#stopbtn': {
-                tap: 'onStopBtnTap'
+            '#nextbtn': {
+                tap: 'onNextBtnTap'
             }
         },
         emptyStats: {
@@ -59660,8 +59657,8 @@ Ext.define('Modify.view.ModPlayer', {
         //        this.patternView = this.down('pattern');
         this.callParent();
     },
-    onRewindBtnTap: function() {
-        this.fireEvent('rewind', this);
+    onPrevBtnTap: function() {
+        this.fireEvent('previous', this);
     },
     onPlayBtnTap: function() {
         if (this.isPlaying) {
@@ -59672,20 +59669,15 @@ Ext.define('Modify.view.ModPlayer', {
         this.fireEvent('play', this);
         this.setPauseMode();
     },
-    onFastForwardButtonTap: function() {
-        this.fireEvent('fastforward', this);
-    },
-    onStopBtnTap: function() {
-        this.fireEvent('stop', this);
-        this.setStats(this.getEmptyStats());
+    onNextBtnTap: function() {
+        this.fireEvent('next', this);
     },
     updateSongData: function(songData) {
         console.log('SongData ::: ', songData);
     },
-    setSongName: function(songName) {
-        var myData = this.getData();
-        this.setData(myData);
-        this.down('#songStatus').setData(myData);
+    setSongName: function(modInfo) {
+        this.setData(modInfo);
+        this.down('#songStatus').setData(modInfo);
     },
     //        alert('open debuhhr');
     //        console.log('here')
@@ -59787,12 +59779,6 @@ Ext.define('Modify.controller.Main', {
         cordova.exec(Ext.emptyFn, Ext.emptyFn, 'MCModPlayerInterface', 'boot', [
             ''
         ]);
-        /*
-    <feature name="MCKGMP">
-        <param name="ios-package" value="MCModPlayerInterface" />
-        <param name="ios-package" value="MCFsTool" />
-    </feature>
-*/
         Ext.Viewport.add(me.main);
         me.main.show();
         if (Ext.os.is.iOS && Ext.os.version.major >= 7) {
@@ -59861,9 +59847,9 @@ Ext.define('Modify.controller.Main', {
     },
     onDirListItemSelect: function(list, record) {
         var me = this;
-        // Ext.Function.defer(function() {
-        //     list.deselectAll();
-        // }, 200);
+        Ext.Function.defer(function() {
+            list.deselectAll();
+        }, 200);
         cordova.exec(Ext.Function.bind(me.onAfterGetModFiles, me), function errorHandler(err) {}, 'MCFsTool', 'getDirectoriesAsJson', [
             record.data.path
         ]);
@@ -59889,9 +59875,9 @@ Ext.define('Modify.controller.Main', {
     onFileListItemSelect: function(list, record) {
         var me = this,
             data = record.data;
-        // Ext.Function.defer(function() {
-        //     list.deselectAll();
-        // }, 200);
+        Ext.Function.defer(function() {
+            list.deselectAll();
+        }, 200);
         var player = me.player = Ext.create('Modify.view.ModPlayer', {
                 data: record.data,
                 listeners: {
@@ -59907,6 +59893,61 @@ Ext.define('Modify.controller.Main', {
                         me.stopModPlayerUpdateLoop();
                         player.isPlaying = false;
                         cordova.exec(Ext.emptyFn, Ext.emptyFn, 'MCModPlayerInterface', 'pause', []);
+                    },
+                    next: function() {
+                        me.stopModPlayerUpdateLoop();
+                        var storeData = record.stores[0].data.items,
+                            index = storeData.indexOf(record),
+                            total = storeData.length,
+                            newIndex;
+                        newIndex = index + 1;
+                        if (newIndex >= total) {
+                            newIndex = 0;
+                        }
+                        console.log('NEXT', newIndex, record);
+                        record = storeData[newIndex];
+                        data = record.data;
+                        cordova.exec(function callback(modInfo) {
+                            modInfo = JSON.parse(modInfo)[0];
+                            console.log(modInfo);
+                            // debugger;
+                            player.setSongName(modInfo);
+                            // me.getPatternData(modInfo.patterns);
+                            me.injectPatternView(modInfo);
+                            player.isPlaying = false;
+                            player.onPlayBtnTap();
+                        }, function errorHandler(err) {
+                            me.loadMask.hide();
+                        }, 'MCModPlayerInterface', 'loadFile', [
+                            data.path
+                        ]);
+                    },
+                    previous: function() {
+                        me.stopModPlayerUpdateLoop();
+                        var storeData = record.stores[0].data.items,
+                            index = storeData.indexOf(record),
+                            total = storeData.length,
+                            newIndex = index - 1;
+                        if (newIndex <= 0) {
+                            newIndex = total - 1;
+                        }
+                        console.log('PREV', newIndex, record);
+                        record = storeData[newIndex];
+                        data = record.data;
+                        cordova.exec(function callback(modInfo) {
+                            modInfo = JSON.parse(modInfo)[0];
+                            console.log(modInfo);
+                            // debugger;
+                            player.setSongName(modInfo);
+                            // me.getPatternData(modInfo.patterns);
+                            me.injectPatternView(modInfo);
+                            player.isPlaying = false;
+                            player.onPlayBtnTap();
+                        }, function errorHandler(err) {
+                            me.loadMask.hide();
+                        }, 'MCModPlayerInterface', 'loadFile', [
+                            data.path
+                        ]);
                     }
                 }
             });
