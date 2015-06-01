@@ -201,7 +201,7 @@ Ext.define('Modify.controller.Main', {
                     cordova.exec(
                         function callback(data) {
                             player.isPlaying = true;
-                            me.startModPlayerUpdateLoop();
+                            me.bindGlobalUpdateMethod();
                         },
                         function errorHandler(err) {
                             callback('Nothing to echo');
@@ -213,7 +213,7 @@ Ext.define('Modify.controller.Main', {
 
                 },
                 pause : function() {
-                    me.stopModPlayerUpdateLoop();
+                    me.unbindGlobalUpdateMethod();
                     player.isPlaying = false;
 
                     cordova.exec(
@@ -226,7 +226,7 @@ Ext.define('Modify.controller.Main', {
                 },
 
                 next : function() {
-                    me.stopModPlayerUpdateLoop();  
+                    me.unbindGlobalUpdateMethod();  
                     var storeData = record.stores[0].data.items,
                         index     = storeData.indexOf(record),
                         total     = storeData.length, 
@@ -271,7 +271,7 @@ Ext.define('Modify.controller.Main', {
                 },
 
                 previous : function() {
-                    me.stopModPlayerUpdateLoop();  
+                    me.unbindGlobalUpdateMethod();  
                     var storeData = record.stores[0].data.items,
                         index     = storeData.indexOf(record),
                         total     = storeData.length,
@@ -377,22 +377,6 @@ Ext.define('Modify.controller.Main', {
         )
     },
 
-    startModPlayerUpdateLoop : function() {
-        this.bindGlobalUpdateMethod();
-        // if (! this.interval && this.vizMode) {
-        //     console.log('startModPlayerUpdateLoop();');
-        //     var boundTimerFunction = Ext.Function.bind(this.getSongStats, this);
-        //     this.interval = setInterval(boundTimerFunction, 40);
-        // }
-    },
-
-    stopModPlayerUpdateLoop : function() {
-        this.unbindGlobalUpdateMethod();
-        // if (this.interval) {
-        //     clearInterval(this.interval);
-        //     delete this.interval;
-        // }
-    },
 
     getSongStats : function() {
 
@@ -469,7 +453,7 @@ Ext.define('Modify.controller.Main', {
     },
 
     injectPatternView : function(modInfo) {
-        this.stopModPlayerUpdateLoop();
+        this.unbindGlobalUpdateMethod();
 
         var xtype = 'patternview',
             player = this.player;
@@ -494,7 +478,7 @@ Ext.define('Modify.controller.Main', {
         //     item.setPatternData(player.patterns);
         // }
 
-        this.startModPlayerUpdateLoop();
+        this.bindGlobalUpdateMethod();
 
         window.vizItem = item;
         window.player  = player;
@@ -508,7 +492,7 @@ Ext.define('Modify.controller.Main', {
 
         xtype = this.buttonTextToXtypeDict[btn.getText()];
 
-        this.stopModPlayerUpdateLoop();
+        this.unbindGlobalUpdateMethod();
 
         player.removeInnerAt(0);
         delete me.vizMode;
@@ -520,15 +504,15 @@ Ext.define('Modify.controller.Main', {
                 xtype  : xtype,
                 height : '100%'
             });
-            me.startModPlayerUpdateLoop();
+
+            me.bindGlobalUpdateMethod();
 
             if (item.setPatternData) {
                 item.setPatternData(player.patternData);
             }
 
-
             window.vizItem = item;
-            window.player = player;
+            window.player  = player;
             player.vizItem = item;
         }
 
